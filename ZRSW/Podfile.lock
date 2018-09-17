@@ -33,7 +33,6 @@ PODS:
   - JKCategories (1.7)
   - JPush (3.1.0):
     - JCore (~> 1.2.0)
-  - JXCategoryView (1.0.4)
   - KMNavigationBarTransition (1.1.5)
   - LYEmptyView (1.2.1)
   - Masonry (1.1.0)
@@ -82,7 +81,6 @@ DEPENDENCIES:
   - JDLaunchAd (~> 0.0.8)
   - JKCategories (~> 1.6)
   - JPush (~> 3.1.0)
-  - JXCategoryView
   - KMNavigationBarTransition (~> 1.1.5)
   - LYEmptyView
   - Masonry (~> 1.1.0)
@@ -122,7 +120,6 @@ SPEC REPOS:
     - JDLaunchAd
     - JKCategories
     - JPush
-    - JXCategoryView
     - KMNavigationBarTransition
     - LYEmptyView
     - Masonry
@@ -161,7 +158,6 @@ SPEC CHECKSUMS:
   JDLaunchAd: e49b3e9cb03d574aae4775c9f6421639871a9a0d
   JKCategories: 5136d903ed6a17e700cac984db9fc9dcfaad2954
   JPush: 5921e25ad13e0386351079217b009f2039084eac
-  JXCategoryView: fb71a82b887aceac0399e8f809e35a7408fb9f59
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   LYEmptyView: e5eb0c742802285f8e0e72d9acc0dc02f8f0ee3f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -183,6 +179,6 @@ SPEC CHECKSUMS:
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 0481c437ca8d508b41d1207bd4204cf7156f7f8a
+PODFILE CHECKSUM: bd94541b07c808ae7fa6a6a1bdb6f81eab64a1fe
 
 COCOAPODS: 1.5.3

@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00D886AD71377EC6136CEE47 /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */; };
+		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
+		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
+		3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */; };
+		3C7E4AD4214F6B900058D3E2 /* guide_point_else@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD2214F6B900058D3E2 /* guide_point_else@2x.png */; };
+		3C7E4ADA214FA2270058D3E2 /* ZRSWHomeNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */; };
+		3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */; };
+		3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -292,6 +299,16 @@
 
 /* Begin PBXFileReference section */
 		03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZRSW.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
+		3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@3x.png"; sourceTree = "<group>"; };
+		3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@2x.png"; sourceTree = "<group>"; };
+		3C7E4AD2214F6B900058D3E2 /* guide_point_else@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@2x.png"; sourceTree = "<group>"; };
+		3C7E4AD8214FA2270058D3E2 /* ZRSWHomeNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeNewsCell.h; sourceTree = "<group>"; };
+		3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeNewsCell.m; sourceTree = "<group>"; };
+		3C7E4ADB214FA4800058D3E2 /* ZRSWHomeBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeBannerModel.h; sourceTree = "<group>"; };
+		3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeBannerModel.m; sourceTree = "<group>"; };
+		3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeNewsHeaderView.h; sourceTree = "<group>"; };
+		3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeNewsHeaderView.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -822,6 +839,8 @@
 			isa = PBXGroup;
 			children = (
 				E5B59BAE214EC55600726DE9 /* 5555.h */,
+				3C7E4ADB214FA4800058D3E2 /* ZRSWHomeBannerModel.h */,
+				3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -839,6 +858,10 @@
 			isa = PBXGroup;
 			children = (
 				E5B59BAF214EC55E00726DE9 /* 6666.h */,
+				3C7E4AD8214FA2270058D3E2 /* ZRSWHomeNewsCell.h */,
+				3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */,
+				3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */,
+				3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -952,6 +975,8 @@
 				E5B5992D214EBEE800726DE9 /* currency_no_network@2x.png */,
 				E5B5992E214EBEE800726DE9 /* empty_weibo@2x.PNG */,
 				E5B5992F214EBEE800726DE9 /* navi_back_26x26_@2x.png */,
+				3C7E4AD2214F6B900058D3E2 /* guide_point_else@2x.png */,
+				3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */,
 			);
 			path = "@2x";
 			sourceTree = "<group>";
@@ -975,6 +1000,8 @@
 				E5B5993E214EBEE800726DE9 /* language_arrow_9x9_@3x.png */,
 				E5B5993F214EBEE800726DE9 /* toast_attention@3x.png */,
 				E5B59940214EBEE800726DE9 /* navi_back_26x26_@3x.png */,
+				3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */,
+				3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */,
 			);
 			path = "@3x";
 			sourceTree = "<group>";
@@ -1574,10 +1601,12 @@
 				E5B59B6B214EC15600726DE9 /* pretrial_sex_select@3x.png in Resources */,
 				E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */,
 				E5B59BA2214EC15600726DE9 /* pretrial_examples_button@3x.png in Resources */,
+				3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */,
 				E5B599FB214EBEE800726DE9 /* language_arrow_9x9_@2x.png in Resources */,
 				E5B59B76214EC15600726DE9 /* currency_top_news@3x.png in Resources */,
 				E5B59B6E214EC15600726DE9 /* share_friends@3x.png in Resources */,
 				E5B599FA214EBEE800726DE9 /* toast_attention@2x.png in Resources */,
+				3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */,
 				E5B59B57214EC15600726DE9 /* news_input@2x.png in Resources */,
 				E5B59B68214EC15600726DE9 /* currency_arrow_option@3x.png in Resources */,
 				E5B59B93214EC15600726DE9 /* pretrial_remarks_box@3x.png in Resources */,
@@ -1747,11 +1776,13 @@
 				E5B59B6A214EC15600726DE9 /* currency_bottom_loan_default@3x.png in Resources */,
 				E5B59B90214EC15600726DE9 /* currency_bottom_loan_select@3x.png in Resources */,
 				E5B59B17214EC15600726DE9 /* icon_80.png in Resources */,
+				3C7E4AD4214F6B900058D3E2 /* guide_point_else@2x.png in Resources */,
 				E5B59B80214EC15600726DE9 /* my_head@3x.png in Resources */,
 				E5B599FD214EBEE800726DE9 /* TableViewArrow_15x15_@2x.png in Resources */,
 				E5B59B74214EC15600726DE9 /* currency_line_670@3x.png in Resources */,
 				E5B59B2A214EC15600726DE9 /* currency_top_tips_bg@2x.png in Resources */,
 				E5B59BA0214EC15600726DE9 /* news_dialog_me@3x.png in Resources */,
+				3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1834,6 +1865,7 @@
 				E5B59A43214EBEE800726DE9 /* LNRefreshConst.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
 				E5B59A37214EBEE800726DE9 /* LXRefreshDIYHeader.m in Sources */,
+				3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */,
 				E5B59A31214EBEE800726DE9 /* UIAlertController+Extension.m in Sources */,
 				E5B59A3D214EBEE800726DE9 /* SAMKeychainQuery.m in Sources */,
 				E5B59A34214EBEE800726DE9 /* NSArray+Log.m in Sources */,
@@ -1868,6 +1900,7 @@
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,
 				E5B59A5C214EBEE800726DE9 /* BaseViewController.m in Sources */,
 				E5B59A5B214EBEE800726DE9 /* BaseTableViewController.m in Sources */,
+				3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */,
 				E5B59A32214EBEE800726DE9 /* UIView+Extension.m in Sources */,
 				E5B59A28214EBEE800726DE9 /* UIView+Badge.m in Sources */,
 				E5B59A2F214EBEE800726DE9 /* NSObject+Runtime.m in Sources */,
@@ -1890,6 +1923,7 @@
 				E5B59A1E214EBEE800726DE9 /* UIBarButtonItem+SXCreate.m in Sources */,
 				E5B59A2E214EBEE800726DE9 /* NSString+Extension.m in Sources */,
 				E5B59A1A214EBEE800726DE9 /* BaseModel.m in Sources */,
+				3C7E4ADA214FA2270058D3E2 /* ZRSWHomeNewsCell.m in Sources */,
 				E5B598FA214E9E2600726DE9 /* main.m in Sources */,
 				E5B59A3F214EBEE800726DE9 /* NotificationName.m in Sources */,
 				E5B59A58214EBEE800726DE9 /* TZGifPhotoPreviewController.m in Sources */,
@@ -2029,8 +2063,8 @@
 			baseConfigurationReference = 9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = K5ZN9R368D;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2040,6 +2074,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
+				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2049,8 +2085,8 @@
 			baseConfigurationReference = FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = K5ZN9R368D;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2060,6 +2096,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
+				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
