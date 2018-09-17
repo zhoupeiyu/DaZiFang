@@ -15,6 +15,9 @@
 @property (nonatomic, strong) ZRSWLoginCustomView *userNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
 @property (nonatomic, strong) UIButton *loginBtn;
+@property (nonatomic, strong) UIButton *faceLoginBtn;
+@property (nonatomic, strong) UIButton *forgetPwdBtn;
+
 
 @end
 
@@ -94,4 +97,5 @@
     }
     return _loginBtn;
 }
+
 @end
