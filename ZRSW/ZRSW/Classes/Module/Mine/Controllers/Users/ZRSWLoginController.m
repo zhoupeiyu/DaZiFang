@@ -15,6 +15,9 @@
 @property (nonatomic, strong) ZRSWLoginCustomView *userNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
 @property (nonatomic, strong) UIButton *loginBtn;
+@property (nonatomic, strong) UIButton *faceLoginBtn;
+@property (nonatomic, strong) UIButton *forgetPwdBtn;
+
 
 @end
 
@@ -93,5 +96,15 @@
         _loginBtn = [ZRSWViewFactoryTool getBlueBtn:@"登录" target:self action:@selector(login)];
     }
     return _loginBtn;
+}
+- (Uibu *)<#headeImgView#> {
+    if (!_<#headeImgView#>) {
+        _<#headeImgView#> = [[<#UIImageView#> alloc] init];
+    }
+    return _<#headeImgView#>;
+}
+
+- (UIButton *)getGrayBtn:(NSString *)title action:(SEL)action {
+    
 }
 @end
