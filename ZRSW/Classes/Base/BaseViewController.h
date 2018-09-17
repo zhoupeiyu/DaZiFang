@@ -16,6 +16,8 @@
 
 @property (nonatomic, assign) BOOL preferNavigationHidden; // 隐藏导航，在viewWillAppear中
 
+- (void)goBack;
+
 - (void)setupConfig;
 
 - (void)setupUI;

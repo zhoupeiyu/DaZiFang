@@ -6,7 +6,7 @@ target 'ZRSW' do
   # use_frameworks!
 
 #头条首页列表滚动效果
-pod 'JXCategoryView'
+#pod 'JXCategoryView'
 
 #网络框架
 pod 'AFNetworking', '~> 3.1.0'
