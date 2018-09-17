@@ -97,14 +97,5 @@
     }
     return _loginBtn;
 }
-- (Uibu *)<#headeImgView#> {
-    if (!_<#headeImgView#>) {
-        _<#headeImgView#> = [[<#UIImageView#> alloc] init];
-    }
-    return _<#headeImgView#>;
-}
 
-- (UIButton *)getGrayBtn:(NSString *)title action:(SEL)action {
-    
-}
 @end
