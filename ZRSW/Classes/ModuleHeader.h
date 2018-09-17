@@ -12,7 +12,6 @@
 // 这个文件导入自己项目中的头文件
 
 
-#import "HomeServiceInterface.h"
 
 
 #import "UserModel.h"
