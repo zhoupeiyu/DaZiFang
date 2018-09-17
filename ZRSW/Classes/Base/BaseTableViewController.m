@@ -69,13 +69,16 @@
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
-    return [[NSAttributedString alloc] initWithString:@"重试"];
+    return ![BaseNetWorkService isReachable] ? [[NSAttributedString alloc] initWithString:@"重试" attributes:@{
+                                                                                                           NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                                                           NSFontAttributeName : [UIFont systemFontOfSize:16]
+                                                                                                           }] : [[NSAttributedString alloc] initWithString:@""];
 }
 - (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
     UIEdgeInsets capInsets = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
-    UIEdgeInsets rectInsets = UIEdgeInsetsMake(-19.0, -61.0, -19.0, -61.0);
+    UIEdgeInsets rectInsets = UIEdgeInsetsMake(-28, -100, -25, -100);
     UIImage *image = [UIImage imageNamed:@"currency_no_network_button"];
-    return [[image resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch] imageWithAlignmentRectInsets:rectInsets];;
+    return ![BaseNetWorkService isReachable] ? [[image resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch] imageWithAlignmentRectInsets:rectInsets] : nil;
 }
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView {
     return - kNavigationBarH;
