@@ -1,0 +1,47 @@
+//
+//  PrefixHeader.pch
+//  ProjectFramework
+//
+//  Created by 周培玉 on 2018/9/10.
+//  Copyright © 2018年 周培玉. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "Header.h"
+
+// 是否需要定位
+#define NeedLocationManager
+// 是否需要百度统计
+#define NeedBaiduMobStat
+
+
+// 如果是测试环境，将这句话打开
+
+#define Api_Test
+
+#ifdef Api_Test // 测试环境
+
+    #define API_Host                @""
+
+    #define UMKey                   @"" // 友盟key
+    #define BaiduMobStatKey         @"" // 百度统计key
+    #define BaiDuLocationKey        @"" // 百度地图key
+
+#else // 正式环境
+
+    #define API_Host                @""
+
+    #define UMKey                   @""
+    #define BaiduMobStatKey         @""
+    #define BaiDuLocationKey        @"" // 百度地图key
+
+#endif
+
+
+
+
+
+
+#endif /* PrefixHeader_pch */

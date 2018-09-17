@@ -1,0 +1,124 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '8.0'
+
+target 'ZRSW' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+#头条首页列表滚动效果
+pod 'JXCategoryView'
+
+#网络框架
+pod 'AFNetworking', '~> 3.1.0'
+
+#底部Tab，可定制中间按钮
+pod 'CYLTabBarController', '~> 1.16.1'
+
+#图片缓存框架
+pod 'SDWebImage', '~> 4.2.2'
+
+#刷新框架
+pod 'MJRefresh', '~> 3.1.15.1'
+
+#键盘管理
+pod 'IQKeyboardManager', '~> 5.0.6'
+
+#布局
+pod 'Masonry', '~> 1.1.0'
+
+#加载loading
+pod 'MBProgressHUD', '~> 1.1.0'
+
+#网络框架 对AFN 封装
+pod 'HYBNetworking', '~> 3.3.1'
+
+#标签
+pod 'TTGTagCollectionView', '~> 1.8.1'
+
+#启动页
+pod 'JDLaunchAd', '~> 0.0.8'
+
+#检测版本升级
+pod 'Harpy', '~> 4.1.9'
+
+# 相册
+#pod 'TZImagePickerController', '~> 1.9.6'
+
+# 图片裁剪
+pod 'HYBImageCliped', '~> 2.2.4'
+
+# YY
+#pod 'YYKit', '~> 1.0.9'
+
+# 全局返回手势
+pod 'FDFullscreenPopGesture', '~> 1.1'
+
+# 空数据显示界面
+pod 'DZNEmptyDataSet', '~> 1.8.1'
+pod 'LYEmptyView'
+
+# 弹框
+pod 'Toast', '~> 4.0.0'
+
+# 各种分类
+pod 'JKCategories', '~> 1.6'
+
+# image-PDF
+pod 'UIImage-ASMPDF', '~> 0.2'
+
+# webView 加载进度条
+#pod 'NJKWebViewProgress', '~> 0.2.3'
+
+# 颜色处理库
+pod 'ChameleonFramework', '~> 2.1.0'
+
+# 导航
+pod 'KMNavigationBarTransition', '~> 1.1.5'
+
+# 弹窗
+pod 'PSTAlertController', '~> 1.2.0'
+
+# 自定义弹框
+pod 'TYAlertController', '~> 1.2.0'
+
+# 图片预览，仿微信，
+pod 'NYTPhotoViewer', '~> 2.0.0'
+
+# 友盟分享
+pod 'UMCCommon'
+pod 'UMCAnalytics'
+pod 'UMCSecurityPlugins'
+
+# 极光推送
+pod 'JPush', '~> 3.1.0'
+
+# 轮播图
+pod 'SDCycleScrollView', '~> 1.75'
+
+# 判断网络
+pod 'Reachability', '~> 3.2'
+
+#Json --> Model
+#pod 'YYModel'
+
+#百度统计 [[BaiduMobStat defaultStat] startWithAppId:@"APP KEY"];
+pod 'BaiduMobStatCodeless'
+
+# 百度地图
+pod 'BMKLocationKit'
+
+# TOWebViewController
+pod 'TOWebViewController', '~> 2.2.8'
+
+#表单
+pod 'XLForm'
+
+# 仿微信弹窗
+pod 'SPAlertController', '~> 1.0.1'
+
+#pod 'GrowingTextView'
+
+
+  # Pods for ProjectFramework
+
+end
