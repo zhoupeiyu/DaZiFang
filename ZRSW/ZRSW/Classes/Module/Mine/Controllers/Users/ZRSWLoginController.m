@@ -94,6 +94,7 @@
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [ZRSWViewFactoryTool getBlueBtn:@"登录" target:self action:@selector(login)];
+        
     }
     return _loginBtn;
 }

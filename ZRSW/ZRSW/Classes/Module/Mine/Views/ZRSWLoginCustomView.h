@@ -14,6 +14,7 @@
 
 + (CGFloat)loginInputViewHeight;
 
+
 - (NSString *)getInputViewText;
 
 + (UIColor *)placeHoledColor;

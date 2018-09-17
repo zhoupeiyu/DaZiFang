@@ -146,6 +146,7 @@
         _titleLbl.textColor = [UIColor colorFromRGB:0x999999];
         _titleLbl.textAlignment = NSTextAlignmentLeft;
         _titleLbl.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
+        
     }
     return _titleLbl;
 }
