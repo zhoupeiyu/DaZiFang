@@ -19,8 +19,10 @@
     
     self.navigationBar.translucent = NO;
     
-    [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[BaseTheme navBarTitleColor],NSForegroundColorAttributeName,nil]];
-    [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[BaseTheme navBarTitleFont],NSFontAttributeName,nil]];
+    self.navigationBar.titleTextAttributes = @{
+                                               NSForegroundColorAttributeName : [BaseTheme navBarTitleColor],
+                                               NSFontAttributeName : [BaseTheme navBarTitleFont]
+                                               };
     [self.navigationBar setBackgroundImage:[BaseTheme navBackgroundImage] forBarMetrics:UIBarMetricsDefault];
     
     UIView *view = [[UIView alloc] init];
