@@ -84,7 +84,7 @@
 #import <JDLaunchAd.h>
 #import <JKUIKit.h>
 #import <JPUSHService.h>
-#import <JXCategoryView.h>
+//#import <JXCategoryView.h>
 #import <UINavigationController+KMNavigationBarTransition.h>
 #import <Masonry.h>
 #import <MBProgressHUD.h>
