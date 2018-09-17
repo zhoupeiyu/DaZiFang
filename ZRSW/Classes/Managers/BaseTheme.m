@@ -20,7 +20,7 @@
 SYNTHESIZE_SINGLETON_ARC(BaseTheme);
 
 + (UIColor *)baseViewColor {
-    return [UIColor colorFromRGB:0xf2f2f2];
+    return [UIColor colorFromRGB:0xF7F8FC];
 }
 
 + (UIColor *)tabBarTitleNormalColor {

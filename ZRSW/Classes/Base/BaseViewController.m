@@ -44,6 +44,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)setupConfig {
     self.view.backgroundColor = [BaseTheme baseViewColor];
 }
@@ -73,7 +76,7 @@
  *  设置导航默认返回按钮
  */
 - (void)setLeftBackBarButton {
-    [self setLeftBarButtonWithImage:[UIImage imageNamed:@"navi_back_shadow_26x26_"] AndHighLightImage:[UIImage imageNamed:@"navi_back_26x26_"]];
+    [self setLeftBarButtonWithImage:[UIImage imageNamed:@"currency_top_back"] AndHighLightImage:[UIImage imageNamed:@"currency_top_back"]];
     [_leftBarButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 /**

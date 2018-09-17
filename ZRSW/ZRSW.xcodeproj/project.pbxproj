@@ -283,6 +283,11 @@
 		E5B59BA7214EC15600726DE9 /* news_input@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B59B10214EC15600726DE9 /* news_input@3x.png */; };
 		E5B59BA8214EC15600726DE9 /* share_blog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B59B11214EC15600726DE9 /* share_blog@3x.png */; };
 		E5B59BA9214EC15600726DE9 /* news_dialog_arrow_them@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */; };
+		E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */; };
+		E5B59BBA214FA5CA00726DE9 /* ZRSWRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */; };
+		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
+		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
+		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -664,7 +669,16 @@
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
 		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
 		E5B59BAF214EC55E00726DE9 /* 6666.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 6666.h; sourceTree = "<group>"; };
-		E5B59BB0214EC56C00726DE9 /* 888.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 888.h; sourceTree = "<group>"; };
+		E5B59BB5214FA2A600726DE9 /* ZRSWLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoginController.h; sourceTree = "<group>"; };
+		E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoginController.m; sourceTree = "<group>"; };
+		E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRegisterController.h; sourceTree = "<group>"; };
+		E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRegisterController.m; sourceTree = "<group>"; };
+		E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoginCustomView.h; sourceTree = "<group>"; };
+		E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoginCustomView.m; sourceTree = "<group>"; };
+		E5B59BC2214FA94300726DE9 /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
+		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
+		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
+		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -739,6 +753,7 @@
 		E5B59903214EBED500726DE9 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E5B59BC5214FD27000726DE9 /* CommentView */,
 				E5B59A77214EC15600726DE9 /* ZRSWImages */,
 				E5B59904214EBED500726DE9 /* Module */,
 				E5B59911214EBED500726DE9 /* Appdelegate */,
@@ -853,6 +868,7 @@
 			children = (
 				E5B59A65214EBFBA00726DE9 /* ZRSWMineController.h */,
 				E5B59A66214EBFBA00726DE9 /* ZRSWMineController.m */,
+				E5B59BB4214FA28500726DE9 /* Users */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -860,7 +876,8 @@
 		E5B59910214EBED500726DE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BB0214EC56C00726DE9 /* 888.h */,
+				E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */,
+				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1124,6 +1141,7 @@
 		E5B599A9214EBEE800726DE9 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				E5B59BC1214FA94300726DE9 /* JKCountDownButton */,
 				E5B599AA214EBEE800726DE9 /* LNRefresh */,
 				E5B599C1214EBEE800726DE9 /* TZImagePickerController */,
 				E5B599DF214EBEE800726DE9 /* YYModel */,
@@ -1233,13 +1251,13 @@
 		E5B59A6B214EC04100726DE9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59A6C214EC04100726DE9 /* ServiceInterface.h */,
-				E5B59A6D214EC04100726DE9 /* OrderService.m */,
-				E5B59A6E214EC04100726DE9 /* UserService.m */,
 				E5B59A6F214EC04100726DE9 /* EnumType.h */,
 				E5B59A70214EC04100726DE9 /* ServiceInterfaceType.h */,
+				E5B59A6C214EC04100726DE9 /* ServiceInterface.h */,
 				E5B59A71214EC04100726DE9 /* OrderService.h */,
+				E5B59A6D214EC04100726DE9 /* OrderService.m */,
 				E5B59A72214EC04100726DE9 /* UserService.h */,
+				E5B59A6E214EC04100726DE9 /* UserService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1448,6 +1466,36 @@
 				E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */,
 			);
 			path = "@3x";
+			sourceTree = "<group>";
+		};
+		E5B59BB4214FA28500726DE9 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				E5B59BB5214FA2A600726DE9 /* ZRSWLoginController.h */,
+				E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */,
+				E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */,
+				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		E5B59BC1214FA94300726DE9 /* JKCountDownButton */ = {
+			isa = PBXGroup;
+			children = (
+				E5B59BC2214FA94300726DE9 /* JKCountDownButton.h */,
+				E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */,
+			);
+			path = JKCountDownButton;
+			sourceTree = "<group>";
+		};
+		E5B59BC5214FD27000726DE9 /* CommentView */ = {
+			isa = PBXGroup;
+			children = (
+				E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */,
+				E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */,
+			);
+			name = CommentView;
+			path = Module/CommentView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1770,12 +1818,14 @@
 				E5B59A2A214EBEE800726DE9 /* NSObject+Extension.m in Sources */,
 				E5B59A16214EBEE800726DE9 /* AppDelegteManager.m in Sources */,
 				E5B59A73214EC04100726DE9 /* OrderService.m in Sources */,
+				E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */,
 				E5B59A27214EBEE800726DE9 /* UIViewController+Extension.m in Sources */,
 				E5B59A17214EBEE800726DE9 /* MatchManager.m in Sources */,
 				E5B59A67214EBFBA00726DE9 /* ZRSWMineController.m in Sources */,
 				E5B59A5A214EBEE800726DE9 /* YYClassInfo.m in Sources */,
 				E5B59A1B214EBEE800726DE9 /* BaseNetWorkService.m in Sources */,
 				E5B59A6A214EC02100726DE9 /* UserModel.m in Sources */,
+				E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */,
 				E5B59A57214EBEE800726DE9 /* TZLocationManager.m in Sources */,
 				E5B59A24214EBEE800726DE9 /* UIFont+Utility.m in Sources */,
 				E5B59A35214EBEE800726DE9 /* PickerView.m in Sources */,
@@ -1800,6 +1850,7 @@
 				E5B59A56214EBEE800726DE9 /* TZImagePickerController.m in Sources */,
 				E5B59A2B214EBEE800726DE9 /* UIScrollView+Extension.m in Sources */,
 				E5B59A42214EBEE800726DE9 /* LNRefreshFooter.m in Sources */,
+				E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */,
 				E5B59A3E214EBEE800726DE9 /* SAMKeychain.m in Sources */,
 				E5B59A64214EBF9600726DE9 /* ZRSWLoansController.m in Sources */,
 				E5B59A25214EBEE800726DE9 /* UILabel+Extension.m in Sources */,
@@ -1832,6 +1883,7 @@
 				E5B59A2D214EBEE800726DE9 /* NSDate+Extension.m in Sources */,
 				E5B59A5E214EBEE800726DE9 /* BaseScrollViewController.m in Sources */,
 				E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */,
+				E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */,
 				E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */,
 				E5B59A53214EBEE800726DE9 /* TZImageManager.m in Sources */,
 				E5B59A55214EBEE800726DE9 /* TZPhotoPreviewCell.m in Sources */,
@@ -1843,6 +1895,7 @@
 				E5B59A58214EBEE800726DE9 /* TZGifPhotoPreviewController.m in Sources */,
 				E5B59A50214EBEE800726DE9 /* TZPhotoPreviewController.m in Sources */,
 				E5B59A26214EBEE800726DE9 /* UIImage+Utility.m in Sources */,
+				E5B59BBA214FA5CA00726DE9 /* ZRSWRegisterController.m in Sources */,
 				E5B59A20214EBEE800726DE9 /* UIDevice+Info.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1980,11 +2033,12 @@
 				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-048469059.ZRSW";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1999,11 +2053,12 @@
 				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-048469059.ZRSW";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
