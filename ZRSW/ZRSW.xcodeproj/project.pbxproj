@@ -15,6 +15,9 @@
 		3C7E4ADA214FA2270058D3E2 /* ZRSWHomeNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */; };
 		3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */; };
 		3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */; };
+		3C7E4AE42150D1360058D3E2 /* ZRSWHomeQuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AE32150D1360058D3E2 /* ZRSWHomeQuestionCell.m */; };
+		3C7E4AE72150D65E0058D3E2 /* ZRSWNewsListDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AE62150D65E0058D3E2 /* ZRSWNewsListDetailsController.m */; };
+		3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AE92150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -311,6 +314,12 @@
 		3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeBannerModel.m; sourceTree = "<group>"; };
 		3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeNewsHeaderView.h; sourceTree = "<group>"; };
 		3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeNewsHeaderView.m; sourceTree = "<group>"; };
+		3C7E4AE22150D1360058D3E2 /* ZRSWHomeQuestionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeQuestionCell.h; sourceTree = "<group>"; };
+		3C7E4AE32150D1360058D3E2 /* ZRSWHomeQuestionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeQuestionCell.m; sourceTree = "<group>"; };
+		3C7E4AE52150D65E0058D3E2 /* ZRSWNewsListDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWNewsListDetailsController.h; sourceTree = "<group>"; };
+		3C7E4AE62150D65E0058D3E2 /* ZRSWNewsListDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWNewsListDetailsController.m; sourceTree = "<group>"; };
+		3C7E4AE82150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWQuestionListDetailsController.h; sourceTree = "<group>"; };
+		3C7E4AE92150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWQuestionListDetailsController.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -855,6 +864,10 @@
 			children = (
 				E5B59A5F214EBF7700726DE9 /* ZRSWHomeController.h */,
 				E5B59A60214EBF7700726DE9 /* ZRSWHomeController.m */,
+				3C7E4AE52150D65E0058D3E2 /* ZRSWNewsListDetailsController.h */,
+				3C7E4AE62150D65E0058D3E2 /* ZRSWNewsListDetailsController.m */,
+				3C7E4AE82150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.h */,
+				3C7E4AE92150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -865,6 +878,8 @@
 				E5B59BAF214EC55E00726DE9 /* 6666.h */,
 				3C7E4AD8214FA2270058D3E2 /* ZRSWHomeNewsCell.h */,
 				3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */,
+				3C7E4AE22150D1360058D3E2 /* ZRSWHomeQuestionCell.h */,
+				3C7E4AE32150D1360058D3E2 /* ZRSWHomeQuestionCell.m */,
 				3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */,
 				3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */,
 			);
@@ -1873,11 +1888,14 @@
 				E5B59A54214EBEE800726DE9 /* TZPhotoPickerController.m in Sources */,
 				E5B59A43214EBEE800726DE9 /* LNRefreshConst.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
+				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
 				E5B59A37214EBEE800726DE9 /* LXRefreshDIYHeader.m in Sources */,
 				3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */,
+				3C7E4AE42150D1360058D3E2 /* ZRSWHomeQuestionCell.m in Sources */,
 				E5B59A31214EBEE800726DE9 /* UIAlertController+Extension.m in Sources */,
 				E5B59A3D214EBEE800726DE9 /* SAMKeychainQuery.m in Sources */,
 				E5B59A34214EBEE800726DE9 /* NSArray+Log.m in Sources */,
+				3C7E4AE72150D65E0058D3E2 /* ZRSWNewsListDetailsController.m in Sources */,
 				E5B59A47214EBEE800726DE9 /* NSObject+LNRefresh.m in Sources */,
 				E5B59A2C214EBEE800726DE9 /* UIColor+Utility.m in Sources */,
 				E5B59A30214EBEE800726DE9 /* UIButton+EnlargeEdge.m in Sources */,
@@ -2075,8 +2093,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = K5ZN9R368D;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2084,10 +2102,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lenovo.linkappol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
+				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2099,8 +2117,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = K5ZN9R368D;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2108,10 +2126,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lenovo.linkappol;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
+				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

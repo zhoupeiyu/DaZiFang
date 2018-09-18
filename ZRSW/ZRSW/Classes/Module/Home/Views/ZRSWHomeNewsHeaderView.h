@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ZRSWHomeNewsHeaderView : UITableViewHeaderFooterView
+@protocol ZRSWHomeNewsHeaderViewDelegate <NSObject>
+- (void)getMoreClick:(NSInteger)type title:(NSString *)title;
+@end
+@interface ZRSWHomeNewsHeaderView : UIView
+@property (nonatomic, strong) UIButton *nextBtn;
+- (void)setTitle:(NSString *)title;
+@property (nonatomic,weak) id<ZRSWHomeNewsHeaderViewDelegate>delegate;
 
 @end

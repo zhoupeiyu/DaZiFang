@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UserModel.h"
 @interface ZRSWHomeNewsCell : UITableViewCell
-
+@property (nonatomic, strong) NewDetailModel *detailModel;
 @end
