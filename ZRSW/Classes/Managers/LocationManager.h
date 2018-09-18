@@ -14,4 +14,6 @@
 
 - (void)setUpLocationManager;
 
+- (void)getCityLocationSuccess:(void (^)(id result))success;
+
 @end

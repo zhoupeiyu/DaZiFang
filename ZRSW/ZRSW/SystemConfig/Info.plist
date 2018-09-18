@@ -115,6 +115,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>你可以修改个人头像</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>为了给您提供更多服务，我们需要访问您的地理位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>你可以修改个人头像</string>
 	<key>UILaunchStoryboardName</key>

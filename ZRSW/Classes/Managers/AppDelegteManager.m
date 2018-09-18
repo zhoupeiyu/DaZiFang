@@ -19,7 +19,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [self baiduMobStat];
     // 定位信息
     [self loactionManager];
-    
+    // 网络
+    [self setupNetWorkConfig];
     
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -58,9 +59,15 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 - (void)loactionManager {
     
 #ifdef NeedLocationManager
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [[[CLLocationManager alloc] init] requestWhenInUseAuthorization];
+    }
     [[LocationManager sharedInstance] setUpLocationManager];
 #else
     
 #endif
+}
+- (void)setupNetWorkConfig {
+    [BaseNetWorkService configNetWorkService];
 }
 @end

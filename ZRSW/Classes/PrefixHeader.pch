@@ -12,7 +12,7 @@
 #import "Header.h"
 
 // 是否需要定位
-#define NeedLocationManager
+#define NeedLocationManager 1
 // 是否需要百度统计
 #define NeedBaiduMobStat
 

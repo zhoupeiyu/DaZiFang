@@ -16,16 +16,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpTableView];
-    [self requsetSystemNotificationList];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    if (self.type == NewListTypePopularInformation) {
-        [self requsetPopularInformationList];
-    }else if (self.type == NewListTypePopularInformation){
-        [self requsetPopularInformationList];
-    }
 }
 
 - (void)setupConfig {
@@ -42,6 +32,15 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
     [self enableLoadMore:YES selector:@selector(requsetMoreData)];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.type == NewListTypePopularInformation) {
+        [self requsetPopularInformationList];
+    }else if (self.type == NewListTypePopularInformation){
+        [self requsetPopularInformationList];
+    }
 }
 
 

@@ -37,9 +37,9 @@
     [super viewDidLoad];
 //    [self.view addSubview:self.cycleScrollView];
     [self setUpTableView];
-    [self requsetBannerList];
-    [self requsetCityList];
 }
+
+
 
 - (void)setupConfig {
     [super setupConfig];
@@ -57,6 +57,18 @@
 //    self.tableView.separatorColor = [UIColor colorFromRGB:0xeaeaea];
     self.tableView.tableHeaderView = self.headerView;
     [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requsetBannerList];
+    [self requsetCityList];
+    WS(weakSelf);
+    [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
+        if (result) {
+            weakSelf.locationLabel.text = [NSString stringWithFormat:@"%@",result];
+        }
+    }];
 }
 
 
