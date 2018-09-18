@@ -60,18 +60,18 @@
 
 - (void)setupLayOut {
     [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
+        make.left.mas_equalTo(30);
         make.top.mas_equalTo(18);
     }];
     [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(15);
-        make.right.mas_equalTo(-15);
+        make.left.mas_equalTo(30);
+        make.right.mas_equalTo(-30);
         make.bottom.mas_equalTo(self.mas_bottom);
         make.height.mas_equalTo(KSeparatorLineHeight);
     }];
     [self.countDownButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.lineView.mas_top).mas_offset(-7);
-        make.right.mas_equalTo(-15);
+        make.right.mas_equalTo(-30);
     }];
     [self.inputTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLbl.mas_left);
@@ -80,7 +80,7 @@
             make.right.mas_equalTo(self.countDownButton.mas_left).offset(-5);
         }
         else {
-            make.right.mas_equalTo(-15);
+            make.right.mas_equalTo(-30);
         }
     }];
 }
@@ -201,7 +201,7 @@
 @end
 @implementation ZRSWUserAgreementView
 
-+ (instancetype)getUserAgreeViewWithTitle:(NSString *)title agreeHtmlName:(NSString *)htmlName {
++ (instancetype)getUserAgreeViewWithTitle:(NSMutableAttributedString *)title agreeHtmlName:(NSString *)htmlName {
     ZRSWUserAgreementView *agreeView = [[ZRSWUserAgreementView alloc] init];
     agreeView.title = title;
     agreeView.htmlName = htmlName;
@@ -261,7 +261,8 @@
 }
 - (void)agreeBtnAction {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"LoginAgreement" ofType:@"html"];
-    [ControllerUtilsManager showViewWithURL:path];
+    NSURL *rurl = [NSURL URLWithString:path];
+    
 }
 #pragma mark - lazy
 
