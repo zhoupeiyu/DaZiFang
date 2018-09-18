@@ -27,6 +27,7 @@
 		3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */; };
 		3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */; };
 		3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */; };
+		3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -336,6 +337,8 @@
 		3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWThirdLoginView.m; sourceTree = "<group>"; };
+		3C7E4AFE21513C8D0058D3E2 /* ZRSWThirdLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWThirdLoginView.h; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -952,6 +955,8 @@
 			children = (
 				E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */,
 				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
+				3C7E4AFE21513C8D0058D3E2 /* ZRSWThirdLoginView.h */,
+				3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1970,6 +1975,7 @@
 				E5B59A2D214EBEE800726DE9 /* NSDate+Extension.m in Sources */,
 				E5B59A5E214EBEE800726DE9 /* BaseScrollViewController.m in Sources */,
 				E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */,
+				3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */,
 				E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */,
 				E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */,
 				E5B59A53214EBEE800726DE9 /* TZImageManager.m in Sources */,
@@ -2118,8 +2124,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = K5ZN9R368D;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2129,8 +2135,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
-				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2141,8 +2147,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = K5ZN9R368D;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2152,8 +2158,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
-				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

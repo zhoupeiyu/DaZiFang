@@ -96,23 +96,21 @@
 }
 
 - (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
-    LLog(@"点击了刷新");
+    [self refreshData];
+}
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
+    [self refreshData];
 }
 - (void)enableRefreshHeader:(BOOL)enabled {
-    [self enableRefreshHeader:enabled refreshSelector:@selector(reloadData)];
-}
-
-
-- (void)enableRefreshHeader:(BOOL)enabled refreshSelector:(SEL)selector {
     if (nil == self.tableView.mj_header) {
-        LXRefreshDIYHeader *header = [LXRefreshDIYHeader headerWithRefreshingTarget:self refreshingAction:selector];
+        LXRefreshDIYHeader *header = [LXRefreshDIYHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
         self.tableView.mj_header = header;
     }
     self.tableView.mj_header.hidden = !enabled;
 }
-- (void)enableLoadMore:(BOOL)enabled selector:(SEL)selector {
+- (void)enableLoadMore:(BOOL)enabled {
     if (enabled) {
-        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:selector];
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
         [footer setTitle:@"加载更多" forState:MJRefreshStateIdle];
         [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
         [footer setTitle:@"没有更多数据啦~" forState:MJRefreshStateNoMoreData];
@@ -132,7 +130,18 @@
         [self.tableView.mj_footer endRefreshing];
     }
 }
-
+- (void)refreshData {
+    LLog(@"刷新");
+}
+- (void)loadMoreData {
+    LLog(@"加载更多");
+}
+- (void)hiddenHeader:(BOOL)isHidden {
+    self.tableView.mj_header.hidden = isHidden;
+}
+- (void)hiddenFooter:(BOOL)isHidden {
+    self.tableView.mj_footer.hidden = isHidden;
+}
 #pragma mark - lazy
 - (UITableView *)tableView {
     if (!_tableView) {

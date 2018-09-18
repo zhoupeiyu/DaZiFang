@@ -36,9 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self.view addSubview:self.cycleScrollView];
-    [self setUpTableView];
-}
+    [self setupUI];
 
+}
+- (void)setupUI {
+    [self setUpTableView];
+    [super setupUI];
+}
 
 
 - (void)setupConfig {
@@ -53,23 +57,19 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableViewStyle =  UITableViewStyleGrouped;
 //    UITableViewStyleGrouped
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    self.tableView.separatorColor = [UIColor colorFromRGB:0xeaeaea];
     self.tableView.tableHeaderView = self.headerView;
-    [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
+    [self enableRefreshHeader:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requsetBannerList];
     [self requsetCityList];
-    WS(weakSelf);
-    [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
-        if (result) {
-            weakSelf.locationLabel.text = [NSString stringWithFormat:@"%@",result];
-        }
-    }];
+    [self locationCity];
 }
+
+
+
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -147,6 +147,15 @@
 
 
 #pragma mark - NetWork
+- (void)locationCity{
+    WS(weakSelf);
+    [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
+        if (result) {
+            weakSelf.locationLabel.text = [NSString stringWithFormat:@"%@",result];
+        }
+    }];
+}
+
 - (void)requsetCityList{
     [[[UserService alloc] init] getCityListDelegate:self];
 }
@@ -264,12 +273,14 @@
 - (void)moreButtonClck:(UIButton *)button{
     ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
     detailsVC.type = NewListTypeSystemNotification;
+    detailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
     NSLog(@"系统公告");
 }
 
 #pragma mark - 我要贷款
 - (void)triangleButtonClck:(UIButton *)button{
+    [self locationCity];
     NSLog(@"更多城市");
 }
 
@@ -280,6 +291,7 @@
         NSLog(@"热门资讯");
         ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
         detailsVC.type = NewListTypePopularInformation;
+        detailsVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detailsVC animated:YES];
     }else if (type == 1){
         NSLog(@"常见问题");
@@ -382,7 +394,7 @@
 
 - (UIView *)locationView{
     if (!_locationView) {
-        _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(95), kUI_HeightS(18))];
+        _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(120), kUI_HeightS(18))];
         UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0, kUI_WidthS(15), kUI_HeightS(18))];
         leftImage.image = [UIImage imageNamed:@"currency_top_position"];
         [_locationView addSubview:leftImage];

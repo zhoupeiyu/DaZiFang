@@ -15,8 +15,12 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 - (void)showPlaceholedView;
-- (void)enableRefreshHeader:(BOOL)enabled refreshSelector:(SEL)selector;
-- (void)enableLoadMore:(BOOL)enabled selector:(SEL)selector;
+- (void)enableRefreshHeader:(BOOL)enabled;
+- (void)enableLoadMore:(BOOL)enabled;
+- (void)hiddenHeader:(BOOL)isHidden;
+- (void)hiddenFooter:(BOOL)isHidden;
+- (void)refreshData;
+- (void)loadMoreData;
 - (void)endHeadRefreshing;
 - (void)endFootRefreshing;
 
