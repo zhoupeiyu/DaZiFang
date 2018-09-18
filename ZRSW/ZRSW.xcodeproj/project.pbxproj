@@ -307,6 +307,8 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
+		E5B59BD121514CDA00726DE9 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */; };
+		E5B59BD42151554B00726DE9 /* ZRSWRetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -723,6 +725,10 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
+		E5B59BCF21514CD900726DE9 /* ZRSWThirdLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWThirdLoginView.h; sourceTree = "<group>"; };
+		E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWThirdLoginView.m; sourceTree = "<group>"; };
+		E5B59BD22151554B00726DE9 /* ZRSWRetrievePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRetrievePasswordController.h; sourceTree = "<group>"; };
+		E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRetrievePasswordController.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -950,6 +956,8 @@
 		E5B59910214EBED500726DE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E5B59BCF21514CD900726DE9 /* ZRSWThirdLoginView.h */,
+				E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */,
 				E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */,
 				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
 			);
@@ -1553,6 +1561,8 @@
 				E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */,
 				E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */,
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
+				E5B59BD22151554B00726DE9 /* ZRSWRetrievePasswordController.h */,
+				E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -1915,6 +1925,7 @@
 				E5B59A54214EBEE800726DE9 /* TZPhotoPickerController.m in Sources */,
 				E5B59A43214EBEE800726DE9 /* LNRefreshConst.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
+				E5B59BD42151554B00726DE9 /* ZRSWRetrievePasswordController.m in Sources */,
 				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
 				E5B59A37214EBEE800726DE9 /* LXRefreshDIYHeader.m in Sources */,
 				3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */,
@@ -1970,6 +1981,7 @@
 				E5B59A2D214EBEE800726DE9 /* NSDate+Extension.m in Sources */,
 				E5B59A5E214EBEE800726DE9 /* BaseScrollViewController.m in Sources */,
 				E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */,
+				E5B59BD121514CDA00726DE9 /* ZRSWThirdLoginView.m in Sources */,
 				E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */,
 				E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */,
 				E5B59A53214EBEE800726DE9 /* TZImageManager.m in Sources */,

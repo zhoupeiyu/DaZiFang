@@ -32,6 +32,7 @@
     self.title = @"注册";
     [self setLeftBackBarButton];
     [self setRightBarButtonWithText:@"登录"];
+    self.scrollView.scrollEnabled = NO;
     [self.rightBarButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -117,6 +118,8 @@
         NSString *tip = @"(字母+数字不少于6位)";
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,tip]];
         [str addAttribute:NSForegroundColorAttributeName value:[ZRSWLoginCustomView placeHoledColor] range:NSMakeRange(0, str.length)];
+        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledNormalFont] range:NSMakeRange(0, str.length)];
+        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length, tip.length)];
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:str keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
     }
     return _pwdView;

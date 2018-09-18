@@ -8,7 +8,7 @@
 
 #import "ZRSWLoginCustomView.h"
 
-@interface ZRSWLoginCustomView ()
+@interface ZRSWLoginCustomView ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSAttributedString *placeHoled;
@@ -72,6 +72,7 @@
     [self.countDownButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.lineView.mas_top).mas_offset(-7);
         make.right.mas_equalTo(-30);
+        make.size.mas_equalTo(CGSizeMake(105, 30));
     }];
     [self.inputTextField mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.titleLbl.mas_left);
@@ -93,11 +94,11 @@
     return [UIColor colorFromRGB:0x474455];
 }
 + (UIFont *)placeHoledNormalFont {
-    return [UIFont fontWithName:@"MicrosoftYaHei" size:16];
+    return [UIFont systemFontOfSize:16];
 }
 
 + (UIFont *)placeHoledSmallFont {
-    return [UIFont fontWithName:@"MicrosoftYaHei" size:13];
+    return [UIFont systemFontOfSize:13];
 }
 ///倒计时按钮点击回调
 - (void)countDownButtonHandler:(TouchedCountDownButtonHandler)touchedCountDownButtonHandler {
@@ -166,6 +167,7 @@
         _inputTextField.clearsOnBeginEditing = YES;
         _inputTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
         _inputTextField.keyboardType = UIKeyboardTypeDefault;
+        _inputTextField.delegate = self;
     }
     return _inputTextField;
 }
@@ -173,9 +175,12 @@
     if (!_countDownButton) {
         _countDownButton = [JKCountDownButton buttonWithType:UIButtonTypeCustom];
         [_countDownButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [_countDownButton setTitleColor:[UIColor colorFromRGB:0x1D1D26] forState:UIControlStateNormal];
-        [_countDownButton setTitleColor:[UIColor colorFromRGB:0x1D1D26] forState:UIControlStateHighlighted];
+        [_countDownButton setTitleColor:[UIColor colorFromRGB:0x474455] forState:UIControlStateNormal];
+        [_countDownButton setTitleColor:[UIColor colorFromRGB:0x474455] forState:UIControlStateHighlighted];
         [_countDownButton setBackgroundImage:[UIImage imageNamed:@"verification_code_button"] forState:UIControlStateNormal];
+        [_countDownButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0xeeeeee]] forState:UIControlStateHighlighted];
+        _countDownButton.masksToBounds = YES;
+        _countDownButton.layer.cornerRadius = 15;
         _countDownButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
     }
     return _countDownButton;

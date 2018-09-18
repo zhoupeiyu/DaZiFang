@@ -10,6 +10,7 @@
 #import "ZRSWRegisterController.h"
 #import "ZRSWLoginCustomView.h"
 #import "ZRSWThirdLoginView.h"
+#import "ZRSWRetrievePasswordController.h"
 
 @interface ZRSWLoginController ()
 
@@ -98,7 +99,8 @@
 #pragma mark - event
 
 - (void)forgetPwdBtnAction {
-    NSLog(@"忘记密码");
+    ZRSWRetrievePasswordController *retrievePassword = [[ZRSWRetrievePasswordController alloc] init];
+    [self.navigationController pushViewController:retrievePassword animated:YES];
 }
 - (void)faceLogin {
     NSLog(@"刷脸登录");
