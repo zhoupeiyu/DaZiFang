@@ -9,9 +9,11 @@
 #import "ZRSWHomeNewsCell.h"
 
 @interface ZRSWHomeNewsCell()
+@property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UIImageView *readerIcon;
 @property (nonatomic, strong) UILabel *readersLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 
@@ -24,23 +26,36 @@
     return self;
 }
 - (void)setUpUI{
+    [self.contentView addSubview:self.topLine];
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
+    [self.contentView addSubview:self.readerIcon];
     [self.contentView addSubview:self.readersLabel];
     [self.contentView addSubview:self.dateLabel];
-    [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(15);
-        make.left.mas_equalTo(15);
-        make.bottom.mas_equalTo(15);
-
-    }];
 }
 
+- (void)layoutSubviews{
+    self.topLine.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
+    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(90), kUI_HeightS(90));
+    self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), kUI_WidthS(114), kUI_HeightS(15));
+    self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(196), kUI_HeightS(34));
+    self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(9));
+    self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(90), kUI_HeightS(9));
+}
+
+- (UIView *)topLine{
+    if (!_topLine) {
+        _topLine = [[UIView alloc] init];
+        _topLine.backgroundColor = [UIColor colorFromRGB:0xFFC8C8C8];
+    }
+    return _topLine;
+}
 - (UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"fav_list_img_default_45x36_"];
+        _iconImageView.image = [UIImage imageNamed:@"home_information_bg"];
     }
     return _iconImageView;
 }
@@ -61,6 +76,14 @@
         _contentLabel.font = [UIFont systemFontOfSize:15];
     }
     return _contentLabel;
+}
+
+- (UIImageView *)readerIcon{
+    if (!_readerIcon) {
+        _readerIcon = [[UIImageView alloc]initWithFrame:CGRectZero];
+        _readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
+    }
+    return _readerIcon;
 }
 
 

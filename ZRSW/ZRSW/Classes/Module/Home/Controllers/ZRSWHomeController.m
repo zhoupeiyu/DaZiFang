@@ -12,7 +12,8 @@
 #import "UserModel.h"
 #import "ZRSWHomeBannerModel.h"
 #import "ZRSWHomeNewsCell.h"
-@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate>
+#import "ZRSWHomeNewsHeaderView.h"
+@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
@@ -46,8 +47,8 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableViewStyle =  UITableViewStyleGrouped;
 //    UITableViewStyleGrouped
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    self.tableView.separatorColor = [UIColor colorFromRGB:0xeaeaea];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//    self.tableView.separatorColor = [UIColor colorFromRGB:0xeaeaea];
     self.tableView.tableHeaderView = self.headerView;
     [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
 }
@@ -60,6 +61,29 @@
         return self.faqsListSource.count+1;
     }
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    ZRSWHomeNewsHeaderView *headerView = [[ZRSWHomeNewsHeaderView alloc] init];
+    headerView.nextBtn.tag = section;
+    if (section == 0) {
+        [headerView setTitle:@"热门资讯"];
+    }else if (section == 1) {
+        [headerView setTitle:@"常见问题"];
+    }
+    headerView.delegate = self;
+    return headerView;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        UIView *footerView = [[UIView alloc] init];
+        footerView.backgroundColor = [UIColor colorFromRGB:0xFFF7F8FC];
+        return footerView;
+    }else{
+        return nil;
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ZRSWHomeNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeNewsCell"];
         if (!cell) {
@@ -76,19 +100,25 @@
     return kUI_HeightS(35);
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        return kUI_HeightS(10);
+    }else{
+        return 0.1;
+    }
+
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        cell.separatorInset = UIEdgeInsetsZero;
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        cell.layoutMargins = UIEdgeInsetsZero;
-    }
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        cell.preservesSuperviewLayoutMargins = false;
+
+-(void)getMoreClick:(NSInteger)type title:(NSString *)title{
+    if (type == 0) {
+        NSLog(@"热门资讯");
+    }else if (type == 1){
+        NSLog(@"常见问题");
     }
 }
 
@@ -106,12 +136,22 @@
     [[[UserService alloc] init] getBannerWithCityID:cityId delegate:self];
 }
 
-- (void)refreshData{
+- (void)requsetPopularInformationList{
     [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
 }
 
+- (void)requsetSystemNotificationList{
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+}
+
+- (void)refreshData{
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+}
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    [self endHeadRefreshing];
+    [self endFootRefreshing];
     if ([reqType isEqualToString:KCityListRequest]) {
         CityListModel *model = (CityListModel *)resObj;
         if (model.error_code.integerValue == 0) {
@@ -142,11 +182,23 @@
         if (model.error_code.integerValue == 0) {
             for (NSUInteger i = 0; i < model.data.count; ++i){
                 NewDetailModel *detailModel = model.data[i];
-                if ([detailModel.newsType intValue] == 4) {
-                    [self.systemNewsListSource addObject:detailModel];
-                }else{
-                    [self.hotNewsListSource addObject:detailModel];
-                }
+                [self.hotNewsListSource addObject:detailModel];
+            }
+        }
+    }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
+        NewListModel *model = (NewListModel *)resObj;
+        if (model.error_code.integerValue == 0) {
+            for (NSUInteger i = 0; i < model.data.count; ++i){
+                NewDetailModel *detailModel = model.data[i];
+                [self.systemNewsListSource addObject:detailModel];
+            }
+        }
+    }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
+        CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
+        if (model.error_code.integerValue == 0) {
+            for (NSUInteger i = 0; i < model.data.count; ++i){
+                CommentQuestionModel *detailModel = model.data[i];
+                [self.faqsListSource addObject:detailModel];
             }
         }
     }else{
@@ -187,10 +239,10 @@
 - (SDCycleScrollView *)cycleScrollView{
     if (!_cycleScrollView) {
         CGFloat height = kUI_HeightS(175);
-        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) delegate:self placeholderImage:[UIImage imageNamed:@""]];
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) delegate:self placeholderImage:[UIImage imageNamed:@"home_advertisement_bg"]];
         _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
-        _cycleScrollView.currentPageDotImage = [UIImage imageNamed:@"guide_point_selected"];
-        _cycleScrollView.pageDotImage = [UIImage imageNamed:@"guide_point_else"];
+        _cycleScrollView.currentPageDotImage = [UIImage imageNamed:@"home_advertise_instructions_select"];
+        _cycleScrollView.pageDotImage = [UIImage imageNamed:@"home_advertise_instructions_default"];
         _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         [_cycleScrollView adjustWhenControllerViewWillAppera];
     }
