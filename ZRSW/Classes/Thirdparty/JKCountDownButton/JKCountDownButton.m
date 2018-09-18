@@ -68,7 +68,7 @@
         }
         else
         {
-            NSString *title = [NSString stringWithFormat:@"%zd秒",_second];
+            NSString *title = [NSString stringWithFormat:@"%zdS",_second];
             [self setTitle:title forState:UIControlStateNormal];
             [self setTitle:title forState:UIControlStateDisabled];
 

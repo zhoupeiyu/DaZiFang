@@ -19,6 +19,9 @@
 
 + (UIColor *)placeHoledColor;
 
++ (UIFont *)placeHoledNormalFont;
+
++ (UIFont *)placeHoledSmallFont;
 ///倒计时按钮点击回调
 - (void)countDownButtonHandler:(TouchedCountDownButtonHandler)touchedCountDownButtonHandler;
 //倒计时时间改变回调
@@ -32,4 +35,11 @@
 
 @end
 
+@interface ZRSWUserAgreementView : UIView
 
++ (instancetype)getUserAgreeViewWithTitle:(NSMutableAttributedString *)title agreeHtmlName:(NSString *)htmlName;
+
++ (CGFloat)viewHeight;
+- (BOOL)checkBtnSelected;
+
+@end

@@ -23,7 +23,7 @@
 
 #ifdef Api_Test // 测试环境
 
-    #define API_Host                @""
+    #define API_Host                @"http://zhongrong.ijiaoban.cn/"
 
     #define UMKey                   @"" // 友盟key
     #define BaiduMobStatKey         @"" // 百度统计key
