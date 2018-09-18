@@ -32,6 +32,7 @@
     
 }
 
+
 - (void)setupUI {
     [super setupUI];
     [self.scrollView addSubview:self.userNameView];

@@ -23,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)setupConfig {
@@ -32,7 +30,7 @@
     self.title = @"注册";
     [self setLeftBackBarButton];
     [self setRightBarButtonWithText:@"登录"];
-    self.scrollView.scrollEnabled = NO;
+    self.scrollView.scrollEnabled = YES;
     [self.rightBarButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
