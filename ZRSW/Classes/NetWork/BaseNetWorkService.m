@@ -47,16 +47,18 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
     return [reach isReachable];
 }
 
-+ (NSDictionary *)netWorkHeader {
++ (NSMutableDictionary *)netWorkHeader {
     NSMutableDictionary *header = [NSMutableDictionary dictionary];
-    NSMutableDictionary *auth = [NSMutableDictionary dictionary];
-    [auth setObject:@"" forKey:@"imei"];
-    [auth setObject:@"iOS" forKey:@"os"];
-    [auth setObject:[[UIDevice currentDevice] systemVersion] forKey:@"os_version"];
-    [auth setObject:[UIApplication sharedApplication].appVersion forKey:@"app_version"];
-    [auth setObject:[NSDate getTimeSecond] forKey:@"time_stamp"];
-    [auth setObject:[self getLoginToken] forKey:@"token"];
-    [auth setObject:[self getUserID] forKey:@"user_id"];
+    NSString *auth = @{
+                       @"imei":@"",
+                       @"os" : @"iOS",
+                       @"os_version" : [[UIDevice currentDevice] systemVersion],
+                       @"app_version" : [UIApplication sharedApplication].appVersion,
+                       @"time_stamp" : [NSDate getScond],
+                       @"token" : [self getLoginToken],
+                       @"user_id" : [self getUserID]
+                       }.yy_modelToJSONString;
+
     [header setObject:auth forKey:@"auth"];
     return header;
 }

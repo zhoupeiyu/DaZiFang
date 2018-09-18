@@ -19,7 +19,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [self baiduMobStat];
     // 定位信息
     [self loactionManager];
-    
+    // 网络
+    [self setupNetWorkConfig];
     
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -65,5 +66,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 #else
     
 #endif
+}
+- (void)setupNetWorkConfig {
+    [BaseNetWorkService configNetWorkService];
 }
 @end
