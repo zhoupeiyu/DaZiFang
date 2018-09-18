@@ -90,7 +90,14 @@
     return self.inputTextField.text;
 }
 + (UIColor *)placeHoledColor {
-    return [UIColor colorFromRGB:0x1D1D26];
+    return [UIColor colorFromRGB:0x474455];
+}
++ (UIFont *)placeHoledNormalFont {
+    return [UIFont fontWithName:@"MicrosoftYaHei" size:16];
+}
+
++ (UIFont *)placeHoledSmallFont {
+    return [UIFont fontWithName:@"MicrosoftYaHei" size:13];
 }
 ///倒计时按钮点击回调
 - (void)countDownButtonHandler:(TouchedCountDownButtonHandler)touchedCountDownButtonHandler {
@@ -154,7 +161,7 @@
     if (!_inputTextField) {
         _inputTextField = [[UITextField alloc] init];
         _inputTextField.textAlignment = NSTextAlignmentLeft;
-        _inputTextField.font = [UIFont fontWithName:@"MicrosoftYaHei" size:16];
+        _inputTextField.font = [ZRSWLoginCustomView placeHoledNormalFont];
         _inputTextField.textColor = [ZRSWLoginCustomView placeHoledColor];
         _inputTextField.clearsOnBeginEditing = YES;
         _inputTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -169,8 +176,6 @@
         [_countDownButton setTitleColor:[UIColor colorFromRGB:0x1D1D26] forState:UIControlStateNormal];
         [_countDownButton setTitleColor:[UIColor colorFromRGB:0x1D1D26] forState:UIControlStateHighlighted];
         [_countDownButton setBackgroundImage:[UIImage imageNamed:@"verification_code_button"] forState:UIControlStateNormal];
-        [_countDownButton setBackgroundImage:[UIImage imageNamed:@"verification_code_button"] forState:UIControlStateNormal];
-        [_countDownButton setBackgroundImage:[UIImage imageNamed:@"verification_code_button"] forState:UIControlStateNormal];
         _countDownButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
     }
     return _countDownButton;
@@ -182,5 +187,99 @@
         _lineView.backgroundColor = [UIColor colorFromRGB:0xEDEDED];
     }
     return _lineView;
+}
+@end
+
+@interface ZRSWUserAgreementView ()
+
+@property (nonatomic, strong) NSMutableAttributedString *title;
+@property (nonatomic, strong) NSString *htmlName;
+
+@property (nonatomic, strong) UIButton *checkBtn;
+@property (nonatomic, strong) UIButton *agreeBtn;
+
+@end
+@implementation ZRSWUserAgreementView
+
++ (instancetype)getUserAgreeViewWithTitle:(NSString *)title agreeHtmlName:(NSString *)htmlName {
+    ZRSWUserAgreementView *agreeView = [[ZRSWUserAgreementView alloc] init];
+    agreeView.title = title;
+    agreeView.htmlName = htmlName;
+    return agreeView;
+}
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupConfig];
+        [self setupUI];
+    }
+    return self;
+}
+
++ (UIImage *)checkNormalImage {
+    return [UIImage imageNamed:@"register_unchecked"];
+}
++ (UIImage *)checkSelectImage {
+    return [UIImage imageNamed:@"register_select"];
+}
+- (void)setupConfig {
+    self.backgroundColor = [UIColor whiteColor];
+}
+- (void)setupUI{
+    [self addSubview:self.checkBtn];
+    [self addSubview:self.agreeBtn];
+    [self setuplayOut];
+}
+- (void)setuplayOut {
+    [self.checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.mas_centerY);
+        make.left.mas_equalTo(25);
+        make.size.mas_equalTo(CGSizeMake([ZRSWUserAgreementView checkNormalImage].size.width + 10, [ZRSWUserAgreementView checkNormalImage].size.width + 10));
+    }];
+    [self.agreeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.checkBtn.mas_right);
+        make.centerY.mas_equalTo(self.mas_centerY);
+    }];
+}
++ (CGFloat)viewHeight {
+    return 30 + [self checkNormalImage].size.height;
+}
+- (BOOL)checkBtnSelected {
+    return self.checkBtn.selected;
+}
+
+- (void)setTitle:(NSMutableAttributedString *)title {
+    _title = title;
+    [self.agreeBtn setAttributedTitle:title forState:UIControlStateNormal];
+    [self.agreeBtn setAttributedTitle:title forState:UIControlStateHighlighted];
+}
+#pragma mark - action
+
+- (void)checkBtnAction:(UIButton *)checkBtn {
+    checkBtn.selected = !checkBtn.selected;
+}
+- (void)agreeBtnAction {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"LoginAgreement" ofType:@"html"];
+    [ControllerUtilsManager showViewWithURL:path];
+}
+#pragma mark - lazy
+
+- (UIButton *)checkBtn {
+    if (!_checkBtn) {
+        _checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_checkBtn setImage:[ZRSWUserAgreementView checkNormalImage] forState:UIControlStateNormal];
+        [_checkBtn setImage:[ZRSWUserAgreementView checkSelectImage] forState:UIControlStateSelected];
+        [_checkBtn addTarget:self action:@selector(checkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _checkBtn;
+}
+- (UIButton *)agreeBtn {
+    if (!_agreeBtn) {
+        _agreeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _agreeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_agreeBtn addTarget:self action:@selector(agreeBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _agreeBtn;
 }
 @end

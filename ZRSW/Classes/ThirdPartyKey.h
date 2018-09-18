@@ -18,7 +18,7 @@
 #define kQQAppKey                           @"OJfTEBgme0l3qH5S";
 
 //百度地图
-#define kBaiduMapAppid                      @"aLKydhiCYm6sxFfDFMAhojo3qOq83xa2";
+#define kBaiduMapAppid                      @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0";
 #define kBaiduMapAppidTest                  @"RT8u8T2kDcPQFjLk7IkOxrmvQv5i2Be0";
 //极光
 #define kJupushKey                          @"a748387bf81b95ce912b82bf";

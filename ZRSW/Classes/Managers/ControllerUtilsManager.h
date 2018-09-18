@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <TOWebViewController.h>
 
 @interface ControllerUtilsManager : NSObject
 

@@ -6,9 +6,9 @@
 //  Copyright © 2018年 周培玉. All rights reserved.
 //
 
-#import "BaseTableViewController.h"
+#import "BaseScrollViewController.h"
 
-@interface ZRSWRegisterController : BaseTableViewController
+@interface ZRSWRegisterController : BaseScrollViewController
 
 
 @end

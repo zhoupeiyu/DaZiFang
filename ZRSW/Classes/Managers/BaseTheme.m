@@ -41,7 +41,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseTheme);
     UIColor *color1 = [UIColor colorFromRGB:0x62606E];
     UIColor *color2 = [UIColor colorFromRGB:0x474455];
     UIImage *image = [UIImage imageWithColor:[UIColor colorWithGradientStyle:UIGradientStyleLeftToRight withFrame:CGRectMake(0, 0, SCREEN_WIDTH, kNavigationBarH) andColors:@[color1,color2]]];
-    return image;
+    return [UIImage imageNamed:@"currency_top_bg"];
 }
 + (UIColor *)navBarBottomLineColor {
     return [UIColor colorFromRGB:0xdfdfdf];
