@@ -307,8 +307,6 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
-		E5B59BCC2150F78E00726DE9 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BCB2150F78E00726DE9 /* ZRSWThirdLoginView.m */; };
-		E5B59BCE21510D3800726DE9 /* LoginAgreement.html in Resources */ = {isa = PBXBuildFile; fileRef = E5B59BCD21510D3700726DE9 /* LoginAgreement.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -725,9 +723,6 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
-		E5B59BCA2150F78E00726DE9 /* ZRSWThirdLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWThirdLoginView.h; sourceTree = "<group>"; };
-		E5B59BCB2150F78E00726DE9 /* ZRSWThirdLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWThirdLoginView.m; sourceTree = "<group>"; };
-		E5B59BCD21510D3700726DE9 /* LoginAgreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = LoginAgreement.html; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -957,8 +952,6 @@
 			children = (
 				E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */,
 				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
-				E5B59BCA2150F78E00726DE9 /* ZRSWThirdLoginView.h */,
-				E5B59BCB2150F78E00726DE9 /* ZRSWThirdLoginView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1576,7 +1569,6 @@
 		E5B59BC5214FD27000726DE9 /* CommentView */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BCD21510D3700726DE9 /* LoginAgreement.html */,
 				E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */,
 				E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */,
 			);
@@ -1807,7 +1799,6 @@
 				E5B59BA9214EC15600726DE9 /* news_dialog_arrow_them@3x.png in Resources */,
 				E5B59B3A214EC15600726DE9 /* currency_bottom_button@2x.png in Resources */,
 				E5B59B77214EC15600726DE9 /* currency_top_position@3x.png in Resources */,
-				E5B59BCE21510D3800726DE9 /* LoginAgreement.html in Resources */,
 				E5B59B15214EC15600726DE9 /* icon_40.png in Resources */,
 				E5B59B8E214EC15600726DE9 /* currency_watch_number@3x.png in Resources */,
 				E5B59B4B214EC15600726DE9 /* bill_content_bg@2x.png in Resources */,
@@ -1949,7 +1940,6 @@
 				E5B59A3E214EBEE800726DE9 /* SAMKeychain.m in Sources */,
 				E5B59A64214EBF9600726DE9 /* ZRSWLoansController.m in Sources */,
 				E5B59A25214EBEE800726DE9 /* UILabel+Extension.m in Sources */,
-				E5B59BCC2150F78E00726DE9 /* ZRSWThirdLoginView.m in Sources */,
 				E5B59A46214EBEE800726DE9 /* LNFooterAnimator.m in Sources */,
 				E5B59A4B214EBEE800726DE9 /* TZAssetCell.m in Sources */,
 				E5B59A1C214EBEE800726DE9 /* LFUIView+MBProgressHUD.m in Sources */,
@@ -2127,7 +2117,6 @@
 			baseConfigurationReference = 9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K5ZN9R368D;
@@ -2138,7 +2127,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lenovo.linkappol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
 				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
@@ -2151,7 +2140,6 @@
 			baseConfigurationReference = FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = K5ZN9R368D;
@@ -2162,7 +2150,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lenovo.linkappol;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ZRSW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b2f4c10f-b076-43ac-90d6-acf40c1cd6a5";
 				PROVISIONING_PROFILE_SPECIFIER = LinkAppDevelopment;
