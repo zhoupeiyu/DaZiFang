@@ -1,16 +1,16 @@
 //
-//  ZRSWHomeNewsCell.m
+//  ZRSWHomeQuestionCell.m
 //  ZRSW
 //
-//  Created by King on 2018/9/17.
+//  Created by King on 2018/9/18.
 //  Copyright © 2018年 周培玉. All rights reserved.
 //
 
-#import "ZRSWHomeNewsCell.h"
-@interface ZRSWHomeNewsCell()
-@property (nonatomic, strong) UIImageView *topLineImge;
+#import "ZRSWHomeQuestionCell.h"
+
+@interface ZRSWHomeQuestionCell()
 @property (nonatomic, strong) UIView *topLine;
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UIImageView *topLineImge;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UIImageView *readerIcon;
@@ -18,17 +18,17 @@
 @property (nonatomic, strong) UILabel *dateLabel;
 
 @end
-@implementation ZRSWHomeNewsCell
+@implementation ZRSWHomeQuestionCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setUpUI];
     }
     return self;
 }
+
 - (void)setUpUI{
 //    [self.contentView addSubview:self.topLine];
-    [self.contentView addSubview:self.topLineImge];
-    [self.contentView addSubview:self.iconImageView];
+        [self.contentView addSubview:self.topLineImge];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.readerIcon];
@@ -39,10 +39,9 @@
 - (void)layoutSubviews{
     self.topLine.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
-    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(90), kUI_HeightS(90));
-    self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), kUI_WidthS(114), kUI_HeightS(15));
-    self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(196), kUI_HeightS(34));
-    self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+    self.titleLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(20), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(15));
+    self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(10), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(34));
+    self.readerIcon.frame = CGRectMake(kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
     self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(9));
     self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(90), kUI_HeightS(9));
 }
@@ -54,6 +53,7 @@
     }
     return _topLine;
 }
+
 - (UIImageView *)topLineImge{
     if (!_topLineImge) {
         _topLineImge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"currency_line_720"]];
@@ -61,28 +61,21 @@
     return _topLineImge;
 }
 
-- (UIImageView *)iconImageView{
-    if (!_iconImageView) {
-        _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"home_information_bg"];
-    }
-    return _iconImageView;
-}
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = [UIColor colorFromRGB:0x131313];
+        _titleLabel.textColor = [UIColor colorFromRGB:0xFF000000];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
     }
     return _titleLabel;
 }
 - (UILabel *)contentLabel{
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] init];
-        _contentLabel.textColor = [UIColor colorFromRGB:0xadadad];
+        _contentLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        _contentLabel.font = [UIFont systemFontOfSize:15];
+        _contentLabel.font = [UIFont systemFontOfSize:14];
     }
     return _contentLabel;
 }
@@ -116,14 +109,13 @@
     return _readersLabel;
 }
 
-- (void)setDetailModel:(NewDetailModel *)detailModel{
-    _detailModel = detailModel;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:detailModel.imgUrl] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
-    self.titleLabel.text = detailModel.title;
-    self.contentLabel.text = detailModel.roundup;
-    self.readersLabel.text = detailModel.readers;
-    self.dateLabel.text = detailModel.updateTime;
+- (void)setDetailModel:(CommentQuestionModel *)questionModel{
+    _questionModel = questionModel;
+    self.titleLabel.text = questionModel.title;
+    self.contentLabel.text = questionModel.faqBody;
+    self.dateLabel.text = questionModel.updateTime;
 }
+
 
 
 - (void)awakeFromNib {

@@ -12,19 +12,23 @@
 #import "UserModel.h"
 #import "ZRSWHomeBannerModel.h"
 #import "ZRSWHomeNewsCell.h"
+#import "ZRSWHomeQuestionCell.h"
 #import "ZRSWHomeNewsHeaderView.h"
+#import "ZRSWNewsListDetailsController.h"
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
 @property (nonatomic, strong) NSMutableArray *hotNewsListSource;
 @property (nonatomic, strong) NSMutableArray *systemNewsListSource;
-@property (nonatomic, strong) NSMutableArray *faqsListSource;
+@property (nonatomic, strong) NSMutableArray *questionListSource;
 @property (nonatomic, strong) UIView *loanView;
 @property (nonatomic, strong) UILabel *loanAmountLabel;
 @property (nonatomic, strong) UIView *systemNotificationView;
 @property (nonatomic, strong) UILabel *systemNotificationLabel;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIView *locationView;
+@property (nonatomic, strong) UILabel *locationLabel;
 @end
 
 @implementation ZRSWHomeController
@@ -40,6 +44,8 @@
 - (void)setupConfig {
     [super setupConfig];
     self.navigationItem.title = @"大资方";
+    UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithCustomView:self.locationView];
+    self.navigationItem.leftBarButtonItem = leftBar;
 }
 
 - (void)setUpTableView{
@@ -58,7 +64,7 @@
     if (section == 0) {
         return self.hotNewsListSource.count+2;
     }else{
-        return self.faqsListSource.count+1;
+        return self.questionListSource.count+1;
     }
 }
 
@@ -85,11 +91,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ZRSWHomeNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeNewsCell"];
+    if (indexPath.section == 0) {
+        ZRSWHomeNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeNewsCell"];
         if (!cell) {
             cell = [[ZRSWHomeNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWHomeNewsCell"];
         }
-        return cell;
+        NewDetailModel *model = self.hotNewsListSource[indexPath.row];
+        cell.detailModel = model;
+         return cell;
+    }else if (indexPath.section == 1){
+        ZRSWHomeQuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeQuestionCell"];
+        if (!cell) {
+            cell = [[ZRSWHomeQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWHomeQuestionCell"];
+        }
+        CommentQuestionModel *model = self.questionListSource[indexPath.row];
+        cell.questionModel = model;
+         return cell;
+    }else{
+        return nil;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -113,18 +133,6 @@
     return 2;
 }
 
-
--(void)getMoreClick:(NSInteger)type title:(NSString *)title{
-    if (type == 0) {
-        NSLog(@"热门资讯");
-    }else if (type == 1){
-        NSLog(@"常见问题");
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 #pragma mark - NetWork
 - (void)requsetCityList{
@@ -152,58 +160,75 @@
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
     [self endHeadRefreshing];
     [self endFootRefreshing];
-    if ([reqType isEqualToString:KCityListRequest]) {
-        CityListModel *model = (CityListModel *)resObj;
-        if (model.error_code.integerValue == 0) {
-            if (self.cityArray.count > 0) {
-                [self.cityArray removeAllObjects];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KCityListRequest]) {
+            CityListModel *model = (CityListModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                if (self.cityArray.count > 0) {
+                    [self.cityArray removeAllObjects];
+                }
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    CityDetailModel *detailModel = model.data[i];
+                    NSLog(@"%@",detailModel.name);
+                    [self.cityArray addObject:detailModel.name];
+                }
+            }else{
+                NSLog(@"请求失败:%@",model.error_msg);
             }
-            for (NSUInteger i = 0; i < model.data.count; ++i){
-                CityDetailModel *detailModel = model.data[i];
-                NSLog(@"%@",detailModel.name);
-                [self.cityArray addObject:detailModel.name];
+        }else if ([reqType isEqualToString:KBannerRequest]) {
+            ZRSWHomeBannerModel *model = (ZRSWHomeBannerModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                if (self.pictureArray.count > 0) {
+                    [self.pictureArray removeAllObjects];
+                }
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    HomeBannerModelDetails *detailModel = model.data[i];
+                    NSLog(@"%@",detailModel.imgUrl);
+                    [self.pictureArray addObject:detailModel.imgUrl];
+                }
+                self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
+            }else{
+                NSLog(@"请求失败:%@",model.error_msg);
             }
-        }
-    }else if ([reqType isEqualToString:KBannerRequest]) {
-         ZRSWHomeBannerModel *model = (ZRSWHomeBannerModel *)resObj;
-        if (model.error_code.integerValue == 0) {
-            if (self.pictureArray.count > 0) {
-                [self.pictureArray removeAllObjects];
+        }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
+            NewListModel *model = (NewListModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    NewDetailModel *detailModel = model.data[i];
+                    [self.hotNewsListSource addObject:detailModel];
+                }
+            }else{
+                NSLog(@"请求失败:%@",model.error_msg);
             }
-            for (NSUInteger i = 0; i < model.data.count; ++i){
-                HomeBannerModelDetails *detailModel = model.data[i];
-                NSLog(@"%@",detailModel.imgUrl);
-                [self.pictureArray addObject:detailModel.imgUrl];
+        }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
+            NewListModel *model = (NewListModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    NewDetailModel *detailModel = model.data[i];
+                    [self.systemNewsListSource addObject:detailModel];
+                }
+                NewDetailModel *model = self.systemNewsListSource.lastObject;
+                if (model) {
+                    _systemNotificationLabel.text = model.title;
+                }
+            }else{
+                NSLog(@"请求失败:%@",model.error_msg);
             }
-            self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
-        }
-    }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
-        NewListModel *model = (NewListModel *)resObj;
-        if (model.error_code.integerValue == 0) {
-            for (NSUInteger i = 0; i < model.data.count; ++i){
-                NewDetailModel *detailModel = model.data[i];
-                [self.hotNewsListSource addObject:detailModel];
-            }
-        }
-    }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
-        NewListModel *model = (NewListModel *)resObj;
-        if (model.error_code.integerValue == 0) {
-            for (NSUInteger i = 0; i < model.data.count; ++i){
-                NewDetailModel *detailModel = model.data[i];
-                [self.systemNewsListSource addObject:detailModel];
-            }
-        }
-    }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
-        CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
-        if (model.error_code.integerValue == 0) {
-            for (NSUInteger i = 0; i < model.data.count; ++i){
-                CommentQuestionModel *detailModel = model.data[i];
-                [self.faqsListSource addObject:detailModel];
+        }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
+            CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    CommentQuestionModel *detailModel = model.data[i];
+                    [self.questionListSource addObject:detailModel];
+                }
+            }else{
+                NSLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-//            NSLog(@"请求失败:%@",model.error_msg);
-        }
+        NSLog(@"请求失败");
+    }
+
 }
 
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -211,17 +236,48 @@
 }
 
 
-
-
-#pragma mark - delegate && datasource
+#pragma mark - delegate && datasource-Banner跳转
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
 
 }
 
+
+#pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
-
-
+     NSLog(@"我要贷款");
 }
+
+
+#pragma mark - 公告更多
+- (void)moreButtonClck:(UIButton *)button{
+    ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
+    detailsVC.type = NewListTypeSystemNotification;
+    [self.navigationController pushViewController:detailsVC animated:YES];
+    NSLog(@"系统公告");
+}
+
+#pragma mark - 我要贷款
+- (void)triangleButtonClck:(UIButton *)button{
+    NSLog(@"更多城市");
+}
+
+
+#pragma mark - 热门资讯/常见问题
+-(void)getMoreClick:(NSInteger)type title:(NSString *)title{
+    if (type == 0) {
+        NSLog(@"热门资讯");
+        ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
+        detailsVC.type = NewListTypePopularInformation;
+        [self.navigationController pushViewController:detailsVC animated:YES];
+    }else if (type == 1){
+        NSLog(@"常见问题");
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 
 
 - (UIView *)headerView{
@@ -301,13 +357,35 @@
         [moreButton setTitle:@"更多" forState:UIControlStateNormal];
         [moreButton setTitleColor:[UIColor colorFromRGB:0x999999] forState:UIControlStateNormal];
         moreButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [moreButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        UIButton *moreClickButton = [[UIButton alloc] initWithFrame:CGRectMake(_systemNotificationLabel.right,0, SCREEN_WIDTH - _systemNotificationLabel.right, kUI_HeightS(44))];
+        [moreClickButton addTarget:self action:@selector(moreButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_systemNotificationView addSubview:moreButton];
+        [_systemNotificationView addSubview:moreClickButton];
         UIImageView *moreImageView = [[UIImageView alloc] initWithFrame:CGRectMake(moreButton.right + kUI_WidthS(5) ,kUI_HeightS(15), kUI_WidthS(12), kUI_HeightS(12))];
         moreImageView.image = [UIImage imageNamed:@"home_notice_arrow"];
         [_systemNotificationView addSubview:moreImageView];
     }
     return _systemNotificationView;
+}
+
+- (UIView *)locationView{
+    if (!_locationView) {
+        _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(95), kUI_HeightS(18))];
+        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0, kUI_WidthS(15), kUI_HeightS(18))];
+        leftImage.image = [UIImage imageNamed:@"currency_top_position"];
+        [_locationView addSubview:leftImage];
+        _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftImage.right + kUI_WidthS(4) ,kUI_HeightS(1), kUI_WidthS(64), kUI_HeightS(16))];
+        _locationLabel.text = @"北京市";
+        _locationLabel.textColor = [UIColor colorFromRGB:0xFFFFFFFF];
+        _locationLabel.textAlignment = NSTextAlignmentCenter;
+        _locationLabel.font = [UIFont systemFontOfSize:16];
+        [_locationView addSubview:_locationLabel];
+        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), kUI_WidthS(8), kUI_HeightS(5))];
+        [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
+        [triangleButton addTarget:self action:@selector(triangleButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        [_locationView addSubview:triangleButton];
+    }
+    return _locationView;
 }
 
 @end
