@@ -15,6 +15,7 @@
 @property (nonatomic, strong) ZRSWLoginCustomView *codeView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
 @property (nonatomic, strong) ZRSWUserAgreementView *agreeView;
+@property (nonatomic, strong) UIButton *registerBtn;
 
 @end
 
@@ -22,8 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
 }
 
 - (void)setupConfig {
@@ -31,16 +30,18 @@
     self.title = @"注册";
     [self setLeftBackBarButton];
     [self setRightBarButtonWithText:@"登录"];
+    self.scrollView.scrollEnabled = YES;
     [self.rightBarButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setupUI {
     [super setupUI];
-    [self.view addSubview:self.userNameView];
-    [self.view addSubview:self.phoneView];
-    [self.view addSubview:self.codeView];
-    [self.view addSubview:self.pwdView];
-    
+    [self.scrollView addSubview:self.userNameView];
+    [self.scrollView addSubview:self.phoneView];
+    [self.scrollView addSubview:self.codeView];
+    [self.scrollView addSubview:self.pwdView];
+    [self.scrollView addSubview:self.agreeView];
+    [self.scrollView addSubview:self.registerBtn];
     [self setupLayOut];
 }
 
@@ -70,6 +71,22 @@
         make.top.mas_equalTo(self.codeView.mas_bottom);
         make.height.mas_equalTo([ZRSWLoginCustomView loginInputViewHeight]);
     }];
+    [self.agreeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(self.pwdView.mas_bottom);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo([ZRSWUserAgreementView viewHeight]);
+    }];
+    [self.registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(30);
+        make.width.mas_equalTo(SCREEN_WIDTH - 2 * 30);
+        make.height.mas_equalTo(44);
+        make.top.mas_equalTo(self.agreeView.mas_bottom).offset(30);
+    }];
+}
+
+#pragma mark - Action
+- (void)registerAction {
     
 }
 #pragma mark - lazy
@@ -99,18 +116,26 @@
         NSString *tip = @"(字母+数字不少于6位)";
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,tip]];
         [str addAttribute:NSForegroundColorAttributeName value:[ZRSWLoginCustomView placeHoledColor] range:NSMakeRange(0, str.length)];
-//        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledNormalFont] range:NSMakeRange(0, str.length)];
-//        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length - 1, tip.length)];
-//        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(0, tip.length)];
+        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledNormalFont] range:NSMakeRange(0, str.length)];
+        [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length, tip.length)];
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:str keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
     }
     return _pwdView;
 }
 - (ZRSWUserAgreementView *)agreeView {
     if (!_agreeView) {
-        
-//        _agreeView = [ZRSWUserAgreementView getUserAgreeViewWithTitle:<#(NSMutableAttributedString *)#> agreeHtmlName:<#(NSString *)#>];
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《中融盛旺用户协议》"];
+        [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x999999] range:NSMakeRange(0, 7)];
+        [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x4771f2] range:NSMakeRange(7, 10)];
+        _agreeView = [ZRSWUserAgreementView getUserAgreeViewWithTitle:att agreeHtmlName:@"LoginAgreement"];
     }
     return _agreeView;
+}
+
+- (UIButton *)registerBtn {
+    if (!_registerBtn) {
+        _registerBtn = [ZRSWViewFactoryTool getBlueBtn:@"注册" target:self action:@selector(registerAction)];
+    }
+    return _registerBtn;
 }
 @end

@@ -45,7 +45,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 #pragma mark -  manager
 
 - (void)keyboardManager {
-    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
 }
 - (void)baiduMobStat {
     

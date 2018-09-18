@@ -38,7 +38,7 @@
         _scrollView.alwaysBounceVertical = YES;
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
-        
+        _scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _scrollView;
 }
