@@ -58,6 +58,9 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 - (void)loactionManager {
     
 #ifdef NeedLocationManager
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        [[[CLLocationManager alloc] init] requestWhenInUseAuthorization];
+    }
     [[LocationManager sharedInstance] setUpLocationManager];
 #else
     
