@@ -8,25 +8,26 @@
 
 #import "ZRSWNewsListDetailsController.h"
 #import "ZRSWHomeNewsCell.h"
+#import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWNewsListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @end
 
 @implementation ZRSWNewsListDetailsController
 - (void)viewDidLoad {
-
     [super viewDidLoad];
     [self setUpTableView];
+    self.dataListSource = [NSMutableArray arrayWithCapacity:0];
 }
 
 - (void)setupConfig {
     [super setupConfig];
+    [self setLeftBackBarButton];
     if (self.type == NewListTypePopularInformation) {
         self.navigationItem.title = @"热门资讯";
     }else if (self.type == NewListTypePopularInformation){
         self.navigationItem.title = @"系统公告";
     }
-    [self setLeftBackBarButton];
 }
 
 - (void)setUpTableView{
@@ -65,7 +66,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    LLog(@"热门资讯详情");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    if (self.type == NewListTypePopularInformation) {
+        detailsVC.type = DetailsTypePopularInformation;
+    }else if (self.type == NewListTypePopularInformation){
+        detailsVC.type = DetailsTypeSystemNotification;
+    }
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork
@@ -105,10 +115,10 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.dataListSource addObject:detailModel];
-                    [self.tableView reloadData];
                 }
+                 [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
             NewListModel *model = (NewListModel *)resObj;
@@ -116,14 +126,14 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.dataListSource addObject:detailModel];
-                    [self.tableView reloadData];
                 }
+                [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-        NSLog(@"请求失败");
+        LLog(@"请求失败");
     }
 }
 

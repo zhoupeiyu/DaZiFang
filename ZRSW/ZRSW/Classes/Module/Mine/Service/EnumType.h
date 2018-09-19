@@ -14,3 +14,11 @@ typedef enum : NSUInteger {
     NewListTypeSystemNotification = 1 // 系统公告
     
 } NewListType;
+
+#pragma mark - 公告/咨询/常见问题详情类型
+
+typedef enum : NSUInteger {
+    DetailsTypePopularInformation = 0, // 热门资讯
+    DetailsTypeSystemNotification = 1, // 系统公告
+    DetailsTypeCommentQuestion = 2 //常见问题
+} DetailsType;

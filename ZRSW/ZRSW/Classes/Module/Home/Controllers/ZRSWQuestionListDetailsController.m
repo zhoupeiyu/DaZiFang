@@ -9,6 +9,7 @@
 #import "ZRSWQuestionListDetailsController.h"
 #import "ZRSWHomeQuestionCell.h"
 #import "UserService.h"
+#import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWQuestionListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @end
@@ -18,16 +19,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUpTableView];
-    [self requsetSystemNotificationList];
+    self.dataListSource = [NSMutableArray arrayWithCapacity:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requsetPopularInformationList];
+    [self requsetCommentQuestionList];
 }
 
 - (void)setupConfig {
     [super setupConfig];
+    [self setLeftBackBarButton];
     self.navigationItem.title = @"常见问题";
 }
 
@@ -59,24 +61,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    detailsVC.type = DetailsTypeCommentQuestion;
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork
-- (void)requsetPopularInformationList{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
-}
-- (void)requsetSystemNotificationList{
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+- (void)requsetCommentQuestionList{
+    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
 }
 
 - (void)refreshData{
     [self.dataListSource removeAllObjects];
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
 }
 
 - (void)loadMoreData{
     CommentQuestionModel *questionModel = self.dataListSource.lastObject;
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:questionModel.id delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:questionModel.id delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
@@ -84,19 +87,19 @@
     [self endFootRefreshing];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
-            NewListModel *model = (NewListModel *)resObj;
+            CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 for (NSUInteger i = 0; i < model.data.count; ++i){
-                    NewDetailModel *detailModel = model.data[i];
+                    CommentQuestionModel *detailModel = model.data[i];
                     [self.dataListSource addObject:detailModel];
                     [self.tableView reloadData];
                 }
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-        NSLog(@"请求失败");
+        LLog(@"请求失败");
     }
 }
 
