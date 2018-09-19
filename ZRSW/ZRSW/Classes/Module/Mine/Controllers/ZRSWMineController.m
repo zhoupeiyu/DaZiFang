@@ -100,11 +100,13 @@
         mineModel.iconName = model.data.headImgUrl.length > 0 ? model.data.headImgUrl : @"";
         mineModel.title = model.data.nickName > 0 ? model.data.nickName : DefaultNickName;
         mineModel.desInfo = model.data.myId.integerValue > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId.stringValue] :@"";
+        mineModel.hasLogin = YES;
     }
     else {
         mineModel.iconName = @"";
         mineModel.title = @"请登录";
         mineModel.desInfo = @"";
+        mineModel.hasLogin = NO;
     }
     [self.tableView reloadData];
 }

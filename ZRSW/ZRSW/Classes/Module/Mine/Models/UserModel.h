@@ -70,7 +70,7 @@
 
 @interface UserInfoModel : BaseModel
 // 用户id
-@property (nonatomic, strong) NSNumber *id;
+@property (nonatomic, strong) NSString *id;
 //登陆账号
 @property (nonatomic, strong) NSString *loginId;
 //用户昵称
