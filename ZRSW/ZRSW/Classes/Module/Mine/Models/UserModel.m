@@ -50,8 +50,8 @@
 
 - (void)setData:(NSArray *)data {
     _data = data;
-    [[NSUserDefaults standardUserDefaults] setValue:data forKey:KCityListKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] setValue:data forKey:KCityListKey];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (NSArray *)getCityList {
