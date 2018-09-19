@@ -9,7 +9,7 @@
 #import "UserModel.h"
 
 #define KCityListKey                @"KCityListKey"
-
+#define KUserModelKey               @"KUserModelKey"
 
 @implementation ImageCode
 
@@ -33,6 +33,21 @@
 @end
 
 @implementation UserModel
+SYNTHESIZE_SINGLETON_ARC(UserModel);
++ (void)updateUserModel:(UserModel *)model {
+    NSDictionary *userDic = [model yy_modelToJSONObject];
+    [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:KUserModelKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
++ (UserModel *)getCurrentModel {
+    NSDictionary *userDic = [[NSUserDefaults standardUserDefaults] objectForKey:KUserModelKey];
+    UserModel *model = [UserModel yy_modelWithJSON:userDic];
+    return model;
+}
++ (void)removeUserData {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:KUserModelKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
 
 @end
 

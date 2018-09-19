@@ -49,6 +49,7 @@
 
 - (void)setupConfig {
     self.backgroundColor = [UIColor whiteColor];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:self.inputTextField];
 }
 - (void)setupUI {
     [self addSubview:self.titleLbl];
@@ -86,6 +87,13 @@
     }];
 }
 
+- (void)textFieldTextDidChange:(NSNotification *)noti {
+    if (noti.object == self.inputTextField) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldTextDidChange:customView:)]) {
+            [self.delegate textFieldTextDidChange:self.inputTextField customView:self];
+        }
+    }
+}
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:customView:)]) {
         BOOL isInput = [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string customView:self];
@@ -93,6 +101,13 @@
     }
     return YES;
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidEndEditing:customView:)]) {
+        [self.delegate textFieldDidEndEditing:textField customView:self];
+    }
+}
+
 #pragma mark - Event
 
 - (NSString *)getInputViewText {

@@ -122,7 +122,12 @@
 
 @interface UserModel : BaseModel
 
++ (UserModel *)sharedInstance;
 @property (nonatomic, strong) UserInfoModel *data;
+
++ (void)updateUserModel:(UserModel *)model;
++ (UserModel *)getCurrentModel;
++ (void)removeUserData;
 
 @end
 

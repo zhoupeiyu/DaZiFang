@@ -10,6 +10,7 @@
 #import "ZRSWLoginController.h"
 #import "ZRSWMineListCell.h"
 #import "ZRSWUserInfoController.h"
+#import "ZRSWSettingController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -79,7 +80,9 @@
 
 #pragma mark - Action
 - (void)settingAction {
-    
+    ZRSWSettingController *setting = [[ZRSWSettingController alloc] init];
+    setting.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:setting animated:YES];
 }
 #pragma mark - lazy
 
