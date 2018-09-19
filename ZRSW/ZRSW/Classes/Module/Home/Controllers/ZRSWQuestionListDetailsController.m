@@ -9,6 +9,7 @@
 #import "ZRSWQuestionListDetailsController.h"
 #import "ZRSWHomeQuestionCell.h"
 #import "UserService.h"
+#import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWQuestionListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @end
@@ -28,6 +29,7 @@
 
 - (void)setupConfig {
     [super setupConfig];
+    [self setLeftBackBarButton];
     self.navigationItem.title = @"常见问题";
 }
 
@@ -59,6 +61,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    detailsVC.type = DetailsTypeCommentQuestion;
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork

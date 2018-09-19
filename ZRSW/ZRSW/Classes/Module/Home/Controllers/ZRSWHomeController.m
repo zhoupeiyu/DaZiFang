@@ -15,6 +15,9 @@
 #import "ZRSWHomeQuestionCell.h"
 #import "ZRSWHomeNewsHeaderView.h"
 #import "ZRSWNewsListDetailsController.h"
+#import "ZRSWQuestionListDetailsController.h"
+#import "ZRSWLoansController.h"
+#import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -255,21 +258,25 @@
 #pragma mark - delegate && datasource-Banner跳转
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
 
+
 }
 
 
 #pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
-     NSLog(@"我要贷款");
+     LLog(@"我要贷款");
+    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
+    loansVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:loansVC animated:YES];
 }
 
 
 #pragma mark - 公告更多
 - (void)moreButtonClck:(UIButton *)button{
-    ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
-    detailsVC.type = NewListTypeSystemNotification;
-    detailsVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailsVC animated:YES];
+    ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
+    listDetailsVC.type = NewListTypeSystemNotification;
+    listDetailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listDetailsVC animated:YES];
     NSLog(@"系统公告");
 }
 
@@ -284,17 +291,32 @@
 -(void)getMoreClick:(NSInteger)type title:(NSString *)title{
     if (type == 0) {
         NSLog(@"热门资讯");
-        ZRSWNewsListDetailsController *detailsVC = [[ZRSWNewsListDetailsController alloc] init];
-        detailsVC.type = NewListTypePopularInformation;
-        detailsVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailsVC animated:YES];
+        ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
+        listDetailsVC.type = NewListTypePopularInformation;
+        listDetailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listDetailsVC animated:YES];
     }else if (type == 1){
         NSLog(@"常见问题");
+        ZRSWQuestionListDetailsController *listDetailsVC = [[ZRSWQuestionListDetailsController alloc] init];
+        listDetailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listDetailsVC animated:YES];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    LLog(@"详情");
+    if (indexPath.section == 0) {
+        ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+        detailsVC.type = DetailsTypePopularInformation;
+        detailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailsVC animated:YES];
+    }else if (indexPath.section == 1) {
+        ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+        detailsVC.type = DetailsTypeCommentQuestion;
+        detailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailsVC animated:YES];
+    }
 }
 
 

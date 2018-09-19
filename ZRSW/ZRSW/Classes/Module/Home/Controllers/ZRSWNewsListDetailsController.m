@@ -8,6 +8,7 @@
 
 #import "ZRSWNewsListDetailsController.h"
 #import "ZRSWHomeNewsCell.h"
+#import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWNewsListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @end
@@ -21,12 +22,12 @@
 
 - (void)setupConfig {
     [super setupConfig];
+    [self setLeftBackBarButton];
     if (self.type == NewListTypePopularInformation) {
         self.navigationItem.title = @"热门资讯";
     }else if (self.type == NewListTypePopularInformation){
         self.navigationItem.title = @"系统公告";
     }
-    [self setLeftBackBarButton];
 }
 
 - (void)setUpTableView{
@@ -65,7 +66,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    LLog(@"热门资讯详情");
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    if (self.type == NewListTypePopularInformation) {
+        detailsVC.type = DetailsTypePopularInformation;
+    }else if (self.type == NewListTypePopularInformation){
+        detailsVC.type = DetailsTypeSystemNotification;
+    }
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork
