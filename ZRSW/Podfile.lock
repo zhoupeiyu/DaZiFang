@@ -64,6 +64,101 @@ PODS:
     - UMCCommon
   - UMCCommon (1.5.2)
   - UMCSecurityPlugins (1.0.6)
+  - UMCShare/Core (6.9.4):
+    - UMCCommon
+  - UMCShare/Social/AlipayShare (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/DingDing (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Douban (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/DropBox (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Email (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/EverNote (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Facebook (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Flickr (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/GooglePlus (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Instagram (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Kakao (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Line (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Pinterest (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Pocket (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/QQ (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+    - UMCShare/Social/ReducedQQ
+  - UMCShare/Social/ReducedQQ (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedSina (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/ReducedWeChat (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Renren (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Sina (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+    - UMCShare/Social/ReducedSina
+  - UMCShare/Social/SMS (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/TencentWeibo (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Tumblr (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/Twitter (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/VKontakte (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/WeChat (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+    - UMCShare/Social/ReducedWeChat
+  - UMCShare/Social/WhatsApp (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/YiXin (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/Social/YouDao (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/UI (6.9.4):
+    - UMCCommon
+    - UMCShare/Core
   - XLForm (3.3.0)
 
 DEPENDENCIES:
@@ -100,6 +195,36 @@ DEPENDENCIES:
   - UMCAnalytics
   - UMCCommon
   - UMCSecurityPlugins
+  - UMCShare/Social/AlipayShare
+  - UMCShare/Social/DingDing
+  - UMCShare/Social/Douban
+  - UMCShare/Social/DropBox
+  - UMCShare/Social/Email
+  - UMCShare/Social/EverNote
+  - UMCShare/Social/Facebook
+  - UMCShare/Social/Flickr
+  - UMCShare/Social/GooglePlus
+  - UMCShare/Social/Instagram
+  - UMCShare/Social/Kakao
+  - UMCShare/Social/Line
+  - UMCShare/Social/Pinterest
+  - UMCShare/Social/Pocket
+  - UMCShare/Social/QQ
+  - UMCShare/Social/ReducedQQ
+  - UMCShare/Social/ReducedSina
+  - UMCShare/Social/ReducedWeChat
+  - UMCShare/Social/Renren
+  - UMCShare/Social/Sina
+  - UMCShare/Social/SMS
+  - UMCShare/Social/TencentWeibo
+  - UMCShare/Social/Tumblr
+  - UMCShare/Social/Twitter
+  - UMCShare/Social/VKontakte
+  - UMCShare/Social/WeChat
+  - UMCShare/Social/WhatsApp
+  - UMCShare/Social/YiXin
+  - UMCShare/Social/YouDao
+  - UMCShare/UI
   - XLForm
 
 SPEC REPOS:
@@ -139,6 +264,7 @@ SPEC REPOS:
     - UMCAnalytics
     - UMCCommon
     - UMCSecurityPlugins
+    - UMCShare
     - XLForm
 
 SPEC CHECKSUMS:
@@ -177,8 +303,9 @@ SPEC CHECKSUMS:
   UMCAnalytics: 0aff87e39008e2a650e5917430db0da2de2f8495
   UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  UMCShare: aa233aecad67979930fe43f3a2f676023b669439
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: bd94541b07c808ae7fa6a6a1bdb6f81eab64a1fe
+PODFILE CHECKSUM: 150c469953d361491a8fb44ccc6109c36bcae0b2
 
 COCOAPODS: 1.5.3

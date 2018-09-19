@@ -116,6 +116,96 @@ pod 'XLForm'
 # 仿微信弹窗
 pod 'SPAlertController', '~> 1.0.1'
 
+# U-Share SDK UI模块（分享面板，建议添加）
+pod 'UMCShare/UI'
+
+# 集成微信(精简版0.2M)
+pod 'UMCShare/Social/ReducedWeChat'
+
+# 集成微信(完整版14.4M)
+pod 'UMCShare/Social/WeChat'
+
+# 集成QQ/QZone/TIM(精简版0.5M)
+pod 'UMCShare/Social/ReducedQQ'
+
+# 集成QQ/QZone/TIM(完整版7.6M)
+pod 'UMCShare/Social/QQ'
+
+# 集成新浪微博(精简版1M)
+pod 'UMCShare/Social/ReducedSina'
+
+# 集成新浪微博(完整版25.3M)
+pod 'UMCShare/Social/Sina'
+
+# 集成Facebook/Messenger
+pod 'UMCShare/Social/Facebook'
+
+# 集成Twitter
+pod 'UMCShare/Social/Twitter'
+
+# 集成支付宝
+pod 'UMCShare/Social/AlipayShare'
+
+# 集成钉钉
+pod 'UMCShare/Social/DingDing'
+
+# 集成豆瓣
+pod 'UMCShare/Social/Douban'
+
+# 集成人人
+pod 'UMCShare/Social/Renren'
+
+# 集成腾讯微博
+pod 'UMCShare/Social/TencentWeibo'
+
+# 集成易信
+pod 'UMCShare/Social/YiXin'
+
+# 集成Flickr
+pod 'UMCShare/Social/Flickr'
+
+# 集成Kakao
+pod 'UMCShare/Social/Kakao'
+
+# 集成Tumblr
+pod 'UMCShare/Social/Tumblr'
+
+# 集成Pinterest
+pod 'UMCShare/Social/Pinterest'
+
+# 集成Instagram
+pod 'UMCShare/Social/Instagram'
+
+# 集成Line
+pod 'UMCShare/Social/Line'
+
+# 集成WhatsApp
+pod 'UMCShare/Social/WhatsApp'
+
+# 集成有道云笔记
+pod 'UMCShare/Social/YouDao'
+
+# 集成印象笔记
+pod 'UMCShare/Social/EverNote'
+
+# 集成Google+
+pod 'UMCShare/Social/GooglePlus'
+
+# 集成Pocket
+pod 'UMCShare/Social/Pocket'
+
+# 集成DropBox
+pod 'UMCShare/Social/DropBox'
+
+# 集成VKontakte
+pod 'UMCShare/Social/VKontakte'
+
+# 集成邮件
+pod 'UMCShare/Social/Email'
+
+# 集成短信
+pod 'UMCShare/Social/SMS'
+
 #pod 'GrowingTextView'
 
 

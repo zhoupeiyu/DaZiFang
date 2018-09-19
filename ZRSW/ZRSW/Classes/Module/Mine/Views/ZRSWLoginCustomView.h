@@ -14,6 +14,10 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView;
 
+- (void)textFieldDidEndEditing:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;
+
+- (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;
+
 - (void)countDownButtonAction:(UIButton *)button;
 
 @end
@@ -21,10 +25,10 @@
 
 @property (nonatomic, weak) id <LoginCustomViewDelegate> delegate;
 
+
 + (instancetype)getLoginInputViewWithTitle:(NSString *)title placeHoled:(NSAttributedString *)placeHoled keyboardType:(UIKeyboardType)keyboardType isNeedCountDownButton:(BOOL)isNeedCountDownButton isNeedBottomLine:(BOOL)isNeedBottomLine;
 
 + (CGFloat)loginInputViewHeight;
-
 
 - (NSString *)getInputViewText;
 

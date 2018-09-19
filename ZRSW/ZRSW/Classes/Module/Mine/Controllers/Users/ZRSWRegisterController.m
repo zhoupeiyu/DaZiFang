@@ -97,6 +97,47 @@
 
 #pragma mark - delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView {
+    if (customView == self.userNameView) {
+        
+    }
+    else if (customView == self.phoneView) {
+        NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+        if (proposedNewLength > 11) {
+            return NO;//限制长度
+        }
+    }
+    else if (customView == self.codeView) {
+        NSUInteger lengthOfString = string.length;  //lengthOfString的值始终为1
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {
+            unichar character = [string characterAtIndex:loopIndex]; //将输入的值转化为ASCII值（即内部索引值），可以参考ASCII表
+            // 48-57;{0,9};65-90;{A..Z};97-122:{a..z}
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57 && character < 65) return NO; //
+            if (character > 90 && character < 97) return NO;
+            if (character > 122) return NO;
+        }
+        NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+        if (proposedNewLength > 6) {
+            return NO;//限制长度
+        }
+        return YES;
+    }
+    else if (customView == self.pwdView) {
+        NSUInteger lengthOfString = string.length;  //lengthOfString的值始终为1
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {
+            unichar character = [string characterAtIndex:loopIndex]; //将输入的值转化为ASCII值（即内部索引值），可以参考ASCII表
+            // 48-57;{0,9};65-90;{A..Z};97-122:{a..z}
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57 && character < 65) return NO; //
+            if (character > 90 && character < 97) return NO;
+            if (character > 122) return NO;
+        }
+        return YES;
+    }
+    
+    return YES;
+}
+- (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView {
     NSString *text = textField.text;
     if (customView == self.userNameView) {
         self.userName = text;
@@ -112,7 +153,6 @@
         self.password = text;
     }
     self.registerBtn.enabled = [self checkRegisterEnabled];
-    return YES;
 }
 - (void)userAgreementViewChecked:(BOOL)check {
     self.isChecked = check;
@@ -134,7 +174,7 @@
 }
 
 - (BOOL)checkRegisterEnabled {
-    return _userName.length > 0 && _phoneNum.length > 0 && _codeNum.length > 0 && _password.length > 0 && _isChecked;
+    return _userName.length > 0 && _phoneNum.length > 0 && _codeNum.length > 0 && _password.length >= 6 && self.isChecked;
 }
 
 
@@ -143,7 +183,15 @@
     [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KUserRegisterRequest]) {
-            
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [UserModel updateUserModel:model];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
         }
         else if ([reqType isEqualToString:KGetPhoneCodeRequest]) {
             BaseModel *model = (BaseModel *)resObj;
@@ -192,7 +240,7 @@
         [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledNormalFont] range:NSMakeRange(0, str.length)];
         [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length, tip.length)];
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:str keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
-        _phoneView.delegate = self;
+        _pwdView.delegate = self;
     }
     return _pwdView;
 }
