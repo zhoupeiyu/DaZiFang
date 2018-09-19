@@ -40,11 +40,11 @@
     self.topLine.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(90), kUI_HeightS(90));
-    self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), kUI_WidthS(114), kUI_HeightS(15));
+    self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), (SCREEN_WIDTH - self.iconImageView.right - kUI_WidthS(30)), kUI_HeightS(15));
     self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(196), kUI_HeightS(34));
     self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
-    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(9));
-    self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(90), kUI_HeightS(9));
+    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
+    self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(150), kUI_HeightS(10));
 }
 
 - (UIView *)topLine{
@@ -71,18 +71,19 @@
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = [UIColor colorFromRGB:0x131313];
+        _titleLabel.textColor = [UIColor colorFromRGB:0xFF000000];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.font = [UIFont systemFontOfSize:15];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
     }
     return _titleLabel;
 }
 - (UILabel *)contentLabel{
     if (!_contentLabel) {
         _contentLabel = [[UILabel alloc] init];
-        _contentLabel.textColor = [UIColor colorFromRGB:0xadadad];
+        _contentLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
         _contentLabel.textAlignment = NSTextAlignmentLeft;
-        _contentLabel.font = [UIFont systemFontOfSize:15];
+        _contentLabel.numberOfLines = 0;
+        _contentLabel.font = [UIFont systemFontOfSize:14];
     }
     return _contentLabel;
 }
@@ -99,9 +100,9 @@
 - (UILabel *)readersLabel{
     if (!_readersLabel) {
         _readersLabel = [[UILabel alloc] init];
-        _readersLabel.textColor = [UIColor colorFromRGB:0xadadad];
+        _readersLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
         _readersLabel.textAlignment = NSTextAlignmentLeft;
-        _readersLabel.font = [UIFont systemFontOfSize:15];
+        _readersLabel.font = [UIFont systemFontOfSize:10];
     }
     return _readersLabel;
 }
@@ -109,20 +110,28 @@
 - (UILabel *)dateLabel{
     if (!_dateLabel) {
         _dateLabel = [[UILabel alloc] init];
-        _dateLabel.textColor = [UIColor colorFromRGB:0xadadad];
+        _dateLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
         _dateLabel.textAlignment = NSTextAlignmentLeft;
-        _dateLabel.font = [UIFont systemFontOfSize:15];
+        _dateLabel.font = [UIFont systemFontOfSize:10];
     }
-    return _readersLabel;
+    return _dateLabel;
 }
 
 - (void)setDetailModel:(NewDetailModel *)detailModel{
     _detailModel = detailModel;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:detailModel.imgUrl] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",API_Host,detailModel.imgUrl]] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
     self.titleLabel.text = detailModel.title;
     self.contentLabel.text = detailModel.roundup;
-    self.readersLabel.text = detailModel.readers;
-    self.dateLabel.text = detailModel.updateTime;
+    self.readersLabel.text = [NSString stringWithFormat:@"%@",detailModel.readers];
+    if (!self.readersLabel.text) {
+        _readerIcon.hidden = YES;
+    }
+    NSTimeInterval interval = [detailModel.updateTime doubleValue] / 1000.0;
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy.MM.dd"];
+    NSString *dateString = [formatter stringFromDate: date];
+    self.dateLabel.text = dateString;
 }
 
 

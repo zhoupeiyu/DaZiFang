@@ -23,6 +23,15 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
+    UIButton *leftButton = [[UIButton alloc] init];
+    [leftButton setImage:[UIImage imageNamed:@"currency_top_share"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(shareButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *rightButton = [[UIButton alloc] init];
+    [rightButton setTitle:@"分享" forState:UIControlStateNormal];
+    [rightButton setTintColor:[UIColor colorFromRGB:0xFFB9B9B9]];
+    [rightButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [rightButton addTarget:self action:@selector(shareButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+    [self setRightBarRightButton:rightButton leftButton:leftButton];
     if (self.type == DetailsTypePopularInformation) {
         self.navigationItem.title = @"资讯详情";
     }else if (self.type == DetailsTypeSystemNotification){
@@ -33,11 +42,16 @@
 }
 
 
+- (void)shareButtonClck:(UIButton *)button{
+    LLog(@"第三方分享");
+}
+
+
 
 
 -(UIWebView *)webView{
     if (!_webView) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, kNavigationBarH, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarH)];
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarH)];
         _webView.delegate = self;
         _webView.backgroundColor = [UIColor whiteColor];
         [_webView sizeToFit];
@@ -45,6 +59,8 @@
     }
     return _webView;
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

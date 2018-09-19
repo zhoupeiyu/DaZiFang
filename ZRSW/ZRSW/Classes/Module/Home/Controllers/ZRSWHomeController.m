@@ -41,6 +41,11 @@
     [super viewDidLoad];
 //    [self.view addSubview:self.cycleScrollView];
     [self setUpTableView];
+    self.cityArray = [NSMutableArray arrayWithCapacity:0];
+    self.pictureArray = [NSMutableArray arrayWithCapacity:0];
+    self.hotNewsListSource = [NSMutableArray arrayWithCapacity:0];
+    self.systemNewsListSource = [NSMutableArray arrayWithCapacity:0];
+    self.questionListSource = [NSMutableArray arrayWithCapacity:0];
 }
 
 
@@ -61,8 +66,12 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requsetBannerList];
     [self requsetCityList];
+    [self requsetBannerList];
+    [self requsetSystemNotificationList];
+    [self requsetPopularInformationList];
+    [self requsetCommentQuestionList];
+
     [self locationCity];
 }
 
@@ -72,9 +81,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return self.hotNewsListSource.count+2;
+        return self.hotNewsListSource.count;
     }else{
-        return self.questionListSource.count+1;
+        return self.questionListSource.count;
     }
 }
 
@@ -171,9 +180,14 @@
     [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
 }
 
+- (void)requsetCommentQuestionList{
+    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
+}
+
 - (void)refreshData{
     [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
     [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
@@ -188,11 +202,11 @@
                 }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     CityDetailModel *detailModel = model.data[i];
-                    NSLog(@"%@",detailModel.name);
+                    LLog(@"%@",detailModel.name);
                     [self.cityArray addObject:detailModel.name];
                 }
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KBannerRequest]) {
             ZRSWHomeBannerModel *model = (ZRSWHomeBannerModel *)resObj;
@@ -202,26 +216,33 @@
                 }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     HomeBannerModelDetails *detailModel = model.data[i];
-                    NSLog(@"%@",detailModel.imgUrl);
-                    [self.pictureArray addObject:detailModel.imgUrl];
+                    LLog(@"%@",detailModel.imgUrl);
+                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@%@",API_Host,detailModel.imgUrl]];
                 }
                 self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
             NewListModel *model = (NewListModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                if (self.hotNewsListSource.count > 0) {
+                    [self.hotNewsListSource removeAllObjects];
+                }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.hotNewsListSource addObject:detailModel];
                 }
+                [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
             NewListModel *model = (NewListModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                if (self.systemNewsListSource.count > 0) {
+                    [self.systemNewsListSource removeAllObjects];
+                }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.systemNewsListSource addObject:detailModel];
@@ -231,21 +252,25 @@
                     _systemNotificationLabel.text = model.title;
                 }
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
             CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                if (self.questionListSource.count > 0) {
+                    [self.questionListSource removeAllObjects];
+                }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     CommentQuestionModel *detailModel = model.data[i];
                     [self.questionListSource addObject:detailModel];
                 }
+                 [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-        NSLog(@"请求失败");
+        LLog(@"请求失败");
     }
 
 }
@@ -277,26 +302,26 @@
     listDetailsVC.type = NewListTypeSystemNotification;
     listDetailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:listDetailsVC animated:YES];
-    NSLog(@"系统公告");
+    LLog(@"系统公告");
 }
 
 #pragma mark - 我要贷款
 - (void)triangleButtonClck:(UIButton *)button{
     [self locationCity];
-    NSLog(@"更多城市");
+    LLog(@"更多城市");
 }
 
 
 #pragma mark - 热门资讯/常见问题
 -(void)getMoreClick:(NSInteger)type title:(NSString *)title{
     if (type == 0) {
-        NSLog(@"热门资讯");
+        LLog(@"热门资讯");
         ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
         listDetailsVC.type = NewListTypePopularInformation;
         listDetailsVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listDetailsVC animated:YES];
     }else if (type == 1){
-        NSLog(@"常见问题");
+        LLog(@"常见问题");
         ZRSWQuestionListDetailsController *listDetailsVC = [[ZRSWQuestionListDetailsController alloc] init];
         listDetailsVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:listDetailsVC animated:YES];

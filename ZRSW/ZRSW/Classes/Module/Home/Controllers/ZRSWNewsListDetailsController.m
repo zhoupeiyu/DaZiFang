@@ -15,9 +15,9 @@
 
 @implementation ZRSWNewsListDetailsController
 - (void)viewDidLoad {
-
     [super viewDidLoad];
     [self setUpTableView];
+    self.dataListSource = [NSMutableArray arrayWithCapacity:0];
 }
 
 - (void)setupConfig {
@@ -115,10 +115,10 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.dataListSource addObject:detailModel];
-                    [self.tableView reloadData];
                 }
+                 [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
             NewListModel *model = (NewListModel *)resObj;
@@ -126,14 +126,14 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
                     [self.dataListSource addObject:detailModel];
-                    [self.tableView reloadData];
                 }
+                [self.tableView reloadData];
             }else{
-                NSLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-        NSLog(@"请求失败");
+        LLog(@"请求失败");
     }
 }
 
