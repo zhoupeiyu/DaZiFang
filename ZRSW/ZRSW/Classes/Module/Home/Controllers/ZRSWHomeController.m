@@ -34,15 +34,12 @@
 @implementation ZRSWHomeController
 
 - (void)viewDidLoad {
+    self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
 //    [self.view addSubview:self.cycleScrollView];
-    [self setupUI];
-
-}
-- (void)setupUI {
     [self setUpTableView];
-    [super setupUI];
 }
+
 
 
 - (void)setupConfig {
@@ -55,8 +52,6 @@
 - (void)setUpTableView{
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
-    self.tableViewStyle =  UITableViewStyleGrouped;
-//    UITableViewStyleGrouped
     self.tableView.tableHeaderView = self.headerView;
     [self enableRefreshHeader:YES];
 }

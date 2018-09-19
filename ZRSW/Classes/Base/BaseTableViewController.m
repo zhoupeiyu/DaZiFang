@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [self setupUI];
 }
 - (void)dealloc {
     self.tableView.dataSource = nil;
