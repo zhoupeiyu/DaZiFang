@@ -49,6 +49,10 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
++ (BOOL)hasLogin {
+    UserModel *model = [self getCurrentModel];
+    return model.data.id.integerValue > 0;
+}
 @end
 
 @implementation CityDetailModel

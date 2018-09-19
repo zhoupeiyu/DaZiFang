@@ -8,6 +8,8 @@
 
 #import "BaseModel.h"
 
+#define DefaultNickName         @"小明"
+
 #pragma mark -  图片验证码
 
 @interface ImageCode : NSObject
@@ -124,6 +126,8 @@
 
 + (UserModel *)sharedInstance;
 @property (nonatomic, strong) UserInfoModel *data;
+
++ (BOOL)hasLogin;
 
 + (void)updateUserModel:(UserModel *)model;
 + (UserModel *)getCurrentModel;
