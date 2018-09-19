@@ -22,4 +22,6 @@
 
 + (NSString *)positiveFormat:(NSString *)text;
 
+-(NSString *)getZZwithString:(NSString *)string;
+
 @end

@@ -69,17 +69,17 @@
 
 #pragma mark - NetWork
 - (void)requsetCommentQuestionList{
-    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)refreshData{
     [self.dataListSource removeAllObjects];
-    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)loadMoreData{
     CommentQuestionModel *questionModel = self.dataListSource.lastObject;
-    [[[UserService alloc] init] getCommentQuestionList:questionModel.id delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:questionModel.id pageSize:100 delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{

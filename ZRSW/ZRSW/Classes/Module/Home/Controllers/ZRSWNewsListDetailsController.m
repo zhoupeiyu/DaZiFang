@@ -41,8 +41,8 @@
     [super viewWillAppear:animated];
     if (self.type == NewListTypePopularInformation) {
         [self requsetPopularInformationList];
-    }else if (self.type == NewListTypePopularInformation){
-        [self requsetPopularInformationList];
+    }else if (self.type == NewListTypeSystemNotification){
+        [self requsetSystemNotificationList];
     }
 }
 
@@ -80,18 +80,18 @@
 
 #pragma mark - NetWork
 - (void)requsetPopularInformationList{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
 }
 - (void)requsetSystemNotificationList{
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
 }
 
 - (void)refreshData{
     [self.dataListSource removeAllObjects];
     if (self.type == NewListTypePopularInformation) {
-        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
-    }else if (self.type == NewListTypePopularInformation){
-        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
+    }else if (self.type == NewListTypeSystemNotification){
+        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
     }
 }
 
@@ -99,9 +99,9 @@
 - (void)loadMoreData{
     NewDetailModel *detailModel = self.dataListSource.lastObject;
     if (self.type == NewListTypePopularInformation) {
-        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:detailModel.id delegate:self];
-    }else if (self.type == NewListTypePopularInformation){
-        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:detailModel.id delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:detailModel.id pageSize:100 delegate:self];
+    }else if (self.type == NewListTypeSystemNotification){
+        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:detailModel.id pageSize:100 delegate:self];
     }
 }
 

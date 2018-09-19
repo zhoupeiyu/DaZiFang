@@ -113,9 +113,10 @@
 - (void)setQuestionModel:(CommentQuestionModel *)questionModel{
     _questionModel = questionModel;
     self.titleLabel.text = questionModel.title;
-    self.contentLabel.text = questionModel.faqBody;
+    self.contentLabel.text = [questionModel.faqBody getZZwithString:questionModel.faqBody];
     self.dateLabel.text = questionModel.updateTime;
 }
+
 
 
 
