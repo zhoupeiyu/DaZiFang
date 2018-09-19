@@ -64,7 +64,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
 }
 + (void)configNetWorkService {
     [HYBNetworking updateBaseUrl:API_Host];
-    [HYBNetworking configRequestType:kHYBRequestTypeJSON responseType:kHYBResponseTypeJSON shouldAutoEncodeUrl:NO callbackOnCancelRequest:YES];
+//    [HYBNetworking configRequestType:kHYBRequestTypeJSON responseType:kHYBResponseTypeJSON shouldAutoEncodeUrl:NO callbackOnCancelRequest:YES];
     [HYBNetworking configCommonHttpHeaders:[self netWorkHeader]];
 }
 -(void)GET:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {

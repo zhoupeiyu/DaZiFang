@@ -8,14 +8,24 @@
 
 #import "ZRSWRegisterController.h"
 #import "ZRSWLoginCustomView.h"
+#import "UserService.h"
 
-@interface ZRSWRegisterController ()
+#define CountDownSecond             60
+
+@interface ZRSWRegisterController ()<LoginCustomViewDelegate,UserAgreementViewDelegate>
 @property (nonatomic, strong) ZRSWLoginCustomView *userNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *phoneView;
 @property (nonatomic, strong) ZRSWLoginCustomView *codeView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
 @property (nonatomic, strong) ZRSWUserAgreementView *agreeView;
 @property (nonatomic, strong) UIButton *registerBtn;
+@property (nonatomic, strong) UserService *userService;
+
+@property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) NSString *phoneNum;
+@property (nonatomic, strong) NSString *codeNum;
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, assign) BOOL isChecked;
 
 @end
 
@@ -85,28 +95,91 @@
     }];
 }
 
+#pragma mark - delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView {
+    NSString *text = textField.text;
+    if (customView == self.userNameView) {
+        self.userName = text;
+    }
+    else if (customView == self.phoneView) {
+        self.phoneNum = text;
+        
+    }
+    else if (customView == self.codeView) {
+        self.codeNum = text;
+    }
+    else if (customView == self.pwdView) {
+        self.password = text;
+    }
+    self.registerBtn.enabled = [self checkRegisterEnabled];
+    return YES;
+}
+- (void)userAgreementViewChecked:(BOOL)check {
+    self.isChecked = check;
+    self.registerBtn.enabled = [self checkRegisterEnabled];
+}
+- (void)countDownButtonAction:(UIButton *)button {
+    if ([MatchManager checkTelNumber:self.phoneNum]) {
+        [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
+    }
+    else {
+        [TipViewManager showToastMessage:@"请输入正确的手机号"];
+    }
+}
 #pragma mark - Action
 - (void)registerAction {
     
+    [TipViewManager showLoading];
+    [self.userService userRegisterLoginId:self.userName phone:self.phoneNum password:self.password validateCode:self.codeNum nickName:self.userName delegate:self];
+}
+
+- (BOOL)checkRegisterEnabled {
+    return _userName.length > 0 && _phoneNum.length > 0 && _codeNum.length > 0 && _password.length > 0 && _isChecked;
+}
+
+
+#pragma mark - network
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUserRegisterRequest]) {
+            
+        }
+        else if ([reqType isEqualToString:KGetPhoneCodeRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"短信验证码发送成功!"];
+                [self.phoneView startCountDownWithSecond:CountDownSecond];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+    else {
+        [TipViewManager showToastMessage:NetworkError];
+    }
 }
 #pragma mark - lazy
 
 - (ZRSWLoginCustomView *)userNameView {
     if (!_userNameView) {
         _userNameView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"用户名" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入用户名" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _userNameView.delegate = self;
     }
     return _userNameView;
 }
 - (ZRSWLoginCustomView *)phoneView {
     if (!_phoneView) {
         _phoneView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"手机号" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypePhonePad isNeedCountDownButton:YES isNeedBottomLine:YES];
-        [_phoneView startCountDownWithSecond:60];
+        _phoneView.delegate = self;
     }
     return _phoneView;
 }
 - (ZRSWLoginCustomView *)codeView {
     if (!_codeView) {
         _codeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _codeView.delegate = self;
     }
     return _codeView;
 }
@@ -119,6 +192,7 @@
         [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledNormalFont] range:NSMakeRange(0, str.length)];
         [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length, tip.length)];
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:str keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _phoneView.delegate = self;
     }
     return _pwdView;
 }
@@ -128,6 +202,7 @@
         [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x999999] range:NSMakeRange(0, 7)];
         [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x4771f2] range:NSMakeRange(7, 10)];
         _agreeView = [ZRSWUserAgreementView getUserAgreeViewWithTitle:att agreeHtmlName:@"LoginAgreement"];
+        _agreeView.delegate = self;
     }
     return _agreeView;
 }
@@ -135,7 +210,14 @@
 - (UIButton *)registerBtn {
     if (!_registerBtn) {
         _registerBtn = [ZRSWViewFactoryTool getBlueBtn:@"注册" target:self action:@selector(registerAction)];
+        _registerBtn.enabled = NO;
     }
     return _registerBtn;
+}
+- (UserService *)userService {
+    if (!_userService) {
+        _userService = [[UserService alloc] init];
+    }
+    return _userService;
 }
 @end

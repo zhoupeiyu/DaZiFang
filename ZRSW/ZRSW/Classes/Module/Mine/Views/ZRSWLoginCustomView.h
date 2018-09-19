@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZRSWLoginCustomView;
+
+@protocol LoginCustomViewDelegate <NSObject>
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView;
+
+- (void)countDownButtonAction:(UIButton *)button;
+
+@end
 @interface ZRSWLoginCustomView : UIView
+
+@property (nonatomic, weak) id <LoginCustomViewDelegate> delegate;
 
 + (instancetype)getLoginInputViewWithTitle:(NSString *)title placeHoled:(NSAttributedString *)placeHoled keyboardType:(UIKeyboardType)keyboardType isNeedCountDownButton:(BOOL)isNeedCountDownButton isNeedBottomLine:(BOOL)isNeedBottomLine;
 
@@ -35,7 +46,14 @@
 
 @end
 
+@protocol UserAgreementViewDelegate <NSObject>
+
+- (void)userAgreementViewChecked:(BOOL)check;
+
+@end
 @interface ZRSWUserAgreementView : UIView
+
+@property (nonatomic, weak) id <UserAgreementViewDelegate> delegate;
 
 + (instancetype)getUserAgreeViewWithTitle:(NSMutableAttributedString *)title agreeHtmlName:(NSString *)htmlName;
 

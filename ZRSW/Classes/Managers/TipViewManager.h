@@ -11,6 +11,8 @@
 #import <TYAlertController.h>
 #import <LYEmptyView.h>
 
+#define NetworkError @"网络错误，请检查网络!"
+
 @interface TipViewManager : NSObject
 
 + (TipViewManager *)sharedInstance;

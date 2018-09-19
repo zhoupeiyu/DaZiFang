@@ -33,6 +33,7 @@
 - (void)getUserPhoneCode:(ImageCodeType)imageCodeType phone:(NSString *)phone delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[self typeStr:imageCodeType] forKey:@"type"];
+    [params setObject:phone forKey:@"phone"];
     [self POST:KGetPhoneCodeInterface reqType:KGetPhoneCodeRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
 - (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode nickName:(NSString *)nickName delegate:(id)delegate {

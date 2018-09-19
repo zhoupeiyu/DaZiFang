@@ -85,6 +85,14 @@
         }
     }];
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:customView:)]) {
+        BOOL isInput = [self.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string customView:self];
+        return isInput;
+    }
+    return YES;
+}
 #pragma mark - Event
 
 - (NSString *)getInputViewText {
@@ -146,6 +154,11 @@
     _isNeedBottomLine = isNeedBottomLine;
     self.lineView.hidden = !isNeedBottomLine;
 }
+- (void)countDownButtonAction:(UIButton *)button {
+    if (self.delegate &&[self.delegate respondsToSelector:@selector(countDownButtonAction:)]) {
+        [self.delegate countDownButtonAction:button];
+    }
+}
 #pragma mark - lazy
 
 - (UILabel *)titleLbl {
@@ -182,6 +195,7 @@
         _countDownButton.masksToBounds = YES;
         _countDownButton.layer.cornerRadius = 15;
         _countDownButton.titleLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
+        [_countDownButton addTarget:self action:@selector(countDownButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _countDownButton;
 }
@@ -263,6 +277,9 @@
 
 - (void)checkBtnAction:(UIButton *)checkBtn {
     checkBtn.selected = !checkBtn.selected;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userAgreementViewChecked:)]) {
+        [self.delegate userAgreementViewChecked:checkBtn.selected];
+    }
 }
 - (void)agreeBtnAction {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"LoginAgreement" ofType:@"html"];
