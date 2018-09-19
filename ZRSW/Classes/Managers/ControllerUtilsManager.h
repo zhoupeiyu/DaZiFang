@@ -11,6 +11,8 @@
 
 @interface ControllerUtilsManager : NSObject
 
++ (BOOL)isHTTPURL:(NSString *)url;
+
 + (BOOL)canShowViewWithURL:(NSString *)url;
 
 + (void)showViewWithURL:(NSString *)url;
