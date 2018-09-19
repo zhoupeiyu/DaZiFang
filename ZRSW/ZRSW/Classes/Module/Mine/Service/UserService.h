@@ -175,10 +175,11 @@
 /**
  公告/资讯列表
  @param listType 类型 0=热门资讯；1=系统公告
- @param lastId 最后一次查询的最后一笔数据的id；默认为空查询最新数据 查询条数，默认等于5
+ @param lastId 最后一次查询的最后一笔数据的id；
+ @param pageSize 查询条数 默认为空查询最新数据 ，默认等于5
  @param delegate
  */
-- (void)getNewList:(NewListType)listType lastId:(NSString *)lastId delegate:(id)delegate;
+- (void)getNewList:(NewListType)listType lastId:(NSString *)lastId pageSize:(int)pageSize delegate:(id)delegate;
 
 
 /**
@@ -195,9 +196,10 @@
  常见问题列表
 
  @param lastID 最后一个ID
+ @param pageSize 查询条数 默认为空查询最新数据 ，默认等于5
  @param delegate 代理
  */
-- (void)getCommentQuestionList:(NSString *)lastID delegate:(id)delegate;
+- (void)getCommentQuestionList:(NSString *)lastID pageSize:(int)pageSize delegate:(id)delegate;
 
 
 /**

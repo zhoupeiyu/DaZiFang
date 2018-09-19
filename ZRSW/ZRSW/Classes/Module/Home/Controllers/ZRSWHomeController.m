@@ -18,6 +18,7 @@
 #import "ZRSWQuestionListDetailsController.h"
 #import "ZRSWLoansController.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
+#import "ZRSWSettingController.h"
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -173,21 +174,21 @@
 }
 
 - (void)requsetPopularInformationList{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
 }
 
 - (void)requsetSystemNotificationList{
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
 }
 
 - (void)requsetCommentQuestionList{
-    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)refreshData{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil delegate:self];
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
-    [[[UserService alloc] init] getCommentQuestionList:nil delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
@@ -290,9 +291,12 @@
 #pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
      LLog(@"我要贷款");
-    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
-    loansVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:loansVC animated:YES];
+//    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
+//    loansVC.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:loansVC animated:YES];
+    ZRSWSettingController *settingVC = [[ZRSWSettingController alloc] init];
+    settingVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingVC animated:YES];
 }
 
 
@@ -394,9 +398,7 @@
         [loanButton.layer setCornerRadius:5.0];
         [loanButton.layer setMasksToBounds:YES];
         [loanButton setTitle:@"我要贷款" forState:UIControlStateNormal];
-        [loanButton setTitle:@"我要贷款" forState:UIControlStateHighlighted];
         [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
-        [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateHighlighted];
         loanButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [loanButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_loanView addSubview:loanButton];
@@ -413,7 +415,6 @@
         leftTitle.image = [UIImage imageNamed:@"home_notice"];
         [_systemNotificationView addSubview:leftTitle];
         _systemNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(168))/2 ,kUI_HeightS(16), kUI_WidthS(168), kUI_HeightS(12))];
-        _systemNotificationLabel.text = @"央行发布房抵贷利率下调0.5";
         _systemNotificationLabel.textColor = [UIColor colorFromRGB:0x333333];
         _systemNotificationLabel.textAlignment = NSTextAlignmentCenter;
         _systemNotificationLabel.font = [UIFont systemFontOfSize:12];

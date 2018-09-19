@@ -30,6 +30,11 @@
 		3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */; };
 		3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */; };
 		3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B042151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m */; };
+		3C7E4B092152232A0058D3E2 /* ZRSWSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B082152232A0058D3E2 /* ZRSWSettingController.m */; };
+		3C7E4B0C21522E3C0058D3E2 /* ZRSWFeedBackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B0B21522E3C0058D3E2 /* ZRSWFeedBackController.m */; };
+		3C7E4B0F21525A880058D3E2 /* ZRSWUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */; };
+		3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */; };
+		3C7E4B1521525AC30058D3E2 /* ZRSWMineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -310,9 +315,6 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
-		E5B59BFC2151F61D00726DE9 /* ZRSWMineListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BFB2151F61D00726DE9 /* ZRSWMineListCell.m */; };
-		E5B59C0421522F2F00726DE9 /* ZRSWMineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59C0321522F2F00726DE9 /* ZRSWMineModel.m */; };
-		E5B59C072152351F00726DE9 /* ZRSWUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59C062152351F00726DE9 /* ZRSWUserInfoController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -348,6 +350,16 @@
 		3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWRetrievePasswordController.m; sourceTree = "<group>"; };
 		3C7E4B032151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWNewAndQuestionDetailsController.h; sourceTree = "<group>"; };
 		3C7E4B042151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWNewAndQuestionDetailsController.m; sourceTree = "<group>"; };
+		3C7E4B072152232A0058D3E2 /* ZRSWSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWSettingController.h; sourceTree = "<group>"; };
+		3C7E4B082152232A0058D3E2 /* ZRSWSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWSettingController.m; sourceTree = "<group>"; };
+		3C7E4B0A21522E3C0058D3E2 /* ZRSWFeedBackController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWFeedBackController.h; sourceTree = "<group>"; };
+		3C7E4B0B21522E3C0058D3E2 /* ZRSWFeedBackController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWFeedBackController.m; sourceTree = "<group>"; };
+		3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZRSWUserInfoController.m; path = ZRSW/Classes/Module/Mine/Controllers/ZRSWUserInfoController.m; sourceTree = SOURCE_ROOT; };
+		3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZRSWUserInfoController.h; path = ZRSW/Classes/Module/Mine/Controllers/ZRSWUserInfoController.h; sourceTree = SOURCE_ROOT; };
+		3C7E4B1021525AA70058D3E2 /* ZRSWMineListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWMineListCell.h; sourceTree = "<group>"; };
+		3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineListCell.m; sourceTree = "<group>"; };
+		3C7E4B1321525AC30058D3E2 /* ZRSWMineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWMineModel.h; sourceTree = "<group>"; };
+		3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineModel.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -735,12 +747,6 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
-		E5B59BFA2151F61D00726DE9 /* ZRSWMineListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWMineListCell.h; sourceTree = "<group>"; };
-		E5B59BFB2151F61D00726DE9 /* ZRSWMineListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineListCell.m; sourceTree = "<group>"; };
-		E5B59C0221522F2F00726DE9 /* ZRSWMineModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWMineModel.h; sourceTree = "<group>"; };
-		E5B59C0321522F2F00726DE9 /* ZRSWMineModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineModel.m; sourceTree = "<group>"; };
-		E5B59C052152351F00726DE9 /* ZRSWUserInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWUserInfoController.h; sourceTree = "<group>"; };
-		E5B59C062152351F00726DE9 /* ZRSWUserInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWUserInfoController.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -780,6 +786,17 @@
 				03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C7E4B06215222C60058D3E2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				3C7E4B072152232A0058D3E2 /* ZRSWSettingController.h */,
+				3C7E4B082152232A0058D3E2 /* ZRSWSettingController.m */,
+				3C7E4B0A21522E3C0058D3E2 /* ZRSWFeedBackController.h */,
+				3C7E4B0B21522E3C0058D3E2 /* ZRSWFeedBackController.m */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		517EE8375C39C374B64EC437 /* Pods */ = {
@@ -953,8 +970,8 @@
 			children = (
 				E5B59A69214EC02100726DE9 /* UserModel.h */,
 				E5B59A68214EC02100726DE9 /* UserModel.m */,
-				E5B59C0221522F2F00726DE9 /* ZRSWMineModel.h */,
-				E5B59C0321522F2F00726DE9 /* ZRSWMineModel.m */,
+				3C7E4B1321525AC30058D3E2 /* ZRSWMineModel.h */,
+				3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -964,8 +981,7 @@
 			children = (
 				E5B59A65214EBFBA00726DE9 /* ZRSWMineController.h */,
 				E5B59A66214EBFBA00726DE9 /* ZRSWMineController.m */,
-				E5B59C052152351F00726DE9 /* ZRSWUserInfoController.h */,
-				E5B59C062152351F00726DE9 /* ZRSWUserInfoController.m */,
+				3C7E4B06215222C60058D3E2 /* Settings */,
 				E5B59BB4214FA28500726DE9 /* Users */,
 			);
 			path = Controllers;
@@ -978,8 +994,8 @@
 				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
 				3C7E4AFE21513C8D0058D3E2 /* ZRSWThirdLoginView.h */,
 				3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */,
-				E5B59BFA2151F61D00726DE9 /* ZRSWMineListCell.h */,
-				E5B59BFB2151F61D00726DE9 /* ZRSWMineListCell.m */,
+				3C7E4B1021525AA70058D3E2 /* ZRSWMineListCell.h */,
+				3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1583,6 +1599,8 @@
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
 				3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */,
 				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
+				3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */,
+				3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -1929,10 +1947,13 @@
 				E5B59A52214EBEE800726DE9 /* TZProgressView.m in Sources */,
 				E5B59A2A214EBEE800726DE9 /* NSObject+Extension.m in Sources */,
 				E5B59A16214EBEE800726DE9 /* AppDelegteManager.m in Sources */,
+				3C7E4B1521525AC30058D3E2 /* ZRSWMineModel.m in Sources */,
+				3C7E4B0F21525A880058D3E2 /* ZRSWUserInfoController.m in Sources */,
 				E5B59A73214EC04100726DE9 /* OrderService.m in Sources */,
 				E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */,
 				E5B59A27214EBEE800726DE9 /* UIViewController+Extension.m in Sources */,
 				E5B59A17214EBEE800726DE9 /* MatchManager.m in Sources */,
+				3C7E4B092152232A0058D3E2 /* ZRSWSettingController.m in Sources */,
 				E5B59A67214EBFBA00726DE9 /* ZRSWMineController.m in Sources */,
 				E5B59A5A214EBEE800726DE9 /* YYClassInfo.m in Sources */,
 				E5B59A1B214EBEE800726DE9 /* BaseNetWorkService.m in Sources */,
@@ -1947,7 +1968,6 @@
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
 				3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */,
 				3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */,
-				E5B59C072152351F00726DE9 /* ZRSWUserInfoController.m in Sources */,
 				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
 				E5B59A37214EBEE800726DE9 /* LXRefreshDIYHeader.m in Sources */,
 				3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */,
@@ -1966,12 +1986,12 @@
 				E5B59A19214EBEE800726DE9 /* PhotoManager.m in Sources */,
 				E5B59A21214EBEE800726DE9 /* UIApplication+Extension.m in Sources */,
 				E5B59A4E214EBEE800726DE9 /* NSBundle+TZImagePicker.m in Sources */,
-				E5B59BFC2151F61D00726DE9 /* ZRSWMineListCell.m in Sources */,
 				E5B59A56214EBEE800726DE9 /* TZImagePickerController.m in Sources */,
 				E5B59A2B214EBEE800726DE9 /* UIScrollView+Extension.m in Sources */,
 				E5B59A42214EBEE800726DE9 /* LNRefreshFooter.m in Sources */,
 				E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */,
 				E5B59A3E214EBEE800726DE9 /* SAMKeychain.m in Sources */,
+				3C7E4B0C21522E3C0058D3E2 /* ZRSWFeedBackController.m in Sources */,
 				E5B59A64214EBF9600726DE9 /* ZRSWLoansController.m in Sources */,
 				E5B59A25214EBEE800726DE9 /* UILabel+Extension.m in Sources */,
 				E5B59A46214EBEE800726DE9 /* LNFooterAnimator.m in Sources */,
@@ -1983,7 +2003,7 @@
 				E5B59A3C214EBEE800726DE9 /* DeviceID.m in Sources */,
 				E5B59A18214EBEE800726DE9 /* BaseTheme.m in Sources */,
 				E5B59A15214EBEE800726DE9 /* ControllerUtilsManager.m in Sources */,
-				E5B59C0421522F2F00726DE9 /* ZRSWMineModel.m in Sources */,
+				3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */,
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,
@@ -2155,7 +2175,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2178,7 +2198,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
