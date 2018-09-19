@@ -8,11 +8,15 @@
 
 #import "ZRSWRetrievePasswordController.h"
 #import "ZRSWLoginCustomView.h"
+#import "UserService.h"
 
-@interface ZRSWRetrievePasswordController ()
+@interface ZRSWRetrievePasswordController ()<LoginCustomViewDelegate>
 @property (nonatomic, strong) ZRSWLoginCustomView *oldPwdView;
 @property (nonatomic, strong) ZRSWLoginCustomView *newPwdView;
 @property (nonatomic, strong) UIButton *commitBtn;
+
+@property (nonatomic, strong) NSString *nPwd;
+@property (nonatomic, strong) NSString *oldPwd;
 
 @end
 
@@ -57,22 +61,42 @@
     [self setLeftBackBarButton];
     self.title = @"找回密码";
 }
-
+- (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView {
+    NSString *text = textField.text;
+    if (customView == self.newPwdView) {
+        self.nPwd = text;
+    }
+    else if (customView == self.oldPwdView) {
+        self.oldPwd = text;
+    }
+    self.commitBtn.enabled = [self checkRegisterEnabled];
+}
 
 #pragma mark - action
 - (void)commitSureAction:(UIButton *)sureBtn {
-    
+    [self endEditing];
+    [TipViewManager showLoading];
+}
+- (BOOL)checkRegisterEnabled {
+    return _nPwd.length >= 6 && _oldPwd.length >= 6;
+}
+- (void)endEditing {
+    [self.view endEditing:YES];
+    [self.newPwdView endEditing];
+    [self.oldPwdView endEditing];
 }
 #pragma mark - lazy
 - (ZRSWLoginCustomView *)oldPwdView {
     if (!_oldPwdView) {
         _oldPwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"新密码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入新密码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _oldPwdView.delegate = self;
     }
     return _oldPwdView;
 }
 - (ZRSWLoginCustomView *)newPwdView {
     if (!_newPwdView) {
         _newPwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"确认密码" placeHoled:[[NSAttributedString alloc] initWithString:@"请再次输入新密码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:NO];
+        _newPwdView.delegate = self;
     }
     return _newPwdView;
 }
