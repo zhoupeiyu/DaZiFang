@@ -27,4 +27,9 @@
     return btn;
 
 }
++ (UIView *)getCellSelectedView:(CGRect)aRect {
+    UIView *v = [[UIView alloc] initWithFrame:aRect];
+    v.backgroundColor = [UIColor colorWithHex:0xf9f9f9];
+    return v;
+}
 @end

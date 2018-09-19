@@ -22,5 +22,6 @@
  */
 + (UIButton *)getBlueBtn:(NSString *)title target:(id)target action:(SEL)action;
 
++ (UIView *)getCellSelectedView:(CGRect)aRect;
 
 @end
