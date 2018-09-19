@@ -12,7 +12,7 @@
 #import "Header.h"
 
 // 是否需要定位
-#define NeedLocationManager 1
+#define NeedLocationManager 
 // 是否需要百度统计
 #define NeedBaiduMobStat
 
@@ -27,7 +27,7 @@
 
     #define UMKey                   @"" // 友盟key
     #define BaiduMobStatKey         @"" // 百度统计key
-    #define BaiDuLocationKey        @"" // 百度地图key
+    #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
 #else // 正式环境
 
@@ -35,7 +35,7 @@
 
     #define UMKey                   @""
     #define BaiduMobStatKey         @""
-    #define BaiDuLocationKey        @"" // 百度地图key
+    #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
 #endif
 

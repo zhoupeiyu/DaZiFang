@@ -34,8 +34,8 @@
 - (void)setUpTableView{
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
-    [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
-    [self enableLoadMore:YES selector:@selector(requsetMoreData)];
+    [self enableRefreshHeader:YES];
+    [self enableLoadMore:YES];
 }
 
 
@@ -74,7 +74,7 @@
     [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil delegate:self];
 }
 
-- (void)requsetMoreData{
+- (void)loadMoreData{
     CommentQuestionModel *questionModel = self.dataListSource.lastObject;
     [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:questionModel.id delegate:self];
 }

@@ -14,6 +14,7 @@
 
 @implementation ZRSWNewsListDetailsController
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     [self setUpTableView];
 }
@@ -25,13 +26,14 @@
     }else if (self.type == NewListTypePopularInformation){
         self.navigationItem.title = @"系统公告";
     }
+    [self setLeftBackBarButton];
 }
 
 - (void)setUpTableView{
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
-    [self enableRefreshHeader:YES refreshSelector:@selector(refreshData)];
-    [self enableLoadMore:YES selector:@selector(requsetMoreData)];
+    [self enableRefreshHeader:YES];
+    [self enableLoadMore:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -84,7 +86,7 @@
 }
 
 
-- (void)requsetMoreData{
+- (void)loadMoreData{
     NewDetailModel *detailModel = self.dataListSource.lastObject;
     if (self.type == NewListTypePopularInformation) {
         [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:detailModel.id delegate:self];

@@ -27,6 +27,8 @@
 		3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */; };
 		3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */; };
 		3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */; };
+		3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */; };
+		3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -307,8 +309,6 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
-		E5B59BD121514CDA00726DE9 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */; };
-		E5B59BD42151554B00726DE9 /* ZRSWRetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -338,6 +338,10 @@
 		3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWThirdLoginView.m; sourceTree = "<group>"; };
+		3C7E4AFE21513C8D0058D3E2 /* ZRSWThirdLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWThirdLoginView.h; sourceTree = "<group>"; };
+		3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWRetrievePasswordController.h; sourceTree = "<group>"; };
+		3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWRetrievePasswordController.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -725,10 +729,6 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
-		E5B59BCF21514CD900726DE9 /* ZRSWThirdLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWThirdLoginView.h; sourceTree = "<group>"; };
-		E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWThirdLoginView.m; sourceTree = "<group>"; };
-		E5B59BD22151554B00726DE9 /* ZRSWRetrievePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRetrievePasswordController.h; sourceTree = "<group>"; };
-		E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRetrievePasswordController.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -956,10 +956,10 @@
 		E5B59910214EBED500726DE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BCF21514CD900726DE9 /* ZRSWThirdLoginView.h */,
-				E5B59BD021514CDA00726DE9 /* ZRSWThirdLoginView.m */,
 				E5B59BBE214FA79700726DE9 /* ZRSWLoginCustomView.h */,
 				E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */,
+				3C7E4AFE21513C8D0058D3E2 /* ZRSWThirdLoginView.h */,
+				3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1561,8 +1561,8 @@
 				E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */,
 				E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */,
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
-				E5B59BD22151554B00726DE9 /* ZRSWRetrievePasswordController.h */,
-				E5B59BD32151554B00726DE9 /* ZRSWRetrievePasswordController.m */,
+				3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */,
+				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -1925,7 +1925,7 @@
 				E5B59A54214EBEE800726DE9 /* TZPhotoPickerController.m in Sources */,
 				E5B59A43214EBEE800726DE9 /* LNRefreshConst.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
-				E5B59BD42151554B00726DE9 /* ZRSWRetrievePasswordController.m in Sources */,
+				3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */,
 				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
 				E5B59A37214EBEE800726DE9 /* LXRefreshDIYHeader.m in Sources */,
 				3C7E4AE0214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m in Sources */,
@@ -1981,7 +1981,7 @@
 				E5B59A2D214EBEE800726DE9 /* NSDate+Extension.m in Sources */,
 				E5B59A5E214EBEE800726DE9 /* BaseScrollViewController.m in Sources */,
 				E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */,
-				E5B59BD121514CDA00726DE9 /* ZRSWThirdLoginView.m in Sources */,
+				3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */,
 				E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */,
 				E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */,
 				E5B59A53214EBEE800726DE9 /* TZImageManager.m in Sources */,
@@ -2131,7 +2131,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4N8RS9Y8V;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2154,7 +2154,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J4N8RS9Y8V;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

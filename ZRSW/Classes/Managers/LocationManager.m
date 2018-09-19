@@ -57,17 +57,14 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
             NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
         }
         if(location) {//得到定位信息，添加annotation
-            if (location.location) {
-                NSLog(@"LOC = %@",location.location);
-            }
             if (location.rgcData) {
                 NSLog(@"rgc = %@",[location.rgcData description]);
                 NSString *result = location.rgcData.city;
                 if (!result) {
                     result = location.rgcData.province;
-                    if (success) {
-                        success(result);
-                    }
+                }
+                if (success) {
+                    success(result);
                 }
             }
         }
