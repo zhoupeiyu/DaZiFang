@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^SelectedImagesBlock)(NSMutableArray *selectedImages);
+
 typedef enum : NSUInteger {
     PhotoPickTypeSystem,
     PhotoPickTypeWeChat
@@ -19,6 +21,8 @@ typedef enum : NSUInteger {
 + (PhotoManager *)sharedInstance;
 
 - (void)showPhotoPickForMaxCount:(NSInteger)maxCount presentedViewController:(UIViewController *)presentedVC photoPickType:(PhotoPickType)photoPickType;
+
+- (void)showPhotoPickForMaxCount:(NSInteger)maxCount presentedViewController:(UIViewController *)presentedVC photoPickType:(PhotoPickType)photoPickType complete:(SelectedImagesBlock)selectedBlcok;
 
 - (NSMutableArray *)selectedImages;
 

@@ -173,8 +173,8 @@
     self.lineView.hidden = !isNeedBottomLine;
 }
 - (void)countDownButtonAction:(UIButton *)button {
-    if (self.delegate &&[self.delegate respondsToSelector:@selector(countDownButtonAction:)]) {
-        [self.delegate countDownButtonAction:button];
+    if (self.delegate &&[self.delegate respondsToSelector:@selector(countDownButtonAction:customView:)]) {
+        [self.delegate countDownButtonAction:button customView:self];
     }
 }
 #pragma mark - lazy

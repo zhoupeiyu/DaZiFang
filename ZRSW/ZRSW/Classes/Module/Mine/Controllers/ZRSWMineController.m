@@ -11,7 +11,9 @@
 #import "ZRSWMineListCell.h"
 #import "ZRSWUserInfoController.h"
 #import "ZRSWSettingController.h"
+#import "ZRSWRealNameAuthController.h"
 #import "ZRSWResetPhoneController.h"
+#import "ZRSWEnterpriseAuthController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -172,7 +174,7 @@
             model.title = @"实名认证";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_identity";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWRealNameAuthController class]);
             [data addObject:model];
         }
         {
@@ -180,7 +182,7 @@
             model.title = @"企业认证";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_enterprise";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWEnterpriseAuthController class]);
             [data addObject:model];
         }
         {
