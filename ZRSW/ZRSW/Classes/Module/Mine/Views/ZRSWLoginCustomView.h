@@ -37,6 +37,9 @@
 + (UIFont *)placeHoledNormalFont;
 
 + (UIFont *)placeHoledSmallFont;
+
+- (void)endEditing;
+
 ///倒计时按钮点击回调
 - (void)countDownButtonHandler:(TouchedCountDownButtonHandler)touchedCountDownButtonHandler;
 //倒计时时间改变回调

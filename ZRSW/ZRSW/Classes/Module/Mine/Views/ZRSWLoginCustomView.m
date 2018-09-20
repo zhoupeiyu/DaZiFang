@@ -144,6 +144,9 @@
     [self.countDownButton stopCountDown];
 }
 
+- (void)endEditing {
+    [self.inputTextField endEditing:YES];
+}
 - (void)setPlaceHoled:(NSAttributedString *)placeHoled {
     _placeHoled = placeHoled;
     self.inputTextField.attributedPlaceholder = placeHoled;

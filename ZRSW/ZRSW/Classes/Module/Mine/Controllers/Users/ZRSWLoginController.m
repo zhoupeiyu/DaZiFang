@@ -11,8 +11,9 @@
 #import "ZRSWLoginCustomView.h"
 #import "ZRSWThirdLoginView.h"
 #import "ZRSWRetrievePasswordController.h"
+#import "UserService.h"
 
-@interface ZRSWLoginController ()
+@interface ZRSWLoginController ()<LoginCustomViewDelegate>
 
 @property (nonatomic, strong) ZRSWLoginCustomView *userNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
@@ -22,6 +23,10 @@
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) NSMutableArray *thirdPartyIcon;
 @property (nonatomic, strong) ZRSWThirdLoginView *loginView;
+
+
+@property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) NSString *password;
 
 @end
 
@@ -97,28 +102,68 @@
 
 #pragma mark - delegate && dataSource
 
+- (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView {
+    NSString *text = textField.text;
+    if (customView == self.userNameView) {
+        self.userName = text;
+    }
+    else if (customView == self.pwdView) {
+        self.password = text;
+    }
+    self.loginBtn.enabled = [self checkRegisterEnabled];
+}
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUserLoginRequest]) {
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [UserModel updateUserModel:model];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+}
 #pragma mark - event
 
+- (BOOL)checkRegisterEnabled {
+    return _userName.length > 0 && _password.length >= 6;
+}
 - (void)forgetPwdBtnAction {
+    [self endEditing];
     ZRSWRetrievePasswordController *retrievePassword = [[ZRSWRetrievePasswordController alloc] init];
     [self.navigationController pushViewController:retrievePassword animated:YES];
 }
 - (void)faceLogin {
+    [self endEditing];
     NSLog(@"刷脸登录");
 }
 - (void)login {
-    LLog(@"登录");
+    [self endEditing];
+    [TipViewManager showLoading];
+    [[[UserService alloc] init] userLoginWithUserName:self.userName password:self.password delegate:self];
 }
 - (void)jumpRegister {
+    [self endEditing];
     ZRSWRegisterController *registerVC = [[ZRSWRegisterController alloc] init];
     [self.navigationController pushViewController:registerVC animated:YES];
 }
 
+- (void)endEditing {
+    [self.view endEditing:YES];
+    [self.userNameView endEditing];
+    [self.pwdView endEditing];
+}
 #pragma mark - lazy
 
 - (ZRSWLoginCustomView *)userNameView {
     if (!_userNameView) {
         _userNameView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"手机号/用户名" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入手机号或用户名" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _userNameView.delegate = self;
     }
     return _userNameView;
 }
@@ -126,13 +171,14 @@
 - (ZRSWLoginCustomView *)pwdView {
     if (!_pwdView) {
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入登录密码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:NO isNeedBottomLine:NO];
+        _pwdView.delegate = self;
     }
     return _pwdView;
 }
 - (UIButton *)loginBtn {
     if (!_loginBtn) {
         _loginBtn = [ZRSWViewFactoryTool getBlueBtn:@"登录" target:self action:@selector(login)];
-        
+        _loginBtn.enabled = NO;
     }
     return _loginBtn;
 }

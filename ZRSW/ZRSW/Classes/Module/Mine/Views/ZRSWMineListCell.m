@@ -84,15 +84,24 @@
             make.centerY.mas_equalTo(self.contentView.mas_centerY);
             make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
-        [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(15);
-            make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
-        }];
-        [self.descLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(-15);
-            make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
-        }];
-        self.descLbl.hidden = NO;
+        if (_model.hasLogin) {
+            [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(15);
+                make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+            }];
+            [self.descLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(-15);
+                make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+            }];
+            self.descLbl.hidden = NO;
+        }
+        else {
+            [self.titleLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.centerY.mas_equalTo(self.contentView.mas_centerY);
+                make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
+            }];
+            self.descLbl.hidden = YES;
+        }
     }
     else {
         [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {

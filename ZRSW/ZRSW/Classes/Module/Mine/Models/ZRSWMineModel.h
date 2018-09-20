@@ -22,6 +22,9 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSString *desInfo;
 // 类型
 @property (nonatomic, assign) MineListType type;
+// 已经登录
+@property (nonatomic, assign) BOOL hasLogin;
+
 // 控制器
 @property (nonatomic, strong) NSString *viewControllerName;
 

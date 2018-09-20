@@ -21,6 +21,14 @@
 
 @implementation ZRSWMineController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateUserInfo];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupConfig];
@@ -32,6 +40,7 @@
     self.title = @"我的";
     [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_set"] AndHighLightImage:[UIImage imageNamed:@""]];
     [self.rightBarButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo) name:UserLoginSuccessNotification object:nil];
 }
 
 - (void)setupUI {
@@ -83,6 +92,23 @@
     ZRSWSettingController *setting = [[ZRSWSettingController alloc] init];
     setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
+}
+- (void)updateUserInfo {
+    UserModel *model = [UserModel getCurrentModel];
+    ZRSWMineModel *mineModel = self.dataSource[0][0];
+    if ([UserModel hasLogin] && model) {
+        mineModel.iconName = model.data.headImgUrl.length > 0 ? model.data.headImgUrl : @"";
+        mineModel.title = model.data.nickName > 0 ? model.data.nickName : DefaultNickName;
+        mineModel.desInfo = model.data.myId.integerValue > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId.stringValue] :@"";
+        mineModel.hasLogin = YES;
+    }
+    else {
+        mineModel.iconName = @"";
+        mineModel.title = @"请登录";
+        mineModel.desInfo = @"";
+        mineModel.hasLogin = NO;
+    }
+    [self.tableView reloadData];
 }
 #pragma mark - lazy
 
