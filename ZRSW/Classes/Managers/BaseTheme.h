@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CYLTabBarController.h>
+#import "BaseTabBarViewController.h"
 
 @interface BaseTheme : NSObject
 
@@ -34,6 +34,6 @@
 
 + (BaseTheme *)sharedInstance;
 
-+ (CYLTabBarController *)tabBarController;
++ (BaseTabBarViewController *)tabBarController;
 
 @end
