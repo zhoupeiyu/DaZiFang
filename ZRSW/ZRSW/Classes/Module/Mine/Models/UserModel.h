@@ -147,8 +147,8 @@
 @interface CityListModel : BaseModel
 @property (nonatomic, strong) NSArray *data;
 
-+ (NSArray *)getCityList;
-
++ (NSArray <NSString *> *)getCityNames;
++ (NSArray <NSString *> *)getCityIds;
 @end
 
 

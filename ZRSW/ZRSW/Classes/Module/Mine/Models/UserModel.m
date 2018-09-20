@@ -8,7 +8,9 @@
 
 #import "UserModel.h"
 
-#define KCityListKey                @"KCityListKey"
+#define KCityNameKey                @"KCityNameKey"
+#define KCityIDKey                  @"KCityIDKey"
+
 #define KUserModelKey               @"KUserModelKey"
 
 @implementation ImageCode
@@ -69,13 +71,26 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 - (void)setData:(NSArray *)data {
     _data = data;
-//    [[NSUserDefaults standardUserDefaults] setValue:data forKey:KCityListKey];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSMutableArray *titles = [[NSMutableArray alloc] init];
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    for (CityDetailModel *cityModel in data) {
+        if (cityModel.name.length > 0 && cityModel.id.length > 0) {
+            [titles addObject:cityModel.name];
+            [ids addObject:cityModel.id];
+        }
+    }
+    [[NSUserDefaults standardUserDefaults] setValue:titles forKey:KCityNameKey];
+    [[NSUserDefaults standardUserDefaults] setValue:ids forKey:KCityIDKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (NSArray *)getCityList {
-    return [[NSUserDefaults standardUserDefaults] valueForKey:KCityListKey];
++ (NSArray <NSString *> *)getCityNames {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:KCityNameKey];
 }
++ (NSArray <NSString *> *)getCityIds {
+    return [[NSUserDefaults standardUserDefaults] valueForKey:KCityIDKey];
+}
+
 @end
 
 
