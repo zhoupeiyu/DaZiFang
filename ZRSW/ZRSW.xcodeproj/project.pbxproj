@@ -44,6 +44,7 @@
 		E591D6C92153EB8500F6802A /* ZRSWActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BF2153EB8300F6802A /* ZRSWActionSheetView.m */; };
 		E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C42153EB8500F6802A /* ZRSWShareManager.m */; };
 		E591D6CB2153EB8500F6802A /* ZRSWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C52153EB8500F6802A /* ZRSWShareView.m */; };
+		E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -388,6 +389,8 @@
 		E591D6C42153EB8500F6802A /* ZRSWShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareManager.m; sourceTree = "<group>"; };
 		E591D6C52153EB8500F6802A /* ZRSWShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareView.m; sourceTree = "<group>"; };
 		E591D6C62153EB8500F6802A /* ZRSWShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareView.h; sourceTree = "<group>"; };
+		E591D6CC2153ECB600F6802A /* ZRSWEnterpriseAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWEnterpriseAuthController.h; sourceTree = "<group>"; };
+		E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWEnterpriseAuthController.m; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5B598F6214E9E2600726DE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1662,6 +1665,8 @@
 				E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */,
 				E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */,
 				E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */,
+				E591D6CC2153ECB600F6802A /* ZRSWEnterpriseAuthController.h */,
+				E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -2078,6 +2083,7 @@
 				E5B59A18214EBEE800726DE9 /* BaseTheme.m in Sources */,
 				E5B59A15214EBEE800726DE9 /* ControllerUtilsManager.m in Sources */,
 				3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */,
+				E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */,
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,

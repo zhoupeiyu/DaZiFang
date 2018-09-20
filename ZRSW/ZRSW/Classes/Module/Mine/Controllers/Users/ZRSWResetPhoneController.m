@@ -128,7 +128,7 @@
     self.isChecked = check;
     self.resetBtn.enabled = [self checkRegisterEnabled];
 }
-- (void)countDownButtonAction:(UIButton *)button {
+- (void)countDownButtonAction:(UIButton *)button customView:(ZRSWLoginCustomView *)customView{
     if ([MatchManager checkTelNumber:self.phoneNum]) {
         [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
     }

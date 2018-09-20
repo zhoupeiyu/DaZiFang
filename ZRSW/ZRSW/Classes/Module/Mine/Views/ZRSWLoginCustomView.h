@@ -18,7 +18,7 @@
 
 - (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;
 
-- (void)countDownButtonAction:(UIButton *)button;
+- (void)countDownButtonAction:(UIButton *)button customView:(ZRSWLoginCustomView *)customView;;
 
 @end
 @interface ZRSWLoginCustomView : UIView

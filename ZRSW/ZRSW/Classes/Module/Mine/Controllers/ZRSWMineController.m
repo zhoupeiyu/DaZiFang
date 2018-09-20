@@ -13,6 +13,7 @@
 #import "ZRSWSettingController.h"
 #import "ZRSWRealNameAuthController.h"
 #import "ZRSWResetPhoneController.h"
+#import "ZRSWEnterpriseAuthController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -181,7 +182,7 @@
             model.title = @"企业认证";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_enterprise";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWEnterpriseAuthController class]);
             [data addObject:model];
         }
         {
