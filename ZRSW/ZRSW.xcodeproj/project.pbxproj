@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00D886AD71377EC6136CEE47 /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */; };
+		3C10D62C2152A8500019112F /* ZRSWShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D62A2152A8500019112F /* ZRSWShareManager.m */; };
+		3C10D62D2152A8500019112F /* ZRSWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D62B2152A8500019112F /* ZRSWShareView.m */; };
+		3C10D62F21533F440019112F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C10D62E21533F440019112F /* libsqlite3.tbd */; };
+		3C10D63121533FBB0019112F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C10D63021533FBB0019112F /* libc++.tbd */; };
+		3C10D63321533FC60019112F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C10D63221533FC60019112F /* libz.tbd */; };
+		3C10D63521533FE60019112F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C10D63421533FE60019112F /* ImageIO.framework */; };
+		3C10D637215340050019112F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C10D636215340050019112F /* Photos.framework */; };
 		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
 		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
 		3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */; };
@@ -320,6 +327,15 @@
 
 /* Begin PBXFileReference section */
 		03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZRSW.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C10D6282152A8500019112F /* ZRSWShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareManager.h; sourceTree = "<group>"; };
+		3C10D6292152A8500019112F /* ZRSWShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareView.h; sourceTree = "<group>"; };
+		3C10D62A2152A8500019112F /* ZRSWShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareManager.m; sourceTree = "<group>"; };
+		3C10D62B2152A8500019112F /* ZRSWShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareView.m; sourceTree = "<group>"; };
+		3C10D62E21533F440019112F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		3C10D63021533FBB0019112F /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3C10D63221533FC60019112F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3C10D63421533FE60019112F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		3C10D636215340050019112F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
 		3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@3x.png"; sourceTree = "<group>"; };
 		3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@2x.png"; sourceTree = "<group>"; };
@@ -758,12 +774,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */,
+				3C10D637215340050019112F /* Photos.framework in Frameworks */,
+				3C10D62F21533F440019112F /* libsqlite3.tbd in Frameworks */,
+				3C10D63521533FE60019112F /* ImageIO.framework in Frameworks */,
+				3C10D63321533FC60019112F /* libz.tbd in Frameworks */,
+				3C10D63121533FBB0019112F /* libc++.tbd in Frameworks */,
 				3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */,
+				3C7E4AF2215100220058D3E2 /* SystemConfiguration.framework in Frameworks */,
+				3C7E4AF4215100320058D3E2 /* CoreGraphics.framework in Frameworks */,
+				3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */,
 				3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */,
 				3C7E4AF62151003F0058D3E2 /* Security.framework in Frameworks */,
-				3C7E4AF4215100320058D3E2 /* CoreGraphics.framework in Frameworks */,
-				3C7E4AF2215100220058D3E2 /* SystemConfiguration.framework in Frameworks */,
 				3C7E4AF0215100140058D3E2 /* OpenGLES.framework in Frameworks */,
 				3C7E4AEE215100080058D3E2 /* QuartzCore.framework in Frameworks */,
 				3C7E4AEC2150FFFC0058D3E2 /* CoreLocation.framework in Frameworks */,
@@ -777,6 +798,11 @@
 		34DF72E7E6C858D3EB182872 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C10D636215340050019112F /* Photos.framework */,
+				3C10D63421533FE60019112F /* ImageIO.framework */,
+				3C10D63221533FC60019112F /* libz.tbd */,
+				3C10D63021533FBB0019112F /* libc++.tbd */,
+				3C10D62E21533F440019112F /* libsqlite3.tbd */,
 				3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */,
 				3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */,
 				3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */,
@@ -807,6 +833,10 @@
 			children = (
 				3C7E4B1721528D070058D3E2 /* ZRSWShareModel.h */,
 				3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */,
+				3C10D6282152A8500019112F /* ZRSWShareManager.h */,
+				3C10D62A2152A8500019112F /* ZRSWShareManager.m */,
+				3C10D6292152A8500019112F /* ZRSWShareView.h */,
+				3C10D62B2152A8500019112F /* ZRSWShareView.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -1998,6 +2028,7 @@
 				E5B59A3D214EBEE800726DE9 /* SAMKeychainQuery.m in Sources */,
 				E5B59A34214EBEE800726DE9 /* NSArray+Log.m in Sources */,
 				3C7E4AE72150D65E0058D3E2 /* ZRSWNewsListDetailsController.m in Sources */,
+				3C10D62D2152A8500019112F /* ZRSWShareView.m in Sources */,
 				E5B59A47214EBEE800726DE9 /* NSObject+LNRefresh.m in Sources */,
 				E5B59A2C214EBEE800726DE9 /* UIColor+Utility.m in Sources */,
 				E5B59A30214EBEE800726DE9 /* UIButton+EnlargeEdge.m in Sources */,
@@ -2033,6 +2064,7 @@
 				E5B59A5B214EBEE800726DE9 /* BaseTableViewController.m in Sources */,
 				3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */,
 				E5B59A32214EBEE800726DE9 /* UIView+Extension.m in Sources */,
+				3C10D62C2152A8500019112F /* ZRSWShareManager.m in Sources */,
 				E5B59A28214EBEE800726DE9 /* UIView+Badge.m in Sources */,
 				E5B59A2F214EBEE800726DE9 /* NSObject+Runtime.m in Sources */,
 				E5B59A5D214EBEE800726DE9 /* BaseNavigationViewController.m in Sources */,
@@ -2197,7 +2229,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2220,7 +2252,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

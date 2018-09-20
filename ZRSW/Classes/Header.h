@@ -103,6 +103,8 @@
 #import <UIImage+ASMPDF.h>
 #import <UMAnalytics/MobClick.h>
 #import <UMCSecurityPlugins/SecurityEnvSDK/SecurityEnvSDK.h>
+#import <UMShare/UMShare.h>
+#import <UShareUI/UShareUI.h>
 #import "TZImagePickerController.h"
 #import "TZImageManager.h"
 #import "YYModel.h"
