@@ -218,7 +218,7 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     HomeBannerModelDetails *detailModel = model.data[i];
                     LLog(@"%@",detailModel.imgUrl);
-                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@%@",API_Host,detailModel.imgUrl]];
+                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",detailModel.imgUrl]];
                 }
                 self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
             }else{

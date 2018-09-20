@@ -18,6 +18,7 @@
 		3C10D63B2153614D0019112F /* ZRSWActionSheetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D63A2153614D0019112F /* ZRSWActionSheetButton.m */; };
 		3C10D63E215361830019112F /* ZRSWActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D63D215361830019112F /* ZRSWActionSheetView.m */; };
 		3C10D641215361C30019112F /* ZRSWShareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D640215361C30019112F /* ZRSWShareTableViewCell.m */; };
+		3C10D64421538F1D0019112F /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64321538F1D0019112F /* ZRSWResetPhoneController.m */; };
 		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
 		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
 		3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */; };
@@ -345,6 +346,8 @@
 		3C10D63D215361830019112F /* ZRSWActionSheetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWActionSheetView.m; sourceTree = "<group>"; };
 		3C10D63F215361C30019112F /* ZRSWShareTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWShareTableViewCell.h; sourceTree = "<group>"; };
 		3C10D640215361C30019112F /* ZRSWShareTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareTableViewCell.m; sourceTree = "<group>"; };
+		3C10D64221538F1D0019112F /* ZRSWResetPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWResetPhoneController.h; sourceTree = "<group>"; };
+		3C10D64321538F1D0019112F /* ZRSWResetPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWResetPhoneController.m; sourceTree = "<group>"; };
 		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
 		3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@3x.png"; sourceTree = "<group>"; };
 		3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@2x.png"; sourceTree = "<group>"; };
@@ -1667,6 +1670,8 @@
 				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
 				3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */,
 				3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */,
+				3C10D64221538F1D0019112F /* ZRSWResetPhoneController.h */,
+				3C10D64321538F1D0019112F /* ZRSWResetPhoneController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -2025,6 +2030,7 @@
 				3C7E4B0F21525A880058D3E2 /* ZRSWUserInfoController.m in Sources */,
 				E5B59A73214EC04100726DE9 /* OrderService.m in Sources */,
 				E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */,
+				3C10D64421538F1D0019112F /* ZRSWResetPhoneController.m in Sources */,
 				E5B59A27214EBEE800726DE9 /* UIViewController+Extension.m in Sources */,
 				E5B59A17214EBEE800726DE9 /* MatchManager.m in Sources */,
 				3C7E4B092152232A0058D3E2 /* ZRSWSettingController.m in Sources */,
