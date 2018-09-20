@@ -24,4 +24,6 @@
 
 + (UIView *)getCellSelectedView:(CGRect)aRect;
 
++ (UIView *)getLineView;
+
 @end

@@ -15,20 +15,26 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerVc;
 @property (nonatomic, strong) NSMutableArray *imageArr;
 @property (nonatomic, assign) PhotoPickType photoPickType;
+@property (nonatomic, copy) SelectedImagesBlock selectedBlcok;
+
 @end
 @implementation PhotoManager
 
 SYNTHESIZE_SINGLETON_ARC(PhotoManager);
 
-- (void)showPhotoPickForMaxCount:(NSInteger)maxCount presentedViewController:(UIViewController *)presentedVC photoPickType:(PhotoPickType)photoPickType{
+- (void)showPhotoPickForMaxCount:(NSInteger)maxCount presentedViewController:(UIViewController *)presentedVC photoPickType:(PhotoPickType)photoPickType complete:(SelectedImagesBlock)selectedBlcok {
     self.maxCount = maxCount;
     self.presentedVC = presentedVC;
     self.photoPickType = photoPickType;
+    self.selectedBlcok = selectedBlcok;
     
     if (_imageArr.count > 0) {
         [_imageArr removeAllObjects];
     }
     [self showPickView];
+}
+- (void)showPhotoPickForMaxCount:(NSInteger)maxCount presentedViewController:(UIViewController *)presentedVC photoPickType:(PhotoPickType)photoPickType{
+    [self showPhotoPickForMaxCount:maxCount presentedViewController:presentedVC photoPickType:photoPickType complete:nil];
 }
 
 - (void)showPickView {
@@ -153,6 +159,9 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
     [self.imageArr addObjectsFromArray:photos];
+    if (self.selectedBlcok) {
+        self.selectedBlcok(self.imageArr);
+    }
 }
 - (void)tz_imagePickerControllerDidCancel:(TZImagePickerController *)picker {
     
@@ -169,6 +178,9 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
             _imageArr = [NSMutableArray array];
         }
         [_imageArr addObject:image];
+        if (self.selectedBlcok) {
+            self.selectedBlcok(self.imageArr);
+        }
     }];
 }
 - (void)pushImagePickerController {

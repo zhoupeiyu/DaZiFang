@@ -32,4 +32,9 @@
     v.backgroundColor = [UIColor colorWithHex:0xf9f9f9];
     return v;
 }
++ (UIView *)getLineView {
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = [UIColor colorFromRGB:0xEDEDED];
+    return line;
+}
 @end
