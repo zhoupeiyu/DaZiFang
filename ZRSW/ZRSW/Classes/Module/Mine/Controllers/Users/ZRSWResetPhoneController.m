@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIButton *resetBtn;
 @property (nonatomic, strong) UserService *userService;
 
+@property (nonatomic, strong) NSString *currentPhoneNum;
 @property (nonatomic, strong) NSString *currentCodeNum;
 @property (nonatomic, strong) NSString *phoneNum;
 @property (nonatomic, strong) NSString *codeNum;
@@ -57,12 +58,12 @@
         make.left.mas_equalTo(14);
         make.width.mas_equalTo(SCREEN_WIDTH - 14*2);
         make.top.mas_equalTo(0);
-        make.bottom.mas_equalTo(43);
+        make.height.mas_equalTo(43);
     }];
     [self.currentCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.currentPhoneLabel).offset(-14);
+        make.left.mas_equalTo(0);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(self.currentPhoneLabel.bottom);
+        make.top.mas_equalTo(self.currentPhoneLabel.mas_bottom);
         make.height.mas_equalTo([ZRSWLoginCustomView loginInputViewHeight]);
     }];
     [self.newPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -130,15 +131,16 @@
 }
 - (void)countDownButtonAction:(UIButton *)button {
     if ([MatchManager checkTelNumber:self.phoneNum]) {
-        [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
+        [self.userService getUserPhoneCode:ImageCodeTypeResetPhone phone:self.phoneNum delegate:self];
     }
     else {
         [TipViewManager showToastMessage:@"请输入正确的手机号"];
     }
 }
 #pragma mark - Action
-- (void)registerAction {
+- (void)resetAction{
     [TipViewManager showLoading];
+    [self.userService userResetPhone:self.currentPhoneNum validateCode1:self.currentCodeNum newPhone:self.phoneNum validateCode2:self.codeNum delegate:self];
 }
 
 - (BOOL)checkRegisterEnabled {
@@ -180,7 +182,7 @@
 - (UILabel *)currentPhoneLabel {
     if (!_currentPhoneLabel) {
         _currentPhoneLabel = [[UILabel alloc] init];
-        _currentPhoneLabel.text = @"已绑定手机号码";
+        _currentPhoneLabel.text = @"已绑定手机号码：185****1940";
         _currentPhoneLabel.textColor = [UIColor colorFromRGB:0x666666];
         _currentPhoneLabel.font = [UIFont systemFontOfSize:13];
         _currentPhoneLabel.textAlignment = NSTextAlignmentLeft;
@@ -189,7 +191,7 @@
 }
 - (ZRSWLoginCustomView *)currentCodeView {
     if (!_currentCodeView) {
-        _currentCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:YES isNeedBottomLine:YES];
+        _currentCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:YES isNeedBottomLine:YES];
         _currentCodeView.delegate = self;
     }
     return _currentCodeView;
@@ -197,7 +199,7 @@
 
 - (ZRSWLoginCustomView *)newPhoneView {
     if (!_newPhoneView) {
-        _newPhoneView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"新手机号" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入新手机号" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypePhonePad isNeedCountDownButton:YES isNeedBottomLine:YES];
+        _newPhoneView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"新手机号" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入新手机号" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:YES isNeedBottomLine:YES];
         _newPhoneView.delegate = self;
     }
     return _newPhoneView;
@@ -205,7 +207,7 @@
 
 - (ZRSWLoginCustomView *)newCodeView {
     if (!_newCodeView) {
-        _newCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _newCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:NO isNeedBottomLine:YES];
         _newCodeView.delegate = self;
     }
     return _newCodeView;
@@ -214,7 +216,7 @@
 
 - (UIButton *)resetBtn {
     if (!_resetBtn) {
-        _resetBtn = [ZRSWViewFactoryTool getBlueBtn:@"确认修改" target:self action:@selector(registerAction)];
+        _resetBtn = [ZRSWViewFactoryTool getBlueBtn:@"确认修改" target:self action:@selector(resetAction)];
         _resetBtn.enabled = NO;
     }
     return _resetBtn;

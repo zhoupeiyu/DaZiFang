@@ -41,7 +41,7 @@
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(90), kUI_HeightS(90));
     self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), (SCREEN_WIDTH - self.iconImageView.right - kUI_WidthS(30)), kUI_HeightS(15));
-    self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(196), kUI_HeightS(34));
+    self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), self.titleLabel.width, kUI_HeightS(34));
     self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
     self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
     self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(150), kUI_HeightS(10));
@@ -124,13 +124,15 @@
     self.contentLabel.text = detailModel.roundup;
     self.readersLabel.text = [NSString stringWithFormat:@"%@",detailModel.readers];
     if (!self.readersLabel.text) {
-        _readerIcon.hidden = YES;
+        self.readerIcon.hidden = YES;
     }
-    NSTimeInterval interval = [detailModel.updateTime doubleValue] / 1000.0;
-    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    NSTimeInterval interval = [detailModel.updateTime doubleValue] / 1000.0;
+//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    NSDate* date = [formatter dateFromString:detailModel.updateTime];
     [formatter setDateFormat:@"yyyy.MM.dd"];
-    NSString *dateString = [formatter stringFromDate: date];
+    NSString *dateString = [formatter stringFromDate:date];
     self.dateLabel.text = dateString;
 }
 
