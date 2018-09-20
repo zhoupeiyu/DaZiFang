@@ -119,7 +119,7 @@
 
 - (void)setDetailModel:(NewDetailModel *)detailModel{
     _detailModel = detailModel;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",API_Host,detailModel.imgUrl]] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",detailModel.imgUrl]] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
     self.titleLabel.text = detailModel.title;
     self.contentLabel.text = detailModel.roundup;
     self.readersLabel.text = [NSString stringWithFormat:@"%@",detailModel.readers];

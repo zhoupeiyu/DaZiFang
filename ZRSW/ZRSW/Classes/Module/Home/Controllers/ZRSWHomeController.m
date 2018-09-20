@@ -218,7 +218,7 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     HomeBannerModelDetails *detailModel = model.data[i];
                     LLog(@"%@",detailModel.imgUrl);
-                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@%@",API_Host,detailModel.imgUrl]];
+                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",detailModel.imgUrl]];
                 }
                 self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
             }else{
@@ -291,12 +291,9 @@
 #pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
      LLog(@"我要贷款");
-//    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
-//    loansVC.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:loansVC animated:YES];
-    ZRSWSettingController *settingVC = [[ZRSWSettingController alloc] init];
-    settingVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:settingVC animated:YES];
+    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
+    loansVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:loansVC animated:YES];
 }
 
 

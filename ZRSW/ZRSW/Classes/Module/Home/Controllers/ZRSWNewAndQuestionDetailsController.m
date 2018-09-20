@@ -7,8 +7,9 @@
 //
 
 #import "ZRSWNewAndQuestionDetailsController.h"
-
-@interface ZRSWNewAndQuestionDetailsController ()<UIWebViewDelegate>
+#import "ZRSWActionSheetView.h"
+#import "ZRSWShareView.h"
+@interface ZRSWNewAndQuestionDetailsController ()<UIWebViewDelegate,PlatformButtonClickDelegate,ShareHandlerDelegate>
 @property(nonatomic,strong) UIWebView *webView;
 @end
 
@@ -44,9 +45,23 @@
 
 - (void)shareButtonClck:(UIButton *)button{
     LLog(@"第三方分享");
+//    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sina)]];
+//    //显示分享面板
+//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+//        // 根据获取的platformType确定所选平台进行下一步操作
+//
+//    }];
+    [ZRSWShareView shareContent:nil shareSourceType:ShareSourceWap delegate:self];
 }
 
 
+- (void)shareHandlerSuccess:(id)data {
+    LLog(@"分享成功#%@",data);
+}
+
+- (void)shareHandlerFailed:(NSError *)error {
+    LLog(@"分享失败%@",error);
+}
 
 
 -(UIWebView *)webView{

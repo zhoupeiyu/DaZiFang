@@ -38,6 +38,12 @@
 		3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
+		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
+		E591D6C72153EB8500F6802A /* ZRSWActionSheetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BD2153EB8300F6802A /* ZRSWActionSheetButton.m */; };
+		E591D6C82153EB8500F6802A /* ZRSWShareTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BE2153EB8300F6802A /* ZRSWShareTableViewCell.m */; };
+		E591D6C92153EB8500F6802A /* ZRSWActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BF2153EB8300F6802A /* ZRSWActionSheetView.m */; };
+		E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C42153EB8500F6802A /* ZRSWShareManager.m */; };
+		E591D6CB2153EB8500F6802A /* ZRSWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C52153EB8500F6802A /* ZRSWShareView.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -370,6 +376,18 @@
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
 		E591D66E21534C6000F6802A /* ZRSWIPCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWIPCardView.h; sourceTree = "<group>"; };
 		E591D66F21534C6000F6802A /* ZRSWIPCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWIPCardView.m; sourceTree = "<group>"; };
+		E591D6B92153EAE800F6802A /* ZRSWResetPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWResetPhoneController.h; sourceTree = "<group>"; };
+		E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWResetPhoneController.m; sourceTree = "<group>"; };
+		E591D6BD2153EB8300F6802A /* ZRSWActionSheetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWActionSheetButton.m; sourceTree = "<group>"; };
+		E591D6BE2153EB8300F6802A /* ZRSWShareTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareTableViewCell.m; sourceTree = "<group>"; };
+		E591D6BF2153EB8300F6802A /* ZRSWActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWActionSheetView.m; sourceTree = "<group>"; };
+		E591D6C02153EB8300F6802A /* ZRSWShareTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareTableViewCell.h; sourceTree = "<group>"; };
+		E591D6C12153EB8300F6802A /* ZRSWActionSheetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWActionSheetButton.h; sourceTree = "<group>"; };
+		E591D6C22153EB8300F6802A /* ZRSWActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWActionSheetView.h; sourceTree = "<group>"; };
+		E591D6C32153EB8400F6802A /* ZRSWShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareManager.h; sourceTree = "<group>"; };
+		E591D6C42153EB8500F6802A /* ZRSWShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareManager.m; sourceTree = "<group>"; };
+		E591D6C52153EB8500F6802A /* ZRSWShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareView.m; sourceTree = "<group>"; };
+		E591D6C62153EB8500F6802A /* ZRSWShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareView.h; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5B598F6214E9E2600726DE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -811,8 +829,13 @@
 		3C7E4B1621528CD90058D3E2 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				E591D6BC2153EB8300F6802A /* ShareBottomView */,
 				3C7E4B1721528D070058D3E2 /* ZRSWShareModel.h */,
 				3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */,
+				E591D6C32153EB8400F6802A /* ZRSWShareManager.h */,
+				E591D6C42153EB8500F6802A /* ZRSWShareManager.m */,
+				E591D6C62153EB8500F6802A /* ZRSWShareView.h */,
+				E591D6C52153EB8500F6802A /* ZRSWShareView.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -824,6 +847,19 @@
 				FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E591D6BC2153EB8300F6802A /* ShareBottomView */ = {
+			isa = PBXGroup;
+			children = (
+				E591D6BD2153EB8300F6802A /* ZRSWActionSheetButton.m */,
+				E591D6BE2153EB8300F6802A /* ZRSWShareTableViewCell.m */,
+				E591D6BF2153EB8300F6802A /* ZRSWActionSheetView.m */,
+				E591D6C02153EB8300F6802A /* ZRSWShareTableViewCell.h */,
+				E591D6C12153EB8300F6802A /* ZRSWActionSheetButton.h */,
+				E591D6C22153EB8300F6802A /* ZRSWActionSheetView.h */,
+			);
+			path = ShareBottomView;
 			sourceTree = "<group>";
 		};
 		E5B598DE214E9E2500726DE9 = {
@@ -929,7 +965,6 @@
 				E5B5990B214EBED500726DE9 /* Controllers */,
 				E5B5990A214EBED500726DE9 /* Models */,
 				E5B5990C214EBED500726DE9 /* Views */,
-				3C7E4B1621528CD90058D3E2 /* Share */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1284,6 +1319,7 @@
 		E5B599A9214EBEE800726DE9 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				3C7E4B1621528CD90058D3E2 /* Share */,
 				E5B59BC1214FA94300726DE9 /* JKCountDownButton */,
 				E5B599AA214EBEE800726DE9 /* LNRefresh */,
 				E5B599C1214EBEE800726DE9 /* TZImagePickerController */,
@@ -1622,6 +1658,8 @@
 				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
 				3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */,
 				3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */,
+				E591D6B92153EAE800F6802A /* ZRSWResetPhoneController.h */,
+				E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */,
 				E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */,
 				E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */,
 			);
@@ -2013,11 +2051,13 @@
 				E5B59A30214EBEE800726DE9 /* UIButton+EnlargeEdge.m in Sources */,
 				E5B59A44214EBEE800726DE9 /* LNRefreshComponent.m in Sources */,
 				E5B59A1F214EBEE800726DE9 /* NSObject+SXRuntime.m in Sources */,
+				E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */,
 				E5B59914214EBED500726DE9 /* AppDelegate.m in Sources */,
 				E5B59A39214EBEE800726DE9 /* MMMaterialDesignSpinner.m in Sources */,
 				E5B59A19214EBEE800726DE9 /* PhotoManager.m in Sources */,
 				E5B59A21214EBEE800726DE9 /* UIApplication+Extension.m in Sources */,
 				E5B59A4E214EBEE800726DE9 /* NSBundle+TZImagePicker.m in Sources */,
+				E591D6C92153EB8500F6802A /* ZRSWActionSheetView.m in Sources */,
 				E5B59A56214EBEE800726DE9 /* TZImagePickerController.m in Sources */,
 				E5B59A2B214EBEE800726DE9 /* UIScrollView+Extension.m in Sources */,
 				E5B59A42214EBEE800726DE9 /* LNRefreshFooter.m in Sources */,
@@ -2033,6 +2073,7 @@
 				E5B59A45214EBEE800726DE9 /* LNRefreshHandler.m in Sources */,
 				E5B59A4C214EBEE800726DE9 /* TZVideoPlayerController.m in Sources */,
 				E5B59A1D214EBEE800726DE9 /* UINavigation+SXFixSpace.m in Sources */,
+				E591D6C82153EB8500F6802A /* ZRSWShareTableViewCell.m in Sources */,
 				E5B59A3C214EBEE800726DE9 /* DeviceID.m in Sources */,
 				E5B59A18214EBEE800726DE9 /* BaseTheme.m in Sources */,
 				E5B59A15214EBEE800726DE9 /* ControllerUtilsManager.m in Sources */,
@@ -2040,6 +2081,7 @@
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,
+				E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */,
 				E5B59A5C214EBEE800726DE9 /* BaseViewController.m in Sources */,
 				E5B59A5B214EBEE800726DE9 /* BaseTableViewController.m in Sources */,
 				3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */,
@@ -2060,6 +2102,7 @@
 				E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */,
 				3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */,
 				E5B59BB7214FA2A600726DE9 /* ZRSWLoginController.m in Sources */,
+				E591D6C72153EB8500F6802A /* ZRSWActionSheetButton.m in Sources */,
 				E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */,
 				E5B59A53214EBEE800726DE9 /* TZImageManager.m in Sources */,
 				E5B59A55214EBEE800726DE9 /* TZPhotoPreviewCell.m in Sources */,
@@ -2075,6 +2118,7 @@
 				E5B59A26214EBEE800726DE9 /* UIImage+Utility.m in Sources */,
 				E5B59BBA214FA5CA00726DE9 /* ZRSWRegisterController.m in Sources */,
 				E5B59A20214EBEE800726DE9 /* UIDevice+Info.m in Sources */,
+				E591D6CB2153EB8500F6802A /* ZRSWShareView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

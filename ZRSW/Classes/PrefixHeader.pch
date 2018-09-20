@@ -25,7 +25,13 @@
 
     #define API_Host                @"http://zhongrong.ijiaoban.cn/"
 
-    #define UMKey                   @"" // 友盟key
+    #define UMKey                   @"5ba31173b465f5623b000047" // 友盟key
+    #define TencentAppID @"1104177532"
+    #define kWeiBoAppKey         @"3751276339"
+    #define kWeiBoRedirectURL    @"http://sns.whalecloud.com/sina2/callback"
+    #define kWeChatAppSecret @"f549325608fbc5028f6757ace09500e7"
+    #define kWeChatAppID @"wx8490e13c4adcaad2"
+    #define kWeChatAppIDVIP @"wx84f52b17ff891841"
     #define BaiduMobStatKey         @"" // 百度统计key
     #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
@@ -34,6 +40,13 @@
     #define API_Host                @""
 
     #define UMKey                   @""
+    #define TencentAppID @"1104177532"
+    #define kWeiBoAppKey         @"3751276339"
+    #define kWeiBoRedirectURI    @"http://sns.whalecloud.com/sina2/callback"
+    #define kZHICHIKEY @"b38d6eb5e8bb4a279bb0df8a65fd49bf"
+    #define kWeChatAppSecret @"f549325608fbc5028f6757ace09500e7"
+    #define kWeChatAppID @"wx8490e13c4adcaad2"
+    #define kWeChatAppIDVIP @"wx84f52b17ff891841"
     #define BaiduMobStatKey         @""
     #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
