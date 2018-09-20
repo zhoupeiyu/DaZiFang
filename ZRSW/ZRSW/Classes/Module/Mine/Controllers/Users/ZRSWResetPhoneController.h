@@ -8,4 +8,5 @@
 
 #import "BaseScrollViewController.h"
 @interface ZRSWResetPhoneController : BaseScrollViewController
+@property (nonatomic, strong) UserInfoModel *model;
 @end
