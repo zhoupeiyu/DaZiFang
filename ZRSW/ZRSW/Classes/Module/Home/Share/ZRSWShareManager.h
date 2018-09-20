@@ -9,20 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZRSWShareModel.h"
 typedef NS_ENUM(NSUInteger, ShareSourceType) {
-    ShareSourceAPP, //app分享
     ShareSourceWap,//网页分享
-    ShareSourceProduct, //商品分享
-    ShareSourceCoffee, // 咖啡厅
     ShareSourceImage // 分享图片
 };
-typedef enum : NSInteger {
-    LXShareMethodQQ,
-    LXShareMethodQZone,
-    LXShareMethodWeibo,
-    LXShareMethodRenRen,
-    LXShareMethodWXSession, // WeChat friend
-    LXShareMethodWXTimeLine, // WeChat Time line
-} LXShareMethod;
 
 @protocol ShareHandlerDelegate <NSObject>
 //分享成功

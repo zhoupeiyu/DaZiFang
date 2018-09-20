@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegteManager.h"
-
+#import "ZRSWShareManager.h"
 @implementation AppDelegteManager
 
 SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
@@ -21,6 +21,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [self loactionManager];
     // 网络
     [self setupNetWorkConfig];
+    //分享
+    [self setupShareConfig];
     
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -79,4 +81,9 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 - (void)setupNetWorkConfig {
     [BaseNetWorkService configNetWorkService];
 }
+
+- (void)setupShareConfig {
+    [ZRSWShareManager registerPlaformInfo];
+}
+
 @end
