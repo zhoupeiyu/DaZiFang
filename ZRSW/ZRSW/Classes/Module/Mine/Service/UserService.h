@@ -8,7 +8,7 @@
 
 #import "BaseNetWorkService.h"
 #import "EnumType.h"
-
+#import "ZRSWRemindListModel.h"
 
 @interface UserService : BaseNetWorkService
 
@@ -210,6 +210,15 @@
  */
 - (void)getCommentQuestionDetail:(NSString *)faqId delegate:(id)delegate;
 
+/**
+ 问题详情
+
+ @param username 用户名
+ @param password 密码
+ @param name ID 昵称
+ @param delegate 代理
+ */
+- (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate;
 
 
 

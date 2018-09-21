@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		00D886AD71377EC6136CEE47 /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */; };
+		3C10D64821548A930019112F /* ZRSWRemindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64721548A930019112F /* ZRSWRemindListController.m */; };
+		3C10D64B21548B790019112F /* ZRSWRemindListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64A21548B790019112F /* ZRSWRemindListCell.m */; };
+		3C10D64E2154939B0019112F /* ZRSWRemindListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64D2154939B0019112F /* ZRSWRemindListModel.m */; };
 		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
 		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
 		3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */; };
@@ -331,6 +334,12 @@
 
 /* Begin PBXFileReference section */
 		03CD4C98B0244122E8D27920 /* libPods-ZRSW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZRSW.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C10D64621548A930019112F /* ZRSWRemindListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRemindListController.h; sourceTree = "<group>"; };
+		3C10D64721548A930019112F /* ZRSWRemindListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRemindListController.m; sourceTree = "<group>"; };
+		3C10D64921548B790019112F /* ZRSWRemindListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRemindListCell.h; sourceTree = "<group>"; };
+		3C10D64A21548B790019112F /* ZRSWRemindListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRemindListCell.m; sourceTree = "<group>"; };
+		3C10D64C2154939B0019112F /* ZRSWRemindListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRemindListModel.h; sourceTree = "<group>"; };
+		3C10D64D2154939B0019112F /* ZRSWRemindListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRemindListModel.m; sourceTree = "<group>"; };
 		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
 		3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@3x.png"; sourceTree = "<group>"; };
 		3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@2x.png"; sourceTree = "<group>"; };
@@ -824,6 +833,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3C10D64521548A660019112F /* Reminds */ = {
+			isa = PBXGroup;
+			children = (
+				3C10D64621548A930019112F /* ZRSWRemindListController.h */,
+				3C10D64721548A930019112F /* ZRSWRemindListController.m */,
+			);
+			path = Reminds;
+			sourceTree = "<group>";
+		};
 		3C7E4B06215222C60058D3E2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,6 +1055,8 @@
 				E5B59A68214EC02100726DE9 /* UserModel.m */,
 				3C7E4B1321525AC30058D3E2 /* ZRSWMineModel.h */,
 				3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */,
+				3C10D64C2154939B0019112F /* ZRSWRemindListModel.h */,
+				3C10D64D2154939B0019112F /* ZRSWRemindListModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1047,6 +1067,7 @@
 				E5B59A65214EBFBA00726DE9 /* ZRSWMineController.h */,
 				E5B59A66214EBFBA00726DE9 /* ZRSWMineController.m */,
 				3C7E4B06215222C60058D3E2 /* Settings */,
+				3C10D64521548A660019112F /* Reminds */,
 				E5B59BB4214FA28500726DE9 /* Users */,
 			);
 			path = Controllers;
@@ -1063,6 +1084,8 @@
 				3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */,
 				3C7E4B1021525AA70058D3E2 /* ZRSWMineListCell.h */,
 				3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */,
+				3C10D64921548B790019112F /* ZRSWRemindListCell.h */,
+				3C10D64A21548B790019112F /* ZRSWRemindListCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2061,11 +2084,13 @@
 				E5B59A3D214EBEE800726DE9 /* SAMKeychainQuery.m in Sources */,
 				E5B59A34214EBEE800726DE9 /* NSArray+Log.m in Sources */,
 				3C7E4AE72150D65E0058D3E2 /* ZRSWNewsListDetailsController.m in Sources */,
+				3C10D64B21548B790019112F /* ZRSWRemindListCell.m in Sources */,
 				E5B59A47214EBEE800726DE9 /* NSObject+LNRefresh.m in Sources */,
 				E5B59A2C214EBEE800726DE9 /* UIColor+Utility.m in Sources */,
 				E5B59A30214EBEE800726DE9 /* UIButton+EnlargeEdge.m in Sources */,
 				E5B59A44214EBEE800726DE9 /* LNRefreshComponent.m in Sources */,
 				E5B59A1F214EBEE800726DE9 /* NSObject+SXRuntime.m in Sources */,
+				3C10D64E2154939B0019112F /* ZRSWRemindListModel.m in Sources */,
 				E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */,
 				E5B59914214EBED500726DE9 /* AppDelegate.m in Sources */,
 				E5B59A39214EBEE800726DE9 /* MMMaterialDesignSpinner.m in Sources */,
@@ -2094,6 +2119,7 @@
 				E5B59A15214EBEE800726DE9 /* ControllerUtilsManager.m in Sources */,
 				3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */,
 				E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */,
+				3C10D64821548A930019112F /* ZRSWRemindListController.m in Sources */,
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,

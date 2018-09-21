@@ -57,6 +57,10 @@
 // 问题详情
 #define KGetCommentQuestionDetailRequest        @"KGetCommentQuestionDetailRequest"
 
+// 提醒列表
+#define KGetRemindListRequest                 @"KGetRemindListRequest"
+
+
 
 
 

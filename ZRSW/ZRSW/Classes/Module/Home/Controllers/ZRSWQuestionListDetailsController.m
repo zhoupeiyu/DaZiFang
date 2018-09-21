@@ -12,6 +12,7 @@
 #import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWQuestionListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, strong) NSString *lastId;
 @end
 
 @implementation ZRSWQuestionListDetailsController
@@ -69,20 +70,27 @@
 
 #pragma mark - NetWork
 - (void)requsetCommentQuestionList{
+    [TipViewManager showLoading];
     [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)refreshData{
+    [TipViewManager showLoading];
+    [self.tableView.mj_footer resetNoMoreData];
     [self.dataListSource removeAllObjects];
+    self.lastId = nil;
     [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
 }
 
 - (void)loadMoreData{
+    [TipViewManager showLoading];
     CommentQuestionModel *questionModel = self.dataListSource.lastObject;
-    [[[UserService alloc] init] getCommentQuestionList:questionModel.id pageSize:100 delegate:self];
+    self.lastId = questionModel.id;
+    [[[UserService alloc] init] getCommentQuestionList:self.lastId pageSize:100 delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    [TipViewManager dismissLoading];
     [self endHeadRefreshing];
     [self endFootRefreshing];
     if (status == RequestFinishedStatusSuccess) {
@@ -91,6 +99,10 @@
             if (model.error_code.integerValue == 0) {
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     CommentQuestionModel *detailModel = model.data[i];
+                    if ([detailModel.id isEqualToString:self.lastId]) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                        return;
+                    }
                     [self.dataListSource addObject:detailModel];
                     [self.tableView reloadData];
                 }

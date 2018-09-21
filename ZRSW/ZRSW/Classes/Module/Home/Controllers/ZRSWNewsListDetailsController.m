@@ -11,6 +11,7 @@
 #import "ZRSWNewAndQuestionDetailsController.h"
 @interface ZRSWNewsListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, strong) NSString *lastId;
 @end
 
 @implementation ZRSWNewsListDetailsController
@@ -80,14 +81,19 @@
 
 #pragma mark - NetWork
 - (void)requsetPopularInformationList{
+    [TipViewManager showLoading];
     [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
 }
 - (void)requsetSystemNotificationList{
+    [TipViewManager showLoading];
     [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
 }
 
 - (void)refreshData{
+    [TipViewManager showLoading];
+    [self.tableView.mj_footer resetNoMoreData];
     [self.dataListSource removeAllObjects];
+    self.lastId = nil;
     if (self.type == NewListTypePopularInformation) {
         [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
     }else if (self.type == NewListTypeSystemNotification){
@@ -97,15 +103,18 @@
 
 
 - (void)loadMoreData{
+    [TipViewManager showLoading];
     NewDetailModel *detailModel = self.dataListSource.lastObject;
+    self.lastId = detailModel.id;
     if (self.type == NewListTypePopularInformation) {
-        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:detailModel.id pageSize:100 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:self.lastId  pageSize:100 delegate:self];
     }else if (self.type == NewListTypeSystemNotification){
-        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:detailModel.id pageSize:100 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:self.lastId  pageSize:100 delegate:self];
     }
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    [TipViewManager dismissLoading];
     [self endHeadRefreshing];
     [self endFootRefreshing];
     if (status == RequestFinishedStatusSuccess) {
@@ -114,6 +123,10 @@
             if (model.error_code.integerValue == 0) {
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
+                    if ([detailModel.id isEqualToString:self.lastId]) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                        return;
+                    }
                     [self.dataListSource addObject:detailModel];
                 }
                  [self.tableView reloadData];
@@ -125,6 +138,10 @@
             if (model.error_code.integerValue == 0) {
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     NewDetailModel *detailModel = model.data[i];
+                    if ([detailModel.id isEqualToString:self.lastId]) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                        return;
+                    }
                     [self.dataListSource addObject:detailModel];
                 }
                 [self.tableView reloadData];

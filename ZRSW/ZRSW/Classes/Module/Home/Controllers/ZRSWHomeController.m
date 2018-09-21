@@ -33,6 +33,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *locationView;
 @property (nonatomic, strong) UILabel *locationLabel;
+@property (nonatomic, strong)  dispatch_group_t group;
 @end
 
 @implementation ZRSWHomeController
@@ -66,12 +67,18 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [TipViewManager showLoading];
+    self.group = dispatch_group_create();
     [self requsetCityList];
     [self requsetBannerList];
     [self requsetSystemNotificationList];
     [self requsetPopularInformationList];
     [self requsetCommentQuestionList];
     [self locationCity];
+    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        [TipViewManager dismissLoading];
+    });
+
 }
 
 
@@ -163,35 +170,43 @@
 }
 
 - (void)requsetCityList{
+     dispatch_group_enter(self.group);
     [[[UserService alloc] init] getCityListDelegate:self];
 }
 
 - (void)requsetBannerList{
+     dispatch_group_enter(self.group);
     NSString *cityId = @"";
     [[[UserService alloc] init] getBannerWithCityID:cityId delegate:self];
 }
 
 - (void)requsetPopularInformationList{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
+     dispatch_group_enter(self.group);
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:3 delegate:self];
 }
 
 - (void)requsetSystemNotificationList{
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
+     dispatch_group_enter(self.group);
+    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:1 delegate:self];
 }
 
 - (void)requsetCommentQuestionList{
-    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
+     dispatch_group_enter(self.group);
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:3 delegate:self];
 }
 
 - (void)refreshData{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
-    [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
-    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
+    self.group = dispatch_group_create();
+    [self requsetPopularInformationList];
+    [self requsetSystemNotificationList];
+    [self requsetCommentQuestionList];
+    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        [self endHeadRefreshing];
+    });
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
-    [self endHeadRefreshing];
-    [self endFootRefreshing];
+     dispatch_group_leave(self.group);
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KCityListRequest]) {
             CityListModel *model = (CityListModel *)resObj;

@@ -57,6 +57,10 @@
 // 问题详情
 #define KGetCommentQuestionDetailInterface              @"api/index/faqInfo"
 
+// 提醒列表
+#define KGetRemindListInterface                @"api/message/msgList"
+
+
 
 
 

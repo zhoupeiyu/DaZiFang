@@ -87,7 +87,8 @@
     [params setObject:validateCode forKey:@"validateCode"];
     [self POST:KUserResetPasswordInterface reqType:KUserResetPasswordRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
-- (void)userResetPhone:(NSString *)oldPhone validateCode1:(NSString *)validateCode1 newPhone:(NSString *)newPhone validateCode2:(NSString *)validateCode2 delegate:(id)delegate {
+- (void)
+userResetPhone:(NSString *)oldPhone validateCode1:(NSString *)validateCode1 newPhone:(NSString *)newPhone validateCode2:(NSString *)validateCode2 delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:oldPhone forKey:@"phone2"];
     [params setObject:validateCode1 forKey:@"validateCode2"];
@@ -169,6 +170,20 @@
     [params setObject:faqId forKey:@"faqId"];
     [self POST:KGetCommentQuestionDetailInterface reqType:KGetCommentQuestionDetailRequest delegate:delegate parameters:params ObjcClass:[CommentQuestionListModel class] NeedCache:NO];
 
+}
+
+- (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (username != nil) {
+        [params setObject:username forKey:@"username"];
+    }
+    if (password != nil) {
+        [params setObject:password forKey:@"password"];
+    }
+    if (name != nil) {
+        [params setObject:name forKey:@"name"];
+    }
+    [self POST:KGetRemindListInterface reqType:KGetRemindListRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
 }
 
 
