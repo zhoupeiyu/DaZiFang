@@ -177,7 +177,7 @@
                 [TipViewManager showToastMessage:model.error_msg];
             }
         }
-        else if ([reqType isEqualToString:KGetOldPhoneCodeRequest]) {
+        else if ([reqType isEqualToString:KGetNewPhoneCodeRequest]) {
             BaseModel *model = (BaseModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 [TipViewManager showToastMessage:@"短信验证码发送成功!"];

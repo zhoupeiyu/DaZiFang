@@ -119,6 +119,9 @@
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
