@@ -50,7 +50,6 @@
 }
 
 
-
 - (void)setupConfig {
     [super setupConfig];
     self.navigationItem.title = @"大资方";
@@ -72,7 +71,6 @@
     [self requsetSystemNotificationList];
     [self requsetPopularInformationList];
     [self requsetCommentQuestionList];
-
     [self locationCity];
 }
 

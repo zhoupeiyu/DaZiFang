@@ -113,11 +113,11 @@ SYNTHESIZE_SINGLETON_ARC(BaseTheme);
     return dic;
 }
 
-+ (CYLTabBarController *)tabBarController {
++ (BaseTabBarViewController *)tabBarController {
     return [[self sharedInstance] tabBarController];
 }
-- (CYLTabBarController *)tabBarController {
-    CYLTabBarController *tabBar = [[CYLTabBarController alloc] initWithViewControllers:self.controllers tabBarItemsAttributes:self.tabBarItemsAttributes];
+- (BaseTabBarViewController *)tabBarController {
+    BaseTabBarViewController *tabBar = [[BaseTabBarViewController alloc] initWithViewControllers:self.controllers tabBarItemsAttributes:self.tabBarItemsAttributes];
     UIImage *backImage = [UIImage imageNamed:@""];
     backImage = [backImage stretchableImageWithLeftCapWidth:backImage.size.width * 0.5 topCapHeight:backImage.size.height * 0.5];
     [tabBar.tabBar setBackgroundImage:backImage];

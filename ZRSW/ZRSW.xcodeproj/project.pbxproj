@@ -45,6 +45,8 @@
 		E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C42153EB8500F6802A /* ZRSWShareManager.m */; };
 		E591D6CB2153EB8500F6802A /* ZRSWShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6C52153EB8500F6802A /* ZRSWShareView.m */; };
 		E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */; };
+		E591D6D12153F67200F6802A /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6D02153F67200F6802A /* BaseTabBarViewController.m */; };
+		E591D6D42153FF5300F6802A /* ZRSWNeedLoansController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -391,6 +393,10 @@
 		E591D6C62153EB8500F6802A /* ZRSWShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWShareView.h; sourceTree = "<group>"; };
 		E591D6CC2153ECB600F6802A /* ZRSWEnterpriseAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWEnterpriseAuthController.h; sourceTree = "<group>"; };
 		E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWEnterpriseAuthController.m; sourceTree = "<group>"; };
+		E591D6CF2153F67200F6802A /* BaseTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
+		E591D6D02153F67200F6802A /* BaseTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
+		E591D6D22153FF5300F6802A /* ZRSWNeedLoansController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWNeedLoansController.h; sourceTree = "<group>"; };
+		E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWNeedLoansController.m; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5B598F6214E9E2600726DE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -949,6 +955,8 @@
 			children = (
 				E5B59A62214EBF9600726DE9 /* ZRSWLoansController.h */,
 				E5B59A63214EBF9600726DE9 /* ZRSWLoansController.m */,
+				E591D6D22153FF5300F6802A /* ZRSWNeedLoansController.h */,
+				E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1424,6 +1432,8 @@
 				E5B599E6214EBEE800726DE9 /* BaseTableViewController.m */,
 				E5B599E9214EBEE800726DE9 /* BaseNavigationViewController.h */,
 				E5B599EB214EBEE800726DE9 /* BaseNavigationViewController.m */,
+				E591D6CF2153F67200F6802A /* BaseTabBarViewController.h */,
+				E591D6D02153F67200F6802A /* BaseTabBarViewController.m */,
 				E5B599E8214EBEE800726DE9 /* BaseScrollViewController.h */,
 				E5B599EC214EBEE800726DE9 /* BaseScrollViewController.m */,
 			);
@@ -2090,6 +2100,7 @@
 				E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */,
 				E5B59A5C214EBEE800726DE9 /* BaseViewController.m in Sources */,
 				E5B59A5B214EBEE800726DE9 /* BaseTableViewController.m in Sources */,
+				E591D6D12153F67200F6802A /* BaseTabBarViewController.m in Sources */,
 				3C7E4ADD214FA4800058D3E2 /* ZRSWHomeBannerModel.m in Sources */,
 				E5B59A32214EBEE800726DE9 /* UIView+Extension.m in Sources */,
 				E5B59A28214EBEE800726DE9 /* UIView+Badge.m in Sources */,
@@ -2117,6 +2128,7 @@
 				E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */,
 				E5B59A1A214EBEE800726DE9 /* BaseModel.m in Sources */,
 				3C7E4ADA214FA2270058D3E2 /* ZRSWHomeNewsCell.m in Sources */,
+				E591D6D42153FF5300F6802A /* ZRSWNeedLoansController.m in Sources */,
 				E5B598FA214E9E2600726DE9 /* main.m in Sources */,
 				E5B59A3F214EBEE800726DE9 /* NotificationName.m in Sources */,
 				E5B59A58214EBEE800726DE9 /* TZGifPhotoPreviewController.m in Sources */,
