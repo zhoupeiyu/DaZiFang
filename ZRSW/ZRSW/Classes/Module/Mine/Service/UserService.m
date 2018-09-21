@@ -21,6 +21,9 @@
     else if (imageCodeType == ImageCodeTypeResetPhone) {
         imageType = @"resetPhone";
     }
+    else if (imageCodeType == ImageCodeTypeResetPhone2) {
+        imageType = @"resetPhone2";
+    }
     return imageType;
 }
 - (void)getUserImageCode:(ImageCodeType)imageCodeType delegate:(id)delegate {
@@ -34,7 +37,13 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[self typeStr:imageCodeType] forKey:@"type"];
     [params setObject:phone forKey:@"phone"];
-    [self POST:KGetPhoneCodeInterface reqType:KGetPhoneCodeRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
+    NSString *type = KGetPhoneCodeRequest;
+    if (imageCodeType == ImageCodeTypeResetPhone) {
+        type = KGetNewPhoneCodeRequest;
+    }else if(imageCodeType == ImageCodeTypeResetPhone2){
+        type = KGetOldPhoneCodeRequest;
+    }
+    [self POST:KGetPhoneCodeInterface reqType:type delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
 - (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode nickName:(NSString *)nickName delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

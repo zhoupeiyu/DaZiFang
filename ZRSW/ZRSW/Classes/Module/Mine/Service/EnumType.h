@@ -4,7 +4,8 @@
 typedef enum : NSUInteger {
     ImageCodeTypeRegister, // 注册
     ImageCodeTypePwd, // 忘记密码
-    ImageCodeTypeResetPhone // 绑定新手机
+    ImageCodeTypeResetPhone, // 绑定新手机
+    ImageCodeTypeResetPhone2 // 旧手机
 } ImageCodeType;
 
 #pragma mark - 公告/咨询列表

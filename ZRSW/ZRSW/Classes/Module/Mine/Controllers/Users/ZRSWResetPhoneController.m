@@ -40,6 +40,7 @@
     self.title = @"更换手机号";
     [self setLeftBackBarButton];
     self.scrollView.scrollEnabled = YES;
+    self.currentPhoneNum = @"18511691940";
 }
 
 - (void)setupUI {
@@ -125,17 +126,20 @@
     }
     self.resetBtn.enabled = [self checkRegisterEnabled];
 }
-- (void)userAgreementViewChecked:(BOOL)check {
-    self.isChecked = check;
-    self.resetBtn.enabled = [self checkRegisterEnabled];
-}
+
 - (void)countDownButtonAction:(UIButton *)button customView:(ZRSWLoginCustomView *)customView{
-    if ([MatchManager checkTelNumber:self.phoneNum]) {
-        [self.userService getUserPhoneCode:ImageCodeTypeResetPhone phone:self.phoneNum delegate:self];
+    if (customView.tag == 101) {
+        if ([MatchManager checkTelNumber:self.currentPhoneNum]) {
+            [self.userService getUserPhoneCode:ImageCodeTypeResetPhone2 phone:self.currentPhoneNum delegate:self];
+        }
+    }else if (customView.tag == 102){
+        if ([MatchManager checkTelNumber:self.phoneNum]) {
+            [self.userService getUserPhoneCode:ImageCodeTypeResetPhone phone:self.phoneNum delegate:self];
+        }else {
+            [TipViewManager showToastMessage:@"请输入正确的手机号"];
+        }
     }
-    else {
-        [TipViewManager showToastMessage:@"请输入正确的手机号"];
-    }
+
 }
 #pragma mark - Action
 - (void)resetAction{
@@ -144,7 +148,7 @@
 }
 
 - (BOOL)checkRegisterEnabled {
-    return  _phoneNum.length > 0 && _currentCodeNum.length > 0 && _codeNum.length >= 6 && self.isChecked;
+    return  _phoneNum.length > 0 && _currentCodeNum.length == 4 && _codeNum.length == 4;
 }
 
 
@@ -152,7 +156,7 @@
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KUserRegisterRequest]) {
+        if ([reqType isEqualToString:KUserResetPhoneRequest]) {
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 [UserModel updateUserModel:model];
@@ -163,7 +167,17 @@
                 [TipViewManager showToastMessage:model.error_msg];
             }
         }
-        else if ([reqType isEqualToString:KGetPhoneCodeRequest]) {
+        else if ([reqType isEqualToString:KGetOldPhoneCodeRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"短信验证码发送成功!"];
+                [self.currentCodeView startCountDownWithSecond:CountDownSecond];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+        else if ([reqType isEqualToString:KGetOldPhoneCodeRequest]) {
             BaseModel *model = (BaseModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 [TipViewManager showToastMessage:@"短信验证码发送成功!"];
@@ -192,6 +206,7 @@
 - (ZRSWLoginCustomView *)currentCodeView {
     if (!_currentCodeView) {
         _currentCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"验证码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:YES isNeedBottomLine:YES];
+        _currentCodeView.tag = 101;
         _currentCodeView.delegate = self;
     }
     return _currentCodeView;
@@ -200,6 +215,7 @@
 - (ZRSWLoginCustomView *)newPhoneView {
     if (!_newPhoneView) {
         _newPhoneView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"新手机号" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入新手机号" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:YES isNeedBottomLine:YES];
+        _newPhoneView.tag = 102;
         _newPhoneView.delegate = self;
     }
     return _newPhoneView;

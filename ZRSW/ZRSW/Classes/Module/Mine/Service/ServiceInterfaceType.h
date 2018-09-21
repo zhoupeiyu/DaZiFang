@@ -5,6 +5,13 @@
 // 手机验证码
 #define KGetPhoneCodeRequest                    @"KGetPhoneCodeRequest"
 
+// 重置新手机验证码
+#define KGetNewPhoneCodeRequest              @"KGetNewPhoneCodeRequest"
+
+// 重置旧手机验证码
+#define KGetOldPhoneCodeRequest              @"KGetOldPhoneCodeRequest"
+
+
 // 用户注册
 #define KUserRegisterRequest                    @"KUserRegisterRequest"
 
