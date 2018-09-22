@@ -25,7 +25,7 @@
 #define KUserResetPasswordInterface                     @"api/user/resetPwd"
 
 // 更换手机号
-#define KUserResetPhoneInterface                        @"user/resetPhone"
+#define KUserResetPhoneInterface                        @"api/user/resetPhone"
 
 // 更新用户信息
 #define KUserUpdateInfoInterface                        @"api/user/resetUserInfo"

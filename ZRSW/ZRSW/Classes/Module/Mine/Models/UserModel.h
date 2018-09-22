@@ -119,6 +119,7 @@
 @property (nonatomic, strong) NSString *authCompany;
 @property (nonatomic, strong) UserAuthNameAudit *authNameAudit;
 @property (nonatomic, strong) UserAuthCompanyAudit *authCompanyAudit;
+@property (nonatomic, strong) NSString *token;
 
 @end
 

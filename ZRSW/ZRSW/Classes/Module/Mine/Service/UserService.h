@@ -211,70 +211,13 @@
 - (void)getCommentQuestionDetail:(NSString *)faqId delegate:(id)delegate;
 
 /**
- 问题详情
-
+ 提醒列表
  @param username 用户名
  @param password 密码
  @param name ID 昵称
  @param delegate 代理
  */
 - (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @end

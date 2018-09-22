@@ -38,6 +38,7 @@
 #pragma -mark count down method
 - (void)startCountDownWithSecond:(NSUInteger)totalSecond
 {
+    self.userInteractionEnabled = NO;
     _totalSecond = totalSecond;
     _second = totalSecond;
     
@@ -96,6 +97,7 @@
                 {
                     [self setTitle:@"重新获取" forState:UIControlStateNormal];
                     [self setTitle:@"重新获取" forState:UIControlStateDisabled];
+                    self.userInteractionEnabled = YES;
 
                 }
             }
