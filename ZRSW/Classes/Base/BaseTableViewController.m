@@ -153,6 +153,8 @@
         _tableView.emptyDataSetDelegate = self;
         _tableView.backgroundColor = [BaseTheme baseViewColor];
         _tableView.contentInset = UIEdgeInsetsZero;
+        _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.showsHorizontalScrollIndicator = NO;
     }
     return _tableView;
 }

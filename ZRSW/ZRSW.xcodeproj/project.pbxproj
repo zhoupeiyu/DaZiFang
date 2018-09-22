@@ -330,6 +330,7 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
+		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -778,7 +779,6 @@
 		E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_dialog_arrow_them@3x.png"; sourceTree = "<group>"; };
 		E5B59BAA214EC53000726DE9 /* 111.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 111.h; sourceTree = "<group>"; };
 		E5B59BAB214EC53800726DE9 /* 2222.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 2222.h; sourceTree = "<group>"; };
-		E5B59BAC214EC54000726DE9 /* 33.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 33.h; sourceTree = "<group>"; };
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
 		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
 		E5B59BAF214EC55E00726DE9 /* 6666.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 6666.h; sourceTree = "<group>"; };
@@ -792,6 +792,8 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
+		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
+		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -982,7 +984,8 @@
 		E5B59908214EBED500726DE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAC214EC54000726DE9 /* 33.h */,
+				E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */,
+				E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2119,6 +2122,7 @@
 				E5B59A15214EBEE800726DE9 /* ControllerUtilsManager.m in Sources */,
 				3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */,
 				E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */,
+				E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */,
 				3C10D64821548A930019112F /* ZRSWRemindListController.m in Sources */,
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
@@ -2297,7 +2301,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2320,7 +2324,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

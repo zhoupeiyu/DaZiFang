@@ -85,20 +85,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
-    if (indexPath.row == 1) {
-        ZRSWRemindListController *vc = [[ZRSWRemindListController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else  if (indexPath.row == 4) {
-        ZRSWResetPhoneController *vc = [[ZRSWResetPhoneController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
-                                                         alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
+                                                     alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 
@@ -171,7 +161,7 @@
             model.title = @"还款提醒";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_remind";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWRemindListController class]);
             [data addObject:model];
         }
         {
@@ -195,7 +185,7 @@
             model.title = @"更换手机号";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_phone";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWResetPhoneController class]);
             [data addObject:model];
         }
         {

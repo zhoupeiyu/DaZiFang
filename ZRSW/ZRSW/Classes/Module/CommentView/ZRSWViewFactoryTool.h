@@ -26,4 +26,6 @@
 
 + (UIView *)getLineView;
 
++ (UIImageView *)arrowImageView;
+
 @end

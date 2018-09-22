@@ -37,4 +37,9 @@
     line.backgroundColor = [UIColor colorFromRGB:0xEDEDED];
     return line;
 }
++ (UIImageView *)arrowImageView {
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"TableViewArrow_15x15_"];
+    return imageView;
+}
 @end
