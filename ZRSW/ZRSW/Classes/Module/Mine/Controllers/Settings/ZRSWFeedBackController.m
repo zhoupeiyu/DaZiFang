@@ -7,6 +7,7 @@
 //
 
 #import "ZRSWFeedBackController.h"
+#import "UserService.h"
 #define MaxNumberOfWord 200
 @interface ZRSWFeedBackController ()<UITextViewDelegate>
 @property (nonatomic, strong) UIView *feedBackView;
@@ -103,6 +104,22 @@
 
 - (void)commitButtonClck:(UIButton *)button{
     LLog(@"提交");
+    [self.view endEditing:YES];
+    [[[UserService alloc] init] userFeedBack:self.feedBackTextView.text delegate:self];
+}
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUserFeedBackRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"意见反馈成功!"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                     [self.navigationController popViewControllerAnimated:YES];
+                });
+            }
+        }
+    }
 }
 
 

@@ -57,6 +57,9 @@
 // 问题详情
 #define KGetCommentQuestionDetailRequest        @"KGetCommentQuestionDetailRequest"
 
+// 账单列表
+#define KGetBillListRequest                @"KGetBillListRequest"
+
 // 提醒列表
 #define KGetRemindListRequest                 @"KGetRemindListRequest"
 
