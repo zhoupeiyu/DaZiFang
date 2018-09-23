@@ -19,6 +19,8 @@
 #import "ZRSWLoansController.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
 #import "ZRSWSettingController.h"
+#import "ZRSWNeedLoansController.h"
+
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
@@ -303,10 +305,11 @@
 
 #pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
-     LLog(@"我要贷款");
-    ZRSWLoansController *loansVC = [[ZRSWLoansController alloc] init];
-    loansVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:loansVC animated:YES];
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:TabBarDidClickNotificationKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    ZRSWNeedLoansController *vc = [[ZRSWNeedLoansController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
