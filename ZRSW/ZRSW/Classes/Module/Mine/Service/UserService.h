@@ -153,16 +153,6 @@
 
 #pragma mark - 首页列表
 
-
-/**
- 获取城市列表
-
- @param delegate 代理
- */
-- (void)getCityListDelegate:(id)delegate;
-
-
-
 /**
  获取banner
 

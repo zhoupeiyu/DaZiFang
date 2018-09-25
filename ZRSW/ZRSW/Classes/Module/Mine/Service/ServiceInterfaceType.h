@@ -61,8 +61,9 @@
 #define KGetRemindListRequest                 @"KGetRemindListRequest"
 
 
+// 获得贷款大类
+#define KGetOrderMainTypeListRequest           @"KGetOrderMainTypeListRequest"
 
-
-
-
+//贷款产品列表接口
+#define KGetOrderLoanTypeListRequest            @"KGetOrderLoanTypeListRequest"
 

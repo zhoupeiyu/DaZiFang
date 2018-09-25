@@ -125,9 +125,7 @@
     [params setObject:content forKey:@"content"];
     [self POST:KUserFeedBackInterface reqType:KUserFeedBackRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
-- (void)getCityListDelegate:(id)delegate {
-     [self POST:KCityListInterface reqType:KCityListRequest delegate:delegate parameters:nil ObjcClass:[CityListModel class] NeedCache:NO];
-}
+
 - (void)getBannerWithCityID:(NSString *)city delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (city.length > 0) {

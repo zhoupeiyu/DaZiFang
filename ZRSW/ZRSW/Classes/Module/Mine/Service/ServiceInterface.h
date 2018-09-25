@@ -58,10 +58,13 @@
 #define KGetCommentQuestionDetailInterface              @"api/index/faqInfo"
 
 // 提醒列表
-#define KGetRemindListInterface                @"api/message/msgList"
+#define KGetRemindListInterface                         @"api/message/msgList"
 
+// 贷款大类列表接口
+#define KGetOrderMainTypeListInterface                  @"api/order/mainTypeList"
 
-
+//贷款产品列表接口
+#define KGetOrderLoanTypeListInterface                  @"api/order/loanTypeList"
 
 
 
