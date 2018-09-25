@@ -793,7 +793,6 @@
 		E5B59B10214EC15600726DE9 /* news_input@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_input@3x.png"; sourceTree = "<group>"; };
 		E5B59B11214EC15600726DE9 /* share_blog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_blog@3x.png"; sourceTree = "<group>"; };
 		E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_dialog_arrow_them@3x.png"; sourceTree = "<group>"; };
-		E5B59BAA214EC53000726DE9 /* 111.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 111.h; sourceTree = "<group>"; };
 		E5B59BAB214EC53800726DE9 /* 2222.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 2222.h; sourceTree = "<group>"; };
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
 		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
@@ -1508,8 +1507,6 @@
 				E5B59A6F214EC04100726DE9 /* EnumType.h */,
 				E5B59A70214EC04100726DE9 /* ServiceInterfaceType.h */,
 				E5B59A6C214EC04100726DE9 /* ServiceInterface.h */,
-				E5B59A71214EC04100726DE9 /* OrderService.h */,
-				E5B59A6D214EC04100726DE9 /* OrderService.m */,
 				E5B59A72214EC04100726DE9 /* UserService.h */,
 				E5B59A6E214EC04100726DE9 /* UserService.m */,
 			);
@@ -1527,7 +1524,8 @@
 		E5B59A76214EC09400726DE9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAA214EC53000726DE9 /* 111.h */,
+				E5B59A71214EC04100726DE9 /* OrderService.h */,
+				E5B59A6D214EC04100726DE9 /* OrderService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
