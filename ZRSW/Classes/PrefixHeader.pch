@@ -36,7 +36,7 @@
     #define BaiduMobStatKey         @"" // 百度统计key
     #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
-    #define JPushAppKey        @"JPushAppKey" // 极光推送key
+    #define JPushAppKey        @"af87ae555cb0e8e369e5086a" // 极光推送key
     #define isProductionJPush @"1"
 
 

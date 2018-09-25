@@ -77,6 +77,12 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     }
     return result;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Required - 注册 DeviceToken
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     // Required, iOS 7 Support
     [self remoteNotificationWith:userInfo];

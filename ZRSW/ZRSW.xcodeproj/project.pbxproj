@@ -43,6 +43,7 @@
 		3C7E4B1521525AC30058D3E2 /* ZRSWMineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */; };
 		3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */; };
 		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
+		3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
 		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
@@ -396,6 +397,8 @@
 		3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareModel.m; sourceTree = "<group>"; };
 		3CED799A2159348800A1BE4C /* ZRSWBrushFaceLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBrushFaceLoginController.h; sourceTree = "<group>"; };
 		3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBrushFaceLoginController.m; sourceTree = "<group>"; };
+		3CED799D2159E36C00A1BE4C /* ZRSWBannerDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBannerDetailsController.h; sourceTree = "<group>"; };
+		3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBannerDetailsController.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRealNameAuthController.h; sourceTree = "<group>"; };
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
@@ -1043,6 +1046,8 @@
 				3C7E4AE92150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m */,
 				3C7E4B032151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.h */,
 				3C7E4B042151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m */,
+				3CED799D2159E36C00A1BE4C /* ZRSWBannerDetailsController.h */,
+				3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2106,6 +2111,7 @@
 				E5B59A54214EBEE800726DE9 /* TZPhotoPickerController.m in Sources */,
 				E5B59A43214EBEE800726DE9 /* LNRefreshConst.m in Sources */,
 				3C10D6612154E2F50019112F /* ZRSWBillListCell.m in Sources */,
+				3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
 				3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */,
 				3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */,
