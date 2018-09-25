@@ -8,6 +8,8 @@
 
 #import "ZRSWNeedLoansController.h"
 #import "ZRSWLoansTopCell.h"
+#import "OrderService.h"
+#import "ZRSWOrderModel.h"
 
 #define KTitleKey           @"KTitleKey"
 #define KContentKey         @"KContentKey"
@@ -21,7 +23,15 @@
 @property (nonatomic, strong) NSMutableArray *topDataSource;
 @property (nonatomic, strong) NSMutableArray *headerTitleSource;
 @property (nonatomic, strong) UIButton *footBtn;
+@property (nonatomic, strong) NSIndexPath *currentIndexPath;
 
+@property (nonatomic, assign) BOOL selectedNewCity;
+@property (nonatomic, assign) BOOL selectedNewMainType;
+@property (nonatomic, assign) BOOL selectedNewLoanID;
+
+@property (nonatomic, strong) NSString *selectedCityID;
+@property (nonatomic, strong) NSString *selectedMainTypeID;
+@property (nonatomic, strong) NSString *selectedLoanID;
 
 @end
 
@@ -67,10 +77,38 @@
 - (void)refreshData {
     
 }
+
+- (void)showPickViewWithDataSource:(NSArray *)dataSource {
+    PickerView *pickView = [[PickerView alloc] initWithData:dataSource];
+    pickView.delegate = self;
+    pickView.pickerHeight = 190.f;
+    pickView.frame = self.view.bounds;
+    pickView.tag = self.currentIndexPath.row;
+    pickView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height + 35);
+    [self.view addSubview:pickView];
+}
+
+- (void)requestMainType {
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [[OrderService alloc] getOrderMainTypeList:self.selectedCityID delegate:self];
+    }
+}
+- (void)rquestLoanType {
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [[OrderService alloc] getOrderLoanTypeList:self.selectedMainTypeID delegate:self];
+    }
+}
 #pragma mark - delegate && datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    if (self.selectedLoanID.length > 0) {
+        return 5;
+    }
+    else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -145,18 +183,39 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.currentIndexPath = indexPath;
     if (indexPath.section == 0) {
-        NSDictionary *dic = self.topDataSource[indexPath.row];
-        NSArray *arr = dic[KListContentKey];
-        PickerView *pickView = [[PickerView alloc] initWithData:arr];
-        pickView.delegate = self;
-        pickView.pickerHeight = 190.f;
-        pickView.frame = self.view.bounds;
-        pickView.tag = indexPath.row;
-        pickView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height + 35);
-        [self.view addSubview:pickView];
+        if (indexPath.row == 0) {
+            NSDictionary *dic = self.topDataSource[indexPath.row];
+            NSArray *arr = dic[KListContentKey];
+            [self showPickViewWithDataSource:arr];
+        }
+        else {
+            if (indexPath.row == 1) {
+                LLog(@"---->%d",self.selectedNewCity);
+                if (self.selectedNewCity) {
+                    [self requestMainType];
+                }
+                else {
+                    NSDictionary *dic = self.topDataSource[indexPath.row];
+                    NSArray *arr = dic[KListContentKey];
+                    [self showPickViewWithDataSource:arr];
+                }
+            }
+            else if (indexPath.row == 2) {
+                if (self.selectedNewMainType) {
+                    [self rquestLoanType];
+                }
+                else {
+                    NSDictionary *dic = self.topDataSource[indexPath.row];
+                    NSArray *arr = dic[KListContentKey];
+                    [self showPickViewWithDataSource:arr];
+                }
+            }
+        }
     }
 }
+
 - (void)pickerView:(PickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSMutableDictionary *dic = self.topDataSource[pickerView.tag];
     NSArray *contentList = dic[KListContentKey];
@@ -166,6 +225,63 @@
     [dic setObject:title forKey:KContentKey];
     [dic setObject:ID forKey:KIDKey];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+    if (self.currentIndexPath.row == 0) {
+        self.selectedNewCity = ![ID isEqualToString:self.selectedCityID];
+        self.selectedCityID = ID;
+        LLog(@"********>%d",self.selectedNewCity);
+
+    }
+    else if (self.currentIndexPath.row == 1) {
+        self.selectedNewMainType = ![ID isEqualToString:self.selectedMainTypeID];
+        self.selectedMainTypeID = ID;
+        self.selectedNewCity = NO;
+    }
+    else if (self.currentIndexPath.row == 2) {
+        self.selectedNewLoanID = ![ID isEqualToString:self.selectedLoanID];
+        self.selectedLoanID = ID;
+        self.selectedNewCity = NO;
+        self.selectedNewMainType = NO;
+    }
+}
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KGetOrderMainTypeListRequest]) {
+            ZRSWOrderMainTypeListModel *listModel = (ZRSWOrderMainTypeListModel *)resObj;
+            if (listModel.error_code.integerValue == 0) {
+                if ([ZRSWOrderMainTypeListModel getMainTypeTitles].count == 0 || [ZRSWOrderMainTypeListModel getMainTypeIDs].count == 0) return;
+                NSMutableDictionary *dic = self.topDataSource[1];
+                dic[KListContentKey] = [ZRSWOrderMainTypeListModel getMainTypeTitles];
+                dic[KListIDsKey] = [ZRSWOrderMainTypeListModel getMainTypeIDs];
+                NSArray *arr = dic[KListContentKey];
+                [self showPickViewWithDataSource:arr];
+                
+            }
+            else {
+                [TipViewManager showToastMessage:listModel.error_msg];
+            }
+        }
+        
+        else if ([reqType isEqualToString:KGetOrderLoanTypeListRequest]) {
+            ZRSWOrderLoanTypeListModel *listModel = (ZRSWOrderLoanTypeListModel *)resObj;
+            if (listModel.error_code.integerValue == 0) {
+                if ([ZRSWOrderLoanTypeListModel getOrderLoanTypeTitles].count == 0 || [ZRSWOrderLoanTypeListModel getOrderLoanTypeIDs].count == 0) return;
+                NSMutableDictionary *dic = self.topDataSource[2];
+                dic[KListContentKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeTitles];
+                dic[KListIDsKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeIDs];
+                NSArray *arr = dic[KListContentKey];
+                [self showPickViewWithDataSource:arr];
+                
+            }
+            else {
+                [TipViewManager showToastMessage:listModel.error_msg];
+            }
+        }
+    }
+    else {
+        [TipViewManager showToastMessage:@"网络错误"];
+    }
 }
 #pragma mark - lazy
 
@@ -198,8 +314,8 @@
             [dic setObject:@"贷款大类" forKey:KTitleKey];
             [dic setObject:@"请选择" forKey:KContentKey];
             [dic setObject:@"0" forKey:KIDKey];
-            [dic setObject:[CityListModel getCityNames] forKey:KListContentKey];
-            [dic setObject:[CityListModel getCityIds] forKey:KListIDsKey];
+            [dic setObject:[NSMutableArray array] forKey:KListContentKey];
+            [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
             [_topDataSource addObject:dic];
         }
         {
@@ -207,12 +323,10 @@
             [dic setObject:@"贷款产品" forKey:KTitleKey];
             [dic setObject:@"请选择" forKey:KContentKey];
             [dic setObject:@"0" forKey:KIDKey];
-            [dic setObject:[CityListModel getCityNames] forKey:KListContentKey];
-            [dic setObject:[CityListModel getCityIds] forKey:KListIDsKey];
+            [dic setObject:[NSMutableArray array] forKey:KListContentKey];
+            [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
             [_topDataSource addObject:dic];
         }
-        
-        NSLog(@"%@",[CityListModel getCityNames]);
     }
     return _topDataSource;
 }

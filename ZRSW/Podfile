@@ -55,7 +55,7 @@ pod 'FDFullscreenPopGesture', '~> 1.1'
 
 # 空数据显示界面
 pod 'DZNEmptyDataSet', '~> 1.8.1'
-pod 'LYEmptyView'
+#pod 'LYEmptyView'
 
 # 弹框
 pod 'Toast', '~> 4.0.0'

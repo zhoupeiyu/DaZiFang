@@ -26,6 +26,9 @@
 
 @property (nonatomic, strong) NSArray *data;
 
++ (NSMutableArray *)getMainTypeTitles;
++ (NSMutableArray *)getMainTypeIDs;
+
 @end
 
 @interface ZRSWOrderLoanTypDetailModel : NSObject
@@ -41,4 +44,9 @@
 @end
 @interface ZRSWOrderLoanTypeListModel : BaseModel
 @property (nonatomic, strong) NSArray *data;
+
++ (NSMutableArray *)getOrderLoanTypeTitles;
++ (NSMutableArray *)getOrderLoanTypeIDs;
++ (NSMutableArray *)getOrderLoanTypeMainIds;
+
 @end

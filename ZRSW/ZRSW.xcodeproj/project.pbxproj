@@ -793,7 +793,6 @@
 		E5B59B10214EC15600726DE9 /* news_input@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_input@3x.png"; sourceTree = "<group>"; };
 		E5B59B11214EC15600726DE9 /* share_blog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_blog@3x.png"; sourceTree = "<group>"; };
 		E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_dialog_arrow_them@3x.png"; sourceTree = "<group>"; };
-		E5B59BAB214EC53800726DE9 /* 2222.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 2222.h; sourceTree = "<group>"; };
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
 		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
 		E5B59BAF214EC55E00726DE9 /* 6666.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 6666.h; sourceTree = "<group>"; };
@@ -991,7 +990,6 @@
 		E5B59906214EBED500726DE9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAB214EC53800726DE9 /* 2222.h */,
 				E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */,
 				E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */,
 			);
@@ -2343,7 +2341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2366,7 +2364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
