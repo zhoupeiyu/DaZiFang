@@ -42,6 +42,7 @@
 		3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */; };
 		3C7E4B1521525AC30058D3E2 /* ZRSWMineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */; };
 		3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */; };
+		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
 		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
@@ -393,6 +394,8 @@
 		3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineModel.m; sourceTree = "<group>"; };
 		3C7E4B1721528D070058D3E2 /* ZRSWShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWShareModel.h; sourceTree = "<group>"; };
 		3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareModel.m; sourceTree = "<group>"; };
+		3CED799A2159348800A1BE4C /* ZRSWBrushFaceLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBrushFaceLoginController.h; sourceTree = "<group>"; };
+		3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBrushFaceLoginController.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRealNameAuthController.h; sourceTree = "<group>"; };
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
@@ -1714,6 +1717,8 @@
 			children = (
 				E5B59BB5214FA2A600726DE9 /* ZRSWLoginController.h */,
 				E5B59BB6214FA2A600726DE9 /* ZRSWLoginController.m */,
+				3CED799A2159348800A1BE4C /* ZRSWBrushFaceLoginController.h */,
+				3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */,
 				E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */,
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
 				3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */,
@@ -2121,6 +2126,7 @@
 				E5B59A1F214EBEE800726DE9 /* NSObject+SXRuntime.m in Sources */,
 				3C10D64E2154939B0019112F /* ZRSWRemindListModel.m in Sources */,
 				E591D6CA2153EB8500F6802A /* ZRSWShareManager.m in Sources */,
+				3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */,
 				E5B59914214EBED500726DE9 /* AppDelegate.m in Sources */,
 				E5B59A39214EBEE800726DE9 /* MMMaterialDesignSpinner.m in Sources */,
 				E5B59A19214EBEE800726DE9 /* PhotoManager.m in Sources */,
@@ -2327,7 +2333,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2350,7 +2356,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

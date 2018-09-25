@@ -27,7 +27,7 @@
 
     #define UMKey                   @"5ba31173b465f5623b000047" // 友盟key
     #define TencentAppID @"1104177532"
-    #define kWeiBoAppKey         @"3751276339"
+    #define kWeiBoAppKey         @"3972746284"
     #define kWeiBoRedirectURL    @"http://sns.whalecloud.com/sina2/callback"
     #define kWeChatAppSecret @"f549325608fbc5028f6757ace09500e7"
     #define kWeChatAppID @"wx8490e13c4adcaad2"

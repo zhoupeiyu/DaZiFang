@@ -101,6 +101,7 @@
 #import <TTGTagCollectionView.h>
 #import <TYAlertController.h>
 #import <UIImage+ASMPDF.h>
+#import <UMCommon/UMCommon.h>
 #import <UMAnalytics/MobClick.h>
 #import <UMCSecurityPlugins/SecurityEnvSDK/SecurityEnvSDK.h>
 #import <UMShare/UMShare.h>

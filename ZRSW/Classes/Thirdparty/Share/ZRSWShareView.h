@@ -13,7 +13,6 @@
 @property (nonatomic, assign) BOOL isShareCallBack;
 
 + (ZRSWShareView *)sharedInstance;
-+ (void)shareApp:(id<ShareHandlerDelegate>)delegate;
 + (void)shareImage:(UIImage *)shareImage delegate:(id<ShareHandlerDelegate>)delegate;
 + (void)shareImageURL:(NSString *)shareImageUrl delegate:(id<ShareHandlerDelegate>)delegate;
 + (void)shareContent:(ZRSWShareModel *)content shareSourceType:(ShareSourceType)type delegate:(id<ShareHandlerDelegate>)delegate;

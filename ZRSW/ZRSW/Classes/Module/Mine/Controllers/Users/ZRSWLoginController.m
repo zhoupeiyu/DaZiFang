@@ -12,6 +12,7 @@
 #import "ZRSWThirdLoginView.h"
 #import "ZRSWRetrievePasswordController.h"
 #import "UserService.h"
+#import "ZRSWBrushFaceLoginController.h"
 
 @interface ZRSWLoginController ()<LoginCustomViewDelegate>
 
@@ -144,6 +145,9 @@
 - (void)faceLogin {
     [self endEditing];
     NSLog(@"刷脸登录");
+    ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
+    [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
+
 }
 - (void)login {
     [self endEditing];
