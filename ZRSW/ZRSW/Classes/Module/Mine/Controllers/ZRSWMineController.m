@@ -162,7 +162,7 @@
             model.title = @"还款提醒";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_remind";
-            model.viewControllerName = NSStringFromClass([ZRSWRemindListController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWBillListController class]);
             [data addObject:model];
         }
         {

@@ -169,6 +169,21 @@
 
 }
 
+
+- (void)getBillList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (username != nil) {
+        [params setObject:username forKey:@"username"];
+    }
+    if (password != nil) {
+        [params setObject:password forKey:@"password"];
+    }
+    if (name != nil) {
+        [params setObject:name forKey:@"name"];
+    }
+    [self POST:KGetBillListInterface reqType:KGetBillListRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
+}
+
 - (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (username != nil) {

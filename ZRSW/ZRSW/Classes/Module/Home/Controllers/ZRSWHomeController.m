@@ -20,11 +20,13 @@
 #import "ZRSWNewAndQuestionDetailsController.h"
 #import "ZRSWSettingController.h"
 #import "ZRSWNeedLoansController.h"
+#import "ZRSWBannerDetailsController.h"
 
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
+@property (nonatomic, strong) NSMutableArray *bannerArray;
 @property (nonatomic, strong) NSMutableArray *hotNewsListSource;
 @property (nonatomic, strong) NSMutableArray *systemNewsListSource;
 @property (nonatomic, strong) NSMutableArray *questionListSource;
@@ -47,6 +49,7 @@
     [self setUpTableView];
     self.cityArray = [NSMutableArray arrayWithCapacity:0];
     self.pictureArray = [NSMutableArray arrayWithCapacity:0];
+    self.bannerArray = [NSMutableArray arrayWithCapacity:0];
     self.hotNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.systemNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
@@ -225,19 +228,22 @@
                 LLog(@"请求失败:%@",model.error_msg);
             }
         }else if ([reqType isEqualToString:KBannerRequest]) {
-            ZRSWHomeBannerModel *model = (ZRSWHomeBannerModel *)resObj;
-            if (model.error_code.integerValue == 0) {
+            BannerListModel *bannerListModel = (BannerListModel *)resObj;
+            if (bannerListModel.error_code.integerValue == 0) {
                 if (self.pictureArray.count > 0) {
                     [self.pictureArray removeAllObjects];
+                     [self.bannerArray removeAllObjects];
                 }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    HomeBannerModelDetails *detailModel = model.data[i];
-                    LLog(@"%@",detailModel.imgUrl);
-                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",detailModel.imgUrl]];
+                for (NSUInteger i = 0; i < bannerListModel.data.count; ++i){
+                    BannerModel *bannerModel = bannerListModel.data[i];
+                    LLog(@"%@",bannerModel.imgUrl);
+                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",bannerModel.imgUrl]];
+                     [self.bannerArray addObject:bannerModel];
+
                 }
                 self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
             }else{
-                LLog(@"请求失败:%@",model.error_msg);
+                LLog(@"请求失败:%@",bannerListModel.error_msg);
             }
         }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
             NewListModel *model = (NewListModel *)resObj;
@@ -288,7 +294,6 @@
     }else{
         LLog(@"请求失败");
     }
-
 }
 
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
@@ -298,8 +303,14 @@
 
 #pragma mark - delegate && datasource-Banner跳转
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-
-
+    LLog(@"Banner跳转%ld",index);
+    ZRSWBannerDetailsController *bannerDetailsVC = [[ZRSWBannerDetailsController alloc] init];
+    BannerModel *bannerModel = self.bannerArray[index];
+    bannerDetailsVC.bannerModel = bannerModel;
+    bannerDetailsVC.hidesBottomBarWhenPushed = YES;
+    if (![bannerModel.href isEqualToString:@""] && bannerModel.href != nil ) {
+        [self.navigationController pushViewController:bannerDetailsVC animated:YES];
+    }
 }
 
 

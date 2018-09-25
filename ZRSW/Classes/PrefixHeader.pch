@@ -27,7 +27,7 @@
 
     #define UMKey                   @"5ba31173b465f5623b000047" // 友盟key
     #define TencentAppID @"1104177532"
-    #define kWeiBoAppKey         @"3751276339"
+    #define kWeiBoAppKey         @"3972746284"
     #define kWeiBoRedirectURL    @"http://sns.whalecloud.com/sina2/callback"
     #define kWeChatAppSecret @"f549325608fbc5028f6757ace09500e7"
     #define kWeChatAppID @"wx8490e13c4adcaad2"
@@ -36,7 +36,7 @@
     #define BaiduMobStatKey         @"" // 百度统计key
     #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
 
-    #define JPushAppKey        @"JPushAppKey" // 极光推送key
+    #define JPushAppKey        @"af87ae555cb0e8e369e5086a" // 极光推送key
     #define isProductionJPush @"1"
 
 

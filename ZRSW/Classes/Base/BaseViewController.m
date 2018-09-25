@@ -196,9 +196,9 @@
     leftButton.frame = CGRectMake(0, 0, 44, 44);
     leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     rightButton.frame = CGRectMake(leftButton.right , 0, 44.f, 44.f);
-    rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-    leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, 2, 0, -2);
-    CGFloat width = 44.0+44.0+10;
+    rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    leftButton.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
+    CGFloat width = 44.0+44.0+15;
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - width,0, width, 44.f)];
     [customView addSubview:rightButton];
     [customView addSubview:leftButton];

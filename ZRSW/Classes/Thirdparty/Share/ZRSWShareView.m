@@ -70,23 +70,27 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
         case 0:
         {
             type = UMSocialPlatformType_WechatSession;
+            LLog(@"微信好友");
         }
             break;
         case 1:
         {
             type = UMSocialPlatformType_QQ;
+             LLog(@"QQ好友");
 
         }
             break;
         case 2:
         {
             type = UMSocialPlatformType_WechatTimeLine;
+             LLog(@"朋友圈");
 
         }
             break;
         case 3:
         {
              type = UMSocialPlatformType_Sina;
+             LLog(@"新浪微博");
 
         }
             break;
@@ -136,6 +140,7 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
 }
 
 - (void)shareActionWithUMSocialPlatformType:(UMSocialPlatformType)type content:(ZRSWShareModel *)content shareSourceType:(ShareSourceType)sourcetype delegate:(id<ShareHandlerDelegate>)delegate{
+
      [ZRSWShareManager shareToPlatformType:type Content:content shareSourceType:sourcetype delegate:delegate];
 }
 

@@ -70,7 +70,7 @@
 #pragma mark - NetWork
 - (void)requsetRemindList{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getRemindList:@"" password:@"" name:@"" delegate:self];
+    [[[UserService alloc] init] getRemindList:@"黄亚楠" password:@"123456" name:@"18511691940" delegate:self];
 }
 
 - (void)refreshData{

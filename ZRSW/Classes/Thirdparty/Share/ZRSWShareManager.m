@@ -8,15 +8,14 @@
 
 #import "ZRSWShareManager.h"
 #import "ZRSWShareView.h"
-
 @implementation ZRSWShareManager
 
 + (void)registerPlaformInfo {
 
     [[UMSocialManager defaultManager] openLog:YES];
     //注册友盟key
-
 //    [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
+    [UMConfigure initWithAppkey:UMKey channel:nil];
     //QQ
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:TencentAppID appSecret:nil redirectURL:nil];
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:TencentAppID appSecret:nil redirectURL:nil];
@@ -44,13 +43,7 @@
 
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:shareModel.title descr:shareModel.content thumImage:shareModel.thumbImage];
         //设置网页地址
-        NSString *para = @"";
-        if (![shareModel.destUrlStr containsString:@"?"]) {
-            para = [NSString stringWithFormat:@"?%@",[self getClientParameters]];
-        }else {
-            //            para = [NSString stringWithFormat:@"&%@",para];
-        }
-        shareObject.webpageUrl = [shareModel.destUrlStr stringByAppendingString:para];
+        shareObject.webpageUrl = shareModel.destUrlStr;
         LLog(@"分享URL:%@",shareObject.webpageUrl);
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
@@ -62,16 +55,11 @@
             image = shareModel.thumbImage;
             shareImage = shareModel.thumbImage;
         }
-        else {
-            image = [UIImage imageNamed:@"share_lexue_logo"];
-            shareImage = [UIImage imageNamed:@"share_lexue_logo"];
-        }
         UMShareImageObject *shareImageObj = [UMShareImageObject shareObjectWithTitle:@"" descr:@"" thumImage:image];
         shareImageObj.shareImage = shareImage;
         messageObject.shareObject = shareImageObj;
     }
     else {
-
         //创建图片内容对象
         UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:shareModel.title descr:shareModel.content thumImage:shareModel.thumbImage];
         [shareObject setShareImage:shareModel.thumbImage];
@@ -88,9 +76,8 @@
         }
         [weakSelf handleSharedResult:data error:error delegate:delegate];
     }];
-
-
 }
+
 + (void)handleSharedResult:(id)data error:(NSError *)error delegate:(id<ShareHandlerDelegate>)delegate {
     if (error) {
         if (delegate && [delegate respondsToSelector:@selector(shareHandlerFailed:)]) {
@@ -122,15 +109,5 @@
 + (BOOL)isImstallWeiBo {
 
     return [[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_Sina];
-}
-+ (NSString *)getClientParameters {
-    NSString *client = @"";
-#ifdef Zhongkao
-    client = @"JUNIOR_TEACH";
-#else
-    client = @"SENIOR_TEACH";
-#endif
-    NSString *para = [NSString stringWithFormat:@"client=%@",client];
-    return para;
 }
 @end

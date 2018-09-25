@@ -43,8 +43,28 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[AppDelegteManager sharedInstance] applicationDidBecomeActive:application];
-
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [[AppDelegteManager sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+     [[AppDelegteManager sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+     [[AppDelegteManager sharedInstance] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+      [[AppDelegteManager sharedInstance] application:application didReceiveRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+      [[AppDelegteManager sharedInstance] application:application didReceiveLocalNotification:notification];
+}
+
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
