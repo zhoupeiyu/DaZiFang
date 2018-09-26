@@ -336,6 +336,7 @@
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
+		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -792,8 +793,6 @@
 		E5B59B10214EC15600726DE9 /* news_input@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_input@3x.png"; sourceTree = "<group>"; };
 		E5B59B11214EC15600726DE9 /* share_blog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_blog@3x.png"; sourceTree = "<group>"; };
 		E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_dialog_arrow_them@3x.png"; sourceTree = "<group>"; };
-		E5B59BAA214EC53000726DE9 /* 111.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 111.h; sourceTree = "<group>"; };
-		E5B59BAB214EC53800726DE9 /* 2222.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 2222.h; sourceTree = "<group>"; };
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
 		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
 		E5B59BAF214EC55E00726DE9 /* 6666.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 6666.h; sourceTree = "<group>"; };
@@ -809,6 +808,8 @@
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
+		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
+		E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderModel.m; sourceTree = "<group>"; };
 		FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -989,7 +990,8 @@
 		E5B59906214EBED500726DE9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAB214EC53800726DE9 /* 2222.h */,
+				E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */,
+				E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1503,8 +1505,6 @@
 				E5B59A6F214EC04100726DE9 /* EnumType.h */,
 				E5B59A70214EC04100726DE9 /* ServiceInterfaceType.h */,
 				E5B59A6C214EC04100726DE9 /* ServiceInterface.h */,
-				E5B59A71214EC04100726DE9 /* OrderService.h */,
-				E5B59A6D214EC04100726DE9 /* OrderService.m */,
 				E5B59A72214EC04100726DE9 /* UserService.h */,
 				E5B59A6E214EC04100726DE9 /* UserService.m */,
 			);
@@ -1522,7 +1522,8 @@
 		E5B59A76214EC09400726DE9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAA214EC53000726DE9 /* 111.h */,
+				E5B59A71214EC04100726DE9 /* OrderService.h */,
+				E5B59A6D214EC04100726DE9 /* OrderService.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -2180,6 +2181,7 @@
 				E5B59A59214EBEE800726DE9 /* NSObject+YYModel.m in Sources */,
 				E5B59A40214EBEE800726DE9 /* LNRefreshHeader.m in Sources */,
 				E5B59A4D214EBEE800726DE9 /* TZAssetModel.m in Sources */,
+				E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */,
 				E5B59A13214EBEE800726DE9 /* TipViewManager.m in Sources */,
 				E5B59A33214EBEE800726DE9 /* NSNotificationCenter+Extension.m in Sources */,
 				E5B59A2D214EBEE800726DE9 /* NSDate+Extension.m in Sources */,
@@ -2339,7 +2341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2362,7 +2364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

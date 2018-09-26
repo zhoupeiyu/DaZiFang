@@ -21,6 +21,7 @@
 #import "ZRSWSettingController.h"
 #import "ZRSWNeedLoansController.h"
 #import "ZRSWBannerDetailsController.h"
+#import "OrderService.h"
 
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
@@ -176,7 +177,7 @@
 
 - (void)requsetCityList{
      dispatch_group_enter(self.group);
-    [[[UserService alloc] init] getCityListDelegate:self];
+    [[[OrderService alloc] init] getCityListDelegate:self];
 }
 
 - (void)requsetBannerList{

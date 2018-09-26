@@ -114,28 +114,28 @@ SYNTHESIZE_SINGLETON_ARC(TipViewManager);
     return [[self sharedInstance] showToastMessage:errorMsg];
 }
 
-+ (LYEmptyView *)netWorkErrorView:(void (^)(void))action; {
-    LYEmptyView *emptyView = [LYEmptyView emptyActionViewWithImageStr:@"currency_no_network"
-                                                             titleStr:@"无网络"
-                                                            detailStr:@"当前网络连接失败，\n快去重新连接一下试试吧！"
-                                                          btnTitleStr:@"重试"
-                                                        btnClickBlock:action];
-    emptyView.subViewMargin = 20.f;
-    emptyView.contentViewOffset = - 50;
-    
-    emptyView.titleLabFont = [UIFont fontWithName:@"MicrosoftYaHei" size:21];
-    emptyView.titleLabTextColor = [UIColor colorFromRGB:0x474455];
-    emptyView.detailLabFont = [UIFont fontWithName:@"MicrosoftYaHei" size:16];
-    emptyView.detailLabTextColor = [UIColor colorWithHex:0x666666 alpha:0.7];
-    
-    emptyView.actionBtnFont = [UIFont systemFontOfSize:21];
-    emptyView.actionBtnTitleColor = [UIColor whiteColor];
-    emptyView.actionBtnHeight = 40.f;
-    emptyView.actionBtnHorizontalMargin = 50;
-    emptyView.actionBtnCornerRadius = 4.f;
-    emptyView.actionBtnBorderColor = [UIColor colorWithHex:0x4771f2 alpha:1];
-    emptyView.actionBtnBorderWidth = KSeparatorLineHeight;
-    emptyView.actionBtnBackGroundColor = [UIColor colorWithHex:0x4771f2 alpha:1];
-    return emptyView;
-}
+//+ (LYEmptyView *)netWorkErrorView:(void (^)(void))action; {
+//    LYEmptyView *emptyView = [LYEmptyView emptyActionViewWithImageStr:@"currency_no_network"
+//                                                             titleStr:@"无网络"
+//                                                            detailStr:@"当前网络连接失败，\n快去重新连接一下试试吧！"
+//                                                          btnTitleStr:@"重试"
+//                                                        btnClickBlock:action];
+//    emptyView.subViewMargin = 20.f;
+//    emptyView.contentViewOffset = - 50;
+//    
+//    emptyView.titleLabFont = [UIFont fontWithName:@"MicrosoftYaHei" size:21];
+//    emptyView.titleLabTextColor = [UIColor colorFromRGB:0x474455];
+//    emptyView.detailLabFont = [UIFont fontWithName:@"MicrosoftYaHei" size:16];
+//    emptyView.detailLabTextColor = [UIColor colorWithHex:0x666666 alpha:0.7];
+//    
+//    emptyView.actionBtnFont = [UIFont systemFontOfSize:21];
+//    emptyView.actionBtnTitleColor = [UIColor whiteColor];
+//    emptyView.actionBtnHeight = 40.f;
+//    emptyView.actionBtnHorizontalMargin = 50;
+//    emptyView.actionBtnCornerRadius = 4.f;
+//    emptyView.actionBtnBorderColor = [UIColor colorWithHex:0x4771f2 alpha:1];
+//    emptyView.actionBtnBorderWidth = KSeparatorLineHeight;
+//    emptyView.actionBtnBackGroundColor = [UIColor colorWithHex:0x4771f2 alpha:1];
+//    return emptyView;
+//}
 @end

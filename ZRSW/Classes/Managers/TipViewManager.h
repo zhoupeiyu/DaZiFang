@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <PSTAlertController.h>
 #import <TYAlertController.h>
-#import <LYEmptyView.h>
+//#import <LYEmptyView.h>
 
 #define NetworkError @"网络错误，请检查网络!"
 
@@ -32,6 +32,6 @@
 + (void)showToastMessage:(NSString *)errorMsg;
 
 // 无网界面
-+ (LYEmptyView *)netWorkErrorView:(void (^)(void))action;
+//+ (LYEmptyView *)netWorkErrorView:(void (^)(void))action;
 
 @end
