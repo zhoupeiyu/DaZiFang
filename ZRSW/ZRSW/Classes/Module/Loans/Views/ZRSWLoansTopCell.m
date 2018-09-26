@@ -201,7 +201,7 @@
 @end
 
 @interface ZRSWLoansProductAttributeCell ()
-@property (nonatomic, strong) NSMutableArray *lblArray;
+@property (nonatomic, strong) NSMutableArray <UILabel *> *lblArray;
 
 @end
 @implementation ZRSWLoansProductAttributeCell
@@ -213,47 +213,60 @@
     }
     return cell;
 }
-+ (CGFloat)cellHeigh {
-    return 65;
-}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupConfig];
-        [self setupUI];
     }
     return self;
 }
 - (void)setupConfig {
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    _lblArray = [[NSMutableArray alloc] init];
 }
 
-- (void)setupUI {
-    
+- (void)setupLayout {
+    NSInteger count = [self.infoDetailModel warpCount];
+    CGFloat width = (SCREEN_WIDTH - count * [self.infoDetailModel attrsLeft]) * 0.5;
+    CGFloat height = [self.infoDetailModel attrsItemHeight];
+    CGFloat margin = [self.infoDetailModel attrsItemMargin];
+    CGFloat top = [self.infoDetailModel attrsTop];
+    CGFloat left = [self.infoDetailModel attrsLeft];
+    [self.lblArray mas_distributeSudokuViewsWithFixedItemWidth:width fixedItemHeight:height fixedLineSpacing:margin fixedInteritemSpacing:-50 warpCount:count topSpacing:top bottomSpacing:top leadSpacing:left tailSpacing:0];
 }
 - (void)setInfoDetailModel:(ZRSWOrderLoanInfoDetailModel *)infoDetailModel {
+    if (!infoDetailModel) return;
     _infoDetailModel = infoDetailModel;
-    for (ZRSWOrderLoanInfoAttrs *model in infoDetailModel.loanTypeAttrs) {
-        
+    if (self.lblArray.count > 0) {
+        [self.lblArray makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.lblArray removeAllObjects];
     }
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《中融盛旺用户协议》"];
-    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x999999] range:NSMakeRange(0, 7)];
-    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x4771f2] range:NSMakeRange(7, 10)];
+    for (ZRSWOrderLoanInfoAttrs *model in infoDetailModel.loanTypeAttrs) {
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：%@",model.attrName,model.attrVal]];
+        [att addAttribute:NSForegroundColorAttributeName value:[self titleColor] range:NSMakeRange(0, model.attrName.length + 1)];
+        [att addAttribute:NSForegroundColorAttributeName value:[self dataColor] range:NSMakeRange(model.attrName.length + 1, model.attrVal.length)];
+        UILabel *lbl = [self getlbl];
+        lbl.attributedText = att;
+        [self.contentView addSubview:lbl];
+        [self.lblArray addObject:lbl];
+    }
+    [self setupLayout];
 }
 
 #pragma mark - lazy
 
 - (UIColor *)titleColor {
-    return [UIColor colorFromRGB:0x999999];
+    return [LoansCellStates getBlackColor];
 }
 - (UIColor *)dataColor {
-    return [UIColor colorFromRGB:0x474455];
+    return [LoansCellStates getContentColor];
 }
 
 - (UILabel *)getlbl {
     UILabel *lbl = [[UILabel alloc] init];
     lbl.textAlignment = NSTextAlignmentLeft;
-    lbl.font = [UIFont systemFontOfSize:14];
+    lbl.font = [LoansCellStates getContentFont];
     return lbl;
 }
 

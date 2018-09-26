@@ -52,6 +52,7 @@
 #import "UIView+Extension.h"
 #import "UIViewController+Extension.h"
 #import "NSString+Extension.h"
+#import "NSArray+Sudoku.h"
 
 #pragma mark - 工具类
 #import "SynthesizeSingleton.h"

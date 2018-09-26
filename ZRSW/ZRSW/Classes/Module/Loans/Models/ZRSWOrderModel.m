@@ -103,8 +103,29 @@
              @"loanCondition" : [ZRSWOrderLoanInfoCondition class]
              };
 }
-
-
+- (NSInteger)warpCount {
+    return 2;
+}
+- (CGFloat)attrsTop {
+    return 15;
+}
+- (CGFloat)attrsLeft {
+    return 14;
+}
+- (CGFloat)attrsItemMargin {
+    return 10;
+}
+- (CGFloat)attrsItemHeight {
+    return 14;
+}
+- (CGFloat)attrsCellHeight {
+    NSInteger count = self.loanTypeAttrs.count;
+    NSInteger height = [self attrsItemHeight];
+    NSInteger space = [self attrsItemMargin];
+    CGFloat max = (((count - 1) / [self warpCount]) + 1) * height +  ((count - 1) / [self warpCount]) * space;
+    max = max + [self attrsTop] * 2;
+    return max;
+}
 @end
 @implementation ZRSWOrderLoanInfoCondition
 

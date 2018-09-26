@@ -142,6 +142,11 @@
         cell.isNeedLine = indexPath.row != self.topDataSource.count - 1;
         return cell;
     }
+    else if (indexPath.section == 1) {
+        ZRSWLoansProductAttributeCell *cell = [ZRSWLoansProductAttributeCell getCellWithTableView:tableView];
+        cell.infoDetailModel = self.infoModel.data;
+        return cell;
+    }
     else if (indexPath.section == 4) {
         ZRSWLoansFlow *cell = [ZRSWLoansFlow getCellWithTableView:tableView];
         return cell;
@@ -158,6 +163,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return [ZRSWLoansTopCell cellHeigh];
+    }
+    else if (indexPath.section == 1) {
+        return [self.infoModel.data attrsCellHeight];
     }
     else if (indexPath.section == 4) {
         return [ZRSWLoansFlow cellHeigh];

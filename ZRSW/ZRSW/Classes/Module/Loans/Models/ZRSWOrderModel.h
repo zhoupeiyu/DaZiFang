@@ -92,6 +92,14 @@
 //贷款需要的材料列表
 @property (nonatomic, strong) NSArray <ZRSWOrderLoanInfoCondition *>*loanCondition;
 
+- (NSInteger)warpCount;
+- (CGFloat)attrsTop;
+- (CGFloat)attrsLeft;
+- (CGFloat)attrsItemMargin;
+- (CGFloat)attrsItemHeight;
+- (CGFloat)attrsCellHeight;
+
+
 @end
 @interface ZRSWOrderLoanInfoModel :BaseModel
 

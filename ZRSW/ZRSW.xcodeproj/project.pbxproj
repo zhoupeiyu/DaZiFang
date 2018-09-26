@@ -44,6 +44,7 @@
 		3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */; };
 		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
 		3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */; };
+		E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */ = {isa = PBXBuildFile; fileRef = E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
 		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
@@ -401,6 +402,8 @@
 		3CED799D2159E36C00A1BE4C /* ZRSWBannerDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBannerDetailsController.h; sourceTree = "<group>"; };
 		3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBannerDetailsController.m; sourceTree = "<group>"; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
+		E5131CA0215B8DC000CF362F /* NSArray+Sudoku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Sudoku.h"; sourceTree = "<group>"; };
+		E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Sudoku.m"; sourceTree = "<group>"; };
 		E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRealNameAuthController.h; sourceTree = "<group>"; };
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
 		E591D66E21534C6000F6802A /* ZRSWIPCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWIPCardView.h; sourceTree = "<group>"; };
@@ -1272,6 +1275,8 @@
 		E5B59956214EBEE800726DE9 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E5131CA0215B8DC000CF362F /* NSArray+Sudoku.h */,
+				E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */,
 				E5B59957214EBEE800726DE9 /* LFUIView+MBProgressHUD.m */,
 				E5B59958214EBEE800726DE9 /* UIColor+Utility.h */,
 				E5B59959214EBEE800726DE9 /* UIScrollView+Extension.h */,
@@ -2147,6 +2152,7 @@
 				E5B59A3E214EBEE800726DE9 /* SAMKeychain.m in Sources */,
 				3C7E4B0C21522E3C0058D3E2 /* ZRSWFeedBackController.m in Sources */,
 				E5B59A64214EBF9600726DE9 /* ZRSWLoansController.m in Sources */,
+				E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */,
 				E5B59A25214EBEE800726DE9 /* UILabel+Extension.m in Sources */,
 				E5B59A46214EBEE800726DE9 /* LNFooterAnimator.m in Sources */,
 				E5B59A4B214EBEE800726DE9 /* TZAssetCell.m in Sources */,

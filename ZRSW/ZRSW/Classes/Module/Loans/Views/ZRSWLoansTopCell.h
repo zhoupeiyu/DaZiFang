@@ -38,7 +38,6 @@
 
 @interface ZRSWLoansProductAttributeCell : UITableViewCell
 + (ZRSWLoansProductAttributeCell *)getCellWithTableView:(UITableView *)tableView;
-+ (CGFloat)cellHeigh;
 @property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *infoDetailModel;
 
 @end
