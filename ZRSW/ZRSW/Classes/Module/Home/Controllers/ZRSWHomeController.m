@@ -363,11 +363,13 @@
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypePopularInformation;
         detailsVC.hidesBottomBarWhenPushed = YES;
+        detailsVC.detailModel = self.systemNewsListSource[indexPath.row];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }else if (indexPath.section == 1) {
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypeCommentQuestion;
         detailsVC.hidesBottomBarWhenPushed = YES;
+        detailsVC.questionModel = self.questionListSource[indexPath.row];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
 }

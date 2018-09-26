@@ -64,6 +64,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
     detailsVC.type = DetailsTypeCommentQuestion;
+    detailsVC.questionModel = self.dataListSource[indexPath.row];
     detailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
 }

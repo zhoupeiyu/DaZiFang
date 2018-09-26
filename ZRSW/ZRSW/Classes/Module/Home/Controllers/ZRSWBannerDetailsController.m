@@ -22,7 +22,12 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.title = self.bannerModel.title;
+    NSString *title = self.bannerModel.title;
+    if (title == nil || [title isEqualToString:@""]) {
+        self.title = @"中融盛旺";
+    }else{
+        self.title = title;
+    }
     NSURL *url = [NSURL URLWithString:self.bannerModel.href];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
     [self.webView sizeToFit];

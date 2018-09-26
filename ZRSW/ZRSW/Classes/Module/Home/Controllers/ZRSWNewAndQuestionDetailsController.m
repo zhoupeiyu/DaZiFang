@@ -9,8 +9,11 @@
 #import "ZRSWNewAndQuestionDetailsController.h"
 #import "ZRSWActionSheetView.h"
 #import "ZRSWShareView.h"
+#import "UserService.h"
 @interface ZRSWNewAndQuestionDetailsController ()<UIWebViewDelegate,PlatformButtonClickDelegate,ShareHandlerDelegate>
 @property(nonatomic,strong) UIWebView *webView;
+@property (nonatomic, strong) NewDetailContensModel *detailContensModel;
+@property (nonatomic, strong) CommentQuestionDetailContentModel *questionDetailContentModel;
 @end
 
 @implementation ZRSWNewAndQuestionDetailsController
@@ -41,6 +44,53 @@
         self.navigationItem.title = @"问题详情";
     }
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+         [self requsetNewDetail];
+    }else if (self.type == DetailsTypeCommentQuestion){
+        [self requsetCommentQuestionDetail];
+    }
+}
+
+
+- (void)requsetNewDetail{
+    [[[UserService alloc] init] getNewDetail:self.detailModel.id delegate:self];
+}
+
+
+- (void)requsetCommentQuestionDetail{
+    [[[UserService alloc] init] getCommentQuestionDetail:self.questionModel.id delegate:self];
+}
+
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KGetNewsDetailRequest]) {
+            NewDetailContenModel *model = (NewDetailContenModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                NewDetailContensModel *detailContensModel = model.data;
+                self.detailContensModel = detailContensModel;
+            }else{
+                LLog(@"请求失败:%@",model.error_msg);
+            }
+        }else if ([reqType isEqualToString:KGetCommentQuestionDetailRequest]) {
+            CommentQuestionDetail *commentQuestionDetail = (CommentQuestionDetail *)resObj;
+            if (commentQuestionDetail.error_code.integerValue == 0) {
+                CommentQuestionDetailContentModel *questionDetailContentModel = commentQuestionDetail.data;
+                self.questionDetailContentModel = questionDetailContentModel;
+            }else{
+                LLog(@"请求失败:%@",commentQuestionDetail.error_msg);
+            }
+        }
+    }else{
+        LLog(@"请求失败");
+    }
+}
+
+
+
 
 
 - (void)shareButtonClck:(UIButton *)button{

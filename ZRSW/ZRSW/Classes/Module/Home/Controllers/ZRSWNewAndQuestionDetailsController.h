@@ -8,7 +8,9 @@
 
 #import "BaseViewController.h"
 #import "EnumType.h"
+#import "UserModel.h"
 @interface ZRSWNewAndQuestionDetailsController : BaseViewController
 @property (nonatomic, assign) DetailsType type;
-
+@property (nonatomic, strong) NewDetailModel *detailModel;
+@property (nonatomic, strong) CommentQuestionModel *questionModel;
 @end
