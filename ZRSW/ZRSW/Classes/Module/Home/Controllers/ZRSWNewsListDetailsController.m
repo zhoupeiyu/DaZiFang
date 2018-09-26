@@ -75,6 +75,7 @@
     }else if (self.type == NewListTypePopularInformation){
         detailsVC.type = DetailsTypeSystemNotification;
     }
+    detailsVC.detailModel = self.dataListSource[indexPath.row];
     detailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
 }

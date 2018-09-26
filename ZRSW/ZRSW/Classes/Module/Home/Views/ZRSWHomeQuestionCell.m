@@ -114,7 +114,14 @@
     _questionModel = questionModel;
     self.titleLabel.text = questionModel.title;
     self.contentLabel.text = [questionModel.faqBody getZZwithString:questionModel.faqBody];
-    self.dateLabel.text = questionModel.updateTime;
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [questionModel.updateTime substringToIndex:10];
+//    NSString *dateStr = [questionModel.updateTime componentsSeparatedByString:@" "].firstObject;
+    NSDate* date = [formatter dateFromString:dateStr];
+    [formatter setDateFormat:@"yyyy.MM.dd"];
+    NSString *dateString = [formatter stringFromDate:date];
+    self.dateLabel.text = dateString;
 }
 
 
