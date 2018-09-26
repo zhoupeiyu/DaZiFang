@@ -897,6 +897,7 @@
 		517EE8375C39C374B64EC437 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				34DF72E7E6C858D3EB182872 /* Frameworks */,
 				9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */,
 				FCDC9D4AFFA571F6BEE53116 /* Pods-ZRSW.release.xcconfig */,
 			);
@@ -923,7 +924,6 @@
 				E5B598E9214E9E2500726DE9 /* ZRSW */,
 				E5B598E8214E9E2500726DE9 /* Products */,
 				517EE8375C39C374B64EC437 /* Pods */,
-				34DF72E7E6C858D3EB182872 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
