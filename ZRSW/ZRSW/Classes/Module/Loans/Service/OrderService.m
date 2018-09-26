@@ -32,4 +32,12 @@
     [self POST:KGetOrderLoanTypeListInterface reqType:KGetOrderLoanTypeListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanTypeListModel class] NeedCache:NO];
 
 }
+- (void)getLoanDetailInfo:(NSString *)loanId delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (loanId.length > 0) {
+        [params setObject:loanId forKey:@"loanId"];
+    }
+    [self POST:KGetOrderLoanInfoInterface reqType:KGetOrderLoanInfoRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanInfoModel class] NeedCache:NO];
+
+}
 @end

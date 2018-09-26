@@ -70,3 +70,5 @@
 //贷款产品列表接口
 #define KGetOrderLoanTypeListRequest            @"KGetOrderLoanTypeListRequest"
 
+// 贷款产品详情
+#define KGetOrderLoanInfoRequest                @"KGetOrderLoanInfoRequest"

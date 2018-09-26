@@ -70,6 +70,8 @@
 //贷款产品列表接口
 #define KGetOrderLoanTypeListInterface                  @"api/order/loanTypeList"
 
+// 贷款产品详情
+#define KGetOrderLoanInfoInterface                      @"api/order/loanTypeInfo"
 
 
 

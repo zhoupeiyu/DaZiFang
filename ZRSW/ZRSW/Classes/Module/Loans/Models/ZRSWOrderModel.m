@@ -91,3 +91,26 @@
     return [[NSUserDefaults standardUserDefaults] valueForKey:KOrderLoanTypeListMainIDKey];
 }
 @end
+
+@implementation ZRSWOrderLoanInfoModel
+
+
+@end
+@implementation ZRSWOrderLoanInfoDetailModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"loanTypeAttrs" : [ZRSWOrderLoanInfoAttrs class],
+             @"loanCondition" : [ZRSWOrderLoanInfoCondition class]
+             };
+}
+
+
+@end
+@implementation ZRSWOrderLoanInfoCondition
+
+
+@end
+@implementation ZRSWOrderLoanInfoAttrs
+
+
+@end

@@ -200,6 +200,112 @@
 }
 @end
 
+@interface ZRSWLoansProductAttributeCell ()
+@property (nonatomic, strong) NSMutableArray *lblArray;
+
+@end
+@implementation ZRSWLoansProductAttributeCell
+
++ (ZRSWLoansProductAttributeCell *)getCellWithTableView:(UITableView *)tableView {
+    ZRSWLoansProductAttributeCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZRSWLoansProductAttributeCell class])];
+    if (!cell) {
+        cell = [[ZRSWLoansProductAttributeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([ZRSWLoansProductAttributeCell class])];
+    }
+    return cell;
+}
++ (CGFloat)cellHeigh {
+    return 65;
+}
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setupConfig];
+        [self setupUI];
+    }
+    return self;
+}
+- (void)setupConfig {
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+
+- (void)setupUI {
+    
+}
+- (void)setInfoDetailModel:(ZRSWOrderLoanInfoDetailModel *)infoDetailModel {
+    _infoDetailModel = infoDetailModel;
+    for (ZRSWOrderLoanInfoAttrs *model in infoDetailModel.loanTypeAttrs) {
+        
+    }
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《中融盛旺用户协议》"];
+    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x999999] range:NSMakeRange(0, 7)];
+    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromRGB:0x4771f2] range:NSMakeRange(7, 10)];
+}
+
+#pragma mark - lazy
+
+- (UIColor *)titleColor {
+    return [UIColor colorFromRGB:0x999999];
+}
+- (UIColor *)dataColor {
+    return [UIColor colorFromRGB:0x474455];
+}
+
+- (UILabel *)getlbl {
+    UILabel *lbl = [[UILabel alloc] init];
+    lbl.textAlignment = NSTextAlignmentLeft;
+    lbl.font = [UIFont systemFontOfSize:14];
+    return lbl;
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #pragma mark - headerView
 

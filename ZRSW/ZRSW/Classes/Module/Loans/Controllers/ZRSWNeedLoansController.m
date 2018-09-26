@@ -20,10 +20,14 @@
 
 @interface ZRSWNeedLoansController ()<PickerViewDelegate>
 
+@property (nonatomic, strong) OrderService *service;
+
 @property (nonatomic, strong) NSMutableArray *topDataSource;
+
 @property (nonatomic, strong) NSMutableArray *headerTitleSource;
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) NSIndexPath *currentIndexPath;
+@property (nonatomic, strong) ZRSWOrderLoanInfoModel *infoModel;
 
 @property (nonatomic, assign) BOOL selectedNewCity;
 @property (nonatomic, assign) BOOL selectedNewMainType;
@@ -91,19 +95,30 @@
 - (void)requestMainType {
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
-        [[OrderService alloc] getOrderMainTypeList:self.selectedCityID delegate:self];
+        [self.service getOrderMainTypeList:self.selectedCityID delegate:self];
     }
 }
 - (void)rquestLoanType {
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
-        [[OrderService alloc] getOrderLoanTypeList:self.selectedMainTypeID delegate:self];
+        [self.service getOrderLoanTypeList:self.selectedMainTypeID delegate:self];
     }
+}
+- (void)requestLoanInfo {
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [self.service getLoanDetailInfo:self.selectedLoanID delegate:self];
+    }
+}
+
+- (void)setInfoModel:(ZRSWOrderLoanInfoModel *)infoModel {
+    _infoModel = infoModel;
+    [self.tableView reloadData];
 }
 #pragma mark - delegate && datasource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.selectedLoanID.length > 0) {
+    if (self.selectedLoanID.length > 0 && self.infoModel) {
         return 5;
     }
     else {
@@ -228,19 +243,19 @@
     if (self.currentIndexPath.row == 0) {
         self.selectedNewCity = ![ID isEqualToString:self.selectedCityID];
         self.selectedCityID = ID;
-        LLog(@"********>%d",self.selectedNewCity);
-
     }
     else if (self.currentIndexPath.row == 1) {
         self.selectedNewMainType = ![ID isEqualToString:self.selectedMainTypeID];
         self.selectedMainTypeID = ID;
         self.selectedNewCity = NO;
+        
     }
     else if (self.currentIndexPath.row == 2) {
         self.selectedNewLoanID = ![ID isEqualToString:self.selectedLoanID];
         self.selectedLoanID = ID;
         self.selectedNewCity = NO;
         self.selectedNewMainType = NO;
+        [self requestLoanInfo];
     }
 }
 
@@ -277,6 +292,10 @@
             else {
                 [TipViewManager showToastMessage:listModel.error_msg];
             }
+        }
+        else if ([reqType isEqualToString:KGetOrderLoanInfoRequest]) {
+            ZRSWOrderLoanInfoModel *listModel = (ZRSWOrderLoanInfoModel *)resObj;
+            self.infoModel = listModel;
         }
     }
     else {
@@ -337,5 +356,11 @@
         [_headerTitleSource addObjectsFromArray:@[@"产品属性",@"进件条件",@"准备材料",@"放款流程"]];
     }
     return _headerTitleSource;
+}
+- (OrderService *)service {
+    if (!_service) {
+        _service = [[OrderService alloc] init];
+    }
+    return _service;
 }
 @end

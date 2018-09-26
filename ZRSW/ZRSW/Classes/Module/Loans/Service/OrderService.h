@@ -34,4 +34,13 @@
  */
 - (void)getOrderLoanTypeList:(NSString *)mainTypeId delegate:(id)delegate;
 
+
+/**
+ 贷款详情
+
+ @param loanId 产品类型
+ @param delegate 代理
+ */
+- (void)getLoanDetailInfo:(NSString *)loanId delegate:(id)delegate;
+
 @end

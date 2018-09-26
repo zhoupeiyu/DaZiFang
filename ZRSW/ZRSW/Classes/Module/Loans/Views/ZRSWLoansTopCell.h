@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZRSWOrderModel.h"
 
 @interface LoansCellStates : NSObject
 
@@ -35,8 +36,16 @@
 
 @end
 
+@interface ZRSWLoansProductAttributeCell : UITableViewCell
++ (ZRSWLoansProductAttributeCell *)getCellWithTableView:(UITableView *)tableView;
++ (CGFloat)cellHeigh;
+@property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *infoDetailModel;
+
+@end
+
 @interface ZRSWLoansTopHeaderView : UIView
 
 @property (nonatomic, strong) NSString *headerTitle;
 
 @end
+
