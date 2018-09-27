@@ -77,8 +77,8 @@
 #import <CYLTabBarController/CYLTabBarController.h>
 #import <UIViewController+CYLTabBarControllerExtention.h>
 #import <UIScrollView+EmptyDataSet.h>
-#import <FLAnimatedImage.h>
-#import <FLAnimatedImageView.h>
+//#import <FLAnimatedImage.h>
+//#import <FLAnimatedImageView.h>
 #import <Harpy.h>
 #import <HYBImageCliped.h>
 #import <HYBNetworking.h>
@@ -92,7 +92,7 @@
 #import <MBProgressHUD.h>
 #import <MJRefresh.h>
 #import <NJKWebViewProgress.h>
-#import <NYTPhotoViewer.h>
+//#import <NYTPhotoViewer.h>
 #import <PSTAlertController.h>
 #import <Reachability.h>
 #import <SDCycleScrollView.h>
@@ -120,6 +120,13 @@
 #import <SPAlertController.h>
 #import "JKCountDownButton.h"
 #import "BaseTabBarViewController.h"
+//Lite版本
+//#import <HyphenateLite/HyphenateLite.h>
+//Full版本
+#import <Hyphenate/Hyphenate.h>
+// IM SDK依赖的UI文件的头文件
+#import "EaseUI.h"
+
 
 
 #endif /* Header_h */

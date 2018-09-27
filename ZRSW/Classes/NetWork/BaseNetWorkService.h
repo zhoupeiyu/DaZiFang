@@ -10,7 +10,7 @@
 
 typedef enum : NSUInteger {
     RequestFinishedStatusSuccess = 0,
-    RequestFinishedStatusFail = -1
+    RequestFinishedStatusFail = 1
 } RequestFinishedStatus;
 
 @protocol BaseNetWorkServiceDelegate <NSObject>

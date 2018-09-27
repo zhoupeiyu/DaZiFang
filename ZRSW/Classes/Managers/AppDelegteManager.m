@@ -9,8 +9,6 @@
 #import "AppDelegteManager.h"
 #import "ZRSWShareManager.h"
 #import "DeviceID.h"
-// 引入JPush功能所需头文件
-#import "JPUSHService.h"
 // iOS10注册APNs所需头文件
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
@@ -37,6 +35,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [self setupShareConfig];
     //推送
     [self setupJpushWithOptions:launchOptions];
+    //环信
+    [self setupEMClientConfig];
     
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -46,6 +46,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [JPUSHService setBadge:0];
+    //环信进入后台
+     [[EMClient sharedClient] applicationDidEnterBackground:application];
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
@@ -53,6 +55,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     //    [UIApplication sharedApplication].applicationIconBadgeNumber = 1;
     //    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService setBadge:0];
+    //环信进入前台
+    [[EMClient sharedClient] applicationWillEnterForeground:application];
     
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -198,6 +202,17 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [JPUSHService setBadge:0];
 
 }
+
+//环信
+- (void)setupEMClientConfig {
+    EMOptions *options = [EMOptions optionsWithAppkey:HyphenateAppKey];
+    //options.apnsCertName = @"istore_dev";
+    EMError *error = [[EMClient sharedClient] initializeSDKWithOptions:options];
+    if (!error) {
+        LLog(@"环信初始化成功");
+    }
+}
+
 
 
 @end
