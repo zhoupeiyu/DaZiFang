@@ -82,7 +82,7 @@ pod 'PSTAlertController', '~> 1.2.0'
 pod 'TYAlertController', '~> 1.2.0'
 
 # 图片预览，仿微信，
-pod 'NYTPhotoViewer', '~> 2.0.0'
+#pod 'NYTPhotoViewer', '~> 2.0.0'
 
 # 友盟分享
 pod 'UMCCommon'
@@ -205,6 +205,12 @@ pod 'UMCShare/Social/Email'
 
 # 集成短信
 pod 'UMCShare/Social/SMS'
+
+# 集成环信
+#Lite版本
+pod 'HyphenateLite'
+#Full版本
+pod 'Hyphenate'
 
 #pod 'GrowingTextView'
 

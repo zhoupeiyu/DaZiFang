@@ -9,6 +9,8 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#ifdef __OBJC__
+
 #import "Header.h"
 
 // 是否需要定位
@@ -39,6 +41,9 @@
     #define JPushAppKey        @"af87ae555cb0e8e369e5086a" // 极光推送key
     #define isProductionJPush @"1"
 
+    #define HyphenateAppKey        @"1115180917099062#anew-zhongrongsw-com-zhongrongsw" // 环信key
+
+
 
 #else // 正式环境
 
@@ -54,12 +59,13 @@
     #define kWeChatAppIDVIP @"wx84f52b17ff891841"
     #define BaiduMobStatKey         @""
     #define BaiDuLocationKey        @"ferCuyDkEHKP68skwyAKeI3VrvnhHPG0" // 百度地图key
+    #define JPushAppKey        @"af87ae555cb0e8e369e5086a" // 极光推送key
+    #define isProductionJPush @"1"
+    #define HyphenateAppKey        @"1115180917099062#anew-zhongrongsw-com-zhongrongsw" // 环信key
+
 
 #endif
 
-
-
-
-
+#endif
 
 #endif /* PrefixHeader_pch */
