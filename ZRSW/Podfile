@@ -210,7 +210,8 @@ pod 'UMCShare/Social/SMS'
 #Lite版本
 pod 'HyphenateLite'
 #Full版本
-pod 'Hyphenate'
+#pod 'Hyphenate'
+pod 'Hyphenate', '~> 3.5.0'
 
 #pod 'GrowingTextView'
 
