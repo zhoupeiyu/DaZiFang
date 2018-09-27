@@ -99,6 +99,8 @@
 - (CGFloat)attrsItemHeight;
 - (CGFloat)attrsCellHeight;
 
+- (CGFloat)loanConditionsCellHeight;
+- (CGFloat)materialDetailsCellHeight;
 
 @end
 @interface ZRSWOrderLoanInfoModel :BaseModel

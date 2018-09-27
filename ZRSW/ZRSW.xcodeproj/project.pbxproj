@@ -32,7 +32,6 @@
 		3C7E4AF62151003F0058D3E2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF52151003E0058D3E2 /* Security.framework */; };
 		3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF7215100550058D3E2 /* libsqlite3.0.tbd */; };
 		3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AF9215100640058D3E2 /* CoreTelephony.framework */; };
-		3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C7E4AFB215100770058D3E2 /* libstdc++.6.0.9.tbd */; };
 		3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4AFD21513C8A0058D3E2 /* ZRSWThirdLoginView.m */; };
 		3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */; };
 		3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B042151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m */; };
@@ -56,6 +55,7 @@
 		E591D6CE2153ECB600F6802A /* ZRSWEnterpriseAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */; };
 		E591D6D12153F67200F6802A /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6D02153F67200F6802A /* BaseTabBarViewController.m */; };
 		E591D6D42153FF5300F6802A /* ZRSWNeedLoansController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */; };
+		E596FA2C215BEDBA00577D6E /* ZRSWLinePrejudicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E596FA2B215BEDBA00577D6E /* ZRSWLinePrejudicationController.m */; };
 		E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F3214E9E2600726DE9 /* Assets.xcassets */; };
 		E5B598F7214E9E2600726DE9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B598F5214E9E2600726DE9 /* LaunchScreen.storyboard */; };
 		E5B598FA214E9E2600726DE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B598F9214E9E2600726DE9 /* main.m */; };
@@ -138,7 +138,6 @@
 		E5B59A38214EBEE800726DE9 /* YLoadingPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59996214EBEE800726DE9 /* YLoadingPanel.m */; };
 		E5B59A39214EBEE800726DE9 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59997214EBEE800726DE9 /* MMMaterialDesignSpinner.m */; };
 		E5B59A3A214EBEE800726DE9 /* LNHeaderDIYAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59998214EBEE800726DE9 /* LNHeaderDIYAnimator.m */; };
-		E5B59A3B214EBEE800726DE9 /* Province.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B5999B214EBEE800726DE9 /* Province.plist */; };
 		E5B59A3C214EBEE800726DE9 /* DeviceID.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B5999E214EBEE800726DE9 /* DeviceID.m */; };
 		E5B59A3D214EBEE800726DE9 /* SAMKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B5999F214EBEE800726DE9 /* SAMKeychainQuery.m */; };
 		E5B59A3E214EBEE800726DE9 /* SAMKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599A3214EBEE800726DE9 /* SAMKeychain.m */; };
@@ -152,7 +151,6 @@
 		E5B59A46214EBEE800726DE9 /* LNFooterAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599B4214EBEE800726DE9 /* LNFooterAnimator.m */; };
 		E5B59A47214EBEE800726DE9 /* NSObject+LNRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599B5214EBEE800726DE9 /* NSObject+LNRefresh.m */; };
 		E5B59A48214EBEE800726DE9 /* LNHeaderAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599BB214EBEE800726DE9 /* LNHeaderAnimator.m */; };
-		E5B59A49214EBEE800726DE9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E5B599C0214EBEE800726DE9 /* Info.plist */; };
 		E5B59A4A214EBEE800726DE9 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599C4214EBEE800726DE9 /* TZImageCropManager.m */; };
 		E5B59A4B214EBEE800726DE9 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599C6214EBEE800726DE9 /* TZAssetCell.m */; };
 		E5B59A4C214EBEE800726DE9 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B599C7214EBEE800726DE9 /* TZVideoPlayerController.m */; };
@@ -336,6 +334,7 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
+		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -426,6 +425,8 @@
 		E591D6D02153F67200F6802A /* BaseTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		E591D6D22153FF5300F6802A /* ZRSWNeedLoansController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWNeedLoansController.h; sourceTree = "<group>"; };
 		E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWNeedLoansController.m; sourceTree = "<group>"; };
+		E596FA2A215BEDBA00577D6E /* ZRSWLinePrejudicationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLinePrejudicationController.h; sourceTree = "<group>"; };
+		E596FA2B215BEDBA00577D6E /* ZRSWLinePrejudicationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLinePrejudicationController.m; sourceTree = "<group>"; };
 		E5B598E7214E9E2500726DE9 /* ZRSW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZRSW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B598F3214E9E2600726DE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E5B598F6214E9E2600726DE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -554,7 +555,6 @@
 		E5B59997214EBEE800726DE9 /* MMMaterialDesignSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMaterialDesignSpinner.m; sourceTree = "<group>"; };
 		E5B59998214EBEE800726DE9 /* LNHeaderDIYAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LNHeaderDIYAnimator.m; sourceTree = "<group>"; };
 		E5B59999214EBEE800726DE9 /* LXRefreshDIYHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXRefreshDIYHeader.h; sourceTree = "<group>"; };
-		E5B5999B214EBEE800726DE9 /* Province.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Province.plist; sourceTree = "<group>"; };
 		E5B5999C214EBEE800726DE9 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		E5B5999E214EBEE800726DE9 /* DeviceID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceID.m; sourceTree = "<group>"; };
 		E5B5999F214EBEE800726DE9 /* SAMKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMKeychainQuery.m; sourceTree = "<group>"; };
@@ -587,7 +587,6 @@
 		E5B599BD214EBEE800726DE9 /* LNFooterAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNFooterAnimator.h; sourceTree = "<group>"; };
 		E5B599BE214EBEE800726DE9 /* LNRefreshHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNRefreshHandler.h; sourceTree = "<group>"; };
 		E5B599BF214EBEE800726DE9 /* LNRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LNRefresh.h; sourceTree = "<group>"; };
-		E5B599C0214EBEE800726DE9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5B599C2214EBEE800726DE9 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
 		E5B599C3214EBEE800726DE9 /* TZPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPickerController.h; sourceTree = "<group>"; };
 		E5B599C4214EBEE800726DE9 /* TZImageCropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageCropManager.m; sourceTree = "<group>"; };
@@ -809,6 +808,7 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
+		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -821,7 +821,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */,
+				E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */,
 				3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */,
 				3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */,
 				3C7E4AF62151003F0058D3E2 /* Security.framework in Frameworks */,
@@ -927,6 +927,7 @@
 				E5B598E9214E9E2500726DE9 /* ZRSW */,
 				E5B598E8214E9E2500726DE9 /* Products */,
 				517EE8375C39C374B64EC437 /* Pods */,
+				E5D39183215CA95400E4F962 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1006,6 +1007,8 @@
 				E5B59A63214EBF9600726DE9 /* ZRSWLoansController.m */,
 				E591D6D22153FF5300F6802A /* ZRSWNeedLoansController.h */,
 				E591D6D32153FF5300F6802A /* ZRSWNeedLoansController.m */,
+				E596FA2A215BEDBA00577D6E /* ZRSWLinePrejudicationController.h */,
+				E596FA2B215BEDBA00577D6E /* ZRSWLinePrejudicationController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1371,7 +1374,6 @@
 		E5B5999A214EBEE800726DE9 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				E5B5999B214EBEE800726DE9 /* Province.plist */,
 				E5B5999C214EBEE800726DE9 /* SynthesizeSingleton.h */,
 				E5B5999D214EBEE800726DE9 /* DeviceID */,
 			);
@@ -1408,7 +1410,6 @@
 			children = (
 				E5B599AB214EBEE800726DE9 /* LNRefresh */,
 				E5B599BF214EBEE800726DE9 /* LNRefresh.h */,
-				E5B599C0214EBEE800726DE9 /* Info.plist */,
 			);
 			path = LNRefresh;
 			sourceTree = "<group>";
@@ -1765,6 +1766,14 @@
 			path = Module/CommentView;
 			sourceTree = "<group>";
 		};
+		E5D39183215CA95400E4F962 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5D39184215CA95400E4F962 /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1893,7 +1902,6 @@
 				E5B59B31214EC15600726DE9 /* home_information_arrow@2x.png in Resources */,
 				E5B59B51214EC15600726DE9 /* currency_button@2x.png in Resources */,
 				E5B59BA6214EC15600726DE9 /* pretrial_sex_default@3x.png in Resources */,
-				E5B59A3B214EBEE800726DE9 /* Province.plist in Resources */,
 				E5B59B70214EC15600726DE9 /* sign_other_blog@3x.png in Resources */,
 				E5B59A0B214EBEE800726DE9 /* currency_no_network@3x.png in Resources */,
 				E5B59B95214EC15600726DE9 /* authentication_button_enterprise@3x.png in Resources */,
@@ -1921,7 +1929,6 @@
 				E5B599F1214EBEE800726DE9 /* placeholder_dropbox@2x.png in Resources */,
 				E5B59B61214EC15600726DE9 /* news_dialog_them@2x.png in Resources */,
 				E5B59B9B214EC15600726DE9 /* currency_shadow_upper@3x.png in Resources */,
-				E5B59A49214EBEE800726DE9 /* Info.plist in Resources */,
 				E5B59A10214EBEE800726DE9 /* language_arrow_9x9_@3x.png in Resources */,
 				E5B59B2D214EC15600726DE9 /* currency_bottom_loan_default@2x.png in Resources */,
 				E5B59B4F214EC15600726DE9 /* currency_watch_number@2x.png in Resources */,
@@ -2119,6 +2126,7 @@
 				3C10D6612154E2F50019112F /* ZRSWBillListCell.m in Sources */,
 				3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
+				E596FA2C215BEDBA00577D6E /* ZRSWLinePrejudicationController.m in Sources */,
 				3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */,
 				3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */,
 				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
@@ -2347,7 +2355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2370,7 +2378,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

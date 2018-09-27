@@ -30,6 +30,7 @@
 
 @end
 
+
 @interface ZRSWLoansFlow : UITableViewCell
 + (ZRSWLoansFlow *)getCellWithTableView:(UITableView *)tableView;
 + (CGFloat)cellHeigh;
@@ -42,6 +43,12 @@
 
 @end
 
+@interface ZRSWLoansConditionCell : UITableViewCell
++ (ZRSWLoansConditionCell *)getCellWithTableView:(UITableView *)tableView;
+@property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *materialDetailsModel;
+@property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *loanConditionsModel;
+
+@end
 @interface ZRSWLoansTopHeaderView : UIView
 
 @property (nonatomic, strong) NSString *headerTitle;

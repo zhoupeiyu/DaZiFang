@@ -126,6 +126,13 @@
     max = max + [self attrsTop] * 2;
     return max;
 }
+
+- (CGFloat)loanConditionsCellHeight {
+    return [self.loanConditions getSizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(SCREEN_WIDTH - 30, CGFLOAT_MAX)].height + 30;
+}
+- (CGFloat)materialDetailsCellHeight {
+    return [self.materialDetails getSizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(SCREEN_WIDTH - 30, CGFLOAT_MAX)].height + 30;
+}
 @end
 @implementation ZRSWOrderLoanInfoCondition
 
