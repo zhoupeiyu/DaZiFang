@@ -121,6 +121,8 @@
 @property (nonatomic, strong) UserAuthCompanyAudit *authCompanyAudit;
 @property (nonatomic, strong) NSString *token;
 
+@property (nonatomic, assign) BOOL hasLogin;
+
 @end
 
 @interface UserModel : BaseModel
