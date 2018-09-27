@@ -147,6 +147,16 @@
         cell.infoDetailModel = self.infoModel.data;
         return cell;
     }
+    else if (indexPath.section == 2) {
+        ZRSWLoansConditionCell *cell = [ZRSWLoansConditionCell getCellWithTableView:tableView];
+        cell.loanConditionsModel = self.infoModel.data;
+        return cell;
+    }
+    else if (indexPath.section == 3) {
+        ZRSWLoansConditionCell *cell = [ZRSWLoansConditionCell getCellWithTableView:tableView];
+        cell.materialDetailsModel = self.infoModel.data;
+        return cell;
+    }
     else if (indexPath.section == 4) {
         ZRSWLoansFlow *cell = [ZRSWLoansFlow getCellWithTableView:tableView];
         return cell;
@@ -166,6 +176,13 @@
     }
     else if (indexPath.section == 1) {
         return [self.infoModel.data attrsCellHeight];
+    }
+    else if (indexPath.section == 2) {
+        return [self.infoModel.data loanConditionsCellHeight];
+    }
+    else if (indexPath.section == 3) {
+        return [self.infoModel.data materialDetailsCellHeight];
+
     }
     else if (indexPath.section == 4) {
         return [ZRSWLoansFlow cellHeigh];

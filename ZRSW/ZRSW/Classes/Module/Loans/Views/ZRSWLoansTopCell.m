@@ -98,9 +98,9 @@
     NSString *title = [NSString stringWithFormat:@"*%@",titleStr];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:title];
     [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSRangeMake(0, title.length)];
-    [attr addAttribute:NSParagraphStyleAttributeName value:[LoansCellStates getBlackColor] range:NSRangeMake(0, title.length)];
-    [attr addAttribute:NSParagraphStyleAttributeName value:[LoansCellStates getStartRedColor] range:NSRangeMake(0, 1)];
-    self.titleLbl.text = titleStr;
+    [attr addAttribute:NSForegroundColorAttributeName value:[LoansCellStates getBlackColor] range:NSRangeMake(0, title.length)];
+    [attr addAttribute:NSForegroundColorAttributeName value:[LoansCellStates getStartRedColor] range:NSRangeMake(0, 1)];
+    self.titleLbl.attributedText = attr;
     [self.titleLbl sizeToFit];
 }
 - (void)setContentStr:(NSString *)contentStr {
@@ -272,7 +272,72 @@
 
 @end
 
+@interface ZRSWLoansConditionCell ()
+@property (nonatomic, strong) UILabel *contentLbl;
+@end
+@implementation ZRSWLoansConditionCell
 
++ (ZRSWLoansConditionCell *)getCellWithTableView:(UITableView *)tableView {
+    ZRSWLoansConditionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZRSWLoansConditionCell class])];
+    if (!cell) {
+        cell = [[ZRSWLoansConditionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([ZRSWLoansConditionCell class])];
+    }
+    return cell;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setupConfig];
+        [self setupUI];
+    }
+    return self;
+}
+- (void)setupConfig {
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+}
+- (void)setupUI {
+    [self.contentView addSubview:self.contentLbl];
+    
+}
+- (void)setMaterialDetailsModel:(ZRSWOrderLoanInfoDetailModel *)materialDetailsModel {
+    _materialDetailsModel = materialDetailsModel;
+    NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[materialDetailsModel.materialDetails dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    self.contentLbl.attributedText = htmlString;
+    [self.contentLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(15);
+        make.bottom.mas_equalTo(0);
+    }];
+    [self.contentLbl sizeToFit];
+}
+
+- (void)setLoanConditionsModel:(ZRSWOrderLoanInfoDetailModel *)loanConditionsModel {
+    _loanConditionsModel = loanConditionsModel;
+    NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[loanConditionsModel.loanConditions dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    self.contentLbl.attributedText = htmlString;
+    [self.contentLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.top.mas_equalTo(15);
+        make.bottom.mas_equalTo(0);
+    }];
+    [self.contentLbl sizeToFit];
+}
+- (UILabel *)contentLbl {
+    if (!_contentLbl) {
+        _contentLbl = [[UILabel alloc] init];
+        _contentLbl.textAlignment = NSTextAlignmentLeft;
+        _contentLbl.font = [UIFont systemFontOfSize:14];
+        _contentLbl.textColor = [LoansCellStates getContentColor];
+        _contentLbl.numberOfLines = 0;
+    }
+    return _contentLbl;
+}
+
+@end
 
 
 

@@ -15,16 +15,16 @@
     [[UMSocialManager defaultManager] openLog:YES];
     //注册友盟key
 //    [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
-    [UMConfigure initWithAppkey:UMKey channel:nil];
+    [UMConfigure initWithAppkey:kUmengAppKey channel:nil];
     //QQ
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:TencentAppID appSecret:nil redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:TencentAppID appSecret:nil redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:kQQAppid appSecret:nil redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:kQQAppid appSecret:nil redirectURL:nil];
 
     //微信
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:kWeChatAppID appSecret:kWeChatAppSecret redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:kWeChatAppID appSecret:kWeChatAppSecret redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:kWechatAppid appSecret:kWechatSecurity redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:kWechatAppid appSecret:kWechatSecrt redirectURL:nil];
     //微博
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:kWeiBoAppKey appSecret:nil redirectURL:kWeiBoRedirectURL];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:kWeiboAppid appSecret:kWeiboSeret redirectURL:kWeiboUrl];
 
 }
 

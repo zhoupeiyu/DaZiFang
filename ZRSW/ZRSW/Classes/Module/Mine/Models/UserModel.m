@@ -53,7 +53,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 + (BOOL)hasLogin {
     UserModel *model = [self getCurrentModel];
-    return model.data.id.length > 0;
+    return model.data.hasLogin;
 }
 @end
 

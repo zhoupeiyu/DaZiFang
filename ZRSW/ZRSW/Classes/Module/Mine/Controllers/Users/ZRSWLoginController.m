@@ -119,6 +119,7 @@
         if ([reqType isEqualToString:KUserLoginRequest]) {
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                model.data.hasLogin = YES;
                 [UserModel updateUserModel:model];
                 UserInfoModel *suer = model.data;
                 //设置LoginToke
