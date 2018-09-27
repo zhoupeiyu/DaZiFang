@@ -1108,9 +1108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				3CFBF536215C7D6800A7AA97 /* libsqlite3.tbd in Frameworks */,
-				3C7E4AFC215100770058D3E2 /* libstdc++.6.0.9.tbd in Frameworks */,
 				3CFBF534215C7D4600A7AA97 /* libc++.tbd in Frameworks */,
 				3CFBF532215C7D3400A7AA97 /* libz.tbd in Frameworks */,
 				3CFBF530215C7CE300A7AA97 /* ImageIO.framework in Frameworks */,
@@ -1118,9 +1116,7 @@
 				3CFBF52C215C7CCB00A7AA97 /* AVFoundation.framework in Frameworks */,
 				3CFBF52A215C7CBD00A7AA97 /* AudioToolbox.framework in Frameworks */,
 				3CFBF528215C7CB100A7AA97 /* CoreMedia.framework in Frameworks */,
-=======
 				E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */,
->>>>>>> fa507b7e1ddd0f90797a9d425172d8be7dae7647
 				3C7E4AFA215100640058D3E2 /* CoreTelephony.framework in Frameworks */,
 				3C7E4AF8215100550058D3E2 /* libsqlite3.0.tbd in Frameworks */,
 				3C7E4AF62151003F0058D3E2 /* Security.framework in Frameworks */,
@@ -1691,11 +1687,8 @@
 				E5B598E9214E9E2500726DE9 /* ZRSW */,
 				E5B598E8214E9E2500726DE9 /* Products */,
 				517EE8375C39C374B64EC437 /* Pods */,
-<<<<<<< HEAD
 				721CF6BE21C03B09A24226E9 /* Frameworks */,
-=======
 				E5D39183215CA95400E4F962 /* Frameworks */,
->>>>>>> fa507b7e1ddd0f90797a9d425172d8be7dae7647
 			);
 			sourceTree = "<group>";
 		};
@@ -2932,11 +2925,8 @@
 				3C10D6612154E2F50019112F /* ZRSWBillListCell.m in Sources */,
 				3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */,
 				E5B59A14214EBEE800726DE9 /* LocationManager.m in Sources */,
-<<<<<<< HEAD
 				3CFBF51B215C7B8B00A7AA97 /* EaseChatToolbarItem.m in Sources */,
-=======
 				E596FA2C215BEDBA00577D6E /* ZRSWLinePrejudicationController.m in Sources */,
->>>>>>> fa507b7e1ddd0f90797a9d425172d8be7dae7647
 				3C7E4B052151EE990058D3E2 /* ZRSWNewAndQuestionDetailsController.m in Sources */,
 				3C7E4B02215162F40058D3E2 /* ZRSWRetrievePasswordController.m in Sources */,
 				3C7E4AEA2150DD6D0058D3E2 /* ZRSWQuestionListDetailsController.m in Sources */,
@@ -3230,7 +3220,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3258,7 +3248,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G43YDC6B84;
+				DEVELOPMENT_TEAM = 3RWME898AZ;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
