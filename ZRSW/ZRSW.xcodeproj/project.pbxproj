@@ -335,6 +335,7 @@
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
+		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -809,6 +810,8 @@
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
+		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -1735,6 +1738,8 @@
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
 				3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */,
 				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
+				E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */,
+				E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */,
 				3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */,
 				3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */,
 				E591D6B92153EAE800F6802A /* ZRSWResetPhoneController.h */,
@@ -2117,6 +2122,7 @@
 				E5B59A6A214EC02100726DE9 /* UserModel.m in Sources */,
 				E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */,
 				E5B59A57214EBEE800726DE9 /* TZLocationManager.m in Sources */,
+				E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */,
 				E5B59A24214EBEE800726DE9 /* UIFont+Utility.m in Sources */,
 				E5B59A35214EBEE800726DE9 /* PickerView.m in Sources */,
 				3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */,
