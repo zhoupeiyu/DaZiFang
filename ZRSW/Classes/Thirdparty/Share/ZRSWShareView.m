@@ -64,7 +64,6 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
     BOOL qqavailable = [ZRSWShareManager isInstallQQ];
     BOOL wxavailable = [ZRSWShareManager isInstallWeChat];
     BOOL wbavailable = [ZRSWShareManager isImstallWeiBo];
-
     switch (btn.tag)
     {
         case 0:
@@ -103,38 +102,18 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
     if (type == UMSocialPlatformType_WechatSession || type == UMSocialPlatformType_WechatTimeLine) {
         if (wxavailable) {
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
-        }else{
-            UIAlertAction * confirmAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请安装微信" preferredStyle:UIAlertControllerStyleAlert];
-            [alertView addAction:confirmAction];
-            [[self appRootViewController] presentViewController:alertView animated:YES completion:nil];
         }
     }else  if (type == UMSocialPlatformType_QQ) {
         if (qqavailable) {
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
-        }else{
-            UIAlertAction * confirmAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请安装QQ" preferredStyle:UIAlertControllerStyleAlert];
-            [alertView addAction:confirmAction];
-            [[self appRootViewController] presentViewController:alertView animated:YES completion:nil];
         }
     }else  if (type == UMSocialPlatformType_WechatSession) {
         if (wbavailable) {
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
-        }else{
-            UIAlertAction * confirmAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请安装微信" preferredStyle:UIAlertControllerStyleAlert];
-            [alertView addAction:confirmAction];
-            [[self appRootViewController] presentViewController:alertView animated:YES completion:nil];
         }
     }else  if (type == UMSocialPlatformType_Sina) {
         if (wxavailable) {
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
-        }else{
-            UIAlertAction * confirmAction=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-            UIAlertController * alertView = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请安装新浪微博" preferredStyle:UIAlertControllerStyleAlert];
-            [alertView addAction:confirmAction];
-            [[self appRootViewController] presentViewController:alertView animated:YES completion:nil];
         }
     }
 }

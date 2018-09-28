@@ -16,16 +16,20 @@
     //注册友盟key
 //    [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
     [UMConfigure initWithAppkey:kUmengAppKey channel:nil];
+    LLog(@"===kUmengAppKey = %@",kUmengAppKey);
     //QQ
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:kQQAppid appSecret:nil redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:kQQAppid appSecret:nil redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:kQQAppId appSecret:kQQAppKey redirectURL:nil];
+    
+//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Qzone appKey:kQQAppId appSecret:kQQAppKey redirectURL:nil];
 
     //微信
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:kWechatAppid appSecret:kWechatSecurity redirectURL:nil];
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:kWechatAppid appSecret:kWechatSecrt redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:kWechatAppId appSecret:kWechatSecret redirectURL:nil];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:kWechatAppId appSecret:kWechatSecret redirectURL:nil];
     //微博
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:kWeiboAppid appSecret:kWeiboSeret redirectURL:kWeiboUrl];
-
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:kWeiboAppId appSecret:kWeiboSeret redirectURL:kWeiboUrl];
+    LLog(@"===kWeiboAppid = %@",kWeiboAppId);
+    LLog(@"===kWeiboSeret = %@",kWeiboSeret);
+    LLog(@"===kWeiboUrl = %@",kWeiboUrl);
 }
 
 
@@ -33,14 +37,12 @@
 
     WS(weakSelf);
     [ZRSWShareView sharedInstance].isShareCallBack = YES;
-
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //设置文本
     messageObject.text = shareModel.content;
 
     if (sourcetype == ShareSourceWap) {
-
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:shareModel.title descr:shareModel.content thumImage:shareModel.thumbImage];
         //设置网页地址
         shareObject.webpageUrl = shareModel.sourceUrlStr;
