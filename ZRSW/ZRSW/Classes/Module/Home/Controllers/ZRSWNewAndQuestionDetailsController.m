@@ -10,10 +10,14 @@
 #import "ZRSWActionSheetView.h"
 #import "ZRSWShareView.h"
 #import "UserService.h"
-@interface ZRSWNewAndQuestionDetailsController ()<UIWebViewDelegate,PlatformButtonClickDelegate,ShareHandlerDelegate>
+#import <JavaScriptCore/JavaScriptCore.h>
+/* Unique URL triggered when JavaScript reports page load is complete */
+NSString *kCompleteRPCURL = @"webviewprogress:///complete";
+@interface ZRSWNewAndQuestionDetailsController ()<UIWebViewDelegate,ShareHandlerDelegate>
 @property(nonatomic,strong) UIWebView *webView;
 @property (nonatomic, strong) NewDetailContensModel *detailContensModel;
 @property (nonatomic, strong) CommentQuestionDetailContentModel *questionDetailContentModel;
+@property (nonatomic, strong) NSURL *url;
 @end
 
 @implementation ZRSWNewAndQuestionDetailsController
@@ -54,6 +58,50 @@
     }
 }
 
+#pragma mark - WebView Delegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
+    ////////////////////
+    if ([url hasPrefix:@"data://appData"]){
+        //创建JSContext对象
+        JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+        //OC调用JS方法
+        //options:nil 不能修改否则h5识别不了
+        if (self.detailContensModel) {
+            id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+            LLog(@"%@",detailsJsonString);
+            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsJsonString]];
+        }else {
+            [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
+        }
+        return NO;
+    }
+    BOOL shouldStart = YES;
+    //TODO: Implement TOModalWebViewController Delegate callback
+
+    //if the URL is the load completed notification from JavaScript
+    if ([request.URL.absoluteString isEqualToString:kCompleteRPCURL]){
+        return NO;
+    }
+    //If the URL contrains a fragement jump (eg an anchor tag), check to see if it relates to the current page, or another
+    //If we're merely jumping around the same page, don't perform a new loading bar sequence
+    BOOL isFragmentJump = NO;
+    if (request.URL.fragment){
+        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
+        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
+    }
+
+    BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
+    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
+    if (shouldStart && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward){
+        //Save the URL in the accessor property
+        self.url = [request URL];
+    }
+    return shouldStart;
+}
+
+
 
 - (void)requsetNewDetail{
     [[[UserService alloc] init] getNewDetail:self.detailModel.id delegate:self];
@@ -72,9 +120,9 @@
             if (model.error_code.integerValue == 0) {
                 NewDetailContensModel *detailContensModel = model.data;
                 self.detailContensModel = detailContensModel;
-                id json = [detailContensModel yy_modelToJSONObject];
-                LLog(@"%@",json);
-                
+                //加载h5
+                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
             }
@@ -104,6 +152,8 @@
 //        // 根据获取的platformType确定所选平台进行下一步操作
 //
 //    }];
+    ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
+    model.sourceUrlStr = self.detailContensModel.sourceUrl;;
     [ZRSWShareView shareContent:nil shareSourceType:ShareSourceWap delegate:self];
 }
 
@@ -126,6 +176,13 @@
         _webView.scalesPageToFit = YES;
     }
     return _webView;
+}
+- (NSURL *)url{
+    if (!_url) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"NewAndQuestionDetails" ofType:@"html"];
+        _url = [NSURL fileURLWithPath:path];
+    }
+    return _url;
 }
 
 

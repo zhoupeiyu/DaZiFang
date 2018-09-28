@@ -43,6 +43,7 @@
     return 3;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
     if (!cell) {
@@ -51,8 +52,8 @@
     if (indexPath.row == 0) {
         cell.imageView.image = [UIImage imageNamed:@"my_phone"];
         cell.textLabel.text = @"版本号";
-        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kUI_WidthS(44), kUI_HeightS(20))];
-        versionLabel.text = @"1.0.0";
+        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kUI_WidthS(36), kUI_HeightS(20))];
+        versionLabel.text = [[UIApplication sharedApplication] appVersion];;
         cell.accessoryView = versionLabel;
     }else if (indexPath.row == 1) {
         cell.imageView.image = [UIImage imageNamed:@"my_order"];

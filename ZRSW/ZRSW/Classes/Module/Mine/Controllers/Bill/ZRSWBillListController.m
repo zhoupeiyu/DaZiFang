@@ -74,12 +74,12 @@
 #pragma mark - NetWork
 - (void)requsetBillList{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getBillList:@"18600886745" password:@"123456" name:@"18511691940" delegate:self];
+    [[[UserService alloc] init] getBillList:@"18600886745" password:@"1234567" name:@"18511691940" delegate:self];
 }
 
 - (void)refreshData{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getRemindList:@"18600886745" password:@"123456" name:@"18511691940" delegate:self];
+    [[[UserService alloc] init] getRemindList:@"18600886745" password:@"1234567" name:@"18511691940" delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{

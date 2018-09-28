@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self loggedInEMClient];
     [self setUpChatController];
     // Do any additional setup after loading the view.
 }
@@ -26,28 +27,33 @@
     [self setLeftBackBarButton];
 }
 
-- (void)setUpChatController{
+- (void)loggedInEMClient{
     EMClient *client = [EMClient sharedClient];
     WS(weakSelf);
     if (client.isLoggedIn != YES) {
+        [TipViewManager showLoading];
         [[EMClient sharedClient] loginWithUsername:@"MEM18000022"password:@"123456"completion:^(NSString *aUsername, EMError *aError) {
+            [TipViewManager dismissLoading];
             if (!aError) {
                 LLog(@"登录成功");
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
-                    [weakSelf addChildViewController:chatController];
-                    [weakSelf.view addSubview:chatController.view];
-                });
             } else {
                 LLog(@"登录失败");
+                [TipViewManager showAlertControllerWithTitle:@"温馨提示" message:@"暂时无法与客服沟通" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:^(PSTAlertAction *action) {
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                } controller:nil completion:nil];
+
             }
         }];
     } else { //已经成功登录
         LLog(@"已经登录");
-        EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
-        [self addChildViewController:chatController];
-        [self.view addSubview:chatController.view];
     }
+}
+
+
+- (void)setUpChatController{
+    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
+    [self addChildViewController:chatController];
+    [self.view addSubview:chatController.view];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
