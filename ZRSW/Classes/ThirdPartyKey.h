@@ -10,27 +10,28 @@
 #define BaiduMobStatKey                     @""
 
 //微信
-#define kWechatAppid                        @"wx8490e13c4adcaad2"
-#define kWechatSecrt                        @"f549325608fbc5028f6757ace09500e7"
+#define kWechatAppId                        @"wx90f7a0e709f2bdf1"
+#define kWechatSecret                        @"c947ca9dabe83097556c230c85ca8c89"
 #define kWechatPartnerId                    @"1388232102"
 #define kWechatSecurity                     @"789"
 
 //weibo
-#define kWeiboAppid                         @"3972746284"
-#define kWeiboSeret                         @"e87c2c1a0e2c3fe328b2fdbbc73f520a"
+#define kWeiboAppId                         @"3972746284"
+#define kWeiboSeret                         @"f751af1aa54591cc915c528fbb0173dd"
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppid                            @"1104177532"
-#define kQQAppKey                           @"OJfTEBgme0l3qH5S"
+#define kQQAppId                            @"1107867864"
+#define kQQAppKey                           @"AeIfDLi7fj0kwgzm"
 
 //极光
 #define kJupushKey                          @"a748387bf81b95ce912b82bf"
 #define JPushMaster                         @"4a19f8341d104e33a706c00e"
 
-
+// 环信key
+#define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
 //环信的登录密码
-#define CMHuanXinpassword                   @"a1b2c3d4ef"
+#define kHuanXinpassword                   @"123456"
 
 //Ali
 #define kAliAppid                           @"3"
@@ -54,27 +55,26 @@
 #define BaiduMobStatKey                     @""
 
 //微信
-#define kWechatAppid                        @"wx8490e13c4adcaad2"
-#define kWechatSecrt                        @"f549325608fbc5028f6757ace09500e7"
-#define kWechatPartnerId                    @"1388232102"
-#define kWechatSecurity                     @"789"
+#define kWechatAppId                        @"wx90f7a0e709f2bdf1"
+#define kWechatSecret                        @"c947ca9dabe83097556c230c85ca8c89"
 
 //weibo
-#define kWeiboAppid                         @"3972746284"
-#define kWeiboSeret                         @"e87c2c1a0e2c3fe328b2fdbbc73f520a"
+#define kWeiboAppId                         @"3972746284"
+#define kWeiboSeret                    @"f751af1aa54591cc915c528fbb0173dd"
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppid                            @"1104177532"
-#define kQQAppKey                           @"OJfTEBgme0l3qH5S"
+#define kQQAppId                            @"1107867864"
+#define kQQAppKey                           @"AeIfDLi7fj0kwgzm"
 
 //极光
 #define kJupushKey                          @"a748387bf81b95ce912b82bf"
 #define JPushMaster                         @"4a19f8341d104e33a706c00e"
 
-
+// 环信key
+#define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
 //环信的登录密码
-#define CMHuanXinpassword                   @"a1b2c3d4ef"
+#define kHuanXinpassword                   @"123456"
 
 //Ali
 #define kAliAppid                           @"3"

@@ -60,7 +60,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    self.title = [self.webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
     ////////////////////
     if ([url hasPrefix:@"data://appData"]){
@@ -153,8 +152,12 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //
 //    }];
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
-    model.sourceUrlStr = self.detailContensModel.sourceUrl;;
-    [ZRSWShareView shareContent:nil shareSourceType:ShareSourceWap delegate:self];
+    model.sourceUrlStr = self.detailContensModel.sourceUrl;
+    model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
+    model.title = self.detailContensModel.title;
+    model.content = self.detailContensModel.roundup;
+
+    [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
 }
 
 
@@ -177,13 +180,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }
     return _webView;
 }
-- (NSURL *)url{
-    if (!_url) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"NewAndQuestionDetails" ofType:@"html"];
-        _url = [NSURL fileURLWithPath:path];
-    }
-    return _url;
-}
+//- (NSURL *)url{
+//    if (!_url) {
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"NewAndQuestionDetails" ofType:@"html"];
+//        _url = [NSURL fileURLWithPath:path];
+//    }
+//    return _url;
+//}
 
 
 

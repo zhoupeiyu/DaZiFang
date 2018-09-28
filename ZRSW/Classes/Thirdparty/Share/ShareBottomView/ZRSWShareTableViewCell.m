@@ -7,6 +7,7 @@
 //
 
 #import "ZRSWShareTableViewCell.h"
+#import "ZRSWShareManager.h"
 @implementation ZRSWShareTableViewCell
 
 - (void)awakeFromNib {
@@ -31,13 +32,28 @@
         [self addSubview:lineView];
         CGFloat btnW = 75;
         CGFloat btnH = 80;
-        NSArray *contentArray = @[
-                                  @{@"name":@"微信好友",@"icon":@"share_wechat"},
-                                  @{@"name":@"QQ好友",@"icon":@"share_qq"},
-                                  @{@"name":@"朋友圈",@"icon":@"share_friends"},
-                                  @{@"name":@"新浪微博",@"icon":@"share_blog"},
-                                  ];
-        for (int i = 0; i < 4; i++)
+        BOOL wxavailable = [ZRSWShareManager isInstallWeChat];
+        BOOL qqavailable = [ZRSWShareManager isInstallQQ];
+        BOOL wbavailable = [ZRSWShareManager isImstallWeiBo];
+        NSMutableArray *contentArray = [NSMutableArray arrayWithCapacity:0];
+        if (wxavailable) {
+            [contentArray addObject:@{@"name":@"微信好友",@"icon":@"share_wechat"}];
+            if (qqavailable) {
+                [contentArray addObject:@{@"name":@"QQ好友",@"icon":@"share_qq"}];
+            }
+            [contentArray addObject:@{@"name":@"朋友圈",@"icon":@"share_friends"}];
+            if (wbavailable) {
+                 [contentArray addObject:@{@"name":@"新浪微博",@"icon":@"share_blog"}];
+            }
+        }else{
+            if (qqavailable) {
+                [contentArray addObject:@{@"name":@"QQ好友",@"icon":@"share_qq"}];
+            }
+            if (wbavailable) {
+                [contentArray addObject:@{@"name":@"新浪微博",@"icon":@"share_blog"}];
+            }
+        }
+        for (int i = 0; i < contentArray.count; i++)
         {
             NSDictionary *dic = [contentArray objectAtIndex:i];
             NSString *name = dic[@"name"];
