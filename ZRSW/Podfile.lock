@@ -26,8 +26,8 @@ PODS:
   - HYBImageCliped (2.2.4)
   - HYBNetworking (3.3.1):
     - AFNetworking (~> 3.1.0)
-  - Hyphenate (3.5.1)
-  - HyphenateLite (3.5.1)
+  - Hyphenate (3.5.0)
+  - HyphenateLite (3.5.0)
   - IQKeyboardManager (5.0.8)
   - JCore (1.2.2)
   - JDLaunchAd (0.0.8)
@@ -153,6 +153,7 @@ PODS:
     - UMCCommon
     - UMCShare/Core
   - XLForm (3.3.0)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -165,7 +166,7 @@ DEPENDENCIES:
   - Harpy (~> 4.1.9)
   - HYBImageCliped (~> 2.2.4)
   - HYBNetworking (~> 3.3.1)
-  - Hyphenate
+  - Hyphenate (~> 3.5.0)
   - HyphenateLite
   - IQKeyboardManager (~> 5.0.6)
   - JDLaunchAd (~> 0.0.8)
@@ -219,6 +220,7 @@ DEPENDENCIES:
   - UMCShare/Social/YouDao
   - UMCShare/UI
   - XLForm
+  - YYCache
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -258,6 +260,7 @@ SPEC REPOS:
     - UMCSecurityPlugins
     - UMCShare
     - XLForm
+    - YYCache
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -270,8 +273,8 @@ SPEC CHECKSUMS:
   Harpy: b2fbe6819f6a8932df32d7cd2fb20f442df86bbc
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
   HYBNetworking: 5b350e2eacfbf6db7d3f4253274b2f2bb68e881c
-  Hyphenate: 02e3934f1bef0c25e6e5f46bd0940df740922957
-  HyphenateLite: 9b33a3eb72a28ec53e10bf5894e6f15a9774561c
+  Hyphenate: 100a811c9e8d02460c66d54fa8b95781c7083d6a
+  HyphenateLite: 660894e2bfbda22b806d75c625d5cc1eea8166a4
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   JCore: f14c0549968a63c22e246a4875aa9d428446f373
   JDLaunchAd: e49b3e9cb03d574aae4775c9f6421639871a9a0d
@@ -296,7 +299,8 @@ SPEC CHECKSUMS:
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMCShare: aa233aecad67979930fe43f3a2f676023b669439
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 708f756a77f38d0156efd1293ce5613df70b09ee
+PODFILE CHECKSUM: d2b8ee3b8dab862f01deef9b76d032d97cc6586d
 
 COCOAPODS: 1.5.3

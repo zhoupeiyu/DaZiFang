@@ -177,6 +177,13 @@
         [self.delegate countDownButtonAction:button customView:self];
     }
 }
+- (void)setSecurityInput:(BOOL)isSecurity {
+    self.inputTextField.secureTextEntry = isSecurity;
+    //清除密码明文切换时留有的空格
+    if ([self.inputTextField isFirstResponder]) {
+        [self.inputTextField becomeFirstResponder];
+    }
+}
 #pragma mark - lazy
 
 - (UILabel *)titleLbl {
@@ -304,6 +311,7 @@
     NSURL *rurl = [NSURL URLWithString:path];
     
 }
+
 #pragma mark - lazy
 
 - (UIButton *)checkBtn {

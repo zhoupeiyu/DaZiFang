@@ -279,7 +279,17 @@
 @end
 
 
+#pragma mark - 图片
 
+@interface UploadImageDetailModel : NSObject
+
+@property (nonatomic, strong) NSString *fileUrl;
+
+@end
+@interface UploadImageModel : BaseModel
+@property (nonatomic, strong) UploadImageDetailModel *data;
+
+@end
 
 
 

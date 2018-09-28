@@ -241,6 +241,8 @@
         [str addAttribute:NSFontAttributeName value:[ZRSWLoginCustomView placeHoledSmallFont] range:NSMakeRange(title.length, tip.length)];
         _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:str keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:YES];
         _pwdView.delegate = self;
+        [_pwdView setSecurityInput:YES];
+
     }
     return _pwdView;
 }

@@ -113,12 +113,25 @@
     [params setObject:idCardImg4 forKey:@"idCardImg4"];
     [self POST:KUserValidationIdCardInterface reqType:KUserValidationIdCardRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
+
 - (void)userValidationCompany:(NSString *)companyName deptName:(NSString *)deptName workCardUrl:(NSString *)workCardUrl delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:companyName forKey:@"companyName"];
     [params setObject:deptName forKey:@"deptName"];
     [params setObject:workCardUrl forKey:@"workCardUrl"];
     [self POST:KUserValidationCompanyInterface reqType:KUserValidationCompanyRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
+}
+
+- (void)uploadImageWithImages:(NSArray *)images uploadType:(UploadImageType)uploadType delegate:(id)delegate {
+    NSString *type = @"";
+    if (uploadType == UploadImageTypeIpCard1) {
+        type = KUserUploadImageCard1Request;
+    }
+    else if (uploadType == UploadImageTypeIpCard2) {
+        type = KUserUploadImageCard2Request;
+    }
+    [self uploadImageWithInterface:KUserUploadImageInterface reqType:type imageArray:images delegate:delegate ObjcClass:[UploadImageModel class]];
+    
 }
 - (void)userFeedBack:(NSString *)content delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -199,7 +212,20 @@
 }
 
 
+- (void)logOutWithDelegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    UserModel *model = [UserModel getCurrentModel];
+    if (model.data.phone.length > 0) {
+        [params setObject:model.data.phone forKey:@"phone"];
+    }
+    else {
+        [params setObject:@"18600886745" forKey:@"phone"];
 
+    }
+    [self POST:KUserLogOutInterface reqType:KUserLogOutRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
+
+    
+}
 
 
 

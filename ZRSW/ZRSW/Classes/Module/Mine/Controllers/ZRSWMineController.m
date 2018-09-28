@@ -16,6 +16,7 @@
 #import "ZRSWEnterpriseAuthController.h"
 #import "ZRSWBillListController.h"
 #import "ZRSWRemindListController.h"
+#import "UserService.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -31,6 +32,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     [self updateUserInfo];
 }
@@ -86,12 +88,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
+    if ([mineModel.title isEqualToString:@"退出登录"]) {
+        [[[UserService alloc] init] logOutWithDelegate:self];
+        return;
+    }
     BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
                                                      alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    if ([reqType isEqualToString:KUserLogOutRequest]) {
+        [UserModel removeUserData];
+        //设置LoginToke
+        [[BaseNetWorkService sharedInstance] setLoginToken:nil];
+        [self.tableView reloadData];
+        
+    }
+}
 #pragma mark - Action
 - (void)settingAction {
     ZRSWSettingController *setting = [[ZRSWSettingController alloc] init];
@@ -192,6 +208,14 @@
         {
             ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
             model.title = @"登录";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_phone";
+            model.viewControllerName = NSStringFromClass([ZRSWLoginController class]);
+            [data addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"退出登录";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_phone";
             model.viewControllerName = NSStringFromClass([ZRSWLoginController class]);

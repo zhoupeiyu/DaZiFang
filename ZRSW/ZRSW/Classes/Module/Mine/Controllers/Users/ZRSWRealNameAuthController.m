@@ -9,6 +9,7 @@
 #import "ZRSWRealNameAuthController.h"
 #import "ZRSWLoginCustomView.h"
 #import "ZRSWIPCardView.h"
+#import "UserService.h"
 
 
 @interface ZRSWRealNameAuthController () <LoginCustomViewDelegate>
@@ -19,6 +20,9 @@
 
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *ipCard;
+@property (nonatomic, strong) UserService *service;
+
+
 
 @end
 
@@ -77,7 +81,25 @@
 #pragma mark - action
 
 - (void)commitBtnAction {
-    
+    if (self.userName.length == 0) {
+        [TipViewManager showToastMessage:@"请输入姓名！"];
+        return;
+    }
+    if (![MatchManager checkUserIdCard:self.ipCard]) {
+        [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
+        return;
+    }
+    if ([self.userCardView getSelectedImages].count < 2) {
+        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
+        return;
+    }
+    if ([self.cardView getSelectedImages].count < 2) {
+        [TipViewManager showToastMessage:@"请上传身份证照片！"];
+        return;
+    }
+    [TipViewManager showLoading];
+    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard1 delegate:self];
+    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard2 delegate:self];
 }
 
 #pragma mark - delegate
@@ -113,7 +135,20 @@
         self.ipCard = text;
     }
 }
-
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUserUploadImageCard1Request]) {
+            LLog(@"--------");
+        }
+        else if ([reqType isEqualToString:KUserUploadImageCard2Request]) {
+             LLog(@"**********");
+        }
+    }
+    else {
+        
+    }
+}
 #pragma mark - lazy
 
 - (ZRSWLoginCustomView *)userNameView {
@@ -142,5 +177,11 @@
         _cardView = [ZRSWIPCardView getIPCardViewWithType:IPCardViewTypePerson title:@"上传手持身份证照片" fristViewContent:@"点击上传\n身份证正面照片" secondContent:@"点击上传\n身份证反面照片" isNeedBottomLine:NO presentVC:self];
     }
     return _cardView;
+}
+- (UserService *)service {
+    if (!_service) {
+        _service = [[UserService alloc] init];
+    }
+    return _service;
 }
 @end

@@ -9,5 +9,7 @@
 #import "BaseScrollViewController.h"
 
 @interface ZRSWRetrievePasswordController : BaseScrollViewController
+@property (nonatomic, strong) NSString *phoneNum;
+@property (nonatomic, strong) NSString *codeNum;
 
 @end

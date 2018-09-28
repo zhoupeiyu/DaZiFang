@@ -13,6 +13,7 @@
 #import "ZRSWRetrievePasswordController.h"
 #import "UserService.h"
 #import "ZRSWBrushFaceLoginController.h"
+#import "ZRSWForgetPwdViewController.h"
 
 @interface ZRSWLoginController ()<LoginCustomViewDelegate>
 
@@ -113,6 +114,22 @@
     }
     self.loginBtn.enabled = [self checkRegisterEnabled];
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView {
+   if (customView == self.pwdView) {
+        NSUInteger lengthOfString = string.length;  //lengthOfString的值始终为1
+        for (NSInteger loopIndex = 0; loopIndex < lengthOfString; loopIndex++) {
+            unichar character = [string characterAtIndex:loopIndex]; //将输入的值转化为ASCII值（即内部索引值），可以参考ASCII表
+            // 48-57;{0,9};65-90;{A..Z};97-122:{a..z}
+            if (character < 48) return NO; // 48 unichar for 0
+            if (character > 57 && character < 65) return NO; //
+            if (character > 90 && character < 97) return NO;
+            if (character > 122) return NO;
+        }
+        return YES;
+    }
+    return YES;
+}
+
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
@@ -140,7 +157,7 @@
 }
 - (void)forgetPwdBtnAction {
     [self endEditing];
-    ZRSWRetrievePasswordController *retrievePassword = [[ZRSWRetrievePasswordController alloc] init];
+    ZRSWForgetPwdViewController *retrievePassword = [[ZRSWForgetPwdViewController alloc] init];
     [self.navigationController pushViewController:retrievePassword animated:YES];
 }
 - (void)faceLogin {
@@ -178,8 +195,9 @@
 
 - (ZRSWLoginCustomView *)pwdView {
     if (!_pwdView) {
-        _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入登录密码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeNumberPad isNeedCountDownButton:NO isNeedBottomLine:NO];
+        _pwdView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"密码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入登录密码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeDefault isNeedCountDownButton:NO isNeedBottomLine:NO];
         _pwdView.delegate = self;
+        [_pwdView setSecurityInput:YES];
     }
     return _pwdView;
 }

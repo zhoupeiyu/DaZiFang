@@ -132,6 +132,7 @@
 - (void)userRealNameValidationIdCard:(NSString *)realName idCard:(NSString *)idCard idCardImg1:(NSString *)idCardImg1 idCardImg2:(NSString *)idCardImg2 idCardImg3:(NSString *)idCardImg3 idCardImg4:(NSString *)idCardImg4 delegate:(id)delegate;
 
 
+
 /**
  企业认证
 
@@ -142,6 +143,14 @@
  */
 - (void)userValidationCompany:(NSString *)companyName deptName:(NSString *)deptName workCardUrl:(NSString *)workCardUrl delegate:(id)delegate;
 
+
+/**
+ 上传图片
+
+ @param images 图片数组
+ @param delegate 代理
+ */
+- (void)uploadImageWithImages:(NSArray *)images uploadType:(UploadImageType)uploadType delegate:(id)delegate;
 
 /**
  意见反馈
@@ -217,6 +226,15 @@
  @param delegate 代理
  */
 - (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate;
+
+
+/**
+ 退出登录
+
+ @param phone 手机号
+ @param delegate 代理
+ */
+- (void)logOutWithDelegate:(id)delegate;
 
 
 @end

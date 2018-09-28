@@ -429,6 +429,11 @@
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
+		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
+		E5E2797A215DCA29007D27A8 /* BANetManagerCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27971215DCA29007D27A8 /* BANetManagerCache.m */; };
+		E5E2797B215DCA29007D27A8 /* BANetManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27972215DCA29007D27A8 /* BANetManager.m */; };
+		E5E2797C215DCA29007D27A8 /* UIImage+CompressImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27973215DCA29007D27A8 /* UIImage+CompressImage.m */; };
+		E5E2797D215DCA29007D27A8 /* BADataEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27975215DCA29007D27A8 /* BADataEntity.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1096,6 +1101,18 @@
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
+		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
+		E5E27970215DCA29007D27A8 /* BADataEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BADataEntity.h; sourceTree = "<group>"; };
+		E5E27971215DCA29007D27A8 /* BANetManagerCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BANetManagerCache.m; sourceTree = "<group>"; };
+		E5E27972215DCA29007D27A8 /* BANetManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BANetManager.m; sourceTree = "<group>"; };
+		E5E27973215DCA29007D27A8 /* UIImage+CompressImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CompressImage.m"; sourceTree = "<group>"; };
+		E5E27974215DCA29007D27A8 /* BANetManager_Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANetManager_Version.h; sourceTree = "<group>"; };
+		E5E27975215DCA29007D27A8 /* BADataEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BADataEntity.m; sourceTree = "<group>"; };
+		E5E27976215DCA29007D27A8 /* BANetManagerCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANetManagerCache.h; sourceTree = "<group>"; };
+		E5E27977215DCA29007D27A8 /* UIImage+CompressImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CompressImage.h"; sourceTree = "<group>"; };
+		E5E27978215DCA29007D27A8 /* BANetManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANetManager.h; sourceTree = "<group>"; };
+		E5E27979215DCA29007D27A8 /* BANetManager_OC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BANetManager_OC.h; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -1199,9 +1216,9 @@
 			isa = PBXGroup;
 			children = (
 				3CFBF387215C7B8A00A7AA97 /* EaseUI.h */,
+				3CFBF4AE215C7B8A00A7AA97 /* EaseUI.m */,
 				3CFBF388215C7B8A00A7AA97 /* EMUIKit */,
 				3CFBF4AC215C7B8A00A7AA97 /* resources */,
-				3CFBF4AE215C7B8A00A7AA97 /* EaseUI.m */,
 			);
 			path = EaseUI;
 			sourceTree = "<group>";
@@ -2158,6 +2175,7 @@
 		E5B599A9214EBEE800726DE9 /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				E5E2796F215DCA29007D27A8 /* BANetManager */,
 				3CFBF386215C7B8A00A7AA97 /* EaseUI */,
 				3C7E4B1621528CD90058D3E2 /* Share */,
 				E5B59BC1214FA94300726DE9 /* JKCountDownButton */,
@@ -2498,6 +2516,8 @@
 				E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */,
 				3C7E4B00215162EE0058D3E2 /* ZRSWRetrievePasswordController.h */,
 				3C7E4B01215162F40058D3E2 /* ZRSWRetrievePasswordController.m */,
+				E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */,
+				E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */,
 				3C7E4B0E21525A880058D3E2 /* ZRSWUserInfoController.h */,
 				3C7E4B0D21525A840058D3E2 /* ZRSWUserInfoController.m */,
 				E591D6B92153EAE800F6802A /* ZRSWResetPhoneController.h */,
@@ -2535,6 +2555,23 @@
 				E5D39184215CA95400E4F962 /* libc++.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5E2796F215DCA29007D27A8 /* BANetManager */ = {
+			isa = PBXGroup;
+			children = (
+				E5E27970215DCA29007D27A8 /* BADataEntity.h */,
+				E5E27975215DCA29007D27A8 /* BADataEntity.m */,
+				E5E27978215DCA29007D27A8 /* BANetManager.h */,
+				E5E27972215DCA29007D27A8 /* BANetManager.m */,
+				E5E27979215DCA29007D27A8 /* BANetManager_OC.h */,
+				E5E27974215DCA29007D27A8 /* BANetManager_Version.h */,
+				E5E27976215DCA29007D27A8 /* BANetManagerCache.h */,
+				E5E27971215DCA29007D27A8 /* BANetManagerCache.m */,
+				E5E27977215DCA29007D27A8 /* UIImage+CompressImage.h */,
+				E5E27973215DCA29007D27A8 /* UIImage+CompressImage.m */,
+			);
+			path = BANetManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2861,8 +2898,8 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW-frameworks.sh",
-				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.1/Hyphenate.framework",
-				"${PODS_ROOT}/HyphenateLite/iOS_Pods_IMSDK_V3.5.1/HyphenateLite.framework",
+				"${PODS_ROOT}/Hyphenate/iOS_Pods_IMFullSDK_V3.5.0/Hyphenate.framework",
+				"${PODS_ROOT}/HyphenateLite/iOS_Pods_IMSDK_V3.5.0/HyphenateLite.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -2886,6 +2923,7 @@
 				3CFBF4B6215C7B8A00A7AA97 /* EaseConvertToCommonEmoticonsHelper.m in Sources */,
 				3CFBF4B0215C7B8A00A7AA97 /* NSDate+Category.m in Sources */,
 				3CFBF4DB215C7B8A00A7AA97 /* EMAudioRecorderUtil.m in Sources */,
+				E5E2797D215DCA29007D27A8 /* BADataEntity.m in Sources */,
 				E5B59A61214EBF7700726DE9 /* ZRSWHomeController.m in Sources */,
 				E5B59A52214EBEE800726DE9 /* TZProgressView.m in Sources */,
 				3CFBF4EE215C7B8B00A7AA97 /* PSTCollectionViewUpdateItem.m in Sources */,
@@ -2914,6 +2952,7 @@
 				E5B59A6A214EC02100726DE9 /* UserModel.m in Sources */,
 				E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */,
 				E5B59A57214EBEE800726DE9 /* TZLocationManager.m in Sources */,
+				E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */,
 				E5B59A24214EBEE800726DE9 /* UIFont+Utility.m in Sources */,
 				E5B59A35214EBEE800726DE9 /* PickerView.m in Sources */,
 				3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */,
@@ -2975,6 +3014,7 @@
 				3CFBF513215C7B8B00A7AA97 /* EaseBaseMessageCell.m in Sources */,
 				E5B59A21214EBEE800726DE9 /* UIApplication+Extension.m in Sources */,
 				E5B59A4E214EBEE800726DE9 /* NSBundle+TZImagePicker.m in Sources */,
+				E5E2797C215DCA29007D27A8 /* UIImage+CompressImage.m in Sources */,
 				E591D6C92153EB8500F6802A /* ZRSWActionSheetView.m in Sources */,
 				E5B59A56214EBEE800726DE9 /* TZImagePickerController.m in Sources */,
 				3CFBF526215C7B8B00A7AA97 /* EaseUI.m in Sources */,
@@ -3038,6 +3078,7 @@
 				E5B59A48214EBEE800726DE9 /* LNHeaderAnimator.m in Sources */,
 				E5B59A22214EBEE800726DE9 /* NSArray+Extension.m in Sources */,
 				3CFBF4AF215C7B8A00A7AA97 /* UIViewController+HUD.m in Sources */,
+				E5E2797B215DCA29007D27A8 /* BANetManager.m in Sources */,
 				3CFBF4B8215C7B8A00A7AA97 /* EaseEmoji.m in Sources */,
 				E5B59A59214EBEE800726DE9 /* NSObject+YYModel.m in Sources */,
 				3CFBF520215C7B8B00A7AA97 /* EaseBubbleView+Video.m in Sources */,
@@ -3067,6 +3108,7 @@
 				E5B59A55214EBEE800726DE9 /* TZPhotoPreviewCell.m in Sources */,
 				3CFBF4B3215C7B8A00A7AA97 /* NSDateFormatter+Category.m in Sources */,
 				E5B59A1E214EBEE800726DE9 /* UIBarButtonItem+SXCreate.m in Sources */,
+				E5E2797A215DCA29007D27A8 /* BANetManagerCache.m in Sources */,
 				E5B59A2E214EBEE800726DE9 /* NSString+Extension.m in Sources */,
 				E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */,
 				E5B59A1A214EBEE800726DE9 /* BaseModel.m in Sources */,
@@ -3220,7 +3262,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = J4N8RS9Y8V;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -3248,7 +3290,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = J4N8RS9Y8V;
 				GCC_PREFIX_HEADER = Classes/PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/ZRSW/SystemConfig/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

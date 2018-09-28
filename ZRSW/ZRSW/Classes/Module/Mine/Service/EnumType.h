@@ -23,3 +23,8 @@ typedef enum : NSUInteger {
     DetailsTypeSystemNotification = 1, // 系统公告
     DetailsTypeCommentQuestion = 2 //常见问题
 } DetailsType;
+
+typedef enum : NSUInteger {
+    UploadImageTypeIpCard1, // 手持身份证照片
+    UploadImageTypeIpCard2 // 身份证照片
+} UploadImageType;
