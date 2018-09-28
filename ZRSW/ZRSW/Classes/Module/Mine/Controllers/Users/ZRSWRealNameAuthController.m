@@ -81,29 +81,36 @@
 #pragma mark - action
 
 - (void)commitBtnAction {
-//    if (self.userName.length == 0) {
-//        [TipViewManager showToastMessage:@"请输入姓名！"];
-//        return;
-//    }
-//    if (![MatchManager checkUserIdCard:self.ipCard]) {
-//        [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
-//        return;
-//    }
-//    if ([self.userCardView getSelectedImages].count < 2) {
-//        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
-//        return;
-//    }
-//    if ([self.cardView getSelectedImages].count < 2) {
-//        [TipViewManager showToastMessage:@"请上传身份证照片！"];
-//        return;
-//    }
-//    [TipViewManager showLoading];
-    [self.imageManager uploadImagesWithImagesArray:[self.userCardView getSelectedImages] completeBlock:^(NSMutableArray * _Nullable imageUrls) {
-        for (NSString *url in imageUrls) {
-            LLog(@"\n");
-            LLog(@"%@",url);
-        }
-    }];
+    if (self.userName.length == 0) {
+        [TipViewManager showToastMessage:@"请输入姓名！"];
+        return;
+    }
+    if (![MatchManager checkUserIdCard:self.ipCard]) {
+        [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
+        return;
+    }
+    if ([self.userCardView getSelectedImages].count < 2) {
+        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
+        return;
+    }
+    if ([self.cardView getSelectedImages].count < 2) {
+        [TipViewManager showToastMessage:@"请上传身份证照片！"];
+        return;
+    }
+    [TipViewManager showLoading];
+    WS(weakSelf);
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObjectsFromArray:[self.userCardView getSelectedImages]];
+    [arr addObjectsFromArray:[self.cardView getSelectedImages]];
+    if ([TipViewManager showNetErrorToast]) {
+        [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            NSString *idCardImg1 = [imageUrls objectAtIndex:2];
+            NSString *idCardImg2 = [imageUrls objectAtIndex:3];
+            NSString *idCardImg3 = [imageUrls objectAtIndex:0];
+            NSString *idCardImg4 = [imageUrls objectAtIndex:1];
+            [weakSelf.service userRealNameValidationIdCard:self.userName idCard:self.ipCard idCardImg1:idCardImg1 idCardImg2:idCardImg2 idCardImg3:idCardImg3 idCardImg4:idCardImg4 delegate:self];
+        }];
+    }
 }
 
 #pragma mark - delegate
@@ -142,15 +149,18 @@
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KUserUploadImageCard1Request]) {
-            LLog(@"--------");
-        }
-        else if ([reqType isEqualToString:KUserUploadImageCard2Request]) {
-             LLog(@"**********");
+        if ([reqType isEqualToString:KUserValidationIdCardRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code == 0) {
+                [TipViewManager showToastMessage:@"认证成功!"];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
         }
     }
     else {
-        
+        [TipViewManager showNetErrorToast];
     }
 }
 #pragma mark - lazy
