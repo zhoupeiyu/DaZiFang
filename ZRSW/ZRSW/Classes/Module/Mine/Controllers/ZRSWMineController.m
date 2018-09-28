@@ -17,6 +17,8 @@
 #import "ZRSWBillListController.h"
 #import "ZRSWRemindListController.h"
 #import "UserService.h"
+#import "ZRSWOrderListController.h"
+
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -170,7 +172,7 @@
             model.title = @"我的订单";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_order";
-            model.viewControllerName = NSStringFromClass([ZRSWUserInfoController class]);
+            model.viewControllerName = NSStringFromClass([ZRSWOrderListController class]);
             [data addObject:model];
         }
         {
