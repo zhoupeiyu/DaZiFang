@@ -26,6 +26,13 @@
 #ifdef Api_Test // 测试环境
 
     #define API_Host                @"http://zhongrong.ijiaoban.cn/"
+
+    #define API_Upload               @""
+
+
+
+
+
     #define UMKey                   @"5ba31173b465f5623b000047" // 友盟key
     #define TencentAppID @"1104177532"
     #define kWeiBoAppKey         @"3972746284"
@@ -46,6 +53,9 @@
 #else // 正式环境
 
     #define API_Host                @""
+
+
+
     #define UMKey                   @""
     #define TencentAppID @"1104177532"
     #define kWeiBoAppKey         @"3751276339"

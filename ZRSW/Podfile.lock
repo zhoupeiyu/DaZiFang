@@ -153,6 +153,7 @@ PODS:
     - UMCCommon
     - UMCShare/Core
   - XLForm (3.3.0)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -219,6 +220,7 @@ DEPENDENCIES:
   - UMCShare/Social/YouDao
   - UMCShare/UI
   - XLForm
+  - YYCache
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -258,6 +260,7 @@ SPEC REPOS:
     - UMCSecurityPlugins
     - UMCShare
     - XLForm
+    - YYCache
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -296,7 +299,8 @@ SPEC CHECKSUMS:
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMCShare: aa233aecad67979930fe43f3a2f676023b669439
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 048952f91e98e1f3cf032a74fae9b8d7aa3c63b8
+PODFILE CHECKSUM: d2b8ee3b8dab862f01deef9b76d032d97cc6586d
 
 COCOAPODS: 1.5.3

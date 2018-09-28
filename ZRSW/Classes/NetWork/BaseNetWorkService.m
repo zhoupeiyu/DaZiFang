@@ -7,6 +7,7 @@
 //
 
 #import "BaseNetWorkService.h"
+#import "BANetManager_OC.h"
 
 static NSString *const UserIDKey = @"UserIDKey";
 static NSString *const UserLoginTokenKey = @"UserLoginTokenKey";
@@ -66,8 +67,14 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
     [HYBNetworking updateBaseUrl:API_Host];
 //    [HYBNetworking configRequestType:kHYBRequestTypeJSON responseType:kHYBResponseTypeJSON shouldAutoEncodeUrl:NO callbackOnCancelRequest:YES];
     [HYBNetworking configCommonHttpHeaders:[self netWorkHeader]];
+    
+    [[BANetManager sharedBANetManager] setRequestSerializer:BAHttpRequestSerializerJSON];
+    [[BANetManager sharedBANetManager] setResponseSerializer:BAHttpResponseSerializerJSON];
+    [[BANetManager sharedBANetManager] setHttpHeaderFieldDictionary:[self netWorkHeader]];
+    [[BANetManager sharedBANetManager] setIsOpenLog:YES];
+    
 }
--(void)GET:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
+- (void)GET:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
     WS(weakSelf);
     [HYBNetworking getWithUrl:interface refreshCache:needCache params:dic progress:^(int64_t bytesRead, int64_t totalBytesRead) {
         
@@ -81,7 +88,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
     }];
 }
 
--(void)POST:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
+- (void)POST:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
     WS(weakSelf);
     [HYBNetworking postWithUrl:interface refreshCache:needCache params:dic progress:^(int64_t bytesRead, int64_t totalBytesRead) {
         
@@ -93,7 +100,20 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
         [weakSelf failBlock:error delegate:delegate reqType:type];
     }];
 }
-
+- (void)uploadImageWithInterface:(NSString *)interface reqType:(NSString *)type imageArray:(NSArray *)imageArray delegate:(id<BaseNetWorkServiceDelegate>) delegate ObjcClass:(Class)objecClass {
+    WS(weakSelf);
+    BAImageDataEntity *imageData = [[BAImageDataEntity alloc] init];
+    imageData.imageArray = imageArray;
+    imageData.urlString = [NSString stringWithFormat:@"%@%@",API_Host,interface];
+    imageData.parameters = nil;
+    [BANetManager ba_uploadImageWithEntity:imageData successBlock:^(id response) {
+        [weakSelf successBlock:response delegate:delegate ObjcClass:objecClass reqType:type];
+    } failurBlock:^(NSError *error) {
+        [weakSelf failBlock:error delegate:delegate reqType:type];
+    } progressBlock:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        LLog(@"总大小：%lld ------ 当前上传大小：%lld",totalBytesProgress,bytesProgress);
+    }];
+}
 - (void)successBlock:(id)response delegate:(id<BaseNetWorkServiceDelegate>)delegate ObjcClass:(Class)objecClass reqType:(NSString *)type{
     
     if ([response isKindOfClass:[NSDictionary class]]) {

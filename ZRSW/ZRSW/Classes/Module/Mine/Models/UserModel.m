@@ -154,8 +154,13 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 @end
 
+@implementation UploadImageDetailModel
 
+@end
 
+@implementation UploadImageModel
+
+@end
 
 
 

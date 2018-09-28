@@ -18,6 +18,8 @@
 // 用户登录
 #define KUserLoginRequest                       @"KUserLoginRequest"
 
+// 退出登录
+#define KUserLogOutRequest                      @"KUserLogOutRequest"
 // 重置密码
 #define KUserResetPasswordRequest               @"KUserResetPasswordRequest"
 
@@ -32,6 +34,12 @@
 
 // 公司认证
 #define KUserValidationCompanyRequest           @"KUserValidationCompanyRequest"
+
+// 手持身份证照片
+#define KUserUploadImageCard1Request            @"KUserUploadImageCard1Request"
+#define KUserUploadImageCard2Request            @"KUserUploadImageCard2Request"
+
+
 
 // 意见反馈
 #define KUserFeedBackRequest                    @"KUserFeedBackRequest"

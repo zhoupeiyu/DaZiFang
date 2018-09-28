@@ -21,6 +21,8 @@
 // 用户登录
 #define KUserLoginInterface                             @"api/user/login"
 
+// 退出登录
+#define KUserLogOutInterface                            @"api/user/deleteUser"
 // 重置密码
 #define KUserResetPasswordInterface                     @"api/user/resetPwd"
 
@@ -39,6 +41,8 @@
 // 意见反馈
 #define KUserFeedBackInterface                          @"api/user/feedBack"
 
+// 上传图片
+#define KUserUploadImageInterface                       @"api/user/uploadFile"
 // 城市列表
 #define KCityListInterface                              @"api/index/citys"
 

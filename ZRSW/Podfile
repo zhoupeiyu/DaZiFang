@@ -213,6 +213,8 @@ pod 'HyphenateLite'
 #pod 'Hyphenate'
 pod 'Hyphenate', '~> 3.5.0'
 
+pod 'YYCache'
+
 #pod 'GrowingTextView'
 
 
