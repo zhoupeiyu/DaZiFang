@@ -13,14 +13,6 @@ typedef enum : NSUInteger {
     RequestFinishedStatusFail = 1
 } RequestFinishedStatus;
 
-/** 上传或者下载的进度, Progress.completedUnitCount:当前大小 - Progress.totalUnitCount:总大小*/
-typedef void (^HttpProgress)(CGFloat currentProgress);
-
-/** 请求成功的Block */
-typedef void(^HttpRequestSuccess)(id responseObject);
-
-/** 请求失败的Block */
-typedef void(^HttpRequestFailed)(NSError *error);
 
 @protocol BaseNetWorkServiceDelegate <NSObject>
 
@@ -46,9 +38,5 @@ typedef void(^HttpRequestFailed)(NSError *error);
 - (void)GET:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache;
 
 - (void)POST:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache;
-
-- (void)uploadImageWithInterface:(NSString *)interface reqType:(NSString *)type imageArray:(NSArray *)imageArray delegate:(id<BaseNetWorkServiceDelegate>) delegate ObjcClass:(Class)objecClass;
-
-
 
 @end

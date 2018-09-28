@@ -122,17 +122,6 @@
     [self POST:KUserValidationCompanyInterface reqType:KUserValidationCompanyRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
 
-- (void)uploadImageWithImages:(NSArray *)images uploadType:(UploadImageType)uploadType delegate:(id)delegate {
-    NSString *type = @"";
-    if (uploadType == UploadImageTypeIpCard1) {
-        type = KUserUploadImageCard1Request;
-    }
-    else if (uploadType == UploadImageTypeIpCard2) {
-        type = KUserUploadImageCard2Request;
-    }
-    [self uploadImageWithInterface:KUserUploadImageInterface reqType:type imageArray:images delegate:delegate ObjcClass:[UploadImageModel class]];
-    
-}
 - (void)userFeedBack:(NSString *)content delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:content forKey:@"content"];

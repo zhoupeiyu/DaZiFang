@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *ipCard;
 @property (nonatomic, strong) UserService *service;
-
+@property (nonatomic, strong) UploadImagesManager *imageManager;
 
 
 @end
@@ -98,8 +98,19 @@
         return;
     }
     [TipViewManager showLoading];
-    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard1 delegate:self];
-    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard2 delegate:self];
+    WS(weakSelf);
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObjectsFromArray:[self.userCardView getSelectedImages]];
+    [arr addObjectsFromArray:[self.cardView getSelectedImages]];
+    if ([TipViewManager showNetErrorToast]) {
+        [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            NSString *idCardImg1 = [imageUrls objectAtIndex:2];
+            NSString *idCardImg2 = [imageUrls objectAtIndex:3];
+            NSString *idCardImg3 = [imageUrls objectAtIndex:0];
+            NSString *idCardImg4 = [imageUrls objectAtIndex:1];
+            [weakSelf.service userRealNameValidationIdCard:self.userName idCard:self.ipCard idCardImg1:idCardImg1 idCardImg2:idCardImg2 idCardImg3:idCardImg3 idCardImg4:idCardImg4 delegate:self];
+        }];
+    }
 }
 
 #pragma mark - delegate
@@ -138,15 +149,18 @@
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KUserUploadImageCard1Request]) {
-            LLog(@"--------");
-        }
-        else if ([reqType isEqualToString:KUserUploadImageCard2Request]) {
-             LLog(@"**********");
+        if ([reqType isEqualToString:KUserValidationIdCardRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code == 0) {
+                [TipViewManager showToastMessage:@"认证成功!"];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
         }
     }
     else {
-        
+        [TipViewManager showNetErrorToast];
     }
 }
 #pragma mark - lazy
@@ -183,5 +197,14 @@
         _service = [[UserService alloc] init];
     }
     return _service;
+}
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
 }
 @end

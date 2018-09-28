@@ -7,6 +7,7 @@
 //
 
 #import "BaseModel.h"
+#import "BaseUploadModel.h"
 
 #define DefaultNickName         @"小明"
 
@@ -286,7 +287,7 @@
 @property (nonatomic, strong) NSString *fileUrl;
 
 @end
-@interface UploadImageModel : BaseModel
+@interface UploadImageModel : BaseUploadModel
 @property (nonatomic, strong) UploadImageDetailModel *data;
 
 @end
