@@ -8,7 +8,6 @@
 
 #import "ZRSWSettingController.h"
 #import "ZRSWFeedBackController.h"
-#import "ZRSWOnlineCustomerServiceController.h"
 @interface ZRSWSettingController ()
 
 @end
@@ -75,9 +74,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 1) {
         LLog(@"用户协议");
-        ZRSWOnlineCustomerServiceController *customerServiceVC = [[ZRSWOnlineCustomerServiceController alloc] init];
-        customerServiceVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:customerServiceVC animated:YES];
     }else if (indexPath.row == 2) {
         LLog(@"意见反馈");
         ZRSWFeedBackController *feedBackVC = [[ZRSWFeedBackController alloc] init];
