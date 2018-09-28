@@ -9,11 +9,14 @@
 #import "ZRSWEnterpriseAuthController.h"
 #import "ZRSWLoginCustomView.h"
 #import "ZRSWIPCardView.h"
+#import "UserService.h"
 
 @interface ZRSWEnterpriseAuthController ()<LoginCustomViewDelegate>
 @property (nonatomic, strong) ZRSWLoginCustomView *companyNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *departmentNameView;
 @property (nonatomic, strong) ZRSWIPCardView *workCardView;
+@property (nonatomic, strong) UploadImagesManager *imageManager;
+@property (nonatomic, strong) UserService *service;
 
 @property (nonatomic, strong) NSString *companyName;
 @property (nonatomic, strong) NSString *departmentName;
@@ -68,7 +71,26 @@
 #pragma mark - action
 
 - (void)commitBtnAction {
-    
+    if (self.companyName.length == 0) {
+        [TipViewManager showToastMessage:@"请输入公司名称！"];
+        return;
+    }
+    if (self.departmentName.length == 0) {
+        [TipViewManager showToastMessage:@"请输入部门名称！"];
+        return;
+    }
+    if ([self.workCardView getSelectedImages].count == 0) {
+        [TipViewManager showToastMessage:@"请上传工牌照片！"];
+        return;
+    }
+    WS(weakSelf);
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [self.imageManager uploadImagesWithImagesArray:[self.workCardView getSelectedImages] completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            NSString *idCardImg3 = [imageUrls objectAtIndex:0];
+            [weakSelf.service userValidationCompany:self.companyName deptName:self.departmentName workCardUrl:idCardImg3 delegate:self];
+        }];
+    }
 }
 
 - (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView {
@@ -80,7 +102,23 @@
         self.departmentName = text;
     }
 }
-
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUserValidationCompanyRequest]) {
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code == 0) {
+                [TipViewManager showToastMessage:@"认证成功!"];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+    else {
+        [TipViewManager showNetErrorToast];
+    }
+}
 #pragma mark - lazy
 - (ZRSWLoginCustomView *)companyNameView {
     if (!_companyNameView) {
@@ -102,7 +140,20 @@
     }
     return _workCardView;
 }
-
-
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
+}
+- (UserService *)service {
+    if (!_service) {
+        _service = [[UserService alloc] init];
+    }
+    return _service;
+}
 
 @end

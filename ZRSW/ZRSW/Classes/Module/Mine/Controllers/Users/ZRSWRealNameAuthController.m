@@ -97,12 +97,13 @@
         [TipViewManager showToastMessage:@"请上传身份证照片！"];
         return;
     }
-    [TipViewManager showLoading];
+    
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObjectsFromArray:[self.userCardView getSelectedImages]];
     [arr addObjectsFromArray:[self.cardView getSelectedImages]];
     if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             NSString *idCardImg1 = [imageUrls objectAtIndex:2];
             NSString *idCardImg2 = [imageUrls objectAtIndex:3];
