@@ -28,8 +28,8 @@
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
 @property (nonatomic, strong) NSMutableArray *bannerArray;
-@property (nonatomic, strong) NSMutableArray *hotNewsListSource;
 @property (nonatomic, strong) NSMutableArray *systemNewsListSource;
+@property (nonatomic, strong) NSMutableArray *hotNewsListSource;
 @property (nonatomic, strong) NSMutableArray *questionListSource;
 @property (nonatomic, strong) UIView *loanView;
 @property (nonatomic, strong) UILabel *loanAmountLabel;
@@ -364,7 +364,7 @@
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypePopularInformation;
         detailsVC.hidesBottomBarWhenPushed = YES;
-        detailsVC.detailModel = self.systemNewsListSource[indexPath.row];
+        detailsVC.detailModel = self.hotNewsListSource[indexPath.row];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }else if (indexPath.section == 1) {
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];

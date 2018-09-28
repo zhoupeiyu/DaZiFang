@@ -28,23 +28,30 @@
 
 - (void)setUpChatController{
     EMClient *client = [EMClient sharedClient];
+    WS(weakSelf);
     if (client.isLoggedIn != YES) {
         [[EMClient sharedClient] loginWithUsername:@"MEM18000022"password:@"123456"completion:^(NSString *aUsername, EMError *aError) {
             if (!aError) {
                 LLog(@"登录成功");
-                EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"abcd400" conversationType:EMConversationTypeChat];
-                [self addChildViewController:chatController];
-                [self.view addSubview:chatController.view];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
+                    [weakSelf addChildViewController:chatController];
+                    [weakSelf.view addSubview:chatController.view];
+                });
             } else {
                 LLog(@"登录失败");
             }
         }];
     } else { //已经成功登录
         LLog(@"已经登录");
-        EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"abcd400" conversationType:EMConversationTypeChat];
+        EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
         [self addChildViewController:chatController];
         [self.view addSubview:chatController.view];
     }
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
 }
 
 
