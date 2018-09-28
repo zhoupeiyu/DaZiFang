@@ -43,7 +43,7 @@
 
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:shareModel.title descr:shareModel.content thumImage:shareModel.thumbImage];
         //设置网页地址
-        shareObject.webpageUrl = shareModel.destUrlStr;
+        shareObject.webpageUrl = shareModel.sourceUrlStr;
         LLog(@"分享URL:%@",shareObject.webpageUrl);
         //分享消息对象设置分享内容对象
         messageObject.shareObject = shareObject;
@@ -66,7 +66,7 @@
         messageObject.shareObject = shareObject;
 
     }
-    LLog(@"thumImageUrl:%@",shareModel.thumImageUrl);
+    LLog(@"thumImageUrl:%@",shareModel.thumImageUrlStr);
 
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         NSDictionary *userInfo = error.userInfo;

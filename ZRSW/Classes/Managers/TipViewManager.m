@@ -23,13 +23,15 @@ static NSString *NetWorkErrorText = @"当前网络不给力，请在试一次";
 SYNTHESIZE_SINGLETON_ARC(TipViewManager);
 
 + (void)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(PSTAlertControllerStyle)style actionTitle:(NSString *)actionTitle handler:(void (^)(PSTAlertAction *action))handler controller:(UIViewController *)controller completion:(void (^)(void))completion {
-    [self showAlertControllerWithTitle:title message:message preferredStyle:style actionTitleOne:actionTitle handlerOne:handler actionTitleTwo:@"" handlerTwo:nil controller:controller completion:completion];
+    [self showAlertControllerWithTitle:title message:message preferredStyle:style actionTitleOne:actionTitle handlerOne:handler actionTitleTwo:nil handlerTwo:nil controller:controller completion:completion];
 }
 
 + (void)showAlertControllerWithTitle:(NSString *)title message:(NSString *)message preferredStyle:(PSTAlertControllerStyle)style actionTitleOne:(NSString *)actionTitleOne handlerOne:(void (^)(PSTAlertAction *action))handlerOne  actionTitleTwo:(NSString *)actionTitleTwo handlerTwo:(void (^)(PSTAlertAction *action))handlerTwo controller:(UIViewController *)controller completion:(void (^)(void))completion {
     PSTAlertController *alertVC = [PSTAlertController alertControllerWithTitle:title message:message preferredStyle:style];
     [alertVC addAction:[PSTAlertAction actionWithTitle:actionTitleOne handler:handlerOne]];
-    [alertVC addAction:[PSTAlertAction actionWithTitle:actionTitleTwo handler:handlerTwo]];
+    if (actionTitleTwo != nil) {
+        [alertVC addAction:[PSTAlertAction actionWithTitle:actionTitleTwo handler:handlerTwo]];
+    }
     [alertVC showWithSender:nil controller:controller animated:YES completion:completion];
 }
 

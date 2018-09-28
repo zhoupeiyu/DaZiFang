@@ -14,8 +14,8 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - BaiduMobStatCodeless (4.9.1)
-  - BMKLocationKit (1.3.0)
+  - BaiduMobStatCodeless (4.9.2)
+  - BMKLocationKit (1.3.0.2)
   - ChameleonFramework (2.1.0):
     - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
@@ -26,12 +26,12 @@ PODS:
   - HYBImageCliped (2.2.4)
   - HYBNetworking (3.3.1):
     - AFNetworking (~> 3.1.0)
-  - Hyphenate (3.5.0)
-  - HyphenateLite (3.5.0)
+  - Hyphenate (3.5.1)
+  - HyphenateLite (3.5.1)
   - IQKeyboardManager (5.0.8)
   - JCore (1.2.2)
   - JDLaunchAd (0.0.8)
-  - JKCategories (1.7)
+  - JKCategories (1.7.1)
   - JPush (3.1.0):
     - JCore (~> 1.2.0)
   - KMNavigationBarTransition (1.1.5)
@@ -264,8 +264,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  BaiduMobStatCodeless: 4ca49fbd26fd452c1ee8cd8762acea9ca782fd9a
-  BMKLocationKit: 2ef707d28cd9aab6959050d2ebfcec4217d5a1cf
+  BaiduMobStatCodeless: d2ce628a9ac80c1b924aac363c02d2ef7a5f8771
+  BMKLocationKit: 6c47273f985609be0a0785f2f6f12bb7c1b7e8b6
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   CYLTabBarController: ed6536b8d2df412bc4304dc4b633d4860f15664e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -273,12 +273,12 @@ SPEC CHECKSUMS:
   Harpy: b2fbe6819f6a8932df32d7cd2fb20f442df86bbc
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
   HYBNetworking: 5b350e2eacfbf6db7d3f4253274b2f2bb68e881c
-  Hyphenate: 100a811c9e8d02460c66d54fa8b95781c7083d6a
-  HyphenateLite: 660894e2bfbda22b806d75c625d5cc1eea8166a4
+  Hyphenate: 02e3934f1bef0c25e6e5f46bd0940df740922957
+  HyphenateLite: 9b33a3eb72a28ec53e10bf5894e6f15a9774561c
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   JCore: f14c0549968a63c22e246a4875aa9d428446f373
   JDLaunchAd: e49b3e9cb03d574aae4775c9f6421639871a9a0d
-  JKCategories: 5136d903ed6a17e700cac984db9fc9dcfaad2954
+  JKCategories: 91d60229a9658378cfbd48e97805ec4602e3b327
   JPush: 5921e25ad13e0386351079217b009f2039084eac
   KMNavigationBarTransition: 7a52c9bc25b39b6e3343e980b453facee1591b82
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201

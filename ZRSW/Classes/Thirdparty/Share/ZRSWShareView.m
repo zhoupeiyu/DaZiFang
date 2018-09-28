@@ -45,7 +45,7 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
 }
 + (void)shareImageURL:(NSString *)shareImageUrl delegate:(id<ShareHandlerDelegate>)delegate {
     ZRSWShareModel *shareModel = [[ZRSWShareModel alloc] init];
-    shareModel.thumImageUrl = shareImageUrl;
+    shareModel.thumImageUrlStr = shareImageUrl;
     [[self sharedInstance] showShareView:shareModel shareSourceType:ShareSourceImage delegate:delegate];
 }
 - (void)showShareView:(ZRSWShareModel *)content shareSourceType:(ShareSourceType)type delegate:(id<ShareHandlerDelegate>)delegate {

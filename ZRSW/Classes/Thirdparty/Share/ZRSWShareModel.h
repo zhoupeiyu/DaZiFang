@@ -13,19 +13,13 @@
 @property (nonatomic, strong) NSString *title;
 //内容
 @property (nonatomic, strong) NSString *content;
-//用户模块
-@property (nonatomic, strong) NSString *userContent;
 //缩略图
 @property (nonatomic, strong) UIImage *thumbImage;
 //缩略图 URL
-@property (nonatomic, strong) NSString *thumImageUrl;
+@property (nonatomic, strong) NSString *thumImageUrlStr;
 
-@property (nonatomic, strong) NSString *destUrlStr;
+@property (nonatomic, strong) NSString *sourceUrlStr;
 
-//视频id
-@property (nonatomic, strong) NSNumber *vid;
-//直播id
-@property (nonatomic, strong) NSNumber *liveVid;
 //微博图片
 @property (nonatomic, strong) UIImage *weiboImage;
 
