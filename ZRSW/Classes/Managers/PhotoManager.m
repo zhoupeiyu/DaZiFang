@@ -132,6 +132,8 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
     imagePickerVc.isAllowShowNum = YES;
     imagePickerVc.isStatusBarDefault = YES;
     imagePickerVc.needShowStatusBar = YES;
+    imagePickerVc.allowCrop = YES;
+    imagePickerVc.circleCropRadius = SCREEN_WIDTH/2.f;
     imagePickerVc.naviBgColor = [UIColor whiteColor];
     imagePickerVc.naviTitleColor = [UIColor getFontBlackColor];
     imagePickerVc.naviTitleFont = [UIFont systemFontOfSize:17];

@@ -24,5 +24,6 @@
 
 -(NSString *)getZZwithString:(NSString *)string;
 
++ (NSString*)uniqueString;
 
 @end

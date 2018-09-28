@@ -145,14 +145,6 @@
 
 
 /**
- 上传图片
-
- @param images 图片数组
- @param delegate 代理
- */
-- (void)uploadImageWithImages:(NSArray *)images uploadType:(UploadImageType)uploadType delegate:(id)delegate;
-
-/**
  意见反馈
 
  @param content 内容

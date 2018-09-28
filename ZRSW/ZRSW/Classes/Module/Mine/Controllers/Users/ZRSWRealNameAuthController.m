@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *ipCard;
 @property (nonatomic, strong) UserService *service;
-
+@property (nonatomic, strong) UploadImagesManager *imageManager;
 
 
 @end
@@ -81,25 +81,29 @@
 #pragma mark - action
 
 - (void)commitBtnAction {
-    if (self.userName.length == 0) {
-        [TipViewManager showToastMessage:@"请输入姓名！"];
-        return;
-    }
-    if (![MatchManager checkUserIdCard:self.ipCard]) {
-        [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
-        return;
-    }
-    if ([self.userCardView getSelectedImages].count < 2) {
-        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
-        return;
-    }
-    if ([self.cardView getSelectedImages].count < 2) {
-        [TipViewManager showToastMessage:@"请上传身份证照片！"];
-        return;
-    }
-    [TipViewManager showLoading];
-    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard1 delegate:self];
-    [self.service uploadImageWithImages:[self.userCardView getSelectedImages] uploadType:UploadImageTypeIpCard2 delegate:self];
+//    if (self.userName.length == 0) {
+//        [TipViewManager showToastMessage:@"请输入姓名！"];
+//        return;
+//    }
+//    if (![MatchManager checkUserIdCard:self.ipCard]) {
+//        [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
+//        return;
+//    }
+//    if ([self.userCardView getSelectedImages].count < 2) {
+//        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
+//        return;
+//    }
+//    if ([self.cardView getSelectedImages].count < 2) {
+//        [TipViewManager showToastMessage:@"请上传身份证照片！"];
+//        return;
+//    }
+//    [TipViewManager showLoading];
+    [self.imageManager uploadImagesWithImagesArray:[self.userCardView getSelectedImages] completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+        for (NSString *url in imageUrls) {
+            LLog(@"\n");
+            LLog(@"%@",url);
+        }
+    }];
 }
 
 #pragma mark - delegate
@@ -183,5 +187,14 @@
         _service = [[UserService alloc] init];
     }
     return _service;
+}
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
 }
 @end
