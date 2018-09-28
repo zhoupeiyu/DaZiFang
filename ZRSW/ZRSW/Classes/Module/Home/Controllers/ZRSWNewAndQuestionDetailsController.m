@@ -72,6 +72,9 @@
             if (model.error_code.integerValue == 0) {
                 NewDetailContensModel *detailContensModel = model.data;
                 self.detailContensModel = detailContensModel;
+                id json = [detailContensModel yy_modelToJSONObject];
+                LLog(@"%@",json);
+                
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
             }
