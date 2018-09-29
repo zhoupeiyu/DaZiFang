@@ -129,7 +129,8 @@
 //#import "EaseUI.h"
 #import <HelpDesk/HelpDesk.h>
 #import "HelpDeskUI.h"
-
+#import <TYTabPagerBar.h>
+#import <TYPagerController.h>
 
 
 #endif /* Header_h */
