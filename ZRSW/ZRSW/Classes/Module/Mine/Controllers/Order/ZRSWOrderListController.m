@@ -115,7 +115,7 @@
         _tabBar.layout.progressColor = [UIColor getFontBlueColor];
         _tabBar.layout.normalTextFont = [UIFont systemFontOfSize:15];
         _tabBar.layout.selectedTextFont = [UIFont systemFontOfSize:15];
-        _tabBar.layout.normalTextColor = [UIColor getFontSixGrayColor];
+        _tabBar.layout.normalTextColor = [UIColor colorFromRGB:<#(NSInteger)#>];
         _tabBar.layout.selectedTextColor = [UIColor getBackgroundBlueColor];
         _tabBar.layout.cellWidth = SCREEN_WIDTH / 6;
         _tabBar.collectionView.scrollEnabled = NO;
