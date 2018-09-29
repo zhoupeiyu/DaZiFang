@@ -62,7 +62,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
-    if ([url hasPrefix:@"data://appData"]){
+    if ([url hasPrefix:@"file://"]){
         //创建JSContext对象
         JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
         //OC调用JS方法
@@ -70,7 +70,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         if (self.detailContensModel) {
             id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
             LLog(@"%@",detailsJsonString);
-            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsJsonString]];
+             NSString *detailsDicJsonString = nil;
+            if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+               detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }else if (self.type == DetailsTypeCommentQuestion){
+                detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }
+            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsDicJsonString]];
         }else {
             [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
         }
@@ -188,8 +194,10 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 }
 - (NSURL *)url{
     if (!_url) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"html" inDirectory:@"H5"];
-        _url = [NSURL fileURLWithPath:path];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"html"];
+        if (path) {
+            _url = [NSURL fileURLWithPath:path];
+        }
     }
     return _url;
 }
