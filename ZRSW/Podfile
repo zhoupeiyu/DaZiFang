@@ -7,7 +7,7 @@ target 'ZRSW' do
 
 #头条首页列表滚动效果
 #pod 'JXCategoryView'
-
+pod 'TYPagerController'
 #网络框架
 pod 'AFNetworking', '~> 3.1.0'
 

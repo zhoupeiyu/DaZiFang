@@ -510,6 +510,7 @@
 		E5E27986215E6CB3007D27A8 /* ZRSWUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27985215E6CB3007D27A8 /* ZRSWUserInfoCell.m */; };
 		E5E27989215E750E007D27A8 /* ZRSWUserInfoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27988215E750E007D27A8 /* ZRSWUserInfoListModel.m */; };
 		E5E2798C215E7FA1007D27A8 /* ZRSWOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */; };
+		E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1306,6 +1307,8 @@
 		E5E27988215E750E007D27A8 /* ZRSWUserInfoListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWUserInfoListModel.m; sourceTree = "<group>"; };
 		E5E2798A215E7FA1007D27A8 /* ZRSWOrderListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderListController.h; sourceTree = "<group>"; };
 		E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListController.m; sourceTree = "<group>"; };
+		E5E2799C215F520F007D27A8 /* ZRSWOrderListDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderListDetailController.h; sourceTree = "<group>"; };
+		E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListDetailController.m; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -2231,6 +2234,7 @@
 			children = (
 				E5B59A65214EBFBA00726DE9 /* ZRSWMineController.h */,
 				E5B59A66214EBFBA00726DE9 /* ZRSWMineController.m */,
+				E5E2799B215F4C5C007D27A8 /* Order */,
 				3C7E4B06215222C60058D3E2 /* Settings */,
 				3CFBF53A215CAE2D00A7AA97 /* CustomerService */,
 				3C10D64F2154DEBF0019112F /* Bill */,
@@ -2879,8 +2883,6 @@
 				E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */,
 				E591D6CC2153ECB600F6802A /* ZRSWEnterpriseAuthController.h */,
 				E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */,
-				E5E2798A215E7FA1007D27A8 /* ZRSWOrderListController.h */,
-				E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -2910,6 +2912,17 @@
 				E5D39184215CA95400E4F962 /* libc++.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5E2799B215F4C5C007D27A8 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				E5E2798A215E7FA1007D27A8 /* ZRSWOrderListController.h */,
+				E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */,
+				E5E2799C215F520F007D27A8 /* ZRSWOrderListDetailController.h */,
+				E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3532,6 +3545,7 @@
 				E5B598FA214E9E2600726DE9 /* main.m in Sources */,
 				3C0F984D215E9BFF00029406 /* MWPhoto.m in Sources */,
 				E5B59A3F214EBEE800726DE9 /* NotificationName.m in Sources */,
+				E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */,
 				E5B59A58214EBEE800726DE9 /* TZGifPhotoPreviewController.m in Sources */,
 				E5B59A50214EBEE800726DE9 /* TZPhotoPreviewController.m in Sources */,
 				3C0F9883215E9BFF00029406 /* HDLocationViewController.m in Sources */,
@@ -3674,7 +3688,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3709,7 +3723,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

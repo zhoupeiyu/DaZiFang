@@ -52,6 +52,7 @@ PODS:
   - TOWebViewController/Core (2.2.8)
   - TTGTagCollectionView (1.8.2)
   - TYAlertController (1.2.0)
+  - TYPagerController (2.1.2)
   - UIImage-ASMPDF (0.2)
   - UMCAnalytics (5.5.1):
     - UMCCommon
@@ -185,6 +186,7 @@ DEPENDENCIES:
   - TOWebViewController (~> 2.2.8)
   - TTGTagCollectionView (~> 1.8.1)
   - TYAlertController (~> 1.2.0)
+  - TYPagerController
   - UIImage-ASMPDF (~> 0.2)
   - UMCAnalytics
   - UMCCommon
@@ -254,6 +256,7 @@ SPEC REPOS:
     - TOWebViewController
     - TTGTagCollectionView
     - TYAlertController
+    - TYPagerController
     - UIImage-ASMPDF
     - UMCAnalytics
     - UMCCommon
@@ -293,6 +296,7 @@ SPEC CHECKSUMS:
   TOWebViewController: 953a24619d32f7aa1d9d4098a74885a9236f7348
   TTGTagCollectionView: 20cf236b538ea9a17d1f0538968148c8d304414a
   TYAlertController: c121090edb0bea7426f987da94cdddd81eef4231
+  TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
   UIImage-ASMPDF: c6fe37974cfeb6375d85ce39a37cc161e295da00
   UMCAnalytics: 0aff87e39008e2a650e5917430db0da2de2f8495
   UMCCommon: 4392868ac47ff1b101663106bb114ba616fabbad
@@ -301,6 +305,6 @@ SPEC CHECKSUMS:
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: d2b8ee3b8dab862f01deef9b76d032d97cc6586d
+PODFILE CHECKSUM: 0b64381575ff7e56404549d570b7dfb83241607e
 
 COCOAPODS: 1.5.3
