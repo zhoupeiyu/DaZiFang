@@ -511,6 +511,7 @@
 		E5E27989215E750E007D27A8 /* ZRSWUserInfoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27988215E750E007D27A8 /* ZRSWUserInfoListModel.m */; };
 		E5E2798C215E7FA1007D27A8 /* ZRSWOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */; };
 		E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */; };
+		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1310,6 +1311,8 @@
 		E5E2799C215F520F007D27A8 /* ZRSWOrderListDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderListDetailController.h; sourceTree = "<group>"; };
 		E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListDetailController.m; sourceTree = "<group>"; };
 		E5E279E4215F5C47007D27A8 /* H5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H5.h; sourceTree = "<group>"; };
+		E5E279E5215F607C007D27A8 /* ZRSWOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderListCell.h; sourceTree = "<group>"; };
+		E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListCell.m; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -2263,6 +2266,8 @@
 				3C10D6602154E2F50019112F /* ZRSWBillListCell.m */,
 				E5E27984215E6CB3007D27A8 /* ZRSWUserInfoCell.h */,
 				E5E27985215E6CB3007D27A8 /* ZRSWUserInfoCell.m */,
+				E5E279E5215F607C007D27A8 /* ZRSWOrderListCell.h */,
+				E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3483,6 +3488,7 @@
 				3C0F988B215E9BFF00029406 /* HDBaseMessageCell.m in Sources */,
 				3C0F984C215E9BFF00029406 /* MWTapDetectingImageView.m in Sources */,
 				3C0F981D215E9BFF00029406 /* HDConvertToCommonEmoticonsHelper.m in Sources */,
+				E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */,
 				3C0F989A215E9C0000029406 /* HDBubbleView+Gif.m in Sources */,
 				3C0F9892215E9C0000029406 /* HDFacialView.m in Sources */,
 				E5B59A36214EBEE800726DE9 /* DatePickerView.m in Sources */,
