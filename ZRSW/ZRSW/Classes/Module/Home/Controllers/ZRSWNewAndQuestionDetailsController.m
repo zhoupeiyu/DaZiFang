@@ -61,9 +61,9 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
-    LLog(@"%@",url);
-    if ([url hasPrefix:@"file://"] && [url containsString:@"news.html"]){
+    NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
+//    LLog(@"%@",url);
+    if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
         //创建JSContext对象
         JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
         //OC调用JS方法
@@ -77,36 +77,36 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             }else if (self.type == DetailsTypeCommentQuestion){
                 detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
             }
-//            NSString * method = @"getAppData";
+//            NSString * method = @"vm.getAppData";
 //            JSValue * function = [context objectForKeyedSubscript:method];
 //            [function callWithArguments:@[detailsDicJsonString]];
-//            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsDicJsonString]];
+            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
         }else {
             [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
         }
-        return NO;
+        return YES;
     }
     BOOL shouldStart = YES;
     //TODO: Implement TOModalWebViewController Delegate callback
 
     //if the URL is the load completed notification from JavaScript
-    if ([request.URL.absoluteString isEqualToString:kCompleteRPCURL]){
-        return NO;
-    }
-    //If the URL contrains a fragement jump (eg an anchor tag), check to see if it relates to the current page, or another
-    //If we're merely jumping around the same page, don't perform a new loading bar sequence
-    BOOL isFragmentJump = NO;
-    if (request.URL.fragment){
-        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
-        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
-    }
-
-    BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
-    if (shouldStart && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward){
-        //Save the URL in the accessor property
-        self.url = [request URL];
-    }
+//    if ([request.URL.absoluteString isEqualToString:kCompleteRPCURL]){
+//        return NO;
+//    }
+//    //If the URL contrains a fragement jump (eg an anchor tag), check to see if it relates to the current page, or another
+//    //If we're merely jumping around the same page, don't perform a new loading bar sequence
+//    BOOL isFragmentJump = NO;
+//    if (request.URL.fragment){
+//        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
+//        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
+//    }
+//
+//    BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
+//    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
+//    if (shouldStart && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward){
+//        //Save the URL in the accessor property
+//        self.url = [request URL];
+//    }
     return shouldStart;
 }
 
@@ -198,7 +198,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 }
 - (NSURL *)url{
     if (!_url) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"html"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"News" ofType:@"html"];
         if (path) {
             _url = [NSURL fileURLWithPath:path];
         }

@@ -514,8 +514,10 @@
 		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
 		E5E27A28215FBBCB007D27A8 /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A23215FBBCA007D27A8 /* rem.js */; };
 		E5E27A29215FBBCB007D27A8 /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A24215FBBCA007D27A8 /* vue-2.5.13.js */; };
-		E5E27A2A215FBBCB007D27A8 /* news.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A25215FBBCA007D27A8 /* news.html */; };
+		E5E27A2A215FBBCB007D27A8 /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A25215FBBCA007D27A8 /* News.html */; };
 		E5E27A2B215FBBCB007D27A8 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A27215FBBCA007D27A8 /* eyes.png */; };
+		E5E27A2D215FC611007D27A8 /* a.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A2C215FC610007D27A8 /* a.html */; };
+		E5E27A2F215FC6A9007D27A8 /* Agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A2E215FC6A9007D27A8 /* Agreement.html */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1319,8 +1321,10 @@
 		E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListCell.m; sourceTree = "<group>"; };
 		E5E27A23215FBBCA007D27A8 /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
 		E5E27A24215FBBCA007D27A8 /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
-		E5E27A25215FBBCA007D27A8 /* news.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = news.html; sourceTree = "<group>"; };
+		E5E27A25215FBBCA007D27A8 /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
 		E5E27A27215FBBCA007D27A8 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
+		E5E27A2C215FC610007D27A8 /* a.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = a.html; sourceTree = "<group>"; };
+		E5E27A2E215FC6A9007D27A8 /* Agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Agreement.html; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -2943,6 +2947,8 @@
 		E5E279E3215F5C34007D27A8 /* H5 */ = {
 			isa = PBXGroup;
 			children = (
+				E5E27A2E215FC6A9007D27A8 /* Agreement.html */,
+				E5E27A2C215FC610007D27A8 /* a.html */,
 				E5E27A21215FBBCA007D27A8 /* news */,
 				E5E279E4215F5C47007D27A8 /* H5.h */,
 			);
@@ -2952,7 +2958,7 @@
 		E5E27A21215FBBCA007D27A8 /* news */ = {
 			isa = PBXGroup;
 			children = (
-				E5E27A25215FBBCA007D27A8 /* news.html */,
+				E5E27A25215FBBCA007D27A8 /* News.html */,
 				E5E27A22215FBBCA007D27A8 /* js */,
 				E5E27A26215FBBCA007D27A8 /* img */,
 			);
@@ -3244,7 +3250,7 @@
 				E5B59B8D214EC15600726DE9 /* verification_code_button@3x.png in Resources */,
 				E5B59B29214EC15600726DE9 /* share_friends@2x.png in Resources */,
 				E5B59B98214EC15600726DE9 /* currency_line_690@3x.png in Resources */,
-				E5E27A2A215FBBCB007D27A8 /* news.html in Resources */,
+				E5E27A2A215FBBCB007D27A8 /* News.html in Resources */,
 				E5B59B8F214EC15600726DE9 /* home_notice@3x.png in Resources */,
 				E5B59B1D214EC15600726DE9 /* icon_76.png in Resources */,
 				3C0F98AB215E9C0000029406 /* Shape@2x.png in Resources */,
@@ -3265,6 +3271,7 @@
 				E5B59B94214EC15600726DE9 /* currency_shadow_lower@3x.png in Resources */,
 				E5B59B13214EC15600726DE9 /* icon_87.png in Resources */,
 				3C0F98C3215E9C0000029406 /* em_example_image_3.png in Resources */,
+				E5E27A2F215FC6A9007D27A8 /* Agreement.html in Resources */,
 				E5B59B54214EC15600726DE9 /* bill_title_instructions@2x.png in Resources */,
 				3C0F98AC215E9C0000029406 /* product_details_4.png in Resources */,
 				E5B59B7D214EC15600726DE9 /* currency_line_750@3x.png in Resources */,
@@ -3276,6 +3283,7 @@
 				3C0F98B6215E9C0000029406 /* em_main_introduce.png in Resources */,
 				3C0F98AE215E9C0000029406 /* list@2x.png in Resources */,
 				3C0F98B4215E9C0000029406 /* em_nav_shop_select@2x.png in Resources */,
+				E5E27A2D215FC611007D27A8 /* a.html in Resources */,
 				3C7E4AD4214F6B900058D3E2 /* guide_point_else@2x.png in Resources */,
 				E5B59B80214EC15600726DE9 /* my_head@3x.png in Resources */,
 				E5B599FD214EBEE800726DE9 /* TableViewArrow_15x15_@2x.png in Resources */,
