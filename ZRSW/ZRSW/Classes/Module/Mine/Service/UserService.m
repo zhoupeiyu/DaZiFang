@@ -97,10 +97,18 @@
 }
 - (void)updateUserInfoMyId:(NSString *)myId nickName:(NSString *)nickName headImgUrl:(NSString *)headImgUrl email:(NSString *)email delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:myId forKey:@"myId"];
-    [params setObject:nickName forKey:@"nickName"];
-    [params setObject:headImgUrl forKey:@"headImgUrl"];
-    [params setObject:email forKey:@"email"];
+    if (myId.length > 0) {
+        [params setObject:myId forKey:@"myId"];
+    }
+    if (nickName.length > 0) {
+        [params setObject:nickName forKey:@"nickName"];
+    }
+    if (headImgUrl.length > 0) {
+        [params setObject:headImgUrl forKey:@"headImgUrl"];
+    }
+    if (email.length > 0) {
+        [params setObject:email forKey:@"email"];
+    }
     [self POST:KUserUpdateInfoInterface reqType:KUserUpdateInfoRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 - (void)userRealNameValidationIdCard:(NSString *)realName idCard:(NSString *)idCard idCardImg1:(NSString *)idCardImg1 idCardImg2:(NSString *)idCardImg2 idCardImg3:(NSString *)idCardImg3 idCardImg4:(NSString *)idCardImg4 delegate:(id)delegate {

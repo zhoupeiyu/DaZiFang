@@ -24,6 +24,10 @@
 @end
 @implementation ZRSWLoginCustomView
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 + (instancetype)getLoginInputViewWithTitle:(NSString *)title placeHoled:(NSAttributedString *)placeHoled keyboardType:(UIKeyboardType)keyboardType isNeedCountDownButton:(BOOL)isNeedCountDownButton isNeedBottomLine:(BOOL)isNeedBottomLine{
     ZRSWLoginCustomView *view = [[ZRSWLoginCustomView alloc] init];
     view.title = title;

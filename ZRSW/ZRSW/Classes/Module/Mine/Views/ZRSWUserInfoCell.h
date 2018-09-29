@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ZRSWUserInfoListModel.h"
 
+@class ZRSWUserInfoCell;
+
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZRSWUserInfoCell : UITableViewCell
@@ -16,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (ZRSWUserInfoCell *)getCellWithTableView:(UITableView *)tableView;
 
 - (void)setUserInfoListModel:(ZRSWUserInfoListModel *)model;
+
+- (void)setHeaderImageUrl:(NSString *)headerImageUrl;
 
 @end
 

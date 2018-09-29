@@ -64,15 +64,18 @@
     self.descLbl.text = model.desInfo;
     self.cellType = model.type;
     self.bottomLineHidden = model.bottomLineHidden;
+    UIImage *image = [UIImage imageNamed:@"my_head"];
     if ([ControllerUtilsManager isHTTPURL:model.iconName]) {
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.iconName]];
+        _iconImageView.layer.cornerRadius = image.size.height * 0.5;
+        _iconImageView.layer.masksToBounds = YES;
     }
     else {
         if (model.iconName.length > 0) {
             _iconImageView.image = [UIImage imageNamed:model.iconName];
         }
         else {
-            _iconImageView.image = [UIImage imageNamed:@"my_head"];
+            _iconImageView.image = image;
         }
     }
 }
@@ -125,7 +128,9 @@
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
         _iconImageView.contentMode = UIViewContentModeScaleToFill;
-        _iconImageView.image = [UIImage imageNamed:@"my_head"];
+        UIImage *image = [UIImage imageNamed:@"my_head"];
+        _iconImageView.image = image;
+
     }
     return _iconImageView;
 }

@@ -122,7 +122,7 @@
     if ([UserModel hasLogin] && model) {
         mineModel.iconName = model.data.headImgUrl.length > 0 ? model.data.headImgUrl : @"";
         mineModel.title = model.data.nickName > 0 ? model.data.nickName : DefaultNickName;
-        mineModel.desInfo = model.data.myId.integerValue > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId.stringValue] :@"";
+        mineModel.desInfo = model.data.myId.length > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId] :@"";
         mineModel.hasLogin = YES;
     }
     else {

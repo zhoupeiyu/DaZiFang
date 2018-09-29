@@ -81,7 +81,7 @@
 //用户头像URL
 @property (nonatomic, strong) NSString *headImgUrl;
 //用户掮客号
-@property (nonatomic, strong) NSNumber *myId;
+@property (nonatomic, strong) NSString *myId;
 //用户性别：1：男；2：女；
 @property (nonatomic, strong) NSNumber *sex;
 // 用户简介
