@@ -27,6 +27,8 @@ typedef enum : NSUInteger {
 
 + (void)removeUserToken;
 
++ (void)removeUserID;
+
 + (BaseNetWorkService *)sharedInstance;
 
 + (BOOL)isReachable;

@@ -114,6 +114,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
         } //
         if (model.data.token.length > 0) {
             userModel.data.token = model.data.token;
+            [BaseNetWorkService sharedInstance].loginToken = model.data.token;
         }
         if (model.data.huanXinName.length > 0) {
             userModel.data.huanXinName = model.data.huanXinName;
@@ -192,6 +193,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
     return model;
 }
 + (void)removeUserData {
+    [BaseNetWorkService removeUserToken];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:KUserModelKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -4,7 +4,7 @@ NSNotificationName const UserLoginSuccessNotification = @"UserLoginSuccessNotifi
 
 NSNotificationName const TabBarDidClickNotification = @"TabBarDidClickNotification";
 
-
+NSNotificationName const UserLoginErrorNotification = @"UserLoginErrorNotification";
 
 
 

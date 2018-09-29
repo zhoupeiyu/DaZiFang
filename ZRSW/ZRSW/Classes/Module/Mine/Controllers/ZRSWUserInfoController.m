@@ -66,6 +66,9 @@ typedef enum : NSUInteger {
                 return;
             }
         }
+        else {
+            self.myID = @"";
+        }
         [weakSelf.service updateUserInfoMyId:self.myID nickName:self.name headImgUrl:url email:nil delegate:self];
     }
 }

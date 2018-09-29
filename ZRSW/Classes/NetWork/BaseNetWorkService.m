@@ -65,11 +65,10 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
 + (void)configNetWorkService {
     [HYBNetworking updateBaseUrl:API_Host];
 //    [HYBNetworking configRequestType:kHYBRequestTypeJSON responseType:kHYBResponseTypeJSON shouldAutoEncodeUrl:NO callbackOnCancelRequest:YES];
-    [HYBNetworking configCommonHttpHeaders:[self netWorkHeader]];
-    
 }
 - (void)GET:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
     WS(weakSelf);
+    [HYBNetworking configCommonHttpHeaders:[BaseNetWorkService netWorkHeader]];
     [HYBNetworking getWithUrl:interface refreshCache:needCache params:dic progress:^(int64_t bytesRead, int64_t totalBytesRead) {
         
     } success:^(id response) {
@@ -84,6 +83,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
 
 - (void)POST:(NSString *)interface reqType:(NSString *)type delegate:(id<BaseNetWorkServiceDelegate>) delegate parameters:(NSMutableDictionary *)dic ObjcClass:(Class)objecClass NeedCache:(BOOL)needCache {
     WS(weakSelf);
+    [HYBNetworking configCommonHttpHeaders:[BaseNetWorkService netWorkHeader]];
     [HYBNetworking postWithUrl:interface refreshCache:needCache params:dic progress:^(int64_t bytesRead, int64_t totalBytesRead) {
         
     } success:^(id response) {
@@ -96,7 +96,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
 }
 
 - (void)successBlock:(id)response delegate:(id<BaseNetWorkServiceDelegate>)delegate ObjcClass:(Class)objecClass reqType:(NSString *)type{
-    
+    [self checkServerStatus:response ObjcClass:objecClass];
     if ([response isKindOfClass:[NSDictionary class]]) {
         if (response) {
             BaseModel *baseModel = [[objecClass class] yy_modelWithJSON:response];
@@ -120,6 +120,16 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
 - (void)failBlock:(NSError *)error delegate:(id<BaseNetWorkServiceDelegate>)delegate reqType:(NSString *)type{
     if ([delegate respondsToSelector:@selector(requestFinishedWithStatus:resObj:reqType:)]) {
         [delegate requestFinishedWithStatus:RequestFinishedStatusFail resObj:nil reqType:type];
+    }
+}
+- (void)checkServerStatus:(id)response ObjcClass:(Class)objecClass {
+    if ([response isKindOfClass:[NSDictionary class]]) {
+        BaseModel *baseModel = [[objecClass class] yy_modelWithJSON:response];
+        NSInteger error_code = baseModel.error_code.integerValue;
+        // 1000 用户未登陆或登陆已失效 9101 token无效，请使用帐密登陆 9102 token登陆过期，请重新登陆！
+        if (error_code == 1000 || error_code == 9101 || error_code == 9102) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginErrorNotification object:[NSDictionary dictionaryWithObjectsAndKeys:baseModel.error_msg,@"error_msg", nil]];
+        }
     }
 }
 - (void)logInterfaceInfo:(id)resObj url:(NSString *)url params:(id)params  error:(NSError *)err{

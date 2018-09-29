@@ -91,7 +91,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
     if ([mineModel.title isEqualToString:@"退出登录"]) {
-        [[[UserService alloc] init] logOutWithDelegate:self];
+        [UserModel removeUserData];
+        [self updateUserInfo];
+        return;
+    }
+    if (![UserModel hasLogin]) {
+        ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
+        login.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:login animated:YES];
         return;
     }
     BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
