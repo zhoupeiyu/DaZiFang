@@ -101,9 +101,7 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     CommentQuestionModel *detailModel = model.data[i];
                     if ([detailModel.id isEqualToString:self.lastId]) {
-                        if (self.dataListSource.count != 0) {
-                            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        }
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
                         return;
                     }
                     [self.dataListSource addObject:detailModel];
