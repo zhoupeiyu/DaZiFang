@@ -17,6 +17,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 @property(nonatomic,strong) UIWebView *webView;
 @property (nonatomic, strong) NewDetailContensModel *detailContensModel;
 @property (nonatomic, strong) CommentQuestionDetailContentModel *questionDetailContentModel;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *url;
 @end
 
@@ -119,6 +120,9 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             if (model.error_code.integerValue == 0) {
                 NewDetailContensModel *detailContensModel = model.data;
                 self.detailContensModel = detailContensModel;
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:detailContensModel.imgUrl]];
+                self.image = [UIImage imageWithData:data]; // 取得图片
+
                 //加载h5
                 NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
                 [self.webView loadRequest:resquest];
@@ -153,7 +157,12 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //    }];
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
     model.sourceUrlStr = self.detailContensModel.sourceUrl;
-    model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
+    NSString *imgUrl = self.detailContensModel.imgUrl;
+    if (self.image) {
+        model.thumbImage = self.image;
+    }else{
+        model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
+    }
     model.title = self.detailContensModel.title;
     model.content = self.detailContensModel.roundup;
 

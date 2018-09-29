@@ -21,8 +21,8 @@
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppId                            @"1107867864"
-#define kQQAppKey                           @"AeIfDLi7fj0kwgzm"
+#define kQQAppId                            @"1107805587"
+#define kQQAppKey                           @"GSTu511a7EAgJef4"
 
 //极光
 #define kJupushKey                          @"a748387bf81b95ce912b82bf"
@@ -32,6 +32,7 @@
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
+#define kHuanXinKeFu                   @"dazifang_kefu"
 
 //Ali
 #define kAliAppid                           @"3"
@@ -60,12 +61,12 @@
 
 //weibo
 #define kWeiboAppId                         @"3972746284"
-#define kWeiboSeret                    @"f751af1aa54591cc915c528fbb0173dd"
+#define kWeiboSeret                        @"f751af1aa54591cc915c528fbb0173dd"
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppId                            @"1107867864"
-#define kQQAppKey                           @"AeIfDLi7fj0kwgzm"
+#define kQQAppId                            @"1107805587"
+#define kQQAppKey                           @"GSTu511a7EAgJef4"
 
 //极光
 #define kJupushKey                          @"a748387bf81b95ce912b82bf"
@@ -75,6 +76,7 @@
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
+#define kHuanXinKeFu                   @"dazifang_kefu"
 
 //Ali
 #define kAliAppid                           @"3"
