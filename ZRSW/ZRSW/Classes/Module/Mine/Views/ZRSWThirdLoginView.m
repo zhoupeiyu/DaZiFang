@@ -7,6 +7,9 @@
 //
 
 #import "ZRSWThirdLoginView.h"
+#import "ZRSWShareManager.h"
+#import <UMSocialSinaHandler.h>
+#import <WXApi.h>
 
 @interface ZRSWThirdLoginView ()
 
@@ -61,29 +64,26 @@
 - (void)refreshButtons {
     self.btnArray = [NSMutableArray array];
     
-    //    if (![[WeiboLoginHandler sharedInstance] shareAvailable]) {
-    //        self.wbBtn.hidden = YES;
-    //    }
-    //    else {
-    [self.btnArray addObject:self.wbBtn];
-    //    }
+        if (![ZRSWShareManager isImstallWeiBo]) {
+            self.wbBtn.hidden = YES;
+        }
+        else {
+            [self.btnArray addObject:self.wbBtn];
+        }
     
-//    if (![[WeChatHandler sharedInstance] shareAvailable]) {
-//        self.wechatBtn.hidden = YES;
-//    }
-//    else {
+    if (![ZRSWShareManager isInstallWeChat]) {
+        self.wechatBtn.hidden = YES;
+    }
+    else {
         [self.btnArray addObject:self.wechatBtn];
-//    }
+    }
     
-//    if (![[QQLoginHandler sharedInstance] shareAvailable]) {
-//        self.qqBtn.hidden = YES;
-//    }
-//    else {
+    if (![ZRSWShareManager isInstallQQ]) {
+        self.qqBtn.hidden = YES;
+    }
+    else {
         [self.btnArray addObject:self.qqBtn];
-//    }
-    
-
-    
+    }
     self.bottomSeparator.hidden = (self.btnArray.count == 0);
     
     [self setNeedsLayout];
@@ -107,7 +107,6 @@
     if (self.btnArray.count == 0) {
         return;
     }
-    
     CGFloat margin = (self.width - width * self.btnArray.count) / (self.btnArray.count + 1);
     CGFloat offset = margin;
     for (UIButton *btn in self.btnArray) {
@@ -121,15 +120,79 @@
 }
 #pragma mark - Actions
 - (void)QQLoginAction {
-   
+
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+            
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            
+            // 授权信息
+            NSLog(@"QQ uid: %@", resp.uid);
+            NSLog(@"QQ openid: %@", resp.openid);
+            NSLog(@"QQ unionid: %@", resp.unionId);
+            NSLog(@"QQ accessToken: %@", resp.accessToken);
+            NSLog(@"QQ expiration: %@", resp.expiration);
+            
+            // 用户信息
+            NSLog(@"QQ name: %@", resp.name);
+            NSLog(@"QQ iconurl: %@", resp.iconurl);
+            NSLog(@"QQ gender: %@", resp.unionGender);
+            
+            // 第三方平台SDK源数据
+            NSLog(@"QQ originalResponse: %@", resp.originalResponse);
+        }
+    }];
 }
 
 - (void)WeiboLoginAction {
-    
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+            
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            
+            // 授权信息
+            NSLog(@"Sina uid: %@", resp.uid);
+            NSLog(@"Sina accessToken: %@", resp.accessToken);
+            NSLog(@"Sina refreshToken: %@", resp.refreshToken);
+            NSLog(@"Sina expiration: %@", resp.expiration);
+            
+            // 用户信息
+            NSLog(@"Sina name: %@", resp.name);
+            NSLog(@"Sina iconurl: %@", resp.iconurl);
+            NSLog(@"Sina gender: %@", resp.unionGender);
+            
+            // 第三方平台SDK源数据
+            NSLog(@"Sina originalResponse: %@", resp.originalResponse);
+        }
+    }];
 }
 
 - (void)WeChatLoginActionid {
-   
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+            
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            
+            // 授权信息
+            NSLog(@"Wechat uid: %@", resp.uid);
+            NSLog(@"Wechat openid: %@", resp.openid);
+            NSLog(@"Wechat unionid: %@", resp.unionId);
+            NSLog(@"Wechat accessToken: %@", resp.accessToken);
+            NSLog(@"Wechat refreshToken: %@", resp.refreshToken);
+            NSLog(@"Wechat expiration: %@", resp.expiration);
+            
+            // 用户信息
+            NSLog(@"Wechat name: %@", resp.name);
+            NSLog(@"Wechat iconurl: %@", resp.iconurl);
+            NSLog(@"Wechat gender: %@", resp.unionGender);
+            
+            // 第三方平台SDK源数据
+            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+        }
+    }];
 }
 
 - (void)informDelegateFailed {
@@ -137,13 +200,15 @@
 }
 
 - (void)updateAvailable {
-    self.qqBtn.hidden = NO;
+    self.qqBtn.hidden = ![ZRSWShareManager isInstallQQ];
     
-    self.wbBtn.hidden = NO;
+    self.wbBtn.hidden = ![ZRSWShareManager isImstallWeiBo];
     
-    self.wechatBtn.hidden = NO;
+    self.wechatBtn.hidden = ![ZRSWShareManager isInstallWeChat];
     
     [self setNeedsLayout];
 }
-
+-(void)onResp:(BaseResp*)resp {
+    
+}
 @end

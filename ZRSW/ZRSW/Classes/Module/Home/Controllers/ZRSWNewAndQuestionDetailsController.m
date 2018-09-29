@@ -62,7 +62,8 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
-    if ([url hasPrefix:@"file://"]){
+    LLog(@"%@",url);
+    if ([url hasPrefix:@"file://"] && [url containsString:@"news.html"]){
         //创建JSContext对象
         JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
         //OC调用JS方法
@@ -76,7 +77,10 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             }else if (self.type == DetailsTypeCommentQuestion){
                 detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
             }
-            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsDicJsonString]];
+//            NSString * method = @"getAppData";
+//            JSValue * function = [context objectForKeyedSubscript:method];
+//            [function callWithArguments:@[detailsDicJsonString]];
+//            [context evaluateScript:[NSString stringWithFormat:@"getAppData('%@')",detailsDicJsonString]];
         }else {
             [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
         }
@@ -186,7 +190,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     if (!_webView) {
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarH)];
         _webView.delegate = self;
-        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.backgroundColor = [UIColor redColor];
         [_webView sizeToFit];
         _webView.scalesPageToFit = YES;
     }
@@ -201,22 +205,5 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }
     return _url;
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
