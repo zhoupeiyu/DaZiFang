@@ -121,9 +121,9 @@
 @property (nonatomic, strong) UserAuthNameAudit *authNameAudit;
 @property (nonatomic, strong) UserAuthCompanyAudit *authCompanyAudit;
 @property (nonatomic, strong) NSString *token;
-
 @property (nonatomic, assign) BOOL hasLogin;
-
+//环信id,其值为用户id，环信密码默认为123456，昵称为用户昵称或手机号
+@property (nonatomic, strong) NSString *huanXinName;
 @end
 
 @interface UserModel : BaseModel

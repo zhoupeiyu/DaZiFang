@@ -115,6 +115,9 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
         if (model.data.token.length > 0) {
             userModel.data.token = model.data.token;
         }
+        if (model.data.huanXinName.length > 0) {
+            userModel.data.huanXinName = model.data.huanXinName;
+        }
         if (model.data.authNameAudit) {
             if (!userModel.data.authNameAudit) {
                 UserAuthNameAudit *auth = [[UserAuthNameAudit alloc] init];

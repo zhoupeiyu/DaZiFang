@@ -16,7 +16,6 @@
     //注册友盟key
 //    [[UMSocialManager defaultManager] setUmSocialAppkey:UMKey];
     [UMConfigure initWithAppkey:kUmengAppKey channel:nil];
-    LLog(@"===kUmengAppKey = %@",kUmengAppKey);
     //QQ
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:kQQAppId appSecret:kQQAppKey redirectURL:nil];
     
@@ -27,9 +26,6 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:kWechatAppId appSecret:kWechatSecret redirectURL:nil];
     //微博
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:kWeiboAppId appSecret:kWeiboSeret redirectURL:kWeiboUrl];
-    LLog(@"===kWeiboAppid = %@",kWeiboAppId);
-    LLog(@"===kWeiboSeret = %@",kWeiboSeret);
-    LLog(@"===kWeiboUrl = %@",kWeiboUrl);
 }
 
 
