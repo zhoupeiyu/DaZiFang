@@ -62,7 +62,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     NSString *url=[[[request URL]absoluteString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
-    ////////////////////
     if ([url hasPrefix:@"data://appData"]){
         //创建JSContext对象
         JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
@@ -157,7 +156,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //    }];
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
     model.sourceUrlStr = self.detailContensModel.sourceUrl;
-    NSString *imgUrl = self.detailContensModel.imgUrl;
     if (self.image) {
         model.thumbImage = self.image;
     }else{

@@ -33,7 +33,7 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.title = @"还款提醒";
+    self.title = @"提醒列表";
 }
 
 - (void)setUpTableView{
