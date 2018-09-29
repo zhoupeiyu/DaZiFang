@@ -21,6 +21,7 @@
     [super viewDidLoad];
     [self setupConfig];
     [self setupUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginError:) name:UserLoginErrorNotification object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -71,6 +72,10 @@
 
 - (BOOL)prefersStatusBarHidden {
     return NO;
+}
+
+- (void)userLoginError:(NSNotification *)noti {
+    
 }
 /**
  *  设置导航默认返回按钮

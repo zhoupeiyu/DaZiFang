@@ -7,6 +7,8 @@ UIKIT_EXTERN NSNotificationName const UserLoginSuccessNotification;
 // 点击了tab
 UIKIT_EXTERN NSNotificationName const TabBarDidClickNotification;
 
+// 登录失败
+UIKIT_EXTERN NSNotificationName const UserLoginErrorNotification;
 
 
 
