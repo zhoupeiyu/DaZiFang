@@ -175,7 +175,7 @@
 - (void)getCommentQuestionDetail:(NSString *)faqId delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:faqId forKey:@"faqId"];
-    [self POST:KGetCommentQuestionDetailInterface reqType:KGetCommentQuestionDetailRequest delegate:delegate parameters:params ObjcClass:[CommentQuestionListModel class] NeedCache:NO];
+    [self POST:KGetCommentQuestionDetailInterface reqType:KGetCommentQuestionDetailRequest delegate:delegate parameters:params ObjcClass:[CommentQuestionDetail class] NeedCache:NO];
 
 }
 
