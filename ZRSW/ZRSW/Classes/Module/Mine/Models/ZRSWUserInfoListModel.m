@@ -11,10 +11,11 @@
 @implementation ZRSWUserInfoListModel
 
 - (void)setCellType:(UserInfoCellType)cellType {
+    _cellType = cellType;
     if (cellType == UserInfoCellTypeHeader) {
         self.cellHeight = 70;
     }
-    else if (cellType == UserInfoCellTypeInfo) {
+    else if (cellType == UserInfoCellTypeInfo || cellType == UserInfoCellTypeInput) {
         self.cellHeight = 60;
     }
 }

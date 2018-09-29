@@ -10,10 +10,21 @@
 
 typedef enum : NSUInteger {
     UserInfoCellTypeHeader,
-    UserInfoCellTypeInfo
+    UserInfoCellTypeInfo,
+    UserInfoCellTypeInput
 } UserInfoCellType;
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class ZRSWUserInfoCell;
+
+@protocol UserInfoCellDelegate <NSObject>
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWUserInfoCell *)cell;
+
+- (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWUserInfoCell *)cell;
+
+@end
 
 @interface ZRSWUserInfoListModel : NSObject
 
@@ -23,6 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *desTitle;
 @property (nonatomic, assign) UITableViewCellSelectionStyle selectionStyle;
 @property (nonatomic, assign) NSInteger cellHeight;
+@property (nonatomic, weak) id <UserInfoCellDelegate> deleget;
+@property (nonatomic, strong) NSString *placeHoled;
+@property (nonatomic, assign) NSInteger textFieldTag;
+@property (nonatomic, strong) NSString *actionName;
+@property (nonatomic, strong) NSString *headerImageUrl;
+@property (nonatomic, strong) UIImage *image;
 
 @end
 

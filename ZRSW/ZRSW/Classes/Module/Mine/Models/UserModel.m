@@ -55,7 +55,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
         if (model.data.headImgUrl.length > 0) {
             userModel.data.headImgUrl = model.data.headImgUrl;
         }
-        if (model.data.myId) {
+        if (model.data.myId.length > 0) {
             userModel.data.myId = model.data.myId;
         }
         if (model.data.sex) {

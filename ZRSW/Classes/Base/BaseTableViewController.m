@@ -155,6 +155,7 @@
         _tableView.contentInset = UIEdgeInsetsZero;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.showsHorizontalScrollIndicator = NO;
+        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
     }
     return _tableView;
 }
