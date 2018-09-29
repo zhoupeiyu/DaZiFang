@@ -9,12 +9,19 @@
 #import "BaseModel.h"
 
 @interface ZRSWBillModel : NSObject
-@property (nonatomic, strong) NSString *uid;
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *groupid;
-@property (nonatomic, strong) NSString *reg_time;
-@property (nonatomic, strong) NSString *last_login_time;
+
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString *orderId;
+@property (nonatomic, strong) NSString *loanTitle;
+@property (nonatomic, assign) int loanNumber;
+@property (nonatomic, assign) int loanCycle;
+@property (nonatomic, strong) NSString *loanMoney;
+@property (nonatomic, strong) NSString *loanUserName;
+@property (nonatomic, strong) NSString *loanUserPhone;
+@property (nonatomic, strong) NSString *loanTime;
+@property (nonatomic, assign) int status;
+@property (nonatomic, assign) int *urgedTimes;
 @end
 
 @interface ZRSWBillListModel : BaseModel

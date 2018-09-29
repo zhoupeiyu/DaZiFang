@@ -10,9 +10,10 @@
 #import "ZRSWRemindListCell.h"
 #import "UserService.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
-
+#define  kPageSize 20
 @interface ZRSWRemindListController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, assign) int pageNum;
 @end
 
 @implementation ZRSWRemindListController
@@ -21,6 +22,7 @@
     [super viewDidLoad];
     [self setUpTableView];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
+    self.pageNum = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -38,6 +40,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES];
+    [self enableLoadMore:YES];
 }
 
 
@@ -70,43 +73,39 @@
 #pragma mark - NetWork
 - (void)requsetRemindList{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getRemindList:@"黄亚楠" password:@"123456" name:@"18511691940" delegate:self];
+    [[[UserService alloc] init] getRemindList:kPageSize pageNum:self.pageNum delegate:self];
 }
 
 - (void)refreshData{
+    self.pageNum = 1;
+    [self.tableView.mj_footer resetNoMoreData];
     [TipViewManager showLoading];
-   [[[UserService alloc] init] getRemindList:@"" password:@"" name:@"" delegate:self];
+    [self requsetRemindList];
+}
+
+- (void)loadMoreData{
+    [self requsetRemindList];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
     [TipViewManager dismissLoading];
     [self endHeadRefreshing];
     [self endFootRefreshing];
-    ZRSWRemindModel *remindModel1 = [[ZRSWRemindModel alloc] init];
-    remindModel1.name = @"2018/09/28 11:25:27";
-    remindModel1.username = @"中融温馨提醒：贷款人杨飞的企业经营贷贷款的到期还款日为2018/9/29，还款额为16778.09。如您已还款请忽略。请立即登陆中融手机APP，方便又快捷。【中融盛旺】";
-    ZRSWRemindModel *remindModel2 = [[ZRSWRemindModel alloc] init];
-    remindModel2.name = @"2018/09/28 11:25:27";
-    remindModel2.username = @"中融温馨提醒：贷款人杨飞的企业经营贷贷款的到期还款日为2018/9/29，还款额为16778.09。如您已还款请忽略。请立即登陆中融手机APP，方便又快捷。【中融盛旺】";
-    ZRSWRemindModel *remindModel3 = [[ZRSWRemindModel alloc] init];
-    remindModel3.name = @"2018/09/28 11:25:27";
-    remindModel3.username = @"中融温馨提醒：贷款人杨飞的企业经营贷贷款的到期还款日为2018/9/29，还款额为16778.09。如您已还款请忽略。请立即登陆中融手机APP，方便又快捷。【中融盛旺】";
-    ZRSWRemindModel *remindModel4 = [[ZRSWRemindModel alloc] init];
-    remindModel4.name = @"2018/09/28 11:25:27";
-    remindModel4.username = @"中融温馨提醒：贷款人杨飞的企业经营贷贷款的到期还款日为2018/9/29，还款额为16778.09。如您已还款请忽略。请立即登陆中融手机APP，方便又快捷。【中融盛旺】";
-    ZRSWRemindModel *remindModel5 = [[ZRSWRemindModel alloc] init];
-    remindModel5.name = @"2018/09/28 11:25:27";
-    remindModel5.username = @"中融温馨提醒：贷款人杨飞的企业经营贷贷款的到期还款日为2018/9/29，还款额为16778.09。如您已还款请忽略。请立即登陆中融手机APP，方便又快捷。【中融盛旺】";
-    [self.dataListSource addObject:remindModel1];
-    [self.dataListSource addObject:remindModel2];
-    [self.dataListSource addObject:remindModel3];
-    [self.dataListSource addObject:remindModel4];
-    [self.dataListSource addObject:remindModel5];
-    [self.tableView reloadData];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetRemindListRequest]) {
             ZRSWRemindListModel *model = (ZRSWRemindListModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                if (self.dataListSource.count > 0 && self.pageNum == 1) {
+                    [self.dataListSource removeAllObjects];
+                }
+                if (model.data.count > 0) {
+                    self.pageNum++;
+                }else{
+                    if (self.dataListSource.count != 0) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                    }
+                    return;
+                }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     ZRSWRemindModel *remindModel = model.data[i];
                     [self.dataListSource addObject:remindModel];

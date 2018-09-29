@@ -204,20 +204,18 @@
 
 /**
  账单列表
- @param username 用户名
- @param password 密码
- @param name ID 昵称
- @param delegate 代理
+ @param pageSize 每页查询条数：默认20条
+ @param pageNum 查询第几页：默认第1页
+  @param delegate 代理
  */
-- (void)getBillList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate;
+- (void)getBillList:(int)pageSize pageNum:(int)pageNum delegate:(id)delegate;
 /**
  提醒列表
- @param username 用户名
- @param password 密码
- @param name ID 昵称
+ @param pageSize 每页查询条数：默认20条
+ @param pageNum 查询第几页：默认第1页
  @param delegate 代理
  */
-- (void)getRemindList:(NSString *)username password:(NSString *)password name:(NSString *)name delegate:(id)delegate;
+- (void)getRemindList:(int)pageSize pageNum:(int)pageNum delegate:(id)delegate;
 
 
 /**

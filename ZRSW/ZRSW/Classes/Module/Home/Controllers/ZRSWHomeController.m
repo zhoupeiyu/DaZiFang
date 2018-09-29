@@ -75,7 +75,7 @@
     [super viewWillAppear:animated];
     [TipViewManager showLoading];
     self.group = dispatch_group_create();
-    [self requsetCityList];
+//    [self requsetCityList];
     [self requsetBannerList];
     [self requsetSystemNotificationList];
     [self requsetPopularInformationList];
