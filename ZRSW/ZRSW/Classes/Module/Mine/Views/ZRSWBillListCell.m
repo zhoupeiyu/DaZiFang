@@ -134,7 +134,7 @@
 - (UILabel *)paymentsLabel{
     if (!_paymentsLabel) {
         _paymentsLabel = [[UILabel alloc] init];
-        _paymentsLabel.text = @"¥16778.09";
+//        _paymentsLabel.text = @"¥16778.09";
         _paymentsLabel.textColor = [UIColor colorFromRGB:0x4771F2];
         _paymentsLabel.textAlignment = NSTextAlignmentLeft;
         _paymentsLabel.font = [UIFont systemFontOfSize:14];
@@ -157,7 +157,7 @@
 - (UILabel *)lenderNameLabel{
     if (!_lenderNameLabel) {
         _lenderNameLabel = [[UILabel alloc] init];
-        _lenderNameLabel.text = @"杨飞";
+//        _lenderNameLabel.text = @"杨飞";
         _lenderNameLabel.textColor = [UIColor colorFromRGB:0x999999];
         _lenderNameLabel.textAlignment = NSTextAlignmentLeft;
         _lenderNameLabel.font = [UIFont systemFontOfSize:13];
@@ -179,7 +179,7 @@
 - (UILabel *)paymentDateLabel{
     if (!_paymentDateLabel) {
         _paymentDateLabel = [[UILabel alloc] init];
-        _paymentDateLabel.text = @"2018/08/29";
+//        _paymentDateLabel.text = @"2018/08/29";
         _paymentDateLabel.textColor = [UIColor colorFromRGB:0x474455];
         _paymentDateLabel.textAlignment = NSTextAlignmentLeft;
         _paymentDateLabel.font = [UIFont systemFontOfSize:14];
@@ -200,7 +200,7 @@
 - (UILabel *)statusLabel{
     if (!_statusLabel) {
         _statusLabel = [[UILabel alloc] init];
-        _statusLabel.text = @"已逾期";
+//        _statusLabel.text = @"已逾期";
         _statusLabel.textColor = [UIColor colorFromRGB:0xFF5153];
         _statusLabel.textAlignment = NSTextAlignmentLeft;
         _statusLabel.font = [UIFont systemFontOfSize:14];
@@ -210,6 +210,20 @@
 
 - (void)setBillModel:(ZRSWBillModel *)billModel{
     _billModel = billModel;
+    self.loanTypeLabel.text = billModel.loanTitle;
+    self.loanDateLabel.text = [NSString stringWithFormat:@"（%d/%d）",billModel.loanNumber,billModel.loanCycle];
+    self.paymentsLabel.text = billModel.loanMoney;
+    self.lenderNameLabel.text = billModel.loanUserName;
+    self.paymentDateLabel.text = billModel.loanTime;
+    if (billModel.status == 0) {
+        self.statusLabel.text = @"未到期";
+    }else if (billModel.status == 1){
+        self.statusLabel.text = @"已逾期";
+    }else if (billModel.status == 2){
+        self.statusLabel.text = @"已还款";
+    }else{
+        self.statusLabel.text = @"已删除";
+    }
 }
 
 - (void)awakeFromNib {

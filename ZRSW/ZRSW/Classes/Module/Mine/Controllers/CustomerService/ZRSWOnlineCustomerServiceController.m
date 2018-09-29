@@ -8,7 +8,7 @@
 
 #import "ZRSWOnlineCustomerServiceController.h"
 
-@interface ZRSWOnlineCustomerServiceController ()<EaseMessageViewControllerDelegate,EaseMessageViewControllerDataSource>
+@interface ZRSWOnlineCustomerServiceController ()
 
 @end
 
@@ -28,30 +28,45 @@
 }
 
 - (void)loggedInEMClient{
-    EMClient *client = [EMClient sharedClient];
-    WS(weakSelf);
-    if (client.isLoggedIn != YES) {
+//    EMClient *client = [EMClient sharedClient];
+//    WS(weakSelf);
+//    if (client.isLoggedIn != YES) {
+//        UserModel *userModel = [UserModel getCurrentModel];
+//        UserInfoModel *userInfoModel = userModel.data;
+//        [[EMClient sharedClient] loginWithUsername:userInfoModel.huanXinName password:kHuanXinpassword completion:^(NSString *aUsername, EMError *aError) {
+//            if (!aError) {
+//                LLog(@"登录成功");
+//            } else {
+//                LLog(@"登录失败");
+//                [TipViewManager showAlertControllerWithTitle:@"温馨提示" message:@"暂时无法与客服沟通" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:^(PSTAlertAction *action) {
+//                    [weakSelf.navigationController popViewControllerAnimated:YES];
+//                } controller:nil completion:nil];
+//
+//            }
+//        }];
+//    } else { //已经成功登录
+//        LLog(@"已经登录");
+//    }
+    HDClient *client = [HDClient sharedClient];
+    if (client.isLoggedInBefore != YES) {
         UserModel *userModel = [UserModel getCurrentModel];
         UserInfoModel *userInfoModel = userModel.data;
-        [[EMClient sharedClient] loginWithUsername:userInfoModel.huanXinName password:kHuanXinpassword completion:^(NSString *aUsername, EMError *aError) {
-            if (!aError) {
-                LLog(@"登录成功");
-            } else {
-                LLog(@"登录失败");
-                [TipViewManager showAlertControllerWithTitle:@"温馨提示" message:@"暂时无法与客服沟通" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:^(PSTAlertAction *action) {
-                    [weakSelf.navigationController popViewControllerAnimated:YES];
-                } controller:nil completion:nil];
-
-            }
-        }];
-    } else { //已经成功登录
-        LLog(@"已经登录");
+        HDError *error = [client loginWithUsername:userInfoModel.huanXinName password:kHuanXinpassword];
+        if (!error) {
+            //登录成功
+             LLog(@"登录成功");
+        } else {
+            //登录失败
+             LLog(@"登录失败");
+            return;
+        }
     }
 }
 
 
 - (void)setUpChatController{
-    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
+//    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
+    HDMessageViewController *chatController = [[HDMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu"];
     [self addChildViewController:chatController];
     [self.view addSubview:chatController.view];
 }

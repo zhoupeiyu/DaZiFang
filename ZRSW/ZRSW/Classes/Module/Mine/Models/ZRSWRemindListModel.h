@@ -8,12 +8,11 @@
 
 #import <Foundation/Foundation.h>
 @interface ZRSWRemindModel : NSObject
-@property (nonatomic, strong) NSString *uid;
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *groupid;
-@property (nonatomic, strong) NSString *reg_time;
-@property (nonatomic, strong) NSString *last_login_time;
+@property (nonatomic, strong) NSString *id;
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *parentId;
+@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *sendTime;
 @end
 
 @interface ZRSWRemindListModel : BaseModel

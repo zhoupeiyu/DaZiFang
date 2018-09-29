@@ -62,7 +62,7 @@
 #define KGetCommentQuestionDetailInterface              @"api/index/faqInfo"
 
 // 账单列表
-#define KGetBillListInterface                @"api/message/accountList"
+#define KGetBillListInterface                @"api/order/recordList"
 
 
 // 提醒列表

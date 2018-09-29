@@ -10,8 +10,11 @@
 #import "ZRSWBillListCell.h"
 #import "UserService.h"
 #import "ZRSWRemindListController.h"
+#define  kPageSize 20
 @interface ZRSWBillListController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, assign) int pageNum;
+
 @end
 
 @implementation ZRSWBillListController
@@ -20,11 +23,11 @@
     [super viewDidLoad];
     [self setUpTableView];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
+    self.pageNum = 1;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self requsetRemindList];
     [self requsetBillList];
 }
 
@@ -40,11 +43,12 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES];
+    [self enableLoadMore:YES];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataListSource.count+5;
+    return self.dataListSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -52,8 +56,8 @@
     if (!cell) {
         cell = [[ZRSWBillListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWBillListCell"];
     }
-//    ZRSWBillModel *model = self.dataListSource[indexPath.row];
-//    cell.billModel = model;
+    ZRSWBillModel *model = self.dataListSource[indexPath.row];
+    cell.billModel = model;
     return cell;
 }
 
@@ -74,12 +78,18 @@
 #pragma mark - NetWork
 - (void)requsetBillList{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getBillList:@"18600886745" password:@"1234567" name:@"18511691940" delegate:self];
+    [[[UserService alloc] init] getBillList:kPageSize pageNum:self.pageNum delegate:self];
 }
 
 - (void)refreshData{
+    self.pageNum = 1;
+    [self.tableView.mj_footer resetNoMoreData];
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getRemindList:@"18600886745" password:@"1234567" name:@"18511691940" delegate:self];
+    [self requsetBillList];
+}
+
+- (void)loadMoreData{
+    [self requsetBillList];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
@@ -90,6 +100,17 @@
         if ([reqType isEqualToString:KGetBillListRequest]) {
             ZRSWBillListModel *model = (ZRSWBillListModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                if (self.dataListSource.count > 0 && self.pageNum == 1) {
+                    [self.dataListSource removeAllObjects];
+                }
+                if (model.data.count > 0) {
+                    self.pageNum++;
+                }else{
+                    if (self.dataListSource.count != 0) {
+                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+                    }
+                    return;
+                }
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     ZRSWBillModel *billModel = model.data[i];
                     [self.dataListSource addObject:billModel];
