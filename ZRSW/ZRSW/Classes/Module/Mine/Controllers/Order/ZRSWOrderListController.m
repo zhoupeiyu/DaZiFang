@@ -112,11 +112,11 @@
         _tabBar.layout.barStyle = TYPagerBarStyleProgressBounceView;
         _tabBar.layout.progressHeight = 3;
         _tabBar.layout.progressRadius = 1.5;
-        _tabBar.layout.progressColor = [UIColor getFontBlueColor];
-        _tabBar.layout.normalTextFont = [UIFont systemFontOfSize:15];
-        _tabBar.layout.selectedTextFont = [UIFont systemFontOfSize:15];
-        _tabBar.layout.normalTextColor = [UIColor colorFromRGB:<#(NSInteger)#>];
-        _tabBar.layout.selectedTextColor = [UIColor getBackgroundBlueColor];
+        _tabBar.layout.progressColor = [UIColor colorFromRGB:0x4771F2];
+        _tabBar.layout.normalTextFont = [UIFont systemFontOfSize:17];
+        _tabBar.layout.selectedTextFont = [UIFont systemFontOfSize:17];
+        _tabBar.layout.normalTextColor = [UIColor colorFromRGB:0x474455];
+        _tabBar.layout.selectedTextColor = [UIColor colorFromRGB:0x4771F2];
         _tabBar.layout.cellWidth = SCREEN_WIDTH / 6;
         _tabBar.collectionView.scrollEnabled = NO;
         _tabBar.layout.adjustContentCellsCenter = YES;
