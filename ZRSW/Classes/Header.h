@@ -127,9 +127,9 @@
 //Full版本
 #import <Hyphenate/Hyphenate.h>
 // IM SDK依赖的UI文件的头文件
-//#import "EaseUI.h"
+#import "EaseUI.h"
 #import <HelpDesk/HelpDesk.h>
-#import "HelpDeskUI.h"
+//#import "HelpDeskUI.h"
 #import <TYTabPagerBar.h>
 #import <TYPagerController.h>
 

@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self loggedInEMClient];
+     [self loggedInClient];
     [self setUpChatController];
     // Do any additional setup after loading the view.
 }
@@ -27,7 +27,7 @@
     [self setLeftBackBarButton];
 }
 
-- (void)loggedInEMClient{
+- (void)loggedInClient{
 //    EMClient *client = [EMClient sharedClient];
 //    WS(weakSelf);
 //    if (client.isLoggedIn != YES) {
@@ -47,6 +47,7 @@
 //    } else { //已经成功登录
 //        LLog(@"已经登录");
 //    }
+    WS(weakSelf);
     HDClient *client = [HDClient sharedClient];
     if (client.isLoggedInBefore != YES) {
         UserModel *userModel = [UserModel getCurrentModel];
@@ -58,21 +59,25 @@
         } else {
             //登录失败
              LLog(@"登录失败");
-            return;
+            [TipViewManager showAlertControllerWithTitle:@"温馨提示" message:@"暂时无法与客服沟通" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:^(PSTAlertAction *action) {
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                                } controller:nil completion:nil];
         }
+    }else{
+        LLog(@"已经登录");
     }
 }
 
 
 - (void)setUpChatController{
-//    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
-    HDMessageViewController *chatController = [[HDMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu"];
+    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
     [self addChildViewController:chatController];
     [self.view addSubview:chatController.view];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    [[HDClient sharedClient] logout:YES];
 }
 
 
