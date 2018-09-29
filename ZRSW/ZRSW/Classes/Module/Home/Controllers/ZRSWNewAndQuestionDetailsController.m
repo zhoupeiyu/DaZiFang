@@ -121,7 +121,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
                 self.detailContensModel = detailContensModel;
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:detailContensModel.imgUrl]];
                 self.image = [UIImage imageWithData:data]; // 取得图片
-
                 //加载h5
                 NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
                 [self.webView loadRequest:resquest];
@@ -187,13 +186,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }
     return _webView;
 }
-//- (NSURL *)url{
-//    if (!_url) {
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"NewAndQuestionDetails" ofType:@"html"];
-//        _url = [NSURL fileURLWithPath:path];
-//    }
-//    return _url;
-//}
+- (NSURL *)url{
+    if (!_url) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"html" inDirectory:@"H5"];
+        _url = [NSURL fileURLWithPath:path];
+    }
+    return _url;
+}
 
 
 
