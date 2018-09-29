@@ -50,7 +50,7 @@
     }];
 }
 - (void)loadData {
-    [self.dataSource addObjectsFromArray:@[@"全部",@"审核中",@"已通过",@"已放款",@"已完成"]];
+    [self.dataSource addObjectsFromArray:@[@"全部",@"审核中",@"已通过",@"已放款",@"已拒绝"]];
     [self reloadData];
 }
 
@@ -82,7 +82,7 @@
 
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
     ZRSWOrderListDetailController *vc = [[ZRSWOrderListDetailController alloc] init];
-//    vc.tabType = index;
+    vc.tabType = index;
     return vc;
 }
 
@@ -111,10 +111,10 @@
         _tabBar = [[TYTabPagerBar alloc]init];
         _tabBar.layout.barStyle = TYPagerBarStyleProgressBounceView;
         _tabBar.layout.progressHeight = 3;
-        _tabBar.layout.progressRadius = 1.5;
+        _tabBar.layout.progressRadius = _tabBar.layout.progressHeight * 0.5;
         _tabBar.layout.progressColor = [UIColor colorFromRGB:0x4771F2];
-        _tabBar.layout.normalTextFont = [UIFont systemFontOfSize:17];
-        _tabBar.layout.selectedTextFont = [UIFont systemFontOfSize:17];
+        _tabBar.layout.normalTextFont = [UIFont systemFontOfSize:15];
+        _tabBar.layout.selectedTextFont = [UIFont systemFontOfSize:15];
         _tabBar.layout.normalTextColor = [UIColor colorFromRGB:0x474455];
         _tabBar.layout.selectedTextColor = [UIColor colorFromRGB:0x4771F2];
         _tabBar.layout.cellWidth = SCREEN_WIDTH / 6;
