@@ -100,16 +100,15 @@
                 }
                 if (model.data.count > 0) {
                     self.pageNum++;
+                    for (NSUInteger i = 0; i < model.data.count; ++i){
+                        ZRSWRemindModel *remindModel = model.data[i];
+                        [self.dataListSource addObject:remindModel];
+                        [self.tableView reloadData];
+                    }
                 }else{
                     if (self.dataListSource.count != 0) {
                         [self.tableView.mj_footer endRefreshingWithNoMoreData];
                     }
-                    return;
-                }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    ZRSWRemindModel *remindModel = model.data[i];
-                    [self.dataListSource addObject:remindModel];
-                    [self.tableView reloadData];
                 }
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
@@ -118,6 +117,11 @@
         }
     }else{
         LLog(@"请求失败");
+    }
+    if(self.dataListSource.count == 0){
+        [self hiddenFooter:YES];
+    }else{
+        [self hiddenFooter:NO];
     }
 }
 

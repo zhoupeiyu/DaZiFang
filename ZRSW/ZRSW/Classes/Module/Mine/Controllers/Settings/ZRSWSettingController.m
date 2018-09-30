@@ -39,7 +39,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 
@@ -62,6 +62,10 @@
         cell.imageView.image = [UIImage imageNamed:@"my_order"];
         cell.textLabel.text = @"意见反馈";
         cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_information_arrow"]];
+    }else if (indexPath.row == 3) {
+        cell.imageView.image = [UIImage imageNamed:@"my_phone"];
+        cell.textLabel.text = @"退出登录";
+        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_information_arrow"]];
     }
     return cell;
 }
@@ -79,6 +83,10 @@
         ZRSWFeedBackController *feedBackVC = [[ZRSWFeedBackController alloc] init];
         feedBackVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:feedBackVC animated:YES];
+    }else if (indexPath.row == 3) {
+        LLog(@"退出登录");
+        [UserModel removeUserData];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

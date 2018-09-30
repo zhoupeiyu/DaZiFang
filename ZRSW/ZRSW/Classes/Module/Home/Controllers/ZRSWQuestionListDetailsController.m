@@ -102,7 +102,6 @@
                     CommentQuestionModel *detailModel = model.data[i];
                     if ([detailModel.id isEqualToString:self.lastId]) {
                         [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        return;
                     }
                     [self.dataListSource addObject:detailModel];
                     [self.tableView reloadData];
@@ -113,6 +112,11 @@
         }
     }else{
         LLog(@"请求失败");
+    }
+    if(self.dataListSource.count == 0){
+        [self hiddenFooter:YES];
+    }else{
+        [self hiddenFooter:NO];
     }
 }
 

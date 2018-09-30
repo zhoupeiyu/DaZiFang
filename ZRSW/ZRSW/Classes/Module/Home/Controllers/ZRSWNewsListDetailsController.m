@@ -157,7 +157,11 @@
     }else{
         LLog(@"请求失败");
     }
-    
+    if(self.dataListSource.count == 0){
+        [self hiddenFooter:YES];
+    }else{
+        [self hiddenFooter:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
