@@ -31,7 +31,7 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    [self setRightBarButtonWithImage:[UIImage imageNamed:@"my_remind"] AndHighLightImage:[UIImage imageNamed:@""]];
+    [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_news"] AndHighLightImage:[UIImage imageNamed:@""]];
     [self.rightBarButton addTarget:self action:@selector(goToRemindListController) forControlEvents:UIControlEventTouchUpInside];
     self.title = @"账单列表";
 }

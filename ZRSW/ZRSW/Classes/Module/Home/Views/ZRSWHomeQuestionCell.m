@@ -44,7 +44,7 @@
     self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(10), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(34));
 //    self.readerIcon.frame = CGRectMake(kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
 //    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
-    self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(150), kUI_HeightS(10));
+    self.dateLabel.frame = CGRectMake(kUI_WidthS(81),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(150), kUI_HeightS(10));
 }
 
 - (UIView *)topLine{
