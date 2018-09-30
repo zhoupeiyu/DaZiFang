@@ -56,7 +56,7 @@
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
     [TipViewManager showLoading];
     self.group = dispatch_group_create();
-    //    [self requsetCityList];
+        [self requsetCityList];
     [self requsetBannerList];
     [self requsetSystemNotificationList];
     [self requsetPopularInformationList];
@@ -83,6 +83,21 @@
 }
 
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    [TipViewManager showLoading];
+//    self.group = dispatch_group_create();
+//    [self requsetCityList];
+//    [self requsetBannerList];
+//    [self requsetSystemNotificationList];
+//    [self requsetPopularInformationList];
+//    [self requsetCommentQuestionList];
+//    [self locationCity];
+//    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+//        [TipViewManager dismissLoading];
+//    });
+
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
