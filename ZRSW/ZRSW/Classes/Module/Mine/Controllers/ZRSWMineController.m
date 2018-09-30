@@ -220,14 +220,6 @@
             model.viewControllerName = NSStringFromClass([ZRSWResetPhoneController class]);
             [data addObject:model];
         }
-        {
-            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
-            model.title = @"退出登录";
-            model.type = MineListTypeCommentList;
-            model.iconName = @"my_phone";
-            model.viewControllerName = NSStringFromClass([ZRSWLoginController class]);
-            [data addObject:model];
-        }
         [self.dataSource addObject:data];
     }
     [self.tableView reloadData];

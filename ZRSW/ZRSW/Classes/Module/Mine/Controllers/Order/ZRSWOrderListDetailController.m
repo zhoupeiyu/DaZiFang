@@ -32,6 +32,7 @@
 - (void)setupTableView {
     [self enableLoadMore:YES];
     [self enableRefreshHeader:YES];
+    self.tableView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)refreshData {
@@ -67,7 +68,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] init];
-    headerView.backgroundColor = [UIColor getBackgroundColor];
+    headerView.backgroundColor = self.view.backgroundColor;
     headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 9);
     return headerView;
 }
