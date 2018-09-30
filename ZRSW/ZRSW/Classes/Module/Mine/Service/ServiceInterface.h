@@ -68,6 +68,11 @@
 // 提醒列表
 #define KGetRemindListInterface                         @"api/message/msgList"
 
+// 更新阅读状态
+#define KUpdateMsgStatusInterface                         @"api/message/updateMsgStatus"
+
+
+
 // 贷款大类列表接口
 #define KGetOrderMainTypeListInterface                  @"api/order/mainTypeList"
 
