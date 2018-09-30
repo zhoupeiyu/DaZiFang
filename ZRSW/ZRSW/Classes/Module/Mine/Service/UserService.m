@@ -194,6 +194,12 @@
     [self POST:KGetRemindListInterface reqType:KGetRemindListRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
 }
 
+- (void)updateMsgStatus:(NSString *)msgIds delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:msgIds forKey:@"msgIds"];
+    [self POST:KGetRemindListInterface reqType:KUpdateMsgStatusRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
+}
+
 
 - (void)logOutWithDelegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

@@ -71,6 +71,9 @@
 // 提醒列表
 #define KGetRemindListRequest                 @"KGetRemindListRequest"
 
+// 更新阅读状态
+#define KUpdateMsgStatusRequest                         @"KUpdateMsgStatusRequest"
+
 
 // 获得贷款大类
 #define KGetOrderMainTypeListRequest           @"KGetOrderMainTypeListRequest"
