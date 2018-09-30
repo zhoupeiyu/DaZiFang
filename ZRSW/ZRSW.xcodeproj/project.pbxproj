@@ -130,10 +130,6 @@
 		3CD3C817215FCC9900DE6199 /* HelpDesk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
 		3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */; };
-		3CEECD68215FBDF6005C76BF /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CEECD63215FBDF5005C76BF /* rem.js */; };
-		3CEECD69215FBDF6005C76BF /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CEECD64215FBDF5005C76BF /* vue-2.5.13.js */; };
-		3CEECD6A215FBDF6005C76BF /* news.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CEECD65215FBDF5005C76BF /* news.html */; };
-		3CEECD6B215FBDF6005C76BF /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CEECD67215FBDF5005C76BF /* eyes.png */; };
 		3CFBF528215C7CB100A7AA97 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF527215C7CB100A7AA97 /* CoreMedia.framework */; };
 		3CFBF52A215C7CBD00A7AA97 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF529215C7CBD00A7AA97 /* AudioToolbox.framework */; };
 		3CFBF52C215C7CCB00A7AA97 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF52B215C7CCA00A7AA97 /* AVFoundation.framework */; };
@@ -444,6 +440,8 @@
 		E5E2798C215E7FA1007D27A8 /* ZRSWOrderListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2798B215E7FA1007D27A8 /* ZRSWOrderListController.m */; };
 		E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */; };
 		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
+		E5E27A2D215FC611007D27A8 /* a.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A2C215FC610007D27A8 /* a.html */; };
+		E5E27A2F215FC6A9007D27A8 /* Agreement.html in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A2E215FC6A9007D27A8 /* Agreement.html */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -706,10 +704,6 @@
 		3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBrushFaceLoginController.m; sourceTree = "<group>"; };
 		3CED799D2159E36C00A1BE4C /* ZRSWBannerDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBannerDetailsController.h; sourceTree = "<group>"; };
 		3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBannerDetailsController.m; sourceTree = "<group>"; };
-		3CEECD63215FBDF5005C76BF /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
-		3CEECD64215FBDF5005C76BF /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
-		3CEECD65215FBDF5005C76BF /* news.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = news.html; sourceTree = "<group>"; };
-		3CEECD67215FBDF5005C76BF /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		3CFBF527215C7CB100A7AA97 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		3CFBF529215C7CBD00A7AA97 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3CFBF52B215C7CCA00A7AA97 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1147,6 +1141,8 @@
 		E5E279E4215F5C47007D27A8 /* H5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = H5.h; sourceTree = "<group>"; };
 		E5E279E5215F607C007D27A8 /* ZRSWOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderListCell.h; sourceTree = "<group>"; };
 		E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListCell.m; sourceTree = "<group>"; };
+		E5E27A2C215FC610007D27A8 /* a.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = a.html; sourceTree = "<group>"; };
+		E5E27A2E215FC6A9007D27A8 /* Agreement.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Agreement.html; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -1764,33 +1760,6 @@
 				3CD3C814215FCC8100DE6199 /* HelpDesk.framework */,
 			);
 			path = HelpDesk;
-			sourceTree = "<group>";
-		};
-		3CEECD61215FBDF5005C76BF /* news */ = {
-			isa = PBXGroup;
-			children = (
-				3CEECD62215FBDF5005C76BF /* js */,
-				3CEECD65215FBDF5005C76BF /* news.html */,
-				3CEECD66215FBDF5005C76BF /* img */,
-			);
-			path = news;
-			sourceTree = "<group>";
-		};
-		3CEECD62215FBDF5005C76BF /* js */ = {
-			isa = PBXGroup;
-			children = (
-				3CEECD63215FBDF5005C76BF /* rem.js */,
-				3CEECD64215FBDF5005C76BF /* vue-2.5.13.js */,
-			);
-			path = js;
-			sourceTree = "<group>";
-		};
-		3CEECD66215FBDF5005C76BF /* img */ = {
-			isa = PBXGroup;
-			children = (
-				3CEECD67215FBDF5005C76BF /* eyes.png */,
-			);
-			path = img;
 			sourceTree = "<group>";
 		};
 		3CFBF53A215CAE2D00A7AA97 /* CustomerService */ = {
@@ -2727,7 +2696,8 @@
 		E5E279E3215F5C34007D27A8 /* H5 */ = {
 			isa = PBXGroup;
 			children = (
-				3CEECD61215FBDF5005C76BF /* news */,
+				E5E27A2E215FC6A9007D27A8 /* Agreement.html */,
+				E5E27A2C215FC610007D27A8 /* a.html */,
 				E5E279E4215F5C47007D27A8 /* H5.h */,
 			);
 			path = H5;
@@ -2810,7 +2780,6 @@
 				E5B59B53214EC15600726DE9 /* currency_top_back@2x.png in Resources */,
 				E5B59B6B214EC15600726DE9 /* pretrial_sex_select@3x.png in Resources */,
 				E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */,
-				3CEECD68215FBDF6005C76BF /* rem.js in Resources */,
 				E5B59BA2214EC15600726DE9 /* pretrial_examples_button@3x.png in Resources */,
 				3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */,
 				E5B599FB214EBEE800726DE9 /* language_arrow_9x9_@2x.png in Resources */,
@@ -2870,7 +2839,6 @@
 				E5B59B5E214EC15600726DE9 /* news_dialog_me@2x.png in Resources */,
 				E5B59B82214EC15600726DE9 /* share_wechat@3x.png in Resources */,
 				E5B59B1E214EC15600726DE9 /* home_advertise_instructions_select@2x.png in Resources */,
-				3CEECD6B215FBDF6005C76BF /* eyes.png in Resources */,
 				E5B59B71214EC15600726DE9 /* pretrial_upload_button@3x.png in Resources */,
 				E5B59B5D214EC15600726DE9 /* pretrial_title_instructions@2x.png in Resources */,
 				E5B59B55214EC15600726DE9 /* news_dialog_arrow_them@2x.png in Resources */,
@@ -2966,7 +2934,6 @@
 				E5B59B8D214EC15600726DE9 /* verification_code_button@3x.png in Resources */,
 				E5B59B29214EC15600726DE9 /* share_friends@2x.png in Resources */,
 				E5B59B98214EC15600726DE9 /* currency_line_690@3x.png in Resources */,
-				3CEECD6A215FBDF6005C76BF /* news.html in Resources */,
 				E5B59B8F214EC15600726DE9 /* home_notice@3x.png in Resources */,
 				E5B59B1D214EC15600726DE9 /* icon_76.png in Resources */,
 				E5B59B43214EC15600726DE9 /* currency_top_set@2x.png in Resources */,
@@ -2980,15 +2947,16 @@
 				E5B59B5F214EC15600726DE9 /* currency_line_720@2x.png in Resources */,
 				E5B59B5C214EC15600726DE9 /* currency_top_bg@2x.png in Resources */,
 				E5B59B3F214EC15600726DE9 /* currency_line_750@2x.png in Resources */,
-				3CEECD69215FBDF6005C76BF /* vue-2.5.13.js in Resources */,
 				E5B59B94214EC15600726DE9 /* currency_shadow_lower@3x.png in Resources */,
 				E5B59B13214EC15600726DE9 /* icon_87.png in Resources */,
+				E5E27A2F215FC6A9007D27A8 /* Agreement.html in Resources */,
 				E5B59B54214EC15600726DE9 /* bill_title_instructions@2x.png in Resources */,
 				E5B59B7D214EC15600726DE9 /* currency_line_750@3x.png in Resources */,
 				E5B599F6214EBEE800726DE9 /* toast_error@2x.png in Resources */,
 				E5B59B6A214EC15600726DE9 /* currency_bottom_loan_default@3x.png in Resources */,
 				E5B59B90214EC15600726DE9 /* currency_bottom_loan_select@3x.png in Resources */,
 				E5B59B17214EC15600726DE9 /* icon_80.png in Resources */,
+				E5E27A2D215FC611007D27A8 /* a.html in Resources */,
 				3C7E4AD4214F6B900058D3E2 /* guide_point_else@2x.png in Resources */,
 				E5B59B80214EC15600726DE9 /* my_head@3x.png in Resources */,
 				3CD3C7F3215FC77F00DE6199 /* MWPhotoBrowser.bundle in Resources */,
@@ -3429,7 +3397,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3465,7 +3433,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
