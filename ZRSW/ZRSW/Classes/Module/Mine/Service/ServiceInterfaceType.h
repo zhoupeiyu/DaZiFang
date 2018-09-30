@@ -83,3 +83,6 @@
 
 // 贷款产品详情
 #define KGetOrderLoanInfoRequest                @"KGetOrderLoanInfoRequest"
+
+// 所有订单
+#define KGetOrderListRequest                         @"KGetOrderListRequest"

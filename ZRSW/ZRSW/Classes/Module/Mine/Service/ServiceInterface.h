@@ -82,7 +82,8 @@
 // 贷款产品详情
 #define KGetOrderLoanInfoInterface                      @"api/order/loanTypeInfo"
 
-
+// 订单列表
+#define KGetOrderListInterface                          @"api/order/orderList"
 
 
 

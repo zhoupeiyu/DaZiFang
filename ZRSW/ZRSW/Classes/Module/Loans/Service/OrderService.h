@@ -8,6 +8,14 @@
 
 #import "BaseNetWorkService.h"
 
+typedef enum : NSUInteger {
+    OrderTypeAll, // 全部
+    OrderTypeUnderReview, // 审核中
+    OrderTypePass, // 已通过
+    OrderTypeCredit,// 已放款
+    OrderTypeRefuse // 已拒绝
+} OrderType;
+
 @interface OrderService : BaseNetWorkService
 
 /**
@@ -42,5 +50,16 @@
  @param delegate 代理
  */
 - (void)getLoanDetailInfo:(NSString *)loanId delegate:(id)delegate;
+
+
+
+/**
+ 订单列表
+
+ @param lastId 最后一个ID
+ @param orderStatus 订单状态
+ @param delegate 代理
+ */
+- (void)getOrderList:(NSString *)lastId orderStatus:(NSInteger)orderStatus delegate:(id)delegate;
 
 @end

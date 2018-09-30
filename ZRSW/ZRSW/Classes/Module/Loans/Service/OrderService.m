@@ -40,4 +40,17 @@
     [self POST:KGetOrderLoanInfoInterface reqType:KGetOrderLoanInfoRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanInfoModel class] NeedCache:NO];
 
 }
+
+- (void)getOrderList:(NSString *)lastId orderStatus:(NSInteger)orderStatus delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (lastId.length > 0) {
+        [params setObject:lastId forKey:@"lastId"];
+    }
+    //订单状态：0=审核中；1=已通过；3=已放款；8=已拒绝（包含初审未过和拒绝放款）;默认为空，查询所有订单
+    [params setObject:@(orderStatus).stringValue forKey:@"orderStatus"];
+    [params setObject:@(15) forKey:@"pageSize"];
+    
+    [self POST:KGetOrderListInterface reqType:KGetOrderListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderListModel class] NeedCache:NO];
+
+}
 @end

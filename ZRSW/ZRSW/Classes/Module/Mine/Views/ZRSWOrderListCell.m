@@ -18,10 +18,12 @@
 @property (nonatomic, strong) UILabel *oderTypeLbl;
 @property (nonatomic, strong) UILabel *orderProductLbl;
 @property (nonatomic, strong) UILabel *orderMoneyLbl;
+@property (nonatomic, strong) ZRSWOrderListModel *orderModel;
+@property (nonatomic, strong) UIView *redView;
 
 @end
 @implementation ZRSWOrderListCell
-//审核中 #666666  已通过#4abd22 已放款#4771f2 已拒绝#ff5153 已完成#999999
+
 + (ZRSWOrderListCell *)getCellWithTableView:(UITableView *)tableView {
     ZRSWOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZRSWOrderListCell class])];
     if (!cell) {
@@ -47,17 +49,127 @@
     [self.contentView addSubview:self.bgView];
     [self.bgView addSubview:self.topBgView];
     [self.bgView addSubview:self.orderNumLbl];
+    [self.bgView addSubview:self.redView];
     [self.bgView addSubview:self.lineView];
     [self.bgView addSubview:self.orderStatesLbl];
     [self.bgView addSubview:self.orderPersonLbl];
     [self.bgView addSubview:self.oderTypeLbl];
     [self.bgView addSubview:self.orderProductLbl];
     [self.bgView addSubview:self.orderMoneyLbl];
-    [self setupLayOut];
-    
+}
+- (void)setListModel:(ZRSWOrderListDetailModel *)model {
+    if (model) {
+       _orderModel = model;
+        self.orderNumLbl.text = [NSString stringWithFormat:@"订单号:%@",model.orderId];
+        self.orderNumLbl.text = model.orderId;
+        {
+            NSString *title = @"订单状态:";
+            NSString *subTitle = model.orderStatesStr.length > 0 ? model.orderStatesStr : @" ";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
+            [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:model.orderStatesColor range:NSRangeMake(title.length, subTitle.length)];
+            self.orderStatesLbl.attributedText = str;
+            
+        }
+        {
+            NSString *title = @"贷款人:";
+            NSString *subTitle = model.loanUserName.length > 0 ? model.loanUserName : @" ";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
+            [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[self blackColor] range:NSRangeMake(title.length, subTitle.length)];
+            self.orderPersonLbl.attributedText = str;
+            
+        }
+        {
+            NSString *title = @"贷款大类:";
+            NSString *subTitle = model.mainLoanType.title.length > 0 ? model.mainLoanType.title : @" ";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
+            [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[self blackColor] range:NSRangeMake(title.length, subTitle.length)];
+            self.oderTypeLbl.attributedText = str;
+            
+        }
+        {
+            NSString *title = @"贷款产品:";
+            NSString *subTitle = model.loanType.title.length > 0 ? model.loanType.title : @" ";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
+            [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[self blackColor] range:NSRangeMake(title.length, subTitle.length)];
+            self.orderProductLbl.attributedText = str;
+            
+        }
+        {
+            NSString *title = @"贷款金额:";
+            NSString *subTitle = model.reallyLoanMoney.length > 0 ? model.reallyLoanMoney : @" ";
+            NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
+            [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
+            [str addAttribute:NSForegroundColorAttributeName value:[self blackColor] range:NSRangeMake(title.length, subTitle.length)];
+            self.orderMoneyLbl.attributedText = str;
+            
+        }
+        [self setupLayOut];
+    }
+
 }
 - (void)setupLayOut {
+    CGFloat bgViewLeft = 10;
+    CGFloat itemLeft = 20;
+    CGFloat itemWidth = SCREEN_WIDTH - 2 * bgViewLeft - 2 * itemLeft;
+    CGFloat itemMargin = 10;
     
+    [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.width.mas_equalTo(SCREEN_WIDTH - 2 * bgViewLeft);
+        make.top.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+    }];
+    [self.topBgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo([self topViewHeight]);
+    }];
+    [self.redView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.centerY.mas_equalTo(self.topBgView.mas_centerY);
+        make.size.mas_equalTo(CGSizeMake(8, 8));
+    }];
+    [self.orderNumLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(itemLeft);
+        make.centerY.mas_equalTo(self.topBgView.mas_centerY);
+        make.right.mas_equalTo(-itemLeft);
+    }];
+    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.right.mas_equalTo(-10);
+        make.bottom.mas_equalTo(self.topBgView.mas_bottom);
+        make.height.mas_equalTo(KSeparatorLineHeight);
+    }];
+    [self.orderStatesLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.orderNumLbl.mas_left);
+        make.top.mas_equalTo(self.topBgView.mas_bottom).mas_offset(14);
+        make.width.mas_equalTo(itemWidth);
+    }];
+    [self.orderPersonLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.orderStatesLbl.mas_right);
+        make.top.mas_equalTo(self.orderStatesLbl.mas_top);
+        make.width.mas_equalTo(itemWidth);
+    }];
+    [self.oderTypeLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.orderStatesLbl.mas_left);
+        make.top.mas_equalTo(self.orderStatesLbl.mas_bottom).mas_offset(itemMargin);
+        make.width.mas_equalTo(itemWidth);
+    }];
+    [self.orderProductLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.orderStatesLbl.mas_left);
+        make.top.mas_equalTo(self.orderPersonLbl.mas_bottom).mas_offset(itemMargin);
+        make.width.mas_equalTo(itemWidth);
+    }];
+    [self.orderMoneyLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.orderStatesLbl.mas_left);
+        make.top.mas_equalTo(self.oderTypeLbl.mas_bottom).mas_offset(itemMargin);
+        make.width.mas_equalTo(itemWidth);
+    }];
 }
 
 #pragma mark - lazy
@@ -84,6 +196,8 @@
 - (UILabel *)orderNumLbl {
     if (!_orderNumLbl) {
         _orderNumLbl = [self getLbl];
+        _orderNumLbl.textColor = [self blackColor];
+        _orderNumLbl.font = [UIFont systemFontOfSize:16];
     }
     return _orderNumLbl;
 }
@@ -122,6 +236,25 @@
         _lineView = [ZRSWViewFactoryTool getLineView];
     }
     return _lineView;
+}
+- (UIView *)redView {
+    if (!_redView) {
+        _redView = [[UIView alloc] init];
+        _redView.backgroundColor = [UIColor redColor];
+        _redView.layer.cornerRadius = 4;
+        _redView.layer.masksToBounds = YES;
+    }
+    return _redView;
+}
+
+- (UIColor *)grayColor {
+    return [UIColor colorFromRGB:0x999999];
+}
+- (UIColor *)blackColor {
+    return [UIColor colorFromRGB:0x474455];
+}
+- (CGFloat)topViewHeight {
+    return 44;
 }
 - (UILabel *)getLbl {
     UILabel *lbl = [[UILabel alloc] init];

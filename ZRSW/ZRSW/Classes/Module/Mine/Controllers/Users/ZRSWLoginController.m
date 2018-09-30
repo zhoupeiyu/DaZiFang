@@ -163,6 +163,8 @@
 - (void)faceLogin {
     [self endEditing];
     NSLog(@"刷脸登录");
+    [TipViewManager showToastMessage:@"下期见！！！！！！"];
+    return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
 
