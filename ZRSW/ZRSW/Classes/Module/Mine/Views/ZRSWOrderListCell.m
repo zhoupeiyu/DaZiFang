@@ -44,6 +44,8 @@
 - (void)setupConfig {
     self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
     self.contentView.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 - (void)setupUI {
     [self.contentView addSubview:self.bgView];

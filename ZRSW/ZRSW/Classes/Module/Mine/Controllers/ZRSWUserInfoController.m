@@ -53,6 +53,7 @@ typedef enum : NSUInteger {
     [self.tableView endEditing:YES];
     [self.view endEditing:YES];
     WS(weakSelf);
+    [TipViewManager dismissLoading];
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         NSString *url = self.selectedImages.count > 0 ? self.selectedImages.firstObject : @"";
@@ -80,10 +81,10 @@ typedef enum : NSUInteger {
             [TipViewManager showLoading];
             __block ZRSWUserInfoListModel *model = self.dataSouce[0][0];
             [self.imageManager uploadImagesWithImagesArray:selectedImages completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+                [TipViewManager dismissLoading];
                 UserModel *userModel = [UserModel getCurrentModel];
                 userModel.data.headImgUrl = imageUrls.firstObject;
                 [UserModel updateUserModel:userModel];
-                [TipViewManager dismissLoading];
                 weakSelf.selectedImages = imageUrls;
                 model.image = selectedImages.firstObject;
                 [weakSelf.tableView reloadData];
