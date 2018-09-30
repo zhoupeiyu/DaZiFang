@@ -145,8 +145,12 @@
 @property (nonatomic, strong) NSString *loanUserPhone;
 //贷款人城市区域
 @property (nonatomic, strong) NSString *loanUserAddress;
-//贷款金额
+
+//实际贷款金额，带单位
+@property (nonatomic, strong) NSString *reallyLoanMoney;
+//实际还款金额，带单位
 @property (nonatomic, strong) NSString *loanMoney;
+
 //订单状态：-1：删除；0：待审核 ；1：初审通过； 2：初审未过；3：已放款（初审通过才能放款）；4：拒绝放款（初审通过的才能拒绝放款）
 @property (nonatomic, strong) NSString *status;
 //贷款产品

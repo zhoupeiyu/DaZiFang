@@ -100,7 +100,7 @@
         }
         {
             NSString *title = @"贷款金额:";
-            NSString *subTitle = model.loanMoney.length > 0 ? model.loanMoney : @" ";
+            NSString *subTitle = model.reallyLoanMoney.length > 0 ? model.reallyLoanMoney : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
             [str addAttribute:NSForegroundColorAttributeName value:[self blackColor] range:NSRangeMake(title.length, subTitle.length)];

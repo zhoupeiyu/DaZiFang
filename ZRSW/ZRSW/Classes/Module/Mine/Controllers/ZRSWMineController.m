@@ -119,6 +119,12 @@
 }
 #pragma mark - Action
 - (void)settingAction {
+    if (![UserModel hasLogin]) {
+        ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
+        login.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:login animated:YES];
+        return;
+    }
     ZRSWSettingController *setting = [[ZRSWSettingController alloc] init];
     setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
@@ -212,14 +218,6 @@
             model.type = MineListTypeCommentList;
             model.iconName = @"my_phone";
             model.viewControllerName = NSStringFromClass([ZRSWResetPhoneController class]);
-            [data addObject:model];
-        }
-        {
-            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
-            model.title = @"登录";
-            model.type = MineListTypeCommentList;
-            model.iconName = @"my_phone";
-            model.viewControllerName = NSStringFromClass([ZRSWLoginController class]);
             [data addObject:model];
         }
         {
