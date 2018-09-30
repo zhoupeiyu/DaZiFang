@@ -19,6 +19,11 @@
     [super viewDidLoad];
     [self setUpTableView];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
+    if (self.type == NewListTypePopularInformation) {
+        [self requsetPopularInformationList];
+    }else if (self.type == NewListTypeSystemNotification){
+        [self requsetSystemNotificationList];
+    }
 }
 
 - (void)setupConfig {
@@ -36,15 +41,6 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES];
     [self enableLoadMore:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    if (self.type == NewListTypePopularInformation) {
-        [self requsetPopularInformationList];
-    }else if (self.type == NewListTypeSystemNotification){
-        [self requsetSystemNotificationList];
-    }
 }
 
 

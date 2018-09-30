@@ -38,6 +38,11 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [super viewDidLoad];
 //    [self.view addSubview:self.webView];
     // Do any additional setup after loading the view.
+    if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+        [self requsetNewDetail];
+    }else if (self.type == DetailsTypeCommentQuestion){
+        [self requsetCommentQuestionDetail];
+    }
 }
 
 - (void)setupConfig {
@@ -60,6 +65,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.navigationItem.title = @"问题详情";
     }
     [self setupUI];
+
 }
 
 - (void)setupUI {
@@ -75,14 +81,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [self.contentView addSubview:self.imgeView];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
-         [self requsetNewDetail];
-    }else if (self.type == DetailsTypeCommentQuestion){
-        [self requsetCommentQuestionDetail];
-    }
-}
 
 #pragma mark - WebView Delegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{

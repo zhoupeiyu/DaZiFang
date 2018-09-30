@@ -37,6 +37,7 @@
     self.dateLabel.frame = CGRectMake(kUI_WidthS(16),kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(32), kUI_HeightS(13));
     self.lineView.frame = CGRectMake(kUI_WidthS(10) ,self.dateLabel.bottom + kUI_HeightS(15) , SCREEN_WIDTH - kUI_WidthS(20), kUI_HeightS(1));
     self.contentLabel.frame = CGRectMake(self.dateLabel.left,self.lineView.bottom + kUI_HeightS(15), self.dateLabel.width, kUI_HeightS(88));
+    [self.contentLabel sizeToFit];
 //    self.nameLabel.frame = CGRectMake(self.contentLabel.left,self.contentLabel.bottom, self.contentLabel.width, kUI_HeightS(14));
 }
 

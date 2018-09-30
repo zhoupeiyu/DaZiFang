@@ -15,7 +15,7 @@
 @implementation ZRSWRemindListModel
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{
-             @"data" : [NewDetailModel class],
+             @"data" : [ZRSWRemindModel class],
              };
 }
 @end
