@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UILabel *oderTypeLbl;
 @property (nonatomic, strong) UILabel *orderProductLbl;
 @property (nonatomic, strong) UILabel *orderMoneyLbl;
-@property (nonatomic, strong) ZRSWOrderListModel *orderModel;
+@property (nonatomic, strong) ZRSWOrderListDetailModel *orderModel;
 @property (nonatomic, strong) UIView *redView;
 
 @end
@@ -43,7 +43,7 @@
 }
 - (void)setupConfig {
     self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
-    self.contentView.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
 }
 - (void)setupUI {
     [self.contentView addSubview:self.bgView];
@@ -63,7 +63,7 @@
         self.orderNumLbl.text = [NSString stringWithFormat:@"订单号:%@",model.orderId];
         self.orderNumLbl.text = model.orderId;
         {
-            NSString *title = @"订单状态:";
+            NSString *title = @"订单状态 : ";
             NSString *subTitle = model.orderStatesStr.length > 0 ? model.orderStatesStr : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
@@ -72,7 +72,7 @@
             
         }
         {
-            NSString *title = @"贷款人:";
+            NSString *title = @"贷款人 : ";
             NSString *subTitle = model.loanUserName.length > 0 ? model.loanUserName : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
@@ -81,7 +81,7 @@
             
         }
         {
-            NSString *title = @"贷款大类:";
+            NSString *title = @"贷款大类 : ";
             NSString *subTitle = model.mainLoanType.title.length > 0 ? model.mainLoanType.title : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
@@ -90,7 +90,7 @@
             
         }
         {
-            NSString *title = @"贷款产品:";
+            NSString *title = @"贷款产品 : ";
             NSString *subTitle = model.loanType.title.length > 0 ? model.loanType.title : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
@@ -99,7 +99,7 @@
             
         }
         {
-            NSString *title = @"贷款金额:";
+            NSString *title = @"贷款金额 : ";
             NSString *subTitle = model.reallyLoanMoney.length > 0 ? model.reallyLoanMoney : @" ";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@",title,subTitle]];
             [str addAttribute:NSForegroundColorAttributeName value:[self grayColor] range:NSRangeMake(0, title.length)];
@@ -114,7 +114,7 @@
 - (void)setupLayOut {
     CGFloat bgViewLeft = 10;
     CGFloat itemLeft = 20;
-    CGFloat itemWidth = SCREEN_WIDTH - 2 * bgViewLeft - 2 * itemLeft;
+    CGFloat itemWidth = (SCREEN_WIDTH - 2 * bgViewLeft - 2 * itemLeft) * 0.5;
     CGFloat itemMargin = 10;
     
     [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -161,14 +161,14 @@
         make.width.mas_equalTo(itemWidth);
     }];
     [self.orderProductLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.orderStatesLbl.mas_left);
+        make.left.mas_equalTo(self.orderStatesLbl.mas_right);
         make.top.mas_equalTo(self.orderPersonLbl.mas_bottom).mas_offset(itemMargin);
         make.width.mas_equalTo(itemWidth);
     }];
     [self.orderMoneyLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.orderStatesLbl.mas_left);
         make.top.mas_equalTo(self.oderTypeLbl.mas_bottom).mas_offset(itemMargin);
-        make.width.mas_equalTo(itemWidth);
+        make.right.mas_equalTo(-itemLeft);
     }];
 }
 

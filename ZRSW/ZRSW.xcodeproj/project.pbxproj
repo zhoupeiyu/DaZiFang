@@ -128,7 +128,6 @@
 		3CD3C815215FCC8200DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
 		3CD3C816215FCC9900DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
 		3CD3C817215FCC9900DE6199 /* HelpDesk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3CD937F1216074CB0091CCC6 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937E8216074CB0091CCC6 /* index.css */; };
 		3CD937F2216074CB0091CCC6 /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EA216074CB0091CCC6 /* rem.js */; };
 		3CD937F4216074CB0091CCC6 /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */; };
 		3CD937F6216074CB0091CCC6 /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EE216074CB0091CCC6 /* News.html */; };
@@ -703,7 +702,6 @@
 		3CD3C7BD215FC77F00DE6199 /* EaseUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseUIResource.bundle; sourceTree = "<group>"; };
 		3CD3C7BE215FC77F00DE6199 /* EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseUI.m; sourceTree = "<group>"; };
 		3CD3C814215FCC8100DE6199 /* HelpDesk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HelpDesk.framework; sourceTree = "<group>"; };
-		3CD937E8216074CB0091CCC6 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		3CD937EA216074CB0091CCC6 /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
 		3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
 		3CD937EE216074CB0091CCC6 /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
@@ -1770,20 +1768,11 @@
 		3CD937E6216074CB0091CCC6 /* news */ = {
 			isa = PBXGroup;
 			children = (
-				3CD937E7216074CB0091CCC6 /* css */,
 				3CD937E9216074CB0091CCC6 /* js */,
 				3CD937EE216074CB0091CCC6 /* News.html */,
 				3CD937EF216074CB0091CCC6 /* img */,
 			);
 			path = news;
-			sourceTree = "<group>";
-		};
-		3CD937E7216074CB0091CCC6 /* css */ = {
-			isa = PBXGroup;
-			children = (
-				3CD937E8216074CB0091CCC6 /* index.css */,
-			);
-			path = css;
 			sourceTree = "<group>";
 		};
 		3CD937E9216074CB0091CCC6 /* js */ = {
@@ -2875,7 +2864,6 @@
 				E5B59B51214EC15600726DE9 /* currency_button@2x.png in Resources */,
 				E5B59BA6214EC15600726DE9 /* pretrial_sex_default@3x.png in Resources */,
 				E5B59B70214EC15600726DE9 /* sign_other_blog@3x.png in Resources */,
-				3CD937F1216074CB0091CCC6 /* index.css in Resources */,
 				E5B59A0B214EBEE800726DE9 /* currency_no_network@3x.png in Resources */,
 				E5B59B95214EC15600726DE9 /* authentication_button_enterprise@3x.png in Resources */,
 				E5B59B5E214EC15600726DE9 /* news_dialog_me@2x.png in Resources */,
@@ -3440,7 +3428,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3477,7 +3465,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3RWME898AZ;
+				DEVELOPMENT_TEAM = G43YDC6B84;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
