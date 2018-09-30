@@ -19,13 +19,24 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 @property (nonatomic, strong) CommentQuestionDetailContentModel *questionDetailContentModel;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSURL *url;
+
+
+@property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UILabel *roundupLabel;
+@property (nonatomic, strong) UILabel *sourceNameLabel;
+@property (nonatomic, strong) UIImageView *readerIcon;
+@property (nonatomic, strong) UILabel *readersLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UIImageView *lineImge;
+@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UIImageView *imgeView;
 @end
 
 @implementation ZRSWNewAndQuestionDetailsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.webView];
+//    [self.view addSubview:self.webView];
     // Do any additional setup after loading the view.
 }
 
@@ -48,6 +59,20 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }else if (self.type == DetailsTypeCommentQuestion){
         self.navigationItem.title = @"问题详情";
     }
+    [self setupUI];
+}
+
+- (void)setupUI {
+    [super setupUI];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView addSubview:self.roundupLabel];
+    [self.contentView addSubview:self.sourceNameLabel];
+    [self.contentView addSubview:self.readerIcon];
+    [self.contentView addSubview:self.readersLabel];
+    [self.contentView addSubview:self.contentLabel];
+    [self.contentView addSubview:self.dateLabel];
+    [self.contentView addSubview:self.lineImge];
+    [self.contentView addSubview:self.imgeView];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -77,10 +102,12 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             }else if (self.type == DetailsTypeCommentQuestion){
                 detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
             }
-//            NSString * method = @"vm.getAppData";
-//            JSValue * function = [context objectForKeyedSubscript:method];
-//            [function callWithArguments:@[detailsDicJsonString]];
-            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+ //           NSString * method = @"vm.getAppData";
+   //         JSValue * function = [context objectForKeyedSubscript:method];
+   //         [function callWithArguments:@[detailsDicJsonString]];
+           [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+
+
         }else {
             [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
         }
@@ -113,16 +140,19 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 
 - (void)requsetNewDetail{
+    [TipViewManager showLoading];
     [[[UserService alloc] init] getNewDetail:self.detailModel.id delegate:self];
 }
 
 
 - (void)requsetCommentQuestionDetail{
+     [TipViewManager showLoading];
     [[[UserService alloc] init] getCommentQuestionDetail:self.questionModel.id delegate:self];
 }
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetNewsDetailRequest]) {
             NewDetailContenModel *model = (NewDetailContenModel *)resObj;
@@ -131,19 +161,23 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
                 self.detailContensModel = detailContensModel;
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:detailContensModel.imgUrl]];
                 self.image = [UIImage imageWithData:data]; // 取得图片
+                 [self setDetailContens];
                 //加载h5
-                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
-                [self.webView loadRequest:resquest];
+//                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+//                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
+                   [TipViewManager showToastMessage:model.error_msg];
             }
         }else if ([reqType isEqualToString:KGetCommentQuestionDetailRequest]) {
             CommentQuestionDetail *commentQuestionDetail = (CommentQuestionDetail *)resObj;
             if (commentQuestionDetail.error_code.integerValue == 0) {
                 CommentQuestionDetailContentModel *questionDetailContentModel = commentQuestionDetail.data;
                 self.questionDetailContentModel = questionDetailContentModel;
+                [self setDetailContens];
             }else{
                 LLog(@"请求失败:%@",commentQuestionDetail.error_msg);
+                [TipViewManager showToastMessage:commentQuestionDetail.error_msg];
             }
         }
     }else{
@@ -185,6 +219,85 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     LLog(@"分享失败%@",error);
 }
 
+- (void)setupLayOut {
+    [super setupLayOut];
+    self.roundupLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
+    [self.roundupLabel sizeToFit];
+    if (self.type == DetailsTypeCommentQuestion){
+        [self.sourceNameLabel removeFromSuperview];
+        [self.readerIcon removeFromSuperview];
+        [self.readersLabel removeFromSuperview];
+        [self.contentLabel removeFromSuperview];
+        self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
+        self.readerIcon.frame = CGRectMake(0,0,0,0);
+        self.readersLabel.frame = CGRectMake(0,0,0,0);
+        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(30),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
+        self.contentLabel.frame = CGRectMake(0,0,0,0);
+    }else{
+        self.sourceNameLabel.frame = CGRectMake(kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(64), kUI_HeightS(10));
+        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
+        self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
+        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(30),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
+        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        [self.contentLabel sizeToFit];
+    }
+
+    if (self.type == DetailsTypeCommentQuestion){
+        if (self.questionDetailContentModel.imgUrl == nil ||[self.questionDetailContentModel.imgUrl isEqualToString:@""] ) {
+            [self.imgeView removeFromSuperview];
+            self.imgeView.frame = CGRectMake(0,0,0,0);
+        }else{
+            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+        }
+    }else{
+        if (self.detailContensModel.imgUrl == nil ||[self.detailContensModel.imgUrl isEqualToString:@""] ) {
+            [self.imgeView removeFromSuperview];
+            self.imgeView.frame = CGRectMake(0,0,0,0);
+        }else{
+            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+        }
+    }
+
+
+    self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.contentView.frame) + kUI_HeightS(20));
+}
+
+- (void)setDetailContens{
+    if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+        self.roundupLabel.text = self.detailContensModel.roundup;
+        self.sourceNameLabel.text = self.detailContensModel.sourceName;
+        self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
+        self.readersLabel.text = [NSString stringWithFormat:@"%@",self.detailContensModel.readers];
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *dateStr = [self.detailContensModel.updateTime substringToIndex:10];
+        NSDate* date = [formatter dateFromString:dateStr];
+        [formatter setDateFormat:@"yyyy.MM.dd"];
+        NSString *dateString = [formatter stringFromDate:date];
+        self.dateLabel.text = dateString;
+        self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
+        NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        self.contentLabel.attributedText = htmlString;
+        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
+    }else if (self.type == DetailsTypeCommentQuestion){
+        self.roundupLabel.text = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
+        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *dateStr = [self.questionDetailContentModel.updateTime substringToIndex:10];
+        NSDate* date = [formatter dateFromString:dateStr];
+        [formatter setDateFormat:@"yyyy.MM.dd"];
+        NSString *dateString = [formatter stringFromDate:date];
+        self.dateLabel.text = dateString;
+        self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
+        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.questionDetailContentModel.imgUrl] placeholderImage:nil];
+    }
+    [self setupLayOut];
+}
+
+
 
 -(UIWebView *)webView{
     if (!_webView) {
@@ -205,5 +318,89 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }
     return _url;
 }
+
+- (UIView *)contentView{
+    if (!_contentView) {
+        _contentView = [[UIView alloc] init];
+        _contentView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+    }
+    return _contentView;
+}
+
+- (UIImageView *)lineImge{
+    if (!_lineImge) {
+        _lineImge = [[UIImageView alloc] init];
+    }
+    return _lineImge;
+}
+
+
+- (UILabel *)roundupLabel{
+    if (!_roundupLabel) {
+        _roundupLabel = [[UILabel alloc] init];
+        _roundupLabel.textColor = [UIColor colorFromRGB:0xFF444152];
+        _roundupLabel.textAlignment = NSTextAlignmentLeft;
+        _roundupLabel.font = [UIFont systemFontOfSize:16];
+        _roundupLabel.numberOfLines = 0;
+    }
+    return _roundupLabel;
+}
+
+- (UILabel *)sourceNameLabel{
+    if (!_sourceNameLabel) {
+        _sourceNameLabel = [[UILabel alloc] init];
+        _sourceNameLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
+        _sourceNameLabel.textAlignment = NSTextAlignmentLeft;
+        _sourceNameLabel.font = [UIFont systemFontOfSize:10];
+    }
+    return _sourceNameLabel;
+}
+- (UIImageView *)readerIcon{
+    if (!_readerIcon) {
+        _readerIcon = [[UIImageView alloc]initWithFrame:CGRectZero];
+    }
+    return _readerIcon;
+}
+
+
+- (UILabel *)readersLabel{
+    if (!_readersLabel) {
+        _readersLabel = [[UILabel alloc] init];
+        _readersLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
+        _readersLabel.textAlignment = NSTextAlignmentLeft;
+        _readersLabel.font = [UIFont systemFontOfSize:10];
+    }
+    return _readersLabel;
+}
+
+- (UILabel *)dateLabel{
+    if (!_dateLabel) {
+        _dateLabel = [[UILabel alloc] init];
+        _dateLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
+        _dateLabel.textAlignment = NSTextAlignmentLeft;
+        _dateLabel.font = [UIFont systemFontOfSize:10];
+    }
+    return _dateLabel;
+}
+
+
+- (UILabel *)contentLabel{
+    if (!_contentLabel) {
+        _contentLabel = [[UILabel alloc] init];
+        _contentLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
+        _contentLabel.textAlignment = NSTextAlignmentLeft;
+        _contentLabel.numberOfLines = 0;
+        _contentLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _contentLabel;
+}
+
+- (UIImageView *)imgeView{
+    if (!_imgeView) {
+        _imgeView = [[UIImageView alloc] init];
+    }
+    return _imgeView;
+}
+
 
 @end

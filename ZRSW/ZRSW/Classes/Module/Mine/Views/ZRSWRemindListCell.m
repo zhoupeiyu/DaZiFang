@@ -21,6 +21,7 @@
         [self setUpUI];
     }
     self.backgroundColor = [UIColor clearColor];
+    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
     return self;
 }
 - (void)setUpUI{

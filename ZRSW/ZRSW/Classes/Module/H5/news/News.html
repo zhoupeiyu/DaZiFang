@@ -6,108 +6,149 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>新闻</title>
-    <script src="rem.js"></script>
-    <script src="vue-2.5.13.js"></script>
+	<script src="rem.js"></script>
+	<script src="vue-2.5.13.js"></script>
+
 </head>
 <style>
-    html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
-    margin: 0;
-    padding: 0;
-    }
-    html,body{
-    width: 100%;
-    height: 100%;
-    background-color: #f6f9fb;
-    }
-    .article {
-        width: 100%;
-        padding: 0.2rem 0.3rem;
-        background-color: #fff;
-        box-sizing: border-box;
-        overflow-y: auto;
-    }
-    .article::-webkit-scrollbar
-    {
-        display: none;
-    }
-    .article .head {
-        border-bottom: 0.02rem solid #eee;
-    }
-    .article .title {
-        display: -webkit-box;
-        white-space: normal;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        font-size: 0.32rem;
-        line-height: 0.48rem;
-    }
-    .article .option {
-        padding: 0.2rem 0 0.28rem;
-        font-size: 0.2rem;
-        line-height: 0.2rem;
-        color: #8d8e91;
-    }
-    .article .item {
-        margin-left: 0.4rem;
-    }
-    .article .reader{
-        padding-left: 0.4rem;
-    }
-    .article .item:first-child {
-        margin-left: 0;
-    }
-    .article .item .fa {
-        margin-right: 0.06rem;
-    }
-    .article .content {
-        overflow: hidden;
-        position: relative;
-        font-size: 0.28rem;
-        line-height: 0.4rem;
-        color: #474455;
-    }
-    .article .content img {
-        display: block;
-        margin: 0.18rem auto;
-        max-width: 100% !important;
-    }
-    .article .content table {
-        max-width: 100% !important;
-    }
-    .article .content embed {
-        max-width: 100% !important;
-    }
-    .reader{
-        position: relative;
-    }
-    .eyes{
-        position: absolute;
-        top: 0rem;
-        left: 0;
-        width: 0.35rem;
-        height: auto;
-    }
-    .round-up{
-        text-indent: 2em;
-        font-size: 0.28rem;
-        color: #474455;
-        line-height: 0.4rem;
-        margin-top: 0.56rem;
-    }
+	/* 文章 */
+	html,
+	body,
+	ul,
+	li,
+	ol,
+	dl,
+	dd,
+	dt,
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	form,
+	fieldset,
+	legend,
+	img {
+		margin: 0;
+		padding: 0;
+	}
+
+	/* html,body{
+  width: 100%;
+  height: 100%;
+  background-color: #f6f9fb;
+} */
+	.article {
+		width: 100%;
+		padding: 0.2rem 0.3rem;
+		background-color: #fff;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+
+	.article::-webkit-scrollbar {
+		display: none;
+	}
+
+	.article .head {
+		border-bottom: 0.02rem solid #eee;
+	}
+
+	.article .title {
+		display: -webkit-box;
+		white-space: normal;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+		font-size: 0.32rem;
+		line-height: 0.48rem;
+	}
+
+	.article .option {
+		padding: 0.2rem 0 0.28rem;
+		font-size: 0.2rem;
+		line-height: 0.2rem;
+		color: #8d8e91;
+	}
+
+	.article .item {
+		margin-left: 0.4rem;
+	}
+
+	.article .reader {
+		padding-left: 0.4rem;
+	}
+
+	.article .item:first-child {
+		margin-left: 0;
+	}
+
+	.article .item .fa {
+		margin-right: 0.06rem;
+	}
+
+	.article .content {
+		overflow: hidden;
+		position: relative;
+		/* padding: 0.18rem 0; */
+		font-size: 0.28rem;
+		line-height: 0.4rem;
+		color: #474455;
+	}
+
+	.article .content img {
+		display: block;
+		margin: 0.18rem auto;
+		/* vertical-align: middle; */
+		max-width: 100% !important;
+	}
+
+	.article .content table {
+		max-width: 100% !important;
+	}
+
+	.article .content embed {
+		max-width: 100% !important;
+	}
+
+	.reader {
+		position: relative;
+	}
+
+	.eyes {
+		position: absolute;
+		top: 0rem;
+		left: 0;
+		width: 0.35rem;
+		height: auto;
+	}
+
+	.round-up {
+		text-indent: 2em;
+		font-size: 0.28rem;
+		color: #474455;
+		line-height: 0.4rem;
+		margin-top: 0.56rem;
+		font-family: "Microsoft Yahei", Helvetica, sans-serif;
+	}
 </style>
+
 <body>
 	<div id="app">
+
 		<!-- 文章 -->
 		<div class="article">
 			<div class="head">
 				<div class="title">
-                    1232142342352
 					{{json.title}}
+					{{test}}
+                    {{title}}
 				</div>
 				<div class="option" v-show="titleShow">
 					<span class="item author">{{json.sourceName}}</span>
-					<span class="item reader"><img src="eyes.png" class="eyes">{{json.readers}}</span>
+					 <span class="item reader"><img src="eyes.png" class="eyes">{{json.readers}}</span>
 					<span class="item time">{{json.updateTime}}</span>
 				</div>
 				<div class="option" v-show="!titleShow">
@@ -124,77 +165,77 @@
 	</div>
 
 
-    <script>
-        let defaultJson = {
-            htmlType: "news",
-            contentData: {
-                error_code: 1,
-                id: "NEWS000000000013743",
-                updateTime: "2017/12/27 00:00:00",
-                title: "刷脸支付",
-                roundup: "由此看来，依靠对人脸等生物特征识别就完 成身份认证和支付的生活，已经渐行渐近， 靠连吃饭的时代来了！",
-                keyword: "中融盛旺",
-                data: {
-                    imgUrl: "http://zhongrong.ijiaoban.cn/static-content/news/2017/12/28/FILE000000000058522.png",
-                    content: `<p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">9月13日凌晨1点，备受瞩目的iphone8发布。苹果首次让三款新产品iPhone 8、iPhone 8 Plus和为iPhone十周年献礼的iPhone X同时亮相！按键设计、传感器、摄像头、拍照性能、屏幕设计、配色、款式型号、面部识别、无线快充……一系列令人惊喜的新技术新变化都将在iPhone上得以体现，新机很美丽，可价格也很美丽。</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">但这次我们不谈钱，企鹅问答关注的是此次苹果解封的面部识别技术。引领技术潮流的苹果启动了刷脸技能，这是否意味着，刷脸时代已经悄然到来。这个功能靠谱吗？将会让哪些人颤抖？对这个新功能你又有什么担忧呢？</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;"><br/></p><p style="text-align:center;margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">
-                    <img src="http://zhongrong.ijiaoban.cn/static-content/news/2017/12/28/FILE000000000058522.png" style="border: 0px; vertical-align: middle; max-width: 640px; display: block;"/></p><p style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p>
-                    <p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">首先会颤抖的，应该是广大男同胞们，你们的荷包要小心了。</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;"><br/></p>`,
-                },
-                newsType: "1",
-                sourceName: "腾讯新闻",
-                readers: "1",
-                sourceUrl: "https://news.qq.com/a/20170918/053761.html",
-            }
+	<script>
+		let defaultJson = {
+			htmlType: "news",
+			contentData: {
+				error_code: 1,
+				id: "NEWS000000000013743",
+				updateTime: "2017/12/27 00:00:00",
+				title: "刷脸支付",
+				roundup: "由此看来，依靠对人脸等生物特征识别就完 成身份认证和支付的生活，已经渐行渐近， 靠连吃饭的时代来了！",
+				keyword: "中融盛旺",
+				imgUrl: "http://zhongrong.ijiaoban.cn/static-content/news/2017/12/28/FILE000000000058522.png",
+				content: `<p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">9月13日凌晨1点，备受瞩目的iphone8发布。苹果首次让三款新产品iPhone 8、iPhone 8 Plus和为iPhone十周年献礼的iPhone X同时亮相！按键设计、传感器、摄像头、拍照性能、屏幕设计、配色、款式型号、面部识别、无线快充……一系列令人惊喜的新技术新变化都将在iPhone上得以体现，新机很美丽，可价格也很美丽。</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">但这次我们不谈钱，企鹅问答关注的是此次苹果解封的面部识别技术。引领技术潮流的苹果启动了刷脸技能，这是否意味着，刷脸时代已经悄然到来。这个功能靠谱吗？将会让哪些人颤抖？对这个新功能你又有什么担忧呢？</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;"><br/></p><p style="text-align:center;margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);">
+					<img src="http://zhongrong.ijiaoban.cn/static-content/news/2017/12/28/FILE000000000058522.png" style="border: 0px; vertical-align: middle; max-width: 640px; display: block;"/></p><p style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255);"><br/></p>
+					<p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;">首先会颤抖的，应该是广大男同胞们，你们的荷包要小心了。</p><p class="text" style="margin-top: 0px; margin-bottom: 28px; padding: 0px; word-wrap: break-word; font-family: &quot;Microsoft Yahei&quot;, Helvetica, sans-serif; white-space: normal; background-color: rgb(255, 255, 255); text-indent: 2em;"><br/></p>`,
 
-        }
-        let qusetionJson = {
-            htmlType: "question",
-            contentData: {
-                "error_code": 0,
-                "error_msg": "ok",
-                "data": {
-                    "id": "F001",
-                    "title": "贷款期限为多久？",
-                    "imgUrl": "http://xxx.com/N001.jpg",
-                    "faqBody": "房屋抵押贷款最长期限通常可达10年之久",
-                    "updateTime": "2018/09/09 09:09:09"
-                }
-            }
-        }
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                json: defaultJson,
-                titleShow: true,
-                content:''
-            },
-            methods: {
-                getAppData(params) {
-                        
-                    let data = JSON.parse(params)
-                    if (data.htmlType === 'news') {
-                        this.json = data.contentData
-                        this.json.updateTime = data.contentData.updateTime.slice(0, 10)
-                        this.titleShow = true
-                        this.content = data.contentData.content
-                         alert(this.content)
-                    }else {
-                        this.titleShow = false
-                        this.json = data.contentData
-                        this.content =  data.contentData.faqBody
-                    }
+				newsType: "1",
+				sourceName: "腾讯新闻",
+				readers: "1",
+				sourceUrl: "https://news.qq.com/a/20170918/053761.html",
+			}
 
-                }
-            },
-             mounted(){
-                window.vm = this
-             }
-        })
-         
-         
-// <!--        vm.getAppData(defaultJson)-->
+		}
+		let qusetionJson = {
+			htmlType: "question",
+			contentData: {
+				"error_code": 0,
+				"error_msg": "ok",
+				"id": "F001",
+				"title": "贷款期限为多久？",
+				"imgUrl": "http://xxx.com/N001.jpg",
+				"faqBody": "房屋抵押贷款最长期限通常可达10年之久",
+				"updateTime": "2018/09/09 09:09:09"
+			}
+		}
+    var vm = new Vue({
+                     el: '#app',
+                     data: {
+                     json: {},
+                     titleShow: true,
+                     content: '',
+                     test: '我是测试数据',
+                     title:''
+                     },
+                     methods: {
+                     getAppData(params) {
+                     alert(1)
+                      var data = JSON.parse(params)
+                     if (data.htmlType === 'news') {
+                     this.title = data.contentData.title
+                     alert(this.title)
+                     //this.$set(this.json, this.json.title, data.contentData.title)
+                     this.json.updateTime = data.contentData.updateTime.slice(0, 10)
+                     this.titleShow = true
+                     this.content = data.contentData.content
 
-    </script>
+                     } else {
+                     this.titleShow = false
+                     this.json = data.contentData
+                     alert(this.json.title)
+                     this.content = data.contentData.faqBody
+
+                     }
+                     }
+                     },
+                     mounted() {
+                     window.vm = this
+                     alert(vm.getAppData)
+                     }
+                     })
+
+        </script>
 </body>
 
 
