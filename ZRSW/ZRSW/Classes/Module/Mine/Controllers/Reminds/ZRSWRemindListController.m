@@ -23,10 +23,6 @@
     [self setUpTableView];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
     self.pageNum = 1;
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     [self requsetRemindList];
 }
 

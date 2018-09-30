@@ -21,12 +21,9 @@
     [super viewDidLoad];
     [self setUpTableView];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
     [self requsetCommentQuestionList];
 }
+
 
 - (void)setupConfig {
     [super setupConfig];

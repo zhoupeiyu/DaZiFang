@@ -54,6 +54,17 @@
     self.hotNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.systemNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
+    [TipViewManager showLoading];
+    self.group = dispatch_group_create();
+    //    [self requsetCityList];
+    [self requsetBannerList];
+    [self requsetSystemNotificationList];
+    [self requsetPopularInformationList];
+    [self requsetCommentQuestionList];
+    [self locationCity];
+    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        [TipViewManager dismissLoading];
+    });
 }
 
 
@@ -70,24 +81,6 @@
     self.tableView.tableHeaderView = self.headerView;
     [self enableRefreshHeader:YES];
 }
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [TipViewManager showLoading];
-    self.group = dispatch_group_create();
-//    [self requsetCityList];
-    [self requsetBannerList];
-    [self requsetSystemNotificationList];
-    [self requsetPopularInformationList];
-    [self requsetCommentQuestionList];
-    [self locationCity];
-    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
-        [TipViewManager dismissLoading];
-    });
-
-}
-
-
 
 
 

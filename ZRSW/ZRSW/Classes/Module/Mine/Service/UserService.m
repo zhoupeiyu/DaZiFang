@@ -184,7 +184,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@(pageSize) forKey:@"pageSize"];
     [params setObject:@(pageNum) forKey:@"pageNum"];
-    [self POST:KGetBillListInterface reqType:KGetBillListRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
+    [self POST:KGetBillListInterface reqType:KGetBillListRequest delegate:delegate parameters:params ObjcClass:[ZRSWBillListModel class] NeedCache:NO];
 }
 
 - (void)getRemindList:(int)pageSize pageNum:(int)pageNum delegate:(id)delegate{
@@ -197,7 +197,7 @@
 - (void)updateMsgStatus:(NSString *)msgIds delegate:(id)delegate{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:msgIds forKey:@"msgIds"];
-    [self POST:KGetRemindListInterface reqType:KUpdateMsgStatusRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
+    [self POST:KGetRemindListInterface reqType:KUpdateMsgStatusRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
 
 

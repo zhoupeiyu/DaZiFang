@@ -9,6 +9,7 @@
 #import "BaseNetWorkService.h"
 #import "EnumType.h"
 #import "ZRSWRemindListModel.h"
+#import "ZRSWBillListModel.h"
 
 @interface UserService : BaseNetWorkService
 
