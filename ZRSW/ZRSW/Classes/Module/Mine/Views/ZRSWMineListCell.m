@@ -66,7 +66,11 @@
     self.bottomLineHidden = model.bottomLineHidden;
     UIImage *image = [UIImage imageNamed:@"my_head"];
     if ([ControllerUtilsManager isHTTPURL:model.iconName]) {
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.iconName]];
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.iconName] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            if (!image) {
+                self.iconImageView.image = image;
+            }
+        }];
         _iconImageView.layer.cornerRadius = image.size.height * 0.5;
         _iconImageView.layer.masksToBounds = YES;
     }

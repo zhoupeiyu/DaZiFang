@@ -142,3 +142,70 @@
 
 
 @end
+
+@implementation ZRSWOrderListMainLoanTypeModel
+
+@end
+
+@implementation ZRSWOrderListLoanTypeModel
+
+@end
+
+@implementation ZRSWOrderListDetailModel
+//审核中 #666666  已通过#4abd22 已放款#4771f2 已拒绝#ff5153 已完成#999999
+
+//订单状态：-1：删除；0：待审核 ；1：初审通过； 2：初审未过；3：已放款（初审通过才能放款）；4：拒绝放款（初审通过的才能拒绝放款）
+- (void)setStatus:(NSString *)status {
+    _status = status;
+    NSInteger s = status.integerValue;
+    UIColor *color = [UIColor whiteColor];
+    NSString *str = @"";
+    switch (s) {
+        case -1:  // 删除
+            color = [UIColor colorFromHexRGB:@"666666"];
+            break;
+        case 0: // 待审核
+        {
+            color = [UIColor colorFromHexRGB:@"666666"];
+            str = @"审核中";
+        }
+            break;
+        case 1: // 已通过
+        {
+            color = [UIColor colorFromHexRGB:@"4abd22"];
+            str = @"已通过";
+        }
+            break;
+        case 2: // 初审未过
+        {
+            color = [UIColor colorFromHexRGB:@"ff5153"];
+            str = @"已拒绝";
+        }
+            break;
+        case 3: // 已放款（初审通过才能放款
+        {
+            color = [UIColor colorFromHexRGB:@"4771f2"];
+            str = @"已放款";
+        }
+            break;
+        case 4: // 拒绝放款（初审通过的才能拒绝放款）
+        {
+            color = [UIColor colorFromHexRGB:@"ff5153"];
+            str = @"已拒绝";
+        }
+            break;
+        default:
+            break;
+    }
+    self.orderStatesColor = color;
+    self.orderStatesStr = str;
+}
+@end
+@implementation ZRSWOrderListModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"data" : [ZRSWOrderListDetailModel class]
+             };
+}
+
+@end

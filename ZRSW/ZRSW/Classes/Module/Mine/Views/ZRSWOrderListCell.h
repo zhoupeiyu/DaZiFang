@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZRSWOrderModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (ZRSWOrderListCell *)getCellWithTableView:(UITableView *)tableView;
 
 + (CGFloat)cellHeight;
+
+- (void)setListModel:(ZRSWOrderListDetailModel *)model;
 
 @end
 
