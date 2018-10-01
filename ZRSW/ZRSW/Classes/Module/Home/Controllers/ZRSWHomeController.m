@@ -41,6 +41,7 @@
 @property (nonatomic, strong)  dispatch_group_t group;
 @end
 
+
 @implementation ZRSWHomeController
 
 - (void)viewDidLoad {
@@ -179,6 +180,7 @@
     [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
         if (result) {
             weakSelf.locationLabel.text = [NSString stringWithFormat:@"%@",result];
+
         }
     }];
 }
@@ -260,10 +262,7 @@
                 if (self.hotNewsListSource.count > 0) {
                     [self.hotNewsListSource removeAllObjects];
                 }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    NewDetailModel *detailModel = model.data[i];
-                    [self.hotNewsListSource addObject:detailModel];
-                }
+                [self.hotNewsListSource addObjectsFromArray:model.data];
                 [self.tableView reloadData];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
@@ -274,10 +273,7 @@
                 if (self.systemNewsListSource.count > 0) {
                     [self.systemNewsListSource removeAllObjects];
                 }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    NewDetailModel *detailModel = model.data[i];
-                    [self.systemNewsListSource addObject:detailModel];
-                }
+                [self.systemNewsListSource addObjectsFromArray:model.data];
                 NewDetailModel *model = self.systemNewsListSource.lastObject;
                 if (model) {
                     _systemNotificationLabel.text = model.title;
@@ -291,10 +287,7 @@
                 if (self.questionListSource.count > 0) {
                     [self.questionListSource removeAllObjects];
                 }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    CommentQuestionModel *detailModel = model.data[i];
-                    [self.questionListSource addObject:detailModel];
-                }
+                [self.questionListSource addObjectsFromArray:model.data];
                  [self.tableView reloadData];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);

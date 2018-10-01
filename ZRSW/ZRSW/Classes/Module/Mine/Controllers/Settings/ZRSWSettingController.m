@@ -16,7 +16,7 @@
 @implementation ZRSWSettingController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.dataSource = [NSMutableArray array];
+    self.dataSource = [NSMutableArray arrayWithCapacity:0];
     [self setupData];
     [self setUpTableView];
 }

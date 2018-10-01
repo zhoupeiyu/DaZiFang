@@ -30,7 +30,7 @@
 
 - (void)setUpUI{
 //    [self.contentView addSubview:self.topLine];
-        [self.contentView addSubview:self.topLineImge];
+    [self.contentView addSubview:self.topLineImge];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
 //    [self.contentView addSubview:self.readerIcon];

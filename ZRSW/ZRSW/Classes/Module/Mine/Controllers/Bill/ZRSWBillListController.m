@@ -14,6 +14,8 @@
 @interface ZRSWBillListController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @property (nonatomic, assign) int pageNum;
+@property (nonatomic, assign) int noReadCount;
+
 
 @end
 
@@ -98,23 +100,19 @@
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetBillListRequest]) {
             ZRSWBillListModel *model = (ZRSWBillListModel *)resObj;
-            [self.rightBarButton lf_showNumberBadge:model.msg_count];
+            self.noReadCount = model.msg_count;
+            [self.rightBarButton lf_showNumberBadge:self.noReadCount];
             if (model.error_code.integerValue == 0) {
                 if (self.dataListSource.count > 0 && self.pageNum == 1) {
                     [self.dataListSource removeAllObjects];
                 }
-                if (model.data.count > 0) {
-                    self.pageNum++;
-                    for (NSUInteger i = 0; i < model.data.count; ++i){
-                        ZRSWBillModel *billModel = model.data[i];
-                        [self.dataListSource addObject:billModel];
-                        [self.tableView reloadData];
-                    }
+                [self.dataListSource addObjectsFromArray:model.data];
+                if (model.data.count < kPageSize) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }else{
-                    if (self.dataListSource.count != 0) {
-                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                    }
+                    self.pageNum++;
                 }
+                [self.tableView reloadData];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
                 [TipViewManager showToastMessage:model.error_msg];

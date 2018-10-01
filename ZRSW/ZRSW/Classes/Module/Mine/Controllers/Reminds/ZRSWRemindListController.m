@@ -13,6 +13,7 @@
 #define  kPageSize 20
 @interface ZRSWRemindListController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, strong) NSString *msgIds;
 @property (nonatomic, assign) int pageNum;
 @end
 
@@ -60,6 +61,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    detailsVC.type = DetailsTypeCommentQuestion;
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork
@@ -79,6 +84,12 @@
     [self requsetRemindList];
 }
 
+- (void)updateMsgStatus{
+    [[[UserService alloc] init] updateMsgStatus:self.msgIds delegate:self];
+}
+
+
+
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
     [TipViewManager dismissLoading];
     [self endHeadRefreshing];
@@ -90,17 +101,25 @@
                 if (self.dataListSource.count > 0 && self.pageNum == 1) {
                     [self.dataListSource removeAllObjects];
                 }
-                if (model.data.count > 0) {
-                    self.pageNum++;
-                    for (NSUInteger i = 0; i < model.data.count; ++i){
-                        ZRSWRemindModel *remindModel = model.data[i];
-                        [self.dataListSource addObject:remindModel];
-                        [self.tableView reloadData];
+                [self.dataListSource addObjectsFromArray:model.data];
+                for (NSUInteger i = 0; i < model.data.count; ++i){
+                    ZRSWRemindModel *remindModel = model.data[i];
+                    if ([remindModel.status isEqualToString:@"0"]) {
+                        if (self.msgIds.length>0) {
+                           self.msgIds = [self.msgIds stringByAppendingString:[NSString stringWithFormat:@",%@",remindModel.id]];
+                        }else{
+                          self.msgIds = [NSString stringWithFormat:@"%@",remindModel.id];
+                        }
                     }
+                }
+                if (model.data.count < kPageSize) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }else{
-                    if (self.dataListSource.count != 0) {
-                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                    }
+                     self.pageNum++;
+                }
+                [self.tableView reloadData];
+                if (self.msgIds.length >0) {
+                    [self updateMsgStatus];
                 }
             }else{
                 LLog(@"请求失败:%@",model.error_msg);

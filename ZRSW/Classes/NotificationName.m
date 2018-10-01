@@ -14,6 +14,7 @@ NSNotificationName const UserLoginErrorNotification = @"UserLoginErrorNotificati
 
 
 
+NSString * const CurrentLocationKey  = @"CurrentLocationKey";
 
 
 
