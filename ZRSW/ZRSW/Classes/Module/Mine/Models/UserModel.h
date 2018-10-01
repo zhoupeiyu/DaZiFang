@@ -250,6 +250,7 @@
 @property (nonatomic, strong) NSString *faqBody;
 //发布时间,格式：yyyy/MM/dd HH:mm:ss
 @property (nonatomic, strong) NSString *updateTime;
+@property (nonatomic, strong) NSString *readers;
 
 
 @end

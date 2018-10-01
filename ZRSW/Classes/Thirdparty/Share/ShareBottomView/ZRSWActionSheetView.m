@@ -10,7 +10,7 @@
 #import "ZRSWShareTableViewCell.h"
 #define SafeAreaHeight ((SCREEN_WIDTH-812)?0:34)
 #define SPACE 10
-#define SheetViewHeight 189
+#define SheetViewHeight 192
 #define ActionViewHeight 45
 
 @interface ZRSWActionSheetView()<UITableViewDelegate,UITableViewDataSource>
@@ -155,7 +155,7 @@
 }
 
 - (void)show {
-    _tableView.frame = CGRectMake(SPACE, SCREEN_HEIGHT -(SPACE * 2), SCREEN_WIDTH - (SPACE * 2), kUI_HeightS(SheetViewHeight + ActionViewHeight)+(SPACE * 2));
+    _tableView.frame = CGRectMake(SPACE, SCREEN_HEIGHT -SPACE, SCREEN_WIDTH - SPACE*2, kUI_HeightS(SheetViewHeight + ActionViewHeight)+SPACE);
     WS(weakSelf);
     [UIView animateWithDuration:.35 animations:^{
         weakSelf.maskView.alpha = .65;

@@ -125,6 +125,11 @@
                 LLog(@"请求失败:%@",model.error_msg);
                 [TipViewManager showToastMessage:model.error_msg];
             }
+        }else if ([reqType isEqualToString:KUpdateMsgStatusRequest]){
+            BaseModel *model = (BaseModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                self.msgIds = nil;
+            }
         }
     }else{
         LLog(@"请求失败");

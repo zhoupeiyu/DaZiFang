@@ -21,17 +21,17 @@
         //分享到
         UILabel *titleLabel = [[UILabel alloc] init];
         titleLabel.text = @"分享至";
-        titleLabel.font = [UIFont boldSystemFontOfSize:23];
+        titleLabel.font = [UIFont systemFontOfSize:23];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor =[UIColor colorFromRGB:0xFF000000];
-        titleLabel.frame = CGRectMake(0, kUI_HeightS(18), SCREEN_WIDTH-20, 23);
+        titleLabel.textColor =[UIColor colorFromRGB:0x474455];
+        titleLabel.frame = CGRectMake(0, kUI_HeightS(17), SCREEN_WIDTH-20, 23);
         [self addSubview:titleLabel];
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor =  [UIColor colorFromRGB:0xFFC8C8C8];
         lineView.frame = CGRectMake(2, kUI_HeightS(57), SCREEN_WIDTH-24, 1);
         [self addSubview:lineView];
-        CGFloat btnW = 75;
-        CGFloat btnH = 80;
+        CGFloat btnW = 84;
+        CGFloat btnH = 90;
         BOOL wxavailable = [ZRSWShareManager isInstallWeChat];
         BOOL qqavailable = [ZRSWShareManager isInstallQQ];
         BOOL wbavailable = [ZRSWShareManager isImstallWeiBo];
@@ -65,7 +65,7 @@
             CGFloat marginX = (SCREEN_WIDTH-20 - 4 * btnW) / (4 + 1);
             int col = i % 4;
             CGFloat btnX = marginX + (marginX + btnW) * col;
-            btn.frame = CGRectMake(btnX, 80, btnW, btnH);
+            btn.frame = CGRectMake(btnX,kUI_HeightS(80), btnW, btnH);
             btn.transform = CGAffineTransformMakeTranslation(0, 100);
             switch (i) {
                 case 0:
