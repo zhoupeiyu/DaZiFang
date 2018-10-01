@@ -74,6 +74,7 @@
 -(NSString *)getZZwithString:(NSString *)string{
     NSRegularExpression *regularExpretion=[NSRegularExpression regularExpressionWithPattern:@"<[^>]*>|\n"options:0 error:nil];
     string=[regularExpretion stringByReplacingMatchesInString:string options:NSMatchingReportProgress range:NSMakeRange(0, string.length) withTemplate:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
     return string;
 }
 

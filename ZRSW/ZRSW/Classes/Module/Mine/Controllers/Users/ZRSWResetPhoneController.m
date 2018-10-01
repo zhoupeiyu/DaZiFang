@@ -40,7 +40,16 @@
     self.title = @"更换手机号";
     [self setLeftBackBarButton];
     self.scrollView.scrollEnabled = YES;
-    self.currentPhoneNum = @"18511691940";
+    UserModel *userModel = [UserModel getCurrentModel];
+    UserInfoModel *userInfoModel = userModel.data;
+    self.currentPhoneNum = userInfoModel.phone;
+     NSMutableString *phoneNum = [NSMutableString stringWithString:self.currentPhoneNum];
+    if ([MatchManager checkTelNumber:phoneNum]){
+        [phoneNum replaceCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    }else{
+        phoneNum = [NSMutableString stringWithString:@"手机号错误，请联系客服"];
+    }
+    self.currentPhoneLabel.text = [NSString stringWithFormat:@"已绑定手机号码：%@",phoneNum.copy];
 }
 
 - (void)setupUI {
@@ -196,7 +205,6 @@
 - (UILabel *)currentPhoneLabel {
     if (!_currentPhoneLabel) {
         _currentPhoneLabel = [[UILabel alloc] init];
-        _currentPhoneLabel.text = @"已绑定手机号码：185****1940";
         _currentPhoneLabel.textColor = [UIColor colorFromRGB:0x666666];
         _currentPhoneLabel.font = [UIFont systemFontOfSize:13];
         _currentPhoneLabel.textAlignment = NSTextAlignmentLeft;
