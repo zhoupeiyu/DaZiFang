@@ -18,10 +18,21 @@
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) UIView *footView;
 @property (nonatomic, strong) NSMutableArray *headerTitles;
+@property (nonatomic, strong) LinePrejudicationUserInfoCell *userInfoCell;
 @property (nonatomic, strong) LinePrejudicationImagesCell *residenceBookCell;
 @property (nonatomic, strong) LinePrejudicationImagesCell *ipCardCell;
 @property (nonatomic, strong) LinePrejudicationImagesCell *houseCardCell;
+@property (nonatomic, strong) LinePrejudicationRemarksCell *remarkCell;
 
+@property (nonatomic, strong) NSString *loanPersonName;
+@property (nonatomic, strong) NSString *loanPersonSex;
+@property (nonatomic, strong) NSString *loanPersonAdd;
+@property (nonatomic, strong) NSString *loanPersonPhone;
+@property (nonatomic, strong) NSString *loanPersonMoney;
+@property (nonatomic, strong) NSString *remarkText;
+@property (nonatomic, strong) NSMutableArray *residenceBookImages;
+@property (nonatomic, strong) NSMutableArray *ipCardImages;
+@property (nonatomic, strong) NSMutableArray *houseCardImages;
 
 @end
 
@@ -64,9 +75,58 @@
     }];
 }
 - (void)goBack {
-    [self endFootRefreshing];
-    [self endHeadRefreshing];
     [super goBack];
+}
+
+#pragma mark - action
+
+- (void)footBtnAction {
+    if ([self checkUserInfo]) {
+        
+    }
+}
+- (BOOL)checkUserInfo {
+    self.loanPersonName =   [self.userInfoCell loanPersonName];
+    self.loanPersonSex =    [self.userInfoCell loanPersonSex];
+    self.loanPersonAdd =    [self.userInfoCell loanPersonAdd];
+    self.loanPersonPhone =  [self.userInfoCell loanPersonPhone];
+    self.loanPersonMoney =  [self.userInfoCell loanPersonMoney];
+    self.remarkText =       [self.remarkCell remarkText];
+    self.residenceBookImages = [self.residenceBookCell getResultImages];
+    self.ipCardImages = [self.ipCardCell getResultImages];
+    self.houseCardImages = [self.houseCardCell getResultImages];
+    NSString *errorString = @"";
+    if (self.loanPersonName.length == 0) {
+        errorString = @"请输入实际贷款人姓名";
+    }
+    else if (self.loanPersonSex.length == 0) {
+        errorString = @"请选择性别";
+    }
+    else if (self.loanPersonAdd.length == 0) {
+        errorString = @"请填写贷款人地址";
+    }
+    else if (self.loanPersonPhone.length == 0) {
+        errorString = @"请输入贷款人电话";
+    }
+    else if (self.loanPersonMoney.length == 0) {
+        errorString = @"请输入贷款金额";
+    }
+    else if (self.residenceBookImages.count == 0) {
+        errorString = @"请选择户口本照片";
+    }
+    else if (self.ipCardImages.count == 0) {
+        errorString = @"请选择身份证照片";
+    }
+    else if (self.houseCardImages.count == 0) {
+        errorString = @"请选择房产证照片";
+    }
+    if (errorString.length != 0) {
+        [TipViewManager showToastMessage:errorString];
+        return NO;
+    }
+    else {
+        return YES;
+    }
 }
 #pragma mark - delegate
 
@@ -87,6 +147,7 @@
     
     if (indexPath.section == 0) {
         LinePrejudicationUserInfoCell *userInfoCell = [LinePrejudicationUserInfoCell getCellWithTableView:tableView];
+        self.userInfoCell = userInfoCell;
         return userInfoCell;
     }
     else if (indexPath.section == 1) {
@@ -109,6 +170,7 @@
     }
     else if (indexPath.section == 4) {
         LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
+        self.remarkCell = remarksCell;
         return remarksCell;
     }
     return cell;
@@ -160,7 +222,7 @@
     }
     else {
         NSString *title = self.headerTitles[section - 1];
-        return [self getHeaderView:title tag:section];
+        return [self getHeaderView:title tag:section needBtn:section == 4];
     }
     return nil;
 }
@@ -184,6 +246,7 @@
         [_footBtn setAdjustsImageWhenHighlighted:YES];
         [_footBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 0)];
         _footBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        [_footBtn addTarget:self action:@selector(footBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footBtn;
 }
@@ -217,7 +280,7 @@
     }
     return _headerTitles;
 }
-- (UIView *)getHeaderView:(NSString *)title tag:(NSInteger)tag {
+- (UIView *)getHeaderView:(NSString *)title tag:(NSInteger)tag needBtn:(BOOL)isNeedBtn{
     UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor clearColor];
     bgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, KHeaderViewHeight);
@@ -262,6 +325,7 @@
         make.centerY.mas_equalTo(bottomBGView);
         make.size.mas_equalTo(CGSizeMake(35, 20));
     }];
+    btn.hidden = !isNeedBtn;
     
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = [UIColor colorFromRGB:0xF4F5F6];

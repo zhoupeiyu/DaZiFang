@@ -38,6 +38,10 @@ static NSString * const cellIdentifier = @"photo";
 }
 
 - (NSMutableArray *)getResultImages {
+    [self.selectedImages removeAllObjects];
+    for (LinePrejudicationImagesModel *model in self.dataSource) {
+        [self.selectedImages addObject:model.image];
+    }
     return self.selectedImages;
 }
 
@@ -532,19 +536,19 @@ static NSString * const cellIdentifier = @"photo";
     }];
 }
 - (NSString *)loanPersonName {
-    return @"";
+    return self.personName;
 }
 - (NSString *)loanPersonSex {
     return [NSString stringWithFormat:@"%zd",self.currentSex];
 }
 - (NSString *)loanPersonAdd {
-    return @"";
+    return self.cityName;
 }
 - (NSString *)loanPersonPhone {
-    return @"";
+    return self.phoneNum;
 }
 - (NSString *)loanPersonMoney {
-    return @"";
+    return self.moneyNum;
 }
 
 #pragma mark - delegate
@@ -563,7 +567,7 @@ static NSString * const cellIdentifier = @"photo";
     }
     else if (customView == self.phoneLbl) {
         NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
-        if (proposedNewLength > 11) {
+        if (proposedNewLength > 12) {
             return NO;//限制长度
         }
     }
