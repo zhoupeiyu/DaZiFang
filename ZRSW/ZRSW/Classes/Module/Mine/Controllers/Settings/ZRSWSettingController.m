@@ -8,20 +8,19 @@
 
 #import "ZRSWSettingController.h"
 #import "ZRSWFeedBackController.h"
+#import "ZRSWMineListCell.h"
 @interface ZRSWSettingController ()
-
+@property (nonatomic, strong) NSMutableArray *dataSource;
 @end
 
 @implementation ZRSWSettingController
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.dataSource = [NSMutableArray arrayWithCapacity:0];
+    [self setupData];
     [self setUpTableView];
-
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
 
 - (void)setupConfig {
     [super setupConfig];
@@ -32,41 +31,18 @@
 - (void)setUpTableView{
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
-//    UITableViewCellSeparatorStyleSingleLineEtched
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     self.tableView.tableFooterView = [[UIView alloc] init];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return self.dataSource.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TableViewCell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TableViewCell"];
-    }
-    if (indexPath.row == 0) {
-        cell.imageView.image = [UIImage imageNamed:@"my_phone"];
-        cell.textLabel.text = @"版本号";
-        UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kUI_WidthS(36), kUI_HeightS(20))];
-        versionLabel.text = [[UIApplication sharedApplication] appVersion];;
-        cell.accessoryView = versionLabel;
-    }else if (indexPath.row == 1) {
-        cell.imageView.image = [UIImage imageNamed:@"my_order"];
-        cell.textLabel.text = @"用户协议";
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_information_arrow"]];
-    }else if (indexPath.row == 2) {
-        cell.imageView.image = [UIImage imageNamed:@"my_order"];
-        cell.textLabel.text = @"意见反馈";
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_information_arrow"]];
-    }else if (indexPath.row == 3) {
-        cell.imageView.image = [UIImage imageNamed:@"my_phone"];
-        cell.textLabel.text = @"退出登录";
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"home_information_arrow"]];
-    }
+    ZRSWMineListCell *cell = [ZRSWMineListCell getCllWithTableView:tableView];
+    cell.model = self.dataSource[indexPath.row];
     return cell;
 }
 
@@ -76,18 +52,56 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 1) {
-        LLog(@"用户协议");
-    }else if (indexPath.row == 2) {
-        LLog(@"意见反馈");
-        ZRSWFeedBackController *feedBackVC = [[ZRSWFeedBackController alloc] init];
-        feedBackVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:feedBackVC animated:YES];
+    ZRSWMineModel *mineModel = self.dataSource[indexPath.row];
+    if (indexPath.row == 0) {
+        return;
     }else if (indexPath.row == 3) {
         LLog(@"退出登录");
         [UserModel removeUserData];
         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
+                                                         alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+
+- (void)setupData {
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"版本号";
+            model.type = MineListTypeSetting;
+            model.iconName = @"my_phone";
+            model.desInfo = [NSString stringWithFormat:@"V%@",[[UIApplication sharedApplication] appVersion]];
+            [self.dataSource addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"用户协议";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_order";
+            [self.dataSource addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"意见反馈";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_order";
+            model.viewControllerName = NSStringFromClass([ZRSWFeedBackController class]);
+               [self.dataSource addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"退出登录";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_phone";
+            model.bottomLineHidden = YES;
+            [self.dataSource addObject:model];
+        }
+    [self.tableView reloadData];
+}
+
 
 @end

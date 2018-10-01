@@ -23,13 +23,14 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setUpUI];
     }
-    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
+    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:CGRectMake(0, 0, SCREEN_WIDTH, kUI_HeightS(120))];
+    self.contentView.backgroundColor = [UIColor whiteColor];
     return self;
 }
 
 - (void)setUpUI{
 //    [self.contentView addSubview:self.topLine];
-        [self.contentView addSubview:self.topLineImge];
+    [self.contentView addSubview:self.topLineImge];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
 //    [self.contentView addSubview:self.readerIcon];

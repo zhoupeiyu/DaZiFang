@@ -9,6 +9,7 @@
 #import "ZRSWNewsListDetailsController.h"
 #import "ZRSWHomeNewsCell.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
+#define  kPageSize 20
 @interface ZRSWNewsListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @property (nonatomic, strong) NSString *lastId;
@@ -92,9 +93,9 @@
     [self.dataListSource removeAllObjects];
     self.lastId = nil;
     if (self.type == NewListTypePopularInformation) {
-        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:20 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:kPageSize delegate:self];
     }else if (self.type == NewListTypeSystemNotification){
-        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:20 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:nil pageSize:kPageSize delegate:self];
     }
 }
 
@@ -104,9 +105,9 @@
     NewDetailModel *detailModel = self.dataListSource.lastObject;
     self.lastId = detailModel.id;
     if (self.type == NewListTypePopularInformation) {
-        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:self.lastId  pageSize:100 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:self.lastId  pageSize:kPageSize delegate:self];
     }else if (self.type == NewListTypeSystemNotification){
-        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:self.lastId  pageSize:100 delegate:self];
+        [[[UserService alloc] init] getNewList:NewListTypeSystemNotification lastId:self.lastId  pageSize:kPageSize delegate:self];
     }
 }
 
@@ -118,15 +119,9 @@
         if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
             NewListModel *model = (NewListModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    NewDetailModel *detailModel = model.data[i];
-                    if ([detailModel.id isEqualToString:self.lastId]) {
-                        if (self.dataListSource.count != 0) {
-                            [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        }
-                        return;
-                    }
-                    [self.dataListSource addObject:detailModel];
+                 [self.dataListSource addObjectsFromArray:model.data];
+                if (model.data.count < kPageSize) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
                  [self.tableView reloadData];
             }else{
@@ -135,15 +130,9 @@
         }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
             NewListModel *model = (NewListModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    NewDetailModel *detailModel = model.data[i];
-                    if ([detailModel.id isEqualToString:self.lastId]) {
-                        if (self.dataListSource.count != 0) {
-                             [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                        }
-                        return;
-                    }
-                    [self.dataListSource addObject:detailModel];
+                [self.dataListSource addObjectsFromArray:model.data];
+                if (model.data.count < kPageSize) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
                 [self.tableView reloadData];
             }else{

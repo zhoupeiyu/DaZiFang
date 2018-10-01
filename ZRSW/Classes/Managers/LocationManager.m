@@ -63,6 +63,7 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
                 if (!result) {
                     result = location.rgcData.province;
                 }
+                [[NSUserDefaults standardUserDefaults] setValue:result forKey:CurrentLocationKey];
                 if (success) {
                     success(result);
                 }

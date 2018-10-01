@@ -218,6 +218,13 @@
  */
 - (void)getRemindList:(int)pageSize pageNum:(int)pageNum delegate:(id)delegate;
 
+/**
+ 更新阅读状态
+ @param msgIds 
+ @param delegate 代理
+ */
+- (void)updateMsgStatus:(NSString *)msgIds delegate:(id)delegate;
+
 
 /**
  退出登录

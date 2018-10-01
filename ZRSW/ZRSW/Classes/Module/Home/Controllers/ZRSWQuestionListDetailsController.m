@@ -10,6 +10,7 @@
 #import "ZRSWHomeQuestionCell.h"
 #import "UserService.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
+#define  kPageSize 20
 @interface ZRSWQuestionListDetailsController ()<BaseNetWorkServiceDelegate>
 @property (nonatomic, strong) NSMutableArray *dataListSource;
 @property (nonatomic, strong) NSString *lastId;
@@ -69,7 +70,7 @@
 #pragma mark - NetWork
 - (void)requsetCommentQuestionList{
     [TipViewManager showLoading];
-    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:kPageSize delegate:self];
 }
 
 - (void)refreshData{
@@ -77,14 +78,14 @@
     [self.tableView.mj_footer resetNoMoreData];
     [self.dataListSource removeAllObjects];
     self.lastId = nil;
-    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:20 delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:nil pageSize:kPageSize delegate:self];
 }
 
 - (void)loadMoreData{
     [TipViewManager showLoading];
     CommentQuestionModel *questionModel = self.dataListSource.lastObject;
     self.lastId = questionModel.id;
-    [[[UserService alloc] init] getCommentQuestionList:self.lastId pageSize:100 delegate:self];
+    [[[UserService alloc] init] getCommentQuestionList:self.lastId pageSize:kPageSize delegate:self];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
@@ -95,14 +96,11 @@
         if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
             CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    CommentQuestionModel *detailModel = model.data[i];
-                    if ([detailModel.id isEqualToString:self.lastId]) {
-                        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-                    }
-                    [self.dataListSource addObject:detailModel];
-                    [self.tableView reloadData];
+                [self.dataListSource addObjectsFromArray:model.data];
+                if (model.data.count < kPageSize) {
+                    [self.tableView.mj_footer endRefreshingWithNoMoreData];
                 }
+                [self.tableView reloadData];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
             }

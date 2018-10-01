@@ -13,9 +13,7 @@ UIKIT_EXTERN NSNotificationName const UserLoginErrorNotification;
 
 
 
-
-
-
+UIKIT_EXTERN NSString * const CurrentLocationKey;
 
 
 UIKIT_EXTERN NSString * const TabBarDidClickNotificationKey;

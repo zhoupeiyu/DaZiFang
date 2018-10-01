@@ -8,7 +8,8 @@
 
 typedef enum : NSUInteger {
     MineListTypeUserInfo,
-    MineListTypeCommentList
+    MineListTypeCommentList,
+    MineListTypeSetting
 } MineListType;
 
 #import <Foundation/Foundation.h>

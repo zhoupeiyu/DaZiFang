@@ -12,7 +12,6 @@
 @property (nonatomic, strong) UIImageView *lineView;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
-@property (nonatomic, strong) UILabel *nameLabel;
 
 @end
 @implementation ZRSWRemindListCell
@@ -21,7 +20,7 @@
         [self setUpUI];
     }
     self.backgroundColor = [UIColor clearColor];
-    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
+    self.userInteractionEnabled = NO;
     return self;
 }
 - (void)setUpUI{
@@ -29,7 +28,6 @@
     [self.backView addSubview:self.dateLabel];
     [self.backView addSubview:self.lineView];
     [self.backView addSubview:self.contentLabel];
-//    [self.backView addSubview:self.nameLabel];
 }
 
 - (void)layoutSubviews{
@@ -38,13 +36,14 @@
     self.lineView.frame = CGRectMake(kUI_WidthS(10) ,self.dateLabel.bottom + kUI_HeightS(15) , SCREEN_WIDTH - kUI_WidthS(20), kUI_HeightS(1));
     self.contentLabel.frame = CGRectMake(self.dateLabel.left,self.lineView.bottom + kUI_HeightS(15), self.dateLabel.width, kUI_HeightS(88));
     [self.contentLabel sizeToFit];
-//    self.nameLabel.frame = CGRectMake(self.contentLabel.left,self.contentLabel.bottom, self.contentLabel.width, kUI_HeightS(14));
 }
 
 - (UIView *)backView{
     if (!_backView) {
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor colorFromRGB:0xFFFFFFFF];
+        _backView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+        _backView.layer.cornerRadius = 10;
+        _backView.layer.masksToBounds = YES;
     }
     return _backView;
 }
@@ -76,17 +75,6 @@
     return _contentLabel;
 }
 
-
-- (UILabel *)nameLabel{
-    if (!_nameLabel) {
-        _nameLabel = [[UILabel alloc] init];
-        _nameLabel.text = @"【中融盛旺】";
-        _nameLabel.textColor = [UIColor colorFromRGB:0xFF444152];
-        _nameLabel.textAlignment = NSTextAlignmentLeft;
-        _nameLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _nameLabel;
-}
 
 - (void)setRemindModel:(ZRSWRemindModel *)remindModel{
     _remindModel = remindModel;
