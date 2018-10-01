@@ -86,6 +86,7 @@
 - (void)setCellType:(MineListType)cellType {
     _cellType = cellType;
     if (cellType == MineListTypeUserInfo) {
+        self.descLbl.textAlignment = NSTextAlignmentLeft;
         [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(15);
             make.centerY.mas_equalTo(self.contentView.mas_centerY);
@@ -107,7 +108,6 @@
                 make.centerY.mas_equalTo(self.contentView.mas_centerY);
                 make.left.mas_equalTo(self.iconImageView.mas_right).offset(15);
             }];
-            self.descLbl.hidden = YES;
         }
     }
     else {
@@ -119,7 +119,18 @@
             make.centerY.mas_equalTo(self.contentView.mas_centerY);
             make.left.mas_equalTo(45);
         }];
-        self.descLbl.hidden = NO;
+        self.descLbl.hidden = cellType == MineListTypeCommentList;
+        self.arrowImageView.hidden = cellType != MineListTypeCommentList;
+        if (cellType == MineListTypeSetting) {
+            [self.descLbl mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(-15);
+                make.centerY.mas_equalTo(self.contentView.mas_centerY);
+            }];
+            self.descLbl.textAlignment = NSTextAlignmentRight;
+        }
+        else{
+            self.descLbl.textAlignment = NSTextAlignmentLeft;
+        }
     }
 }
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden {

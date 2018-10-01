@@ -60,10 +60,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
-    detailsVC.type = DetailsTypeCommentQuestion;
-    detailsVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailsVC animated:YES];
 }
 
 #pragma mark - NetWork

@@ -32,6 +32,8 @@
     [super setupConfig];
     [self setLeftBackBarButton];
     [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_news"] AndHighLightImage:[UIImage imageNamed:@""]];
+    self.rightBarButton.badgeOriginX = 20;
+    self.rightBarButton.badgeOriginY = 8;
     [self.rightBarButton addTarget:self action:@selector(goToRemindListController) forControlEvents:UIControlEventTouchUpInside];
     self.title = @"账单列表";
 }
@@ -96,6 +98,7 @@
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetBillListRequest]) {
             ZRSWBillListModel *model = (ZRSWBillListModel *)resObj;
+            [self.rightBarButton lf_showNumberBadge:model.msg_count];
             if (model.error_code.integerValue == 0) {
                 if (self.dataListSource.count > 0 && self.pageNum == 1) {
                     [self.dataListSource removeAllObjects];

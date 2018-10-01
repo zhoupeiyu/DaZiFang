@@ -16,6 +16,7 @@
 @end
 
 @interface ZRSWRemindListModel : BaseModel
+@property (nonatomic, assign) int msg_count;
 @property (nonatomic, strong) NSArray *data;
 
 @end

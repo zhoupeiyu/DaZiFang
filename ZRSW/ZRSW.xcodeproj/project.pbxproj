@@ -14,6 +14,8 @@
 		3C10D65B2154E23C0019112F /* ZRSWBillListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D65A2154E23C0019112F /* ZRSWBillListController.m */; };
 		3C10D65E2154E29E0019112F /* ZRSWBillListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */; };
 		3C10D6612154E2F50019112F /* ZRSWBillListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D6602154E2F50019112F /* ZRSWBillListCell.m */; };
+		3C4644402160CFF8000122B9 /* ZRSWAchieveFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */; };
+		3C4644432160D0AA000122B9 /* ZRSWAchieveFilterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4644422160D0AA000122B9 /* ZRSWAchieveFilterTableView.m */; };
 		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
 		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
 		3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */; };
@@ -476,6 +478,10 @@
 		3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListModel.m; sourceTree = "<group>"; };
 		3C10D65F2154E2F50019112F /* ZRSWBillListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBillListCell.h; sourceTree = "<group>"; };
 		3C10D6602154E2F50019112F /* ZRSWBillListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListCell.m; sourceTree = "<group>"; };
+		3C46443E2160CFF8000122B9 /* ZRSWAchieveFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWAchieveFilterView.h; sourceTree = "<group>"; };
+		3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWAchieveFilterView.m; sourceTree = "<group>"; };
+		3C4644412160D0AA000122B9 /* ZRSWAchieveFilterTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWAchieveFilterTableView.h; sourceTree = "<group>"; };
+		3C4644422160D0AA000122B9 /* ZRSWAchieveFilterTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWAchieveFilterTableView.m; sourceTree = "<group>"; };
 		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
 		3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_else@3x.png"; sourceTree = "<group>"; };
 		3C7E4AD1214F6B8F0058D3E2 /* guide_point_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@2x.png"; sourceTree = "<group>"; };
@@ -1992,6 +1998,10 @@
 				3C7E4AE32150D1360058D3E2 /* ZRSWHomeQuestionCell.m */,
 				3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */,
 				3C7E4ADF214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.m */,
+				3C46443E2160CFF8000122B9 /* ZRSWAchieveFilterView.h */,
+				3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */,
+				3C4644412160D0AA000122B9 /* ZRSWAchieveFilterTableView.h */,
+				3C4644422160D0AA000122B9 /* ZRSWAchieveFilterTableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3191,6 +3201,7 @@
 				E5B59A64214EBF9600726DE9 /* ZRSWLoansController.m in Sources */,
 				3CD3C7D9215FC77F00DE6199 /* EMAudioRecorderUtil.m in Sources */,
 				3CD3C7D2215FC77F00DE6199 /* wav.mm in Sources */,
+				3C4644432160D0AA000122B9 /* ZRSWAchieveFilterTableView.m in Sources */,
 				E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */,
 				E5B59A25214EBEE800726DE9 /* UILabel+Extension.m in Sources */,
 				E5E2798C215E7FA1007D27A8 /* ZRSWOrderListController.m in Sources */,
@@ -3202,6 +3213,7 @@
 				3CD3C7F1215FC77F00DE6199 /* PSTCollectionViewLayout.m in Sources */,
 				3CD3C7F6215FC77F00DE6199 /* EaseUsersListViewController.m in Sources */,
 				E5B59A1C214EBEE800726DE9 /* LFUIView+MBProgressHUD.m in Sources */,
+				3C4644402160CFF8000122B9 /* ZRSWAchieveFilterView.m in Sources */,
 				3CD3C7E9215FC77F00DE6199 /* PSTGridLayoutInfo.m in Sources */,
 				E5B59A45214EBEE800726DE9 /* LNRefreshHandler.m in Sources */,
 				E5B59A4C214EBEE800726DE9 /* TZVideoPlayerController.m in Sources */,

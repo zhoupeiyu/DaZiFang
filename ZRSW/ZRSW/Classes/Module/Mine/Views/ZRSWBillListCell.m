@@ -30,7 +30,7 @@
         [self setUpUI];
     }
     self.backgroundColor = [UIColor clearColor];
-    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
+    self.userInteractionEnabled = NO;
     return self;
 }
 - (void)setUpUI{
@@ -52,7 +52,7 @@
 
 - (void)layoutSubviews{
     self.backView.frame = CGRectMake(kUI_WidthS(10) ,kUI_HeightS(10),SCREEN_WIDTH - kUI_WidthS(20), kUI_HeightS(150));
-    self.iconView.frame = CGRectMake(kUI_WidthS(10),kUI_HeightS(18), kUI_WidthS(5), kUI_HeightS(5));
+    self.iconView.frame = CGRectMake(kUI_WidthS(10),kUI_HeightS(18), kUI_WidthS(8), kUI_HeightS(8));
     self.loanProductLabel.frame = CGRectMake(self.iconView.right + kUI_WidthS(5) ,kUI_HeightS(15) ,kUI_WidthS(88), kUI_HeightS(16));
     self.loanTypeLabel.frame = CGRectMake(self.loanProductLabel.right,self.loanProductLabel.top, kUI_WidthS(84), kUI_HeightS(16));
     self.loanDateLabel.frame = CGRectMake(self.loanTypeLabel.right,self.loanProductLabel.top, kUI_WidthS(120), kUI_HeightS(16));
@@ -70,7 +70,9 @@
 - (UIView *)backView{
     if (!_backView) {
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor colorFromRGB:0xFFFFFFFF];
+        _backView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+        _backView.layer.cornerRadius = 10;
+        _backView.layer.masksToBounds = YES;
     }
     return _backView;
 }
@@ -95,7 +97,6 @@
 - (UILabel *)loanTypeLabel{
     if (!_loanTypeLabel) {
         _loanTypeLabel = [[UILabel alloc] init];
-        _loanTypeLabel.text = @"企业经营贷";
         _loanTypeLabel.textColor = [UIColor colorFromRGB:0x474455];
         _loanTypeLabel.textAlignment = NSTextAlignmentLeft;
         _loanTypeLabel.font = [UIFont systemFontOfSize:16];
@@ -106,7 +107,6 @@
 - (UILabel *)loanDateLabel{
     if (!_loanDateLabel) {
         _loanDateLabel = [[UILabel alloc] init];
-        _loanDateLabel.text = @"（10/24期）";
         _loanDateLabel.textColor = [UIColor colorFromRGB:0xff5153];
         _loanDateLabel.textAlignment = NSTextAlignmentLeft;
         _loanDateLabel.font = [UIFont systemFontOfSize:16];
@@ -135,7 +135,6 @@
 - (UILabel *)paymentsLabel{
     if (!_paymentsLabel) {
         _paymentsLabel = [[UILabel alloc] init];
-//        _paymentsLabel.text = @"¥16778.09";
         _paymentsLabel.textColor = [UIColor colorFromRGB:0x4771F2];
         _paymentsLabel.textAlignment = NSTextAlignmentLeft;
         _paymentsLabel.font = [UIFont systemFontOfSize:14];
@@ -158,8 +157,7 @@
 - (UILabel *)lenderNameLabel{
     if (!_lenderNameLabel) {
         _lenderNameLabel = [[UILabel alloc] init];
-//        _lenderNameLabel.text = @"杨飞";
-        _lenderNameLabel.textColor = [UIColor colorFromRGB:0x999999];
+        _lenderNameLabel.textColor = [UIColor colorFromRGB:0x474455];
         _lenderNameLabel.textAlignment = NSTextAlignmentLeft;
         _lenderNameLabel.font = [UIFont systemFontOfSize:13];
     }
@@ -180,7 +178,6 @@
 - (UILabel *)paymentDateLabel{
     if (!_paymentDateLabel) {
         _paymentDateLabel = [[UILabel alloc] init];
-//        _paymentDateLabel.text = @"2018/08/29";
         _paymentDateLabel.textColor = [UIColor colorFromRGB:0x474455];
         _paymentDateLabel.textAlignment = NSTextAlignmentLeft;
         _paymentDateLabel.font = [UIFont systemFontOfSize:14];
@@ -201,8 +198,6 @@
 - (UILabel *)statusLabel{
     if (!_statusLabel) {
         _statusLabel = [[UILabel alloc] init];
-//        _statusLabel.text = @"已逾期";
-        _statusLabel.textColor = [UIColor colorFromRGB:0xFF5153];
         _statusLabel.textAlignment = NSTextAlignmentLeft;
         _statusLabel.font = [UIFont systemFontOfSize:14];
     }
@@ -212,18 +207,22 @@
 - (void)setBillModel:(ZRSWBillModel *)billModel{
     _billModel = billModel;
     self.loanTypeLabel.text = billModel.loanTitle;
-    self.loanDateLabel.text = [NSString stringWithFormat:@"（%d/%d）",billModel.loanNumber,billModel.loanCycle];
-    self.paymentsLabel.text = billModel.loanMoney;
+    self.loanDateLabel.text = [NSString stringWithFormat:@"（%02d/%02d期）",billModel.loanNumber,billModel.loanCycle];
+    self.paymentsLabel.text = [NSString stringWithFormat:@"¥%@",billModel.loanMoney];
     self.lenderNameLabel.text = billModel.loanUserName;
     self.paymentDateLabel.text = billModel.loanTime;
     if (billModel.status == 0) {
         self.statusLabel.text = @"未到期";
+        self.statusLabel.textColor = [UIColor colorFromRGB:0x474455];
     }else if (billModel.status == 1){
         self.statusLabel.text = @"已逾期";
+        self.statusLabel.textColor = [UIColor colorFromRGB:0xFF5153];
     }else if (billModel.status == 2){
         self.statusLabel.text = @"已还款";
+        self.statusLabel.textColor = [UIColor colorFromRGB:0x474455];
     }else{
         self.statusLabel.text = @"已删除";
+        self.statusLabel.textColor = [UIColor colorFromRGB:0x474455];
     }
 }
 

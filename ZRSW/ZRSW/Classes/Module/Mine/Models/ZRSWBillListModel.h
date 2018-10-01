@@ -25,5 +25,6 @@
 @end
 
 @interface ZRSWBillListModel : BaseModel
+@property (nonatomic, assign) int msg_count;
 @property (nonatomic, strong) NSArray *data;
 @end
