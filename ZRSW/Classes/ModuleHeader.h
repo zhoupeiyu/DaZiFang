@@ -25,6 +25,7 @@
 #import "ZRSWLoansController.h"
 #import "ZRSWHomeController.h"
 #import "ZRSWMineController.h"
+#import "ZRSWMineMainController.h"
 
 
 #endif /* ModuleHeader_h */

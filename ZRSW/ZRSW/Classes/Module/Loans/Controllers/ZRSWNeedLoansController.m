@@ -10,6 +10,7 @@
 #import "ZRSWLoansTopCell.h"
 #import "OrderService.h"
 #import "ZRSWOrderModel.h"
+#import "ZRSWLinePrejudicationController.h"
 
 #define KTitleKey           @"KTitleKey"
 #define KContentKey         @"KContentKey"
@@ -42,18 +43,18 @@
 @implementation ZRSWNeedLoansController
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self goBack];
     [super viewWillDisappear:animated];
 }
 - (void)viewDidDisappear:(BOOL)animated {
-    
     [super viewDidDisappear:animated];
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidLoad {
     self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
+    self.fd_interactivePopDisabled = YES;
+    self.fd_prefersNavigationBarHidden = YES;
+
 }
 - (void)setupUI {
     [super setupUI];
@@ -82,7 +83,10 @@
     [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+- (void)nextAcrion {
+    ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)refreshData {
     
 }
@@ -237,6 +241,10 @@
         }
         else {
             if (indexPath.row == 1) {
+                if (self.selectedCityID.length == 0) {
+                    [TipViewManager showToastMessage:@"请选择城市"];
+                    return;
+                }
                 LLog(@"---->%d",self.selectedNewCity);
                 if (self.selectedNewCity) {
                     [self requestMainType];
@@ -248,6 +256,14 @@
                 }
             }
             else if (indexPath.row == 2) {
+                if (self.selectedCityID.length == 0) {
+                    [TipViewManager showToastMessage:@"请选择城市"];
+                    return;
+                }
+                if (self.selectedMainTypeID.length == 0) {
+                    [TipViewManager showToastMessage:@"请选择贷款大类"];
+                    return;
+                }
                 if (self.selectedNewMainType) {
                     [self rquestLoanType];
                 }
@@ -291,6 +307,7 @@
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     [TipViewManager dismissLoading];
+    
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetOrderMainTypeListRequest]) {
             ZRSWOrderMainTypeListModel *listModel = (ZRSWOrderMainTypeListModel *)resObj;
@@ -317,7 +334,7 @@
                 dic[KListIDsKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeIDs];
                 NSArray *arr = dic[KListContentKey];
                 [self showPickViewWithDataSource:arr];
-                
+                self.footBtn.enabled = YES;
             }
             else {
                 [TipViewManager showToastMessage:listModel.error_msg];
@@ -343,6 +360,8 @@
         [_footBtn setAdjustsImageWhenHighlighted:YES];
         [_footBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 0)];
         _footBtn.titleLabel.font = [UIFont systemFontOfSize:18];
+        _footBtn.enabled = NO;
+        [_footBtn addTarget:self action:@selector(nextAcrion) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footBtn;
 }

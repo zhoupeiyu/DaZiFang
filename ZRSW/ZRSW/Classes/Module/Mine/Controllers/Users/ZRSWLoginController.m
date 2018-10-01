@@ -30,10 +30,17 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *password;
 
+@property (nonatomic, assign) LoginVCType type;
+
 @end
 
 @implementation ZRSWLoginController
 
++ (ZRSWLoginController *)getLoginViewController:(LoginVCType)type {
+    ZRSWLoginController *vc = [[ZRSWLoginController alloc] init];
+    vc.type = type;
+    return vc;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
