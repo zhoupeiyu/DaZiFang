@@ -9,9 +9,7 @@
 #import "ZRSWActionSheetButton.h"
 
 #define kTitlePrecent 0.4
-#define kImageViewWH 46  //55
-
-#define RGB(r, g, b)   [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+#define kImageViewWH 64  //55
 
 @implementation ZRSWActionSheetButton
 
@@ -20,8 +18,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self setTitleColor:RGB(40, 40, 40) forState:UIControlStateNormal];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self setTitleColor:[UIColor colorFromRGB:0x474455] forState:UIControlStateNormal];
     }
     return self;
 }

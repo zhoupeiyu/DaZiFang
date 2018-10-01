@@ -33,8 +33,8 @@
     [self.contentView addSubview:self.topLineImge];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
-//    [self.contentView addSubview:self.readerIcon];
-//    [self.contentView addSubview:self.readersLabel];
+    [self.contentView addSubview:self.readerIcon];
+    [self.contentView addSubview:self.readersLabel];
     [self.contentView addSubview:self.dateLabel];
 }
 
@@ -43,8 +43,8 @@
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.titleLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(20), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(15));
     self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(10), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(34));
-//    self.readerIcon.frame = CGRectMake(kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
-//    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
+    self.readerIcon.frame = CGRectMake(kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+    self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
     self.dateLabel.frame = CGRectMake(kUI_WidthS(81),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(150), kUI_HeightS(10));
 }
 
@@ -116,6 +116,12 @@
     _questionModel = questionModel;
     self.titleLabel.text = questionModel.title;
     self.contentLabel.text = [questionModel.faqBody getZZwithString:questionModel.faqBody];
+    if (questionModel.readers) {
+        self.readersLabel.text = [NSString stringWithFormat:@"%@",questionModel.readers];
+    }else{
+        self.readersLabel.text = @"0";
+    }
+
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *dateStr = [questionModel.updateTime substringToIndex:10];
