@@ -23,3 +23,8 @@ typedef enum : NSUInteger {
     DetailsTypeSystemNotification = 1, // 系统公告
     DetailsTypeCommentQuestion = 2 //常见问题
 } DetailsType;
+
+typedef enum : NSUInteger {
+    UseInfoSexMan = 1, // 男
+    UseInfoSexWoman // 女
+} UseInfoSex;

@@ -447,6 +447,7 @@
 		E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */; };
 		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
 		E5E27A362160D9BF007D27A8 /* ZRSWMineMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */; };
+		E5E27A3F216207BD007D27A8 /* ZRSWLinePrejudicationCells.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27A3E216207BD007D27A8 /* ZRSWLinePrejudicationCells.m */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1155,6 +1156,8 @@
 		E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListCell.m; sourceTree = "<group>"; };
 		E5E27A342160D9BF007D27A8 /* ZRSWMineMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWMineMainController.h; sourceTree = "<group>"; };
 		E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineMainController.m; sourceTree = "<group>"; };
+		E5E27A3D216207BD007D27A8 /* ZRSWLinePrejudicationCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLinePrejudicationCells.h; sourceTree = "<group>"; };
+		E5E27A3E216207BD007D27A8 /* ZRSWLinePrejudicationCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLinePrejudicationCells.m; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -1949,6 +1952,8 @@
 			children = (
 				E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */,
 				E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */,
+				E5E27A3D216207BD007D27A8 /* ZRSWLinePrejudicationCells.h */,
+				E5E27A3E216207BD007D27A8 /* ZRSWLinePrejudicationCells.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3197,6 +3202,7 @@
 				3CD3C7C0215FC77F00DE6199 /* NSDate+Category.m in Sources */,
 				3CD3C7EB215FC77F00DE6199 /* NSIndexPath+PSTCollectionViewAdditions.m in Sources */,
 				3CD3C7C2215FC77F00DE6199 /* UIImage+GIF.m in Sources */,
+				E5E27A3F216207BD007D27A8 /* ZRSWLinePrejudicationCells.m in Sources */,
 				3CD3C7D4215FC77F00DE6199 /* EMVoiceConverter.mm in Sources */,
 				E5B59A2B214EBEE800726DE9 /* UIScrollView+Extension.m in Sources */,
 				E5B59A42214EBEE800726DE9 /* LNRefreshFooter.m in Sources */,

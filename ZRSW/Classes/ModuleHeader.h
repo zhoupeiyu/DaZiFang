@@ -18,6 +18,7 @@
 #import "ServiceInterface.h"
 #import "ServiceInterfaceType.h"
 #import "ZRSWViewFactoryTool.h"
+#import "EnumType.h"
 
 
 
@@ -26,6 +27,7 @@
 #import "ZRSWHomeController.h"
 #import "ZRSWMineController.h"
 #import "ZRSWMineMainController.h"
+#import "ZRSWLinePrejudicationController.h"
 
 
 #endif /* ModuleHeader_h */
