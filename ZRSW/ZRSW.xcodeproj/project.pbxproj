@@ -448,6 +448,8 @@
 		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
 		E5E27A362160D9BF007D27A8 /* ZRSWMineMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */; };
 		E5E27A3F216207BD007D27A8 /* ZRSWLinePrejudicationCells.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27A3E216207BD007D27A8 /* ZRSWLinePrejudicationCells.m */; };
+		E5E27A4121625C7F007D27A8 /* btn_deleted_img_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */; };
+		E5E27A4321625C90007D27A8 /* btn_deleted_img_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -1158,6 +1160,8 @@
 		E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineMainController.m; sourceTree = "<group>"; };
 		E5E27A3D216207BD007D27A8 /* ZRSWLinePrejudicationCells.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLinePrejudicationCells.h; sourceTree = "<group>"; };
 		E5E27A3E216207BD007D27A8 /* ZRSWLinePrejudicationCells.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLinePrejudicationCells.m; sourceTree = "<group>"; };
+		E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@2x.png"; sourceTree = "<group>"; };
+		E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@3x.png"; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -2529,6 +2533,7 @@
 		E5B59A85214EC15600726DE9 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */,
 				E5B59A86214EC15600726DE9 /* home_advertise_instructions_select@2x.png */,
 				E5B59A87214EC15600726DE9 /* currency_top_position@2x.png */,
 				E5B59A88214EC15600726DE9 /* share_bg@2x.png */,
@@ -2606,6 +2611,7 @@
 		E5B59ACC214EC15600726DE9 /* @3x */ = {
 			isa = PBXGroup;
 			children = (
+				E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */,
 				E5B59ACD214EC15600726DE9 /* home_advertisement_bg@3x.png */,
 				E5B59ACE214EC15600726DE9 /* currency_bottom_bg@3x.png */,
 				E5B59ACF214EC15600726DE9 /* home_information_arrow@3x.png */,
@@ -2846,6 +2852,7 @@
 				E5B59B16214EC15600726DE9 /* icon_57.png in Resources */,
 				E5B59B72214EC15600726DE9 /* my_phone@3x.png in Resources */,
 				E5B59A0A214EBEE800726DE9 /* post_originalimage_normal@3x.png in Resources */,
+				E5E27A4321625C90007D27A8 /* btn_deleted_img_normal@3x.png in Resources */,
 				E5B59B9D214EC15600726DE9 /* news_dialog_them@3x.png in Resources */,
 				3CD937F4216074CB0091CCC6 /* vue-2.5.13.js in Resources */,
 				E5B599F2214EBEE800726DE9 /* fav_list_img_default_45x36_@2x.png in Resources */,
@@ -2979,6 +2986,7 @@
 				E5B59BA9214EC15600726DE9 /* news_dialog_arrow_them@3x.png in Resources */,
 				E5B59B3A214EC15600726DE9 /* currency_bottom_button@2x.png in Resources */,
 				E5B59B77214EC15600726DE9 /* currency_top_position@3x.png in Resources */,
+				E5E27A4121625C7F007D27A8 /* btn_deleted_img_normal@2x.png in Resources */,
 				E5B59B15214EC15600726DE9 /* icon_40.png in Resources */,
 				E5B59B8E214EC15600726DE9 /* currency_watch_number@3x.png in Resources */,
 				E5B59B4B214EC15600726DE9 /* bill_content_bg@2x.png in Resources */,

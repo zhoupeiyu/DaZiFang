@@ -8,6 +8,196 @@
 
 #import "ZRSWLinePrejudicationCells.h"
 
+#pragma mark - r图片cell
+
+#define defaultMaxNum 9
+static CGFloat leftAndRightMargin = 15;
+static NSString * const cellIdentifier = @"photo";
+
+
+@implementation LinePrejudicationImagesModel
+
+@end
+
+@interface LinePrejudicationImagesCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+@property (nonatomic, strong) NSMutableArray *selectedImages;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, assign) NSInteger maxPickerImageNum;
+
+@end
+@implementation LinePrejudicationImagesCell
+
++ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView {
+    LinePrejudicationImagesCell *cell = [tebleView dequeueReusableCellWithIdentifier:NSStringFromClass(self)];
+    if (!cell) {
+        cell = [[LinePrejudicationImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(self)];
+    }
+    return cell;
+}
+
+- (NSMutableArray *)getResultImages {
+    return self.selectedImages;
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        [self setUpConfig];
+        [self setUpUI];
+    }
+    return self;
+}
+
+- (void)setUpConfig {
+    [self addFristImage];
+    self.maxPickerImageNum = defaultMaxNum;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+}
+- (void)setUpUI {
+    [self addSubview:self.collectionView];
+    [self.collectionView reloadData];
+}
++ (CGFloat)cellHeight {
+    return 80;
+}
+#pragma mark - delegate && dataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (self.dataSource.count >= self.maxPickerImageNum) {
+        return self.dataSource.count;
+    }
+    return _dataSource.count + 1;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    for (UIView * subView in cell.contentView.subviews) {
+        [subView removeFromSuperview];
+    }
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.layer.cornerRadius = 2;
+    imageView.layer.masksToBounds = YES;
+    imageView.clipsToBounds = YES;
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.frame = cell.contentView.bounds;
+    [cell.contentView addSubview:imageView];
+    
+    UIButton * cancelButton = [[UIButton alloc] init];
+    [cancelButton setImage:[UIImage imageNamed:@"btn_deleted_img_normal"] forState:UIControlStateNormal];
+    [cancelButton setImage:[UIImage imageNamed:@"btn_deleted_img_pressed"] forState:UIControlStateHighlighted];
+    [cancelButton addTarget:self action:@selector(cancelButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.tag = indexPath.item;
+    cancelButton.hidden = indexPath.item == 0;
+    [cell.contentView addSubview:cancelButton];
+    [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(imageView.mas_right).offset(7);
+        make.top.mas_equalTo(imageView.mas_top).offset(-7);
+    }];
+    
+    UIButton *chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [chooseButton setImage:[UIImage imageNamed:@"pretrial_upload_button"] forState:UIControlStateNormal];
+    [chooseButton addTarget:self action:@selector(choosePicture) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:chooseButton];
+    [chooseButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(imageView);
+        make.size.mas_equalTo(CGSizeMake(80, 70));
+    }];
+    if (indexPath.row >= _dataSource.count) {
+        imageView.hidden = YES;
+        cancelButton.hidden = YES;
+        chooseButton.hidden = NO;
+    }else{
+        LinePrejudicationImagesModel *model = self.dataSource[indexPath.item];
+        imageView.image = model.image;
+        imageView.hidden = NO;
+        cancelButton.hidden = NO;
+        chooseButton.hidden = YES;
+    }
+    
+    return cell;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(80, 60);
+}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return  UIEdgeInsetsMake(0, leftAndRightMargin , 0, leftAndRightMargin);
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 10;
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row >= _dataSource.count) {
+        [self choosePicture];
+        return;
+    }
+}
+#pragma mark - event
+
+- (void)choosePicture {
+    NSUInteger maxImageCount = self.maxPickerImageNum - self.dataSource.count;
+    WS(weakSelf);
+    [[PhotoManager sharedInstance] showPhotoPickForMaxCount:maxImageCount presentedViewController:self.presentedVC photoPickType:PhotoPickTypeSystem complete:^(NSMutableArray *selectedImages) {
+        for (UIImage *image in selectedImages) {
+            LinePrejudicationImagesModel *model = [[LinePrejudicationImagesModel alloc] init];
+            model.image = image;
+            [weakSelf.dataSource addObject:model];
+            [weakSelf.collectionView reloadData];
+        }
+    }];
+}
+
+- (void)cancelButtonOnClick:(UIButton *)sender{
+    [_dataSource removeObjectAtIndex:sender.tag];
+    [_collectionView reloadData];
+}
+
+- (void)addFristImage {
+    
+}
+#pragma mark - lazy
+
+- (NSMutableArray *)selectedImages {
+    if (!_selectedImages) {
+        _selectedImages = [[NSMutableArray alloc] init];
+    }
+    return _selectedImages;
+}
+- (NSMutableArray *)dataSource {
+    if (!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+        
+    }
+    return _dataSource;
+}
+- (UICollectionView *)collectionView{
+    
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [LinePrejudicationImagesCell cellHeight]) collectionViewLayout:layout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.showsVerticalScrollIndicator = NO;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.bounces = NO;
+        _collectionView.backgroundColor = [UIColor clearColor];
+        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
+        _collectionView.clipsToBounds = false;
+    }
+    return _collectionView;
+}
+
+@end
+
+
 #pragma mark - 用户信息
 // 选择性别
 @interface LinePrejudicationUserInfoCheckItem ()

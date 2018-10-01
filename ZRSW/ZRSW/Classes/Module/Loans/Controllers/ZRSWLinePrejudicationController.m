@@ -18,6 +18,10 @@
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) UIView *footView;
 @property (nonatomic, strong) NSMutableArray *headerTitles;
+@property (nonatomic, strong) LinePrejudicationImagesCell *residenceBookCell;
+@property (nonatomic, strong) LinePrejudicationImagesCell *ipCardCell;
+@property (nonatomic, strong) LinePrejudicationImagesCell *houseCardCell;
+
 
 @end
 
@@ -85,6 +89,24 @@
         LinePrejudicationUserInfoCell *userInfoCell = [LinePrejudicationUserInfoCell getCellWithTableView:tableView];
         return userInfoCell;
     }
+    else if (indexPath.section == 1) {
+        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
+        cell.presentedVC = self;
+        self.residenceBookCell = cell;
+        return cell;
+    }
+    else if (indexPath.section == 2) {
+        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
+        cell.presentedVC = self;
+        self.ipCardCell = cell;
+        return cell;
+    }
+    else if (indexPath.section == 3) {
+        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
+        cell.presentedVC = self;
+        self.houseCardCell = cell;
+        return cell;
+    }
     else if (indexPath.section == 4) {
         LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
         return remarksCell;
@@ -100,7 +122,7 @@
         return [LinePrejudicationRemarksCell cellHeight];
     }
     else {
-        return 80;
+        return [LinePrejudicationImagesCell cellHeight];
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
