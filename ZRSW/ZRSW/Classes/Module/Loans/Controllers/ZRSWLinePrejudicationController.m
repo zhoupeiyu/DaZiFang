@@ -7,6 +7,7 @@
 //
 
 #import "ZRSWLinePrejudicationController.h"
+#import "ZRSWLinePrejudicationCells.h"
 
 #define KFootBtnHeight      60
 #define KFootViewHeight     40
@@ -25,10 +26,21 @@
 - (void)viewDidLoad {
     self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
+    self.fd_interactivePopDisabled = YES;
+    self.fd_prefersNavigationBarHidden = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+}
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+    
 }
 - (void)setupUI {
     [super setupUI];
-    [self enableRefreshHeader:YES];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.footBtn];
@@ -68,15 +80,24 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%zd ----- %zd",indexPath.row,indexPath.section];
+    
+    if (indexPath.section == 0) {
+        LinePrejudicationUserInfoCell *userInfoCell = [LinePrejudicationUserInfoCell getCellWithTableView:tableView];
+        return userInfoCell;
+    }
+    else if (indexPath.section == 4) {
+        LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
+        return remarksCell;
+    }
     return cell;
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 230;
+        return [LinePrejudicationUserInfoCell cellHeight];
     }
     else if (indexPath.section == 4) {
-        return 120;
+        return [LinePrejudicationRemarksCell cellHeight];
     }
     else {
         return 80;
@@ -184,15 +205,12 @@
     bottomBGView.frame = CGRectMake(0, KHeaderViewHeight - 44, SCREEN_WIDTH, 44);
     [bgView addSubview:bottomBGView];
     
-    UIView *redView = [[UIView alloc] init];
-    redView.backgroundColor = [UIColor colorFromRGB:0xFF5274];
-    redView.layer.cornerRadius = 1.5;
-    redView.layer.masksToBounds = YES;
+    UIImageView *redView = [[UIImageView alloc] init];
+    redView.image = [UIImage imageNamed:@"pretrial_title_instructions"];
     [bottomBGView addSubview:redView];
     [redView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.centerY.mas_equalTo(bottomBGView.mas_centerY);
-        make.size.mas_equalTo(CGSizeMake(3, 11));
     }];
     
     UILabel *lbl = [[UILabel alloc] init];

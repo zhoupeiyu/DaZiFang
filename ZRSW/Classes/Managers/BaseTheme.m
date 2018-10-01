@@ -73,7 +73,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseTheme);
             [_controllers addObject:nav];
         }
         {
-            ZRSWLoansController *vc = [[ZRSWLoansController alloc] init];
+            ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
             BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:vc];
             [_controllers addObject:nav];
         }
