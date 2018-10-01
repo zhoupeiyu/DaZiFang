@@ -8,7 +8,12 @@
 
 #import "BaseScrollViewController.h"
 
+typedef enum : NSUInteger {
+    LoginVCTypeNormal, // 正常
+    LoginVCTypeMine
+} LoginVCType;
 @interface ZRSWLoginController : BaseScrollViewController
 
++ (ZRSWLoginController *)getLoginViewController:(LoginVCType)type;
 
 @end
