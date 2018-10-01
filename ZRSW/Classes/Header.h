@@ -89,7 +89,9 @@
 #import <JKUIKit.h>
 #import <JPUSHService.h>
 //#import <JXCategoryView.h>
-#import <UINavigationController+KMNavigationBarTransition.h>
+//#import <UINavigationController+KMNavigationBarTransition.h>
+#import <UINavigationController+FDFullscreenPopGesture.h>
+
 #import <Masonry.h>
 #import <MBProgressHUD.h>
 #import <MJRefresh.h>
