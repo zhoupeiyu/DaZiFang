@@ -11,6 +11,7 @@
 #import "OrderService.h"
 #import "ZRSWOrderModel.h"
 #import "ZRSWLinePrejudicationController.h"
+#import "ZRSWLoginController.h"
 
 #define KTitleKey           @"KTitleKey"
 #define KContentKey         @"KContentKey"
@@ -84,6 +85,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)nextAcrion {
+    if (![UserModel hasLogin]) {
+        [ZRSWLoginController showLoginViewController];
+        return;
+    }
     ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

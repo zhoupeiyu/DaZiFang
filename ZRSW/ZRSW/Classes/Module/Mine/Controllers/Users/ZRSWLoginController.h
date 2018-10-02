@@ -16,4 +16,6 @@ typedef enum : NSUInteger {
 
 + (ZRSWLoginController *)getLoginViewController:(LoginVCType)type;
 
++ (void)showLoginViewController;
+
 @end

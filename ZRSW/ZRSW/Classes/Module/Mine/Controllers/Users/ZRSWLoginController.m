@@ -36,6 +36,10 @@
 
 @implementation ZRSWLoginController
 
+- (void)goBack {
+    [super goBack];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 + (ZRSWLoginController *)getLoginViewController:(LoginVCType)type {
     ZRSWLoginController *vc = [[ZRSWLoginController alloc] init];
     vc.type = type;
@@ -159,6 +163,17 @@
 }
 #pragma mark - event
 
++ (void)showLoginViewController {
+    UIViewController *presentVC = [UIViewController currentViewController];
+    [TipViewManager showAlertControllerWithTitle:@"" message:@"您尚未登录，请登录！" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"确定" handler:^(PSTAlertAction *action) {
+        ZRSWLoginController *loginVC = [[ZRSWLoginController alloc] init];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:loginVC];
+        [presentVC presentViewController:nav animated:YES completion:nil];
+    } controller:presentVC completion:^{
+        
+    }];
+    
+}
 - (BOOL)checkRegisterEnabled {
     return _userName.length > 0 && _password.length >= 6;
 }
@@ -169,8 +184,7 @@
 }
 - (void)faceLogin {
     [self endEditing];
-    NSLog(@"刷脸登录");
-    [TipViewManager showToastMessage:@"下期见！！！！！！"];
+    [TipViewManager showToastMessage:@"！！！下期见！！！"];
     return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
