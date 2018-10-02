@@ -8,6 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - 图片cell
+
+@interface LinePrejudicationImagesModel : NSObject
+
+@property (nonatomic, strong) UIImage *image;
+
+@end
+
+@interface LinePrejudicationImagesCell : UITableViewCell
+
+@property (nonatomic, weak) UIViewController *presentedVC;
+
++ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView;
+
++ (CGFloat)cellHeight;
+
+- (NSMutableArray *)getResultImages;
+
+
+@end
+
+
 #pragma mark - 用户信息
 
 @class LinePrejudicationUserInfoInputItem;
@@ -42,7 +64,6 @@
 - (void)setPlaceHolder:(NSString *)placeHolder;
 - (void)setKeyboardType:(UIKeyboardType)keyboardType;
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden;
-
 
 @end
 @interface LinePrejudicationUserInfoCell : UITableViewCell
