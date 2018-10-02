@@ -116,6 +116,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseTheme);
 + (BaseTabBarViewController *)tabBarController {
     return [[self sharedInstance] tabBarController];
 }
+
 - (BaseTabBarViewController *)tabBarController {
     BaseTabBarViewController *tabBar = [[BaseTabBarViewController alloc] initWithViewControllers:self.controllers tabBarItemsAttributes:self.tabBarItemsAttributes];
     UIImage *backImage = [UIImage imageNamed:@""];

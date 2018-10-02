@@ -58,7 +58,7 @@
 }
 - (void)setupUI {
     [super setupUI];
-    [self enableRefreshHeader:YES];
+//    [self enableRefreshHeader:YES];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
     [self.view addSubview:self.footBtn];
     [self setupLayOut];

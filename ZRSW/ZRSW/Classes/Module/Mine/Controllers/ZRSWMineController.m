@@ -132,7 +132,7 @@
 - (void)updateUserInfo {
     UserModel *model = [UserModel getCurrentModel];
     ZRSWMineModel *mineModel = self.dataSource[0][0];
-    if ([UserModel hasLogin] && model) {
+    if (model) {
         mineModel.iconName = model.data.headImgUrl.length > 0 ? model.data.headImgUrl : @"";
         mineModel.title = model.data.nickName > 0 ? model.data.nickName : DefaultNickName;
         mineModel.desInfo = model.data.myId.length > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId] :@"";

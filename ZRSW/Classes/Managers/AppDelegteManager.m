@@ -129,10 +129,14 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [JPUSHService setBadge:0];
 }
 
+#pragma mark - event
+- (void)addNotify {
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginError:) name:UserLoginErrorNotification object:nil];
+}
 
-
-
-
+- (void)userLoginError:(NSNotification *)noti {
+    
+}
 #pragma mark -  manager
 
 - (void)keyboardManager {

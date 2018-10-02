@@ -148,6 +148,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
             if (model.data.authNameAudit.data4.length > 0) {
                 userModel.data.authNameAudit.data4 = model.data.authNameAudit.data4;
             }
+            userModel.data.hasLogin = model.data.hasLogin;
         }
         if (model.data.authCompanyAudit) {
             if (!userModel.data.authCompanyAudit) {
@@ -200,7 +201,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 + (BOOL)hasLogin {
     UserModel *model = [self getCurrentModel];
-    return model.data.hasLogin;
+    return model;
 }
 @end
 

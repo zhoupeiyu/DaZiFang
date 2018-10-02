@@ -159,7 +159,7 @@
 }
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
-        _nextBtn = [ZRSWViewFactoryTool getBlueBtn:@"注册" target:self action:@selector(nextAction)];
+        _nextBtn = [ZRSWViewFactoryTool getBlueBtn:@"下一步" target:self action:@selector(nextAction)];
         _nextBtn.enabled = NO;
     }
     return _nextBtn;

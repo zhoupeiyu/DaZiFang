@@ -80,6 +80,11 @@
 
 #pragma mark - action
 
+- (void)back {
+    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+    [self.tabBarController setSelectedIndex:lastIndex];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)footBtnAction {
     if ([self checkUserInfo]) {
         
@@ -222,7 +227,7 @@
     }
     else {
         NSString *title = self.headerTitles[section - 1];
-        return [self getHeaderView:title tag:section needBtn:section == 4];
+        return [self getHeaderView:title tag:section needBtn:section != 4];
     }
     return nil;
 }
