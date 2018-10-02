@@ -40,6 +40,11 @@
     }else{
         NSInteger interNumWord = [[textView text] length];
         self.numWordLable.text=[NSString stringWithFormat:@"%ld/%d",(long)interNumWord,MaxNumberOfWord];
+        if (interNumWord == 0) {
+            self.commitButton.enabled = NO;
+        }else{
+            self.commitButton.enabled = YES;
+        }
         return YES;
     }
 }
@@ -54,6 +59,11 @@
         interNumWord = [[textView text] length];
     }
     self.numWordLable.text=[NSString stringWithFormat:@"%ld/%d",(long)interNumWord,MaxNumberOfWord];
+    if (interNumWord == 0) {
+        self.commitButton.enabled = NO;
+    }else{
+        self.commitButton.enabled = YES;
+    }
 }
 
 - (UIView *)feedBackView{
@@ -98,6 +108,7 @@
         [_commitButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
         _commitButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_commitButton addTarget:self action:@selector(commitButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        _commitButton.enabled = NO;
     }
     return _commitButton;
 }

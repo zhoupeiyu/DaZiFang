@@ -32,7 +32,7 @@
     [self setLeftBackBarButton];
     if (self.type == NewListTypePopularInformation) {
         self.navigationItem.title = @"热门资讯";
-    }else if (self.type == NewListTypePopularInformation){
+    }else if (self.type == NewListTypeSystemNotification){
         self.navigationItem.title = @"系统公告";
     }
 }
