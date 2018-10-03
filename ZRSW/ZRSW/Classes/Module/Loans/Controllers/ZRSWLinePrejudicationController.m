@@ -9,6 +9,11 @@
 #import "ZRSWLinePrejudicationController.h"
 #import "ZRSWLinePrejudicationCells.h"
 
+#define KHeaderViewKey          @"KHeaderViewKey"
+#define KMainViewKey            @"KMainViewKey"
+#define KHeaderViewHeightKey    @"KHeaderViewHeightKey"
+#define KMainViewHeightKey      @"KMainViewHeightKey"
+
 #define KFootBtnHeight      60
 #define KFootViewHeight     40
 #define KHeaderViewHeight   54
@@ -17,8 +22,11 @@
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) UIView *footView;
 @property (nonatomic, strong) NSMutableArray *headerTitles;
-@property (nonatomic, strong) LinePrejudicationUserInfoCell *userInfoCell;
-@property (nonatomic, strong) LinePrejudicationRemarksCell *remarkCell;
+@property (nonatomic, strong) NSMutableArray *contentViews;
+@property (nonatomic, strong) NSMutableArray *mainViews;
+@property (nonatomic, strong) LinePrejudicationUserInfoView *userInfoView;
+@property (nonatomic, strong) LinePrejudicationRemarksView *remarkView;
+@property (nonatomic, assign) CGFloat contentHeight;
 
 @property (nonatomic, strong) NSString *loanPersonName;
 @property (nonatomic, strong) NSString *loanPersonSex;
@@ -32,7 +40,6 @@
 @implementation ZRSWLinePrejudicationController
 
 - (void)viewDidLoad {
-    self.tableViewStyle = UITableViewStylePlain;
     [super viewDidLoad];
     self.fd_interactivePopDisabled = YES;
     self.fd_prefersNavigationBarHidden = YES;
@@ -49,25 +56,15 @@
 }
 - (void)setupUI {
     [super setupUI];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
-    self.tableView.backgroundColor = [UIColor clearColor];
-//    self.tableView.tableFooterView = self.footView;
-    [self.view addSubview:self.footBtn];
-    [self setupLayOut];
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    self.scrollView.alwaysBounceVertical = YES;
 }
 - (void)setupConfig {
     [super setupConfig];
     self.title = @"线上预审";
     [self setLeftBackBarButton];
 }
-- (void)setupLayOut {
-    [super setupLayOut];
-    [self.footBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(KFootBtnHeight);
-    }];
-}
+
 - (void)goBack {
     [super goBack];
 }
@@ -83,22 +80,19 @@
     if ([self checkUserInfo]) {
         NSMutableArray *allImages = [[NSMutableArray alloc] init];
         for (NSInteger index = 0; index < self.loanCondition.count; index++) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index + 1];
-            LinePrejudicationImagesCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-            NSMutableArray *images = [cell getResultImages];
-            [allImages addObject:images];
+            
         }
         LLog(@"%zd",allImages.count);
     }
    
 }
 - (BOOL)checkUserInfo {
-    self.loanPersonName =   [self.userInfoCell loanPersonName];
-    self.loanPersonSex =    [self.userInfoCell loanPersonSex];
-    self.loanPersonAdd =    [self.userInfoCell loanPersonAdd];
-    self.loanPersonPhone =  [self.userInfoCell loanPersonPhone];
-    self.loanPersonMoney =  [self.userInfoCell loanPersonMoney];
-    self.remarkText =       [self.remarkCell remarkText];
+    self.loanPersonName =   [self.userInfoView loanPersonName];
+    self.loanPersonSex =    [self.userInfoView loanPersonSex];
+    self.loanPersonAdd =    [self.userInfoView loanPersonAdd];
+    self.loanPersonPhone =  [self.userInfoView loanPersonPhone];
+    self.loanPersonMoney =  [self.userInfoView loanPersonMoney];
+    self.remarkText =       [self.remarkView remarkText];
     
     NSString *errorString = @"";
     if (self.loanPersonName.length == 0) {
@@ -127,116 +121,106 @@
 - (void)setLoanCondition:(NSArray<ZRSWOrderLoanInfoCondition *> *)loanCondition {
     _loanCondition = loanCondition;
     [self.headerTitles removeAllObjects];
-    for (ZRSWOrderLoanInfoCondition *conditionModel in loanCondition) {
-        [self.headerTitles addObject:conditionModel.title];
+    [self.contentViews removeAllObjects];
+    [self.mainViews removeAllObjects];
+    self.contentHeight = 0.0f;
+    [self.mainViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIView *view = (UIView *)obj;
+        [view removeFromSuperview];
+    }];
+    {// 添加第一个view数组
+        CGFloat headerH = 10;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[self getHeaderView] forKey:KHeaderViewKey];
+        [dic setObject:self.userInfoView forKey:KMainViewKey];
+        [dic setObject:@(headerH) forKey:KHeaderViewHeightKey];
+        [dic setObject:@([LinePrejudicationUserInfoView viewHeight]) forKey:KMainViewHeightKey];
+        [self.contentViews addObject:dic];
+        self.contentHeight += headerH;
+        self.contentHeight += [LinePrejudicationUserInfoView viewHeight];
     }
-    [_headerTitles addObject:@"备注"];
-    [self.tableView reloadData];
-}
-#pragma mark - delegate
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    CGFloat sectionHeaderHeight = 60;
-    
-    if (scrollView.contentOffset.y<= sectionHeaderHeight && scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, KFootBtnHeight, 0);
-    } else if (scrollView.contentOffset.y>= sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, KFootBtnHeight, 0);
+    {
+        // 常见header标题数组
+        for (ZRSWOrderLoanInfoCondition *conditionModel in loanCondition) {
+            [self.headerTitles addObject:conditionModel.title];
+        }
+        [_headerTitles addObject:@"备注"];
+        // 添加View
+        for (NSInteger index = 0; index < self.headerTitles.count; index ++) {
+            NSString *title = self.headerTitles[index];
+            UIView *headerView = [self getHeaderView:title tag:index needBtn:index != self.headerTitles.count - 1];
+            UIView *contentView = index != self.headerTitles.count - 1 ? [self getImagesView] : self.remarkView;
+            CGFloat contentHeight = index != self.headerTitles.count - 1 ? [LinePrejudicationImagesView viewHeight] : [LinePrejudicationRemarksView viewHeight];
+            CGFloat headerHeight = KHeaderViewHeight;
+            
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:headerView forKey:KHeaderViewKey];
+            [dic setObject:contentView forKey:KMainViewKey];
+            [dic setObject:@(headerHeight) forKey:KHeaderViewHeightKey];
+            [dic setObject:@(contentHeight) forKey:KMainViewHeightKey];
+            [self.contentViews addObject:dic];
+            if (index != self.headerTitles.count - 1) {
+                [self.mainViews addObject:contentView];
+            }
+            self.contentHeight += headerHeight;
+            self.contentHeight += contentHeight;
+        }
+        
     }
-}
-
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.headerTitles.count + 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[self getHeaderView] forKey:KHeaderViewKey];
+        [dic setObject:self.footView forKey:KMainViewKey];
+        [dic setObject:@(0) forKey:KHeaderViewHeightKey];
+        [dic setObject:@(KFootViewHeight) forKey:KMainViewHeightKey];
+        [self.contentViews addObject:dic];
+        self.contentHeight += KFootViewHeight;
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd ----- %zd",indexPath.row,indexPath.section];
-    
-    if (indexPath.section == 0) {
-        LinePrejudicationUserInfoCell *userInfoCell = [LinePrejudicationUserInfoCell getCellWithTableView:tableView];
-        self.userInfoCell = userInfoCell;
-        return userInfoCell;
-    }
-    else if (indexPath.section == self.headerTitles.count) {
-        LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
-        self.remarkCell = remarksCell;
-        return remarksCell;
-    }
-    else {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView indexPath:indexPath];
-        cell.presentedVC = self;
-        cell.tag = indexPath.section - 1;
-        return cell;
-    }
-    return cell;
-
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return [LinePrejudicationUserInfoCell cellHeight];
-    }
-    else if (indexPath.section == self.headerTitles.count) {
-        return [LinePrejudicationRemarksCell cellHeight];
-    }
-    else {
-        return [LinePrejudicationImagesCell cellHeight];
-    }
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == self.headerTitles.count) {
-        return KFootViewHeight;
-//        return 0.00001;
-    }
-    else {
-        return 0.00001;
-    }
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 10;
-    }
-    else {
-        return KHeaderViewHeight;
-    }
-}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == self.headerTitles.count) {
-        return self.footView;
-    }
-    else {
-        UIView *view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor clearColor];
-        return view;
-    }
+    [self.view addSubview:self.footBtn];
+    [self setupLayOut];
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        UIView *view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor clearColor];
-        return view;
-    }
-    else {
-        NSString *title = self.headerTitles[section - 1];
-        return [self getHeaderView:title tag:section needBtn:section != self.headerTitles.count];
-    }
-    return nil;
+- (void)setupLayOut {
+    [super setupLayOut];
+    __block UIView *lastView = nil;
+    [self.contentViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        CGFloat headerViewHeight = ((NSNumber *)dic[KHeaderViewHeightKey]).integerValue;
+        CGFloat mainViewHeight = ((NSNumber *)dic[KMainViewHeightKey]).integerValue;
+        UIView *headerView = (UIView *)dic[KHeaderViewKey];
+        UIView *mainView = (UIView *)dic[KMainViewKey];
+        if (lastView) {
+            [headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(lastView.mas_bottom);
+                make.left.mas_equalTo(0);
+                make.height.mas_equalTo(headerViewHeight);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+            }];
+            
+        }
+        else {
+            [headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(0);
+                make.left.mas_equalTo(0);
+                make.height.mas_equalTo(headerViewHeight);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+            }];
+        }
+        [mainView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(headerView.mas_bottom);
+            make.left.mas_equalTo(0);
+            make.height.mas_equalTo(mainViewHeight);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+        }];
+        lastView = mainView;
+    }];
+    [self.footBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(KFootBtnHeight);
+    }];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.contentHeight + KFootBtnHeight);
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 #pragma mark - action
 - (void)exampleAction:(UIButton *)btn {
     
@@ -277,6 +261,7 @@
             make.centerY.mas_equalTo(_footView.mas_centerY).offset(8);
             make.right.mas_equalTo(-15);
         }];
+        [self.scrollView addSubview:_footView];
     }
     return _footView;
 }
@@ -291,6 +276,7 @@
     UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor clearColor];
     bgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, KHeaderViewHeight);
+    [self.view addSubview:bgView];
     
     UIView *bottomBGView = [[UIView alloc] init];
     bottomBGView.backgroundColor = [UIColor whiteColor];
@@ -342,6 +328,47 @@
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
+    
     return bgView;
+}
+
+- (UIView *)getHeaderView {
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:headerView];
+    return headerView;
+}
+
+- (LinePrejudicationImagesView *)getImagesView {
+    LinePrejudicationImagesView *imagesView = [[LinePrejudicationImagesView alloc] init];
+    imagesView.presentedVC = self;
+    [self.scrollView addSubview:imagesView];
+    return imagesView;
+}
+- (LinePrejudicationUserInfoView *)userInfoView {
+    if (!_userInfoView) {
+        _userInfoView = [[LinePrejudicationUserInfoView alloc] init];
+        [self.scrollView addSubview:_userInfoView];
+    }
+    return _userInfoView;
+}
+- (LinePrejudicationRemarksView *)remarkView {
+    if (!_remarkView) {
+        _remarkView = [[LinePrejudicationRemarksView alloc] init];
+        [self.scrollView addSubview:_remarkView];
+    }
+    return _remarkView;
+}
+- (NSMutableArray *)contentViews {
+    if (!_contentViews) {
+        _contentViews = [[NSMutableArray alloc] init];
+    }
+    return _contentViews;
+}
+- (NSMutableArray *)mainViews {
+    if (!_mainViews) {
+        _mainViews = [[NSMutableArray alloc] init];
+    }
+    return _mainViews;
 }
 @end

@@ -7,11 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import "BaseTableViewController.h"
+#import "BaseScrollViewController.h"
 #import "ZRSWOrderModel.h"
 
 
-@interface ZRSWLinePrejudicationController : BaseTableViewController
+@interface ZRSWLinePrejudicationController : BaseScrollViewController
 
 @property (nonatomic, strong) NSArray <ZRSWOrderLoanInfoCondition *>*loanCondition;
 

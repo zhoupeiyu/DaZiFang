@@ -19,7 +19,7 @@ static NSString * const cellIdentifier = @"photo";
 
 @end
 
-@interface LinePrejudicationImagesCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface LinePrejudicationImagesView ()<UICollectionViewDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *selectedImages;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -27,16 +27,12 @@ static NSString * const cellIdentifier = @"photo";
 @property (nonatomic, assign) NSInteger maxPickerImageNum;
 
 @end
-@implementation LinePrejudicationImagesCell
+@implementation LinePrejudicationImagesView
 
-+ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView indexPath:(NSIndexPath *)indexPath {
-    LinePrejudicationImagesCell *cell = [tebleView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@---%zd",NSStringFromClass(self),indexPath.section]];
-    if (!cell) {
-        cell = [[LinePrejudicationImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"%@---%zd",NSStringFromClass(self),indexPath.section]];
-    }
-    return cell;
++ (LinePrejudicationImagesView *)getImagesView {
+    LinePrejudicationImagesView *view = [[LinePrejudicationImagesView alloc] init];
+    return view;
 }
-
 - (NSMutableArray *)getResultImages {
     [self.selectedImages removeAllObjects];
     for (LinePrejudicationImagesModel *model in self.dataSource) {
@@ -45,24 +41,26 @@ static NSString * const cellIdentifier = @"photo";
     return self.selectedImages;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self setUpConfig];
         [self setUpUI];
     }
     return self;
 }
 
+
 - (void)setUpConfig {
     [self addFristImage];
     self.maxPickerImageNum = defaultMaxNum;
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 - (void)setUpUI {
     [self addSubview:self.collectionView];
     [self.collectionView reloadData];
 }
-+ (CGFloat)cellHeight {
++ (CGFloat)viewHeight {
     return 80;
 }
 #pragma mark - delegate && dataSource
@@ -186,13 +184,13 @@ static NSString * const cellIdentifier = @"photo";
     if (!_collectionView) {
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [LinePrejudicationImagesCell cellHeight]) collectionViewLayout:layout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, [LinePrejudicationImagesView viewHeight]) collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.bounces = NO;
-        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.bounces = YES;
+        _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
         _collectionView.clipsToBounds = false;
     }
@@ -459,7 +457,7 @@ static NSString * const cellIdentifier = @"photo";
 }
 @end
 
-@interface LinePrejudicationUserInfoCell ()<LinePrejudicationInputItemDelegate,LinePrejudicationCheckItemDelegate>
+@interface LinePrejudicationUserInfoView ()<LinePrejudicationInputItemDelegate,LinePrejudicationCheckItemDelegate>
 
 @property (nonatomic, strong) LinePrejudicationUserInfoInputItem *personLbl;
 @property (nonatomic, strong) LinePrejudicationUserInfoCheckItem *checkItem;
@@ -475,41 +473,39 @@ static NSString * const cellIdentifier = @"photo";
 
 @end
 
-@implementation LinePrejudicationUserInfoCell
+@implementation LinePrejudicationUserInfoView
 
-+ (LinePrejudicationUserInfoCell *)getCellWithTableView:(UITableView *)tableView {
-    LinePrejudicationUserInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self)];
-    if (!cell) {
-        cell = [[LinePrejudicationUserInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(self)];
-    }
-    return cell;
++ (LinePrejudicationUserInfoView *)getUserInfoView {
+    LinePrejudicationUserInfoView *view = [[LinePrejudicationUserInfoView alloc] init];
+    return view;
 }
-+ (CGFloat)cellHeight {
++ (CGFloat)viewHeight {
     return 230;
 }
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self setupConfig];
         [self setupUI];
     }
     return self;
 }
-
 - (void)setupConfig {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setupUI {
-    [self.contentView addSubview:self.personLbl];
-    [self.contentView addSubview:self.checkItem];
-    [self.contentView addSubview:self.cityLbl];
-    [self.contentView addSubview:self.phoneLbl];
-    [self.contentView addSubview:self.moneyLbl];
+    [self addSubview:self.personLbl];
+    [self addSubview:self.checkItem];
+    [self addSubview:self.cityLbl];
+    [self addSubview:self.phoneLbl];
+    [self addSubview:self.moneyLbl];
     [self setupLayout];
 }
 - (void)setupLayout {
-    CGFloat itemH = [LinePrejudicationUserInfoCell cellHeight] / 5;
+    CGFloat itemH = [LinePrejudicationUserInfoView viewHeight] / 5;
     [self.personLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
         make.height.mas_equalTo(itemH);
@@ -652,23 +648,22 @@ static NSString * const cellIdentifier = @"photo";
 
 #pragma mark - 备注
 
-@interface LinePrejudicationRemarksCell ()
+@interface LinePrejudicationRemarksView ()
 
 @property (nonatomic, strong) UITextView *textView;
 
 @end
 
-@implementation LinePrejudicationRemarksCell
+@implementation LinePrejudicationRemarksView
 
-+ (LinePrejudicationRemarksCell *)getCellWithTableView:(UITableView *)tableView {
-    LinePrejudicationRemarksCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(self)];
-    if (!cell) {
-        cell = [[LinePrejudicationRemarksCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(self)];
-    }
-    return cell;
++ (LinePrejudicationRemarksView *)getRemarkView {
+    LinePrejudicationRemarksView *remarkView = [[LinePrejudicationRemarksView alloc] init];
+    return remarkView;
 }
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         [self setupConfig];
         [self setupUI];
     }
@@ -676,12 +671,11 @@ static NSString * const cellIdentifier = @"photo";
 }
 
 - (void)setupConfig {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setupUI {
-    [self.contentView addSubview:self.textView];
+    [self addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
@@ -692,9 +686,10 @@ static NSString * const cellIdentifier = @"photo";
 - (NSString *)remarkText {
     return self.textView.text;
 }
-+ (CGFloat)cellHeight {
++ (CGFloat)viewHeight {
     return 120;
 }
+
 #pragma mark - lazy
 - (UITextView *)textView {
     if (!_textView) {
