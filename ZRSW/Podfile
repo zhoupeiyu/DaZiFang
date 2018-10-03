@@ -61,7 +61,7 @@ pod 'DZNEmptyDataSet', '~> 1.8.1'
 pod 'Toast', '~> 4.0.0'
 
 # 各种分类
-pod 'JKCategories', '~> 1.6'
+#pod 'JKCategories', '~> 1.6'
 
 # image-PDF
 pod 'UIImage-ASMPDF', '~> 0.2'

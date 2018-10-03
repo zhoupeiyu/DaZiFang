@@ -14,14 +14,10 @@
 #define KHeaderViewHeight   54
 
 @interface ZRSWLinePrejudicationController ()
-
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) UIView *footView;
 @property (nonatomic, strong) NSMutableArray *headerTitles;
 @property (nonatomic, strong) LinePrejudicationUserInfoCell *userInfoCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *residenceBookCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *ipCardCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *houseCardCell;
 @property (nonatomic, strong) LinePrejudicationRemarksCell *remarkCell;
 
 @property (nonatomic, strong) NSString *loanPersonName;
@@ -30,16 +26,13 @@
 @property (nonatomic, strong) NSString *loanPersonPhone;
 @property (nonatomic, strong) NSString *loanPersonMoney;
 @property (nonatomic, strong) NSString *remarkText;
-@property (nonatomic, strong) NSMutableArray *residenceBookImages;
-@property (nonatomic, strong) NSMutableArray *ipCardImages;
-@property (nonatomic, strong) NSMutableArray *houseCardImages;
 
 @end
 
 @implementation ZRSWLinePrejudicationController
 
 - (void)viewDidLoad {
-    self.tableViewStyle = UITableViewStyleGrouped;
+    self.tableViewStyle = UITableViewStylePlain;
     [super viewDidLoad];
     self.fd_interactivePopDisabled = YES;
     self.fd_prefersNavigationBarHidden = YES;
@@ -58,6 +51,7 @@
     [super setupUI];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
     self.tableView.backgroundColor = [UIColor clearColor];
+//    self.tableView.tableFooterView = self.footView;
     [self.view addSubview:self.footBtn];
     [self setupLayOut];
 }
@@ -87,8 +81,16 @@
 }
 - (void)footBtnAction {
     if ([self checkUserInfo]) {
-        
+        NSMutableArray *allImages = [[NSMutableArray alloc] init];
+        for (NSInteger index = 0; index < self.loanCondition.count; index++) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:index + 1];
+            LinePrejudicationImagesCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            NSMutableArray *images = [cell getResultImages];
+            [allImages addObject:images];
+        }
+        LLog(@"%zd",allImages.count);
     }
+   
 }
 - (BOOL)checkUserInfo {
     self.loanPersonName =   [self.userInfoCell loanPersonName];
@@ -97,9 +99,7 @@
     self.loanPersonPhone =  [self.userInfoCell loanPersonPhone];
     self.loanPersonMoney =  [self.userInfoCell loanPersonMoney];
     self.remarkText =       [self.remarkCell remarkText];
-    self.residenceBookImages = [self.residenceBookCell getResultImages];
-    self.ipCardImages = [self.ipCardCell getResultImages];
-    self.houseCardImages = [self.houseCardCell getResultImages];
+    
     NSString *errorString = @"";
     if (self.loanPersonName.length == 0) {
         errorString = @"请输入实际贷款人姓名";
@@ -116,15 +116,6 @@
     else if (self.loanPersonMoney.length == 0) {
         errorString = @"请输入贷款金额";
     }
-    else if (self.residenceBookImages.count == 0) {
-        errorString = @"请选择户口本照片";
-    }
-    else if (self.ipCardImages.count == 0) {
-        errorString = @"请选择身份证照片";
-    }
-    else if (self.houseCardImages.count == 0) {
-        errorString = @"请选择房产证照片";
-    }
     if (errorString.length != 0) {
         [TipViewManager showToastMessage:errorString];
         return NO;
@@ -133,10 +124,31 @@
         return YES;
     }
 }
+- (void)setLoanCondition:(NSArray<ZRSWOrderLoanInfoCondition *> *)loanCondition {
+    _loanCondition = loanCondition;
+    [self.headerTitles removeAllObjects];
+    for (ZRSWOrderLoanInfoCondition *conditionModel in loanCondition) {
+        [self.headerTitles addObject:conditionModel.title];
+    }
+    [_headerTitles addObject:@"备注"];
+    [self.tableView reloadData];
+}
 #pragma mark - delegate
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat sectionHeaderHeight = 60;
+    
+    if (scrollView.contentOffset.y<= sectionHeaderHeight && scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, KFootBtnHeight, 0);
+    } else if (scrollView.contentOffset.y>= sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, KFootBtnHeight, 0);
+    }
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return self.headerTitles.count + 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -155,28 +167,16 @@
         self.userInfoCell = userInfoCell;
         return userInfoCell;
     }
-    else if (indexPath.section == 1) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.residenceBookCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 2) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.ipCardCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 3) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.houseCardCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 4) {
+    else if (indexPath.section == self.headerTitles.count) {
         LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
         self.remarkCell = remarksCell;
         return remarksCell;
+    }
+    else {
+        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView indexPath:indexPath];
+        cell.presentedVC = self;
+        cell.tag = indexPath.section - 1;
+        return cell;
     }
     return cell;
 
@@ -185,7 +185,7 @@
     if (indexPath.section == 0) {
         return [LinePrejudicationUserInfoCell cellHeight];
     }
-    else if (indexPath.section == 4) {
+    else if (indexPath.section == self.headerTitles.count) {
         return [LinePrejudicationRemarksCell cellHeight];
     }
     else {
@@ -193,8 +193,9 @@
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 4) {
+    if (section == self.headerTitles.count) {
         return KFootViewHeight;
+//        return 0.00001;
     }
     else {
         return 0.00001;
@@ -209,7 +210,7 @@
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 4) {
+    if (section == self.headerTitles.count) {
         return self.footView;
     }
     else {
@@ -227,7 +228,7 @@
     }
     else {
         NSString *title = self.headerTitles[section - 1];
-        return [self getHeaderView:title tag:section needBtn:section != 4];
+        return [self getHeaderView:title tag:section needBtn:section != self.headerTitles.count];
     }
     return nil;
 }
@@ -238,6 +239,7 @@
 
 #pragma mark - action
 - (void)exampleAction:(UIButton *)btn {
+    
     [TipViewManager showToastMessage:[NSString stringWithFormat:@"%zd",btn.tag]];
 }
 #pragma mark - lazy
@@ -281,7 +283,7 @@
 - (NSMutableArray *)headerTitles {
     if (!_headerTitles) {
         _headerTitles = [[NSMutableArray alloc] init];
-        [_headerTitles addObjectsFromArray:@[@"上传户口本图片",@"上传身份证图片",@"上传房产证图片",@"备注"]];
+        
     }
     return _headerTitles;
 }

@@ -29,10 +29,10 @@ static NSString * const cellIdentifier = @"photo";
 @end
 @implementation LinePrejudicationImagesCell
 
-+ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView {
-    LinePrejudicationImagesCell *cell = [tebleView dequeueReusableCellWithIdentifier:NSStringFromClass(self)];
++ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView indexPath:(NSIndexPath *)indexPath {
+    LinePrejudicationImagesCell *cell = [tebleView dequeueReusableCellWithIdentifier:[NSString stringWithFormat:@"%@---%zd",NSStringFromClass(self),indexPath.section]];
     if (!cell) {
-        cell = [[LinePrejudicationImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(self)];
+        cell = [[LinePrejudicationImagesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[NSString stringWithFormat:@"%@---%zd",NSStringFromClass(self),indexPath.section]];
     }
     return cell;
 }

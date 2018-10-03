@@ -90,6 +90,7 @@
         return;
     }
     ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
+    vc.loanCondition = self.infoModel.data.loanCondition;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)refreshData {

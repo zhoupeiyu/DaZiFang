@@ -154,6 +154,7 @@
                 [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];
@@ -184,7 +185,7 @@
 }
 - (void)faceLogin {
     [self endEditing];
-    [TipViewManager showToastMessage:@"！！！下期见！！！"];
+    [TipViewManager showToastMessage:@"     下期见     "];
     return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];

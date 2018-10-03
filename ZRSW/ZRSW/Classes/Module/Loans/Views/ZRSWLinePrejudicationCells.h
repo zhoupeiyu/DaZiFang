@@ -20,7 +20,7 @@
 
 @property (nonatomic, weak) UIViewController *presentedVC;
 
-+ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView;
++ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView indexPath:(NSIndexPath *)indexPath;
 
 + (CGFloat)cellHeight;
 
