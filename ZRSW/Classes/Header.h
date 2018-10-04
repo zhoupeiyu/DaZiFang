@@ -134,6 +134,7 @@
 //#import "HelpDeskUI.h"
 #import <TYTabPagerBar.h>
 #import <TYPagerController.h>
-
+#import "SDPhotoBrowser.h"
+#import "ZLPhotoActionSheet.h"
 
 #endif /* Header_h */

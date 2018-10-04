@@ -216,6 +216,8 @@ pod 'Hyphenate', '~> 3.5.0'
 
 pod 'YYCache'
 
+pod 'GPUImage', '~> 0.1.7'
+   
 #pod 'GrowingTextView'
 
 

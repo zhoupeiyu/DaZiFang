@@ -22,6 +22,7 @@ PODS:
   - CYLTabBarController (1.16.1)
   - DZNEmptyDataSet (1.8.1)
   - FDFullscreenPopGesture (1.1)
+  - GPUImage (0.1.7)
   - Harpy (4.1.14)
   - HYBImageCliped (2.2.4)
   - HYBNetworking (3.3.1):
@@ -162,6 +163,7 @@ DEPENDENCIES:
   - CYLTabBarController (~> 1.16.1)
   - DZNEmptyDataSet (~> 1.8.1)
   - FDFullscreenPopGesture (~> 1.1)
+  - GPUImage (~> 0.1.7)
   - Harpy (~> 4.1.9)
   - HYBImageCliped (~> 2.2.4)
   - HYBNetworking (~> 3.3.1)
@@ -229,6 +231,7 @@ SPEC REPOS:
     - CYLTabBarController
     - DZNEmptyDataSet
     - FDFullscreenPopGesture
+    - GPUImage
     - Harpy
     - HYBImageCliped
     - HYBNetworking
@@ -267,6 +270,7 @@ SPEC CHECKSUMS:
   CYLTabBarController: ed6536b8d2df412bc4304dc4b633d4860f15664e
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Harpy: b2fbe6819f6a8932df32d7cd2fb20f442df86bbc
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
   HYBNetworking: 5b350e2eacfbf6db7d3f4253274b2f2bb68e881c
@@ -297,6 +301,6 @@ SPEC CHECKSUMS:
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 76e7ad95c6f3ca65eea70776d2d80566c1569d5e
+PODFILE CHECKSUM: 12ba0a8f98988c154a572a5871dc36aca826dfa5
 
 COCOAPODS: 1.5.3

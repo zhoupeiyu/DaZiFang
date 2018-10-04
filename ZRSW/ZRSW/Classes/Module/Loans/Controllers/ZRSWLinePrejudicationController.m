@@ -37,7 +37,7 @@
 @property (nonatomic, strong) NSString *remarkText;
 @property (nonatomic, strong) UploadImagesManager *imageManager;
 @property (nonatomic, strong) OrderService *service;
-
+@property (nonatomic, strong) NSMutableArray *preImages;
 @end
 
 @implementation ZRSWLinePrejudicationController
@@ -263,8 +263,21 @@
 }
 #pragma mark - action
 - (void)exampleAction:(UIButton *)btn {
-    
-    [TipViewManager showToastMessage:[NSString stringWithFormat:@"%zd",btn.tag]];
+    NSArray *imageURLs = self.loanCondition[btn.tag].exampleImgUrls;
+    ZLPhotoActionSheet *ac = [[ZLPhotoActionSheet alloc] init];
+    ac.configuration.maxSelectCount = 5;
+    ac.configuration.maxPreviewCount = 10;
+    ac.configuration.navBarColor = [UIColor blackColor];
+    ac.sender = self;
+    //预览网络图片
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    for (NSString *url in imageURLs) {
+        NSDictionary *dic = GetDictForPreviewPhoto(url, ZLPreviewPhotoTypeURLImage);
+        [images addObject:dic];
+    }
+    [ac previewPhotos:images index:0 hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+        
+    }];
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
@@ -282,6 +295,7 @@
         }
     }
 }
+
 #pragma mark - lazy
 
 - (UIButton *)footBtn {
