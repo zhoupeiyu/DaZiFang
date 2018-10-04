@@ -16,10 +16,6 @@ typedef enum : NSUInteger {
     OrderTypeRefuse // 已拒绝
 } OrderType;
 
-
-#define KConditionKey       @"KConditionKey"
-#define KConditionValue     @"KConditionValue"
-
 @interface OrderService : BaseNetWorkService
 
 /**

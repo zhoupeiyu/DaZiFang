@@ -27,6 +27,7 @@
 
 + (void)showLoading;
 + (void)dismissLoading;
++ (void)showLoadingWithText:(NSString *)txt;
 
 + (BOOL)showNetErrorToast;
 + (void)showToastMessage:(NSString *)errorMsg;

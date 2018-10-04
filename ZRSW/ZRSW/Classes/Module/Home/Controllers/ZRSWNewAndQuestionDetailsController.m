@@ -36,7 +36,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self.view addSubview:self.webView];
+    [self.view addSubview:self.webView];
     // Do any additional setup after loading the view.
     if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
         [self requsetNewDetail];
@@ -64,26 +64,70 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }else if (self.type == DetailsTypeCommentQuestion){
         self.navigationItem.title = @"问题详情";
     }
-    [self setupUI];
+//    [self setupUI];
 
 }
 
 - (void)setupUI {
     [super setupUI];
-    [self.scrollView addSubview:self.contentView];
-    [self.contentView addSubview:self.roundupLabel];
-    [self.contentView addSubview:self.sourceNameLabel];
-    [self.contentView addSubview:self.readerIcon];
-    [self.contentView addSubview:self.readersLabel];
-    [self.contentView addSubview:self.contentLabel];
-    [self.contentView addSubview:self.dateLabel];
-    [self.contentView addSubview:self.lineImge];
-    [self.contentView addSubview:self.imgeView];
+//    [self.scrollView addSubview:self.contentView];
+//    [self.contentView addSubview:self.roundupLabel];
+//    [self.contentView addSubview:self.sourceNameLabel];
+//    [self.contentView addSubview:self.readerIcon];
+//    [self.contentView addSubview:self.readersLabel];
+//    [self.contentView addSubview:self.contentLabel];
+//    [self.contentView addSubview:self.dateLabel];
+//    [self.contentView addSubview:self.lineImge];
+//    [self.contentView addSubview:self.imgeView];
 }
 
 
 #pragma mark - WebView Delegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
+//        //创建JSContext对象
+//        JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//        //OC调用JS方法
+//        //options:nil 不能修改否则h5识别不了
+//        if (self.detailContensModel) {
+//            id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+//            LLog(@"%@",detailsJsonString);
+//            NSString *detailsDicJsonString = nil;
+//            if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+//                detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+//            }else if (self.type == DetailsTypeCommentQuestion){
+//                detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
+//            }
+//            //           NSString * method = @"vm.getAppData";
+//            //         JSValue * function = [context objectForKeyedSubscript:method];
+//            //         [function callWithArguments:@[detailsDicJsonString]];
+//            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+//
+//
+//        }else {
+//            [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
+    //        }JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    //OC调用JS方法
+    //options:nil 不能修改否则h5识别不了
+    JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    if (self.detailContensModel || self.questionDetailContentModel) {
+        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+        NSString *detailsDicJsonString = nil;
+        if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+            detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+        }else if (self.type == DetailsTypeCommentQuestion){
+            detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":questionJsonString}.yy_modelToJSONString;
+        }
+        [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+    }
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+    
     NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
 //    LLog(@"%@",url);
     if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
@@ -112,26 +156,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         return YES;
     }
     BOOL shouldStart = YES;
-    //TODO: Implement TOModalWebViewController Delegate callback
-
-    //if the URL is the load completed notification from JavaScript
-//    if ([request.URL.absoluteString isEqualToString:kCompleteRPCURL]){
-//        return NO;
-//    }
-//    //If the URL contrains a fragement jump (eg an anchor tag), check to see if it relates to the current page, or another
-//    //If we're merely jumping around the same page, don't perform a new loading bar sequence
-//    BOOL isFragmentJump = NO;
-//    if (request.URL.fragment){
-//        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
-//        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
-//    }
-//
-//    BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-//    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
-//    if (shouldStart && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward){
-//        //Save the URL in the accessor property
-//        self.url = [request URL];
-//    }
     return shouldStart;
 }
 
@@ -159,10 +183,10 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
                 self.detailContensModel = detailContensModel;
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:detailContensModel.imgUrl]];
                 self.image = [UIImage imageWithData:data]; // 取得图片
-                 [self setDetailContens];
+//                 [self setDetailContens];
                 //加载h5
-//                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
-//                [self.webView loadRequest:resquest];
+                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
                    [TipViewManager showToastMessage:model.error_msg];
@@ -172,7 +196,9 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             if (commentQuestionDetail.error_code.integerValue == 0) {
                 CommentQuestionDetailContentModel *questionDetailContentModel = commentQuestionDetail.data;
                 self.questionDetailContentModel = questionDetailContentModel;
-                [self setDetailContens];
+//                [self setDetailContens];
+                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",commentQuestionDetail.error_msg);
                 [TipViewManager showToastMessage:commentQuestionDetail.error_msg];
@@ -301,7 +327,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     if (!_webView) {
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarH)];
         _webView.delegate = self;
-        _webView.backgroundColor = [UIColor redColor];
+        _webView.backgroundColor = [UIColor clearColor];
         [_webView sizeToFit];
         _webView.scalesPageToFit = YES;
     }

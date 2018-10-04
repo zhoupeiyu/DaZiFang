@@ -8,6 +8,7 @@
 
 #import "ZRSWLinePrejudicationController.h"
 #import "ZRSWLinePrejudicationCells.h"
+#import "OrderService.h"
 
 #define KHeaderViewKey          @"KHeaderViewKey"
 #define KMainViewKey            @"KMainViewKey"
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) NSString *loanPersonMoney;
 @property (nonatomic, strong) NSString *remarkText;
 @property (nonatomic, strong) UploadImagesManager *imageManager;
+@property (nonatomic, strong) OrderService *service;
 
 @end
 
@@ -78,8 +80,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)footBtnAction {
-//    if ([self checkUserInfo]) {
+    if ([self checkUserInfo]) {
         WS(weakSelf);
+        
+        [TipViewManager showLoadingWithText:@"图片上传中，请耐心等待..."];
         NSMutableArray *allImages = [[NSMutableArray alloc] init];
         __block NSMutableArray *imageCount = [[NSMutableArray alloc] init];
         __block NSMutableArray *imageAttri = [[NSMutableArray alloc] init];
@@ -96,7 +100,14 @@
             }
         }
         [self.imageManager uploadImagesWithImagesArray:allImages completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            [TipViewManager dismissLoading];
+            [TipViewManager showLoadingWithText:@"数据上传中，请耐心等待..."];
             NSMutableArray *allImageUrls = [imageUrls copy]; // URL 数组
+            if (allImages.count != imageUrls.count) {
+                [TipViewManager dismissLoading];
+                [TipViewManager showToastMessage:@"上传图片失败，请重新上传!"];
+                return;
+            }
             for (NSInteger count = 0; count < imageCount.count; count ++) { // 遍历存放个数的数组
                 ZRSWOrderLoanInfoCondition *loanCondition = (ZRSWOrderLoanInfoCondition *)weakSelf.loanCondition[count];// 获取对象
                 NSString *loanConditionName = loanCondition.title; // 获取对象标题
@@ -111,11 +122,9 @@
                 [imageAttri addObject:attri];
                 [imageUrlArray removeObjectsInArray:allImageUrls];
             }
-            NSLog(@"%@",imageAttri);
+            [self.service createOrderLoanId:weakSelf.loanId loanUserName:weakSelf.loanPersonName loanUserSex:weakSelf.loanPersonSex.integerValue loanUserAddress:weakSelf.loanPersonAdd loanUserPhone:weakSelf.loanPersonPhone loanMoney:weakSelf.loanPersonMoney remark:weakSelf.remarkText condition:imageAttri delegate:weakSelf];
         }];
-//    }
-    
-   
+    }
 }
 - (BOOL)checkUserInfo {
     self.loanPersonName =   [self.userInfoView loanPersonName];
@@ -256,6 +265,22 @@
 - (void)exampleAction:(UIButton *)btn {
     
     [TipViewManager showToastMessage:[NSString stringWithFormat:@"%zd",btn.tag]];
+}
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KCreateOrderRequest]) {
+            ZRSWCreateModel *model = (ZRSWCreateModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"资料上传成功!"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
 }
 #pragma mark - lazy
 
@@ -410,5 +435,11 @@
         _imageManager.url = @"api/user/uploadFile";
     }
     return _imageManager;
+}
+- (OrderService *)service {
+    if (!_service) {
+        _service = [[OrderService alloc] init];
+    }
+    return _service;
 }
 @end

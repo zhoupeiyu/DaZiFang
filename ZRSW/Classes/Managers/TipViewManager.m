@@ -52,7 +52,10 @@ SYNTHESIZE_SINGLETON_ARC(TipViewManager);
     [[self sharedInstance] dismissLoading];
 }
 
-- (void)showLoading {
++ (void)showLoadingWithText:(NSString *)txt {
+    [[self sharedInstance] showLoadingWithText:txt];
+}
+- (void)showLoadingWithText:(NSString *)txt {
     [self.hud removeFromSuperview];
     UIViewController *vc = [UIViewController currentViewController];
     if (!vc.navigationController.view){
@@ -60,12 +63,15 @@ SYNTHESIZE_SINGLETON_ARC(TipViewManager);
     }
     self.hud = [[MBProgressHUD alloc] initWithView:vc.navigationController.view];
     [vc.navigationController.view addSubview:self.hud];
-    self.hud.label.text = LoadingText;
+    self.hud.label.text = txt;
     self.hud.label.font = [UIFont systemFontOfSize:13.f];
     self.hud.bezelView.backgroundColor = [UIColor blackColor];
     self.hud.label.textColor = [UIColor whiteColor];
     self.hud.activityIndicatorColor = [UIColor whiteColor];
     [self.hud showAnimated:YES];
+}
+- (void)showLoading {
+    [self showLoadingWithText:LoadingText];
 }
 - (void)dismissLoading {
     [self.hud removeFromSuperview];

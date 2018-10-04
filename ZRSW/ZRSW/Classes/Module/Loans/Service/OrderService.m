@@ -65,14 +65,12 @@
     if (remark.length > 0) {
         [params setObject:remark forKey:@"remark"];
     }
-    [condition enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
-        if ([dic.allKeys containsObject:KConditionKey] && [dic.allKeys containsObject:KConditionValue]) {
-            NSString *key = dic[KConditionKey];
-            NSString *vaule = dic[KConditionValue];
-            [params setObject:key forKey:vaule];
+    for (NSDictionary *dic in condition) {
+        for (NSString *key in dic.allKeys) {
+            NSString *value = dic[key];
+            [params setObject:value forKey:key];
         }
-    }];
+    }
     [self POST:KCreateOrderInterface reqType:KCreateOrderRequest delegate:delegate parameters:params ObjcClass:[ZRSWCreateModel class] NeedCache:NO];
 
 
