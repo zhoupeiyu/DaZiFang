@@ -13,6 +13,9 @@
 
 @interface ZRSWLinePrejudicationController : BaseScrollViewController
 
+// 贷款条件
 @property (nonatomic, strong) NSArray <ZRSWOrderLoanInfoCondition *>*loanCondition;
+// 贷款产品
+@property (nonatomic, strong) NSString *loanId;
 
 @end

@@ -91,6 +91,7 @@
     }
     ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
     vc.loanCondition = self.infoModel.data.loanCondition;
+    vc.loanId = self.selectedLoanID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)refreshData {

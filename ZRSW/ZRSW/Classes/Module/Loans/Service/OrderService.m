@@ -53,4 +53,28 @@
     [self POST:KGetOrderListInterface reqType:KGetOrderListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderListModel class] NeedCache:NO];
 
 }
+
+- (void)createOrderLoanId:(NSString *)loanId loanUserName:(NSString *)loanUserName loanUserSex:(NSInteger)loanUserSex loanUserAddress:(NSString *)loanUserAddress loanUserPhone:(NSString *)loanUserPhone loanMoney:(NSString *)loanMoney remark:(NSString *)remark condition:(NSMutableArray *)condition delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:loanId forKey:@"loanId"];
+    [params setObject:loanUserName forKey:@"loanUserName"];
+    [params setObject:@(loanUserSex) forKey:@"loanUserSex"];
+    [params setObject:loanUserAddress forKey:@"loanUserAddress"];
+    [params setObject:loanUserPhone forKey:@"loanUserPhone"];
+    [params setObject:loanMoney forKey:@"loanMoney"];
+    if (remark.length > 0) {
+        [params setObject:remark forKey:@"remark"];
+    }
+    [condition enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        if ([dic.allKeys containsObject:KConditionKey] && [dic.allKeys containsObject:KConditionValue]) {
+            NSString *key = dic[KConditionKey];
+            NSString *vaule = dic[KConditionValue];
+            [params setObject:key forKey:vaule];
+        }
+    }];
+    [self POST:KCreateOrderInterface reqType:KCreateOrderRequest delegate:delegate parameters:params ObjcClass:[ZRSWCreateModel class] NeedCache:NO];
+
+
+}
 @end

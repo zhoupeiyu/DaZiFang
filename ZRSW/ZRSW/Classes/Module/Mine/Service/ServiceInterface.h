@@ -85,6 +85,8 @@
 // 订单列表
 #define KGetOrderListInterface                          @"api/order/orderList"
 
+// 创建l订单
+#define KCreateOrderInterface                           @"api/order/createOrder"
 
 
 

@@ -167,3 +167,11 @@
 @property (nonatomic, strong) NSArray *data;
 
 @end
+
+
+@interface ZRSWCreateDetailModel : NSObject
+@property (nonatomic, strong) NSString *orderId;
+@end
+@interface ZRSWCreateModel : BaseModel
+@property (nonatomic, strong) ZRSWCreateDetailModel *data;
+@end

@@ -34,6 +34,7 @@
 @property (nonatomic, strong) NSString *loanPersonPhone;
 @property (nonatomic, strong) NSString *loanPersonMoney;
 @property (nonatomic, strong) NSString *remarkText;
+@property (nonatomic, strong) UploadImagesManager *imageManager;
 
 @end
 
@@ -77,13 +78,43 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)footBtnAction {
-    if ([self checkUserInfo]) {
+//    if ([self checkUserInfo]) {
+        WS(weakSelf);
         NSMutableArray *allImages = [[NSMutableArray alloc] init];
-        for (NSInteger index = 0; index < self.loanCondition.count; index++) {
-            
+        __block NSMutableArray *imageCount = [[NSMutableArray alloc] init];
+        __block NSMutableArray *imageAttri = [[NSMutableArray alloc] init];
+    
+        for (NSInteger index = 0; index < self.mainViews.count; index ++) {
+            LinePrejudicationImagesView *imageView = (LinePrejudicationImagesView *)self.mainViews[index];
+            NSMutableArray *imageArr = [imageView getResultImages];
+            if (imageArr.count > 0) {
+                [allImages addObjectsFromArray:imageArr];
+                [imageCount addObject:@(imageArr.count)];
+            }
+            else {
+                [imageCount addObject:@(0)];
+            }
         }
-        LLog(@"%zd",allImages.count);
-    }
+        [self.imageManager uploadImagesWithImagesArray:allImages completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            NSMutableArray *allImageUrls = [imageUrls copy]; // URL 数组
+            for (NSInteger count = 0; count < imageCount.count; count ++) { // 遍历存放个数的数组
+                ZRSWOrderLoanInfoCondition *loanCondition = (ZRSWOrderLoanInfoCondition *)weakSelf.loanCondition[count];// 获取对象
+                NSString *loanConditionName = loanCondition.title; // 获取对象标题
+                NSInteger imageNum = ((NSNumber *)imageCount[count]).integerValue;// 个数
+                NSMutableArray *imageUrlArray = [[NSMutableArray alloc] init];// 需要移除的数组
+                NSMutableDictionary *attri = [NSMutableDictionary dictionary]; // URL和标题的字典
+                for (NSInteger index = 0; index < imageNum; index ++) {
+                    [imageUrlArray addObject:allImageUrls[index]]; // 获取URL数组的个数
+                }
+                NSString *imageURL = [imageUrlArray componentsJoinedByString:@","];//#为分隔符
+                [attri setObject:imageURL forKey:loanConditionName];
+                [imageAttri addObject:attri];
+                [imageUrlArray removeObjectsInArray:allImageUrls];
+            }
+            NSLog(@"%@",imageAttri);
+        }];
+//    }
+    
    
 }
 - (BOOL)checkUserInfo {
@@ -370,5 +401,14 @@
         _mainViews = [[NSMutableArray alloc] init];
     }
     return _mainViews;
+}
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
 }
 @end

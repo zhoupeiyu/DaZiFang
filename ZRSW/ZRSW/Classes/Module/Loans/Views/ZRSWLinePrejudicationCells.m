@@ -189,7 +189,7 @@ static NSString * const cellIdentifier = @"photo";
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        _collectionView.bounces = YES;
+        _collectionView.bounces = NO;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellIdentifier];
         _collectionView.clipsToBounds = false;
