@@ -400,6 +400,7 @@
 		E5565F4221666CE800747A49 /* ZLPhotoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E5565F2221666CE800747A49 /* ZLPhotoConfiguration.m */; };
 		E5565F4421666D6000747A49 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5565F4321666D6000747A49 /* Photos.framework */; };
 		E5565F4621666D7000747A49 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5565F4521666D6F00747A49 /* PhotosUI.framework */; };
+		E5565F482167AAEA00747A49 /* axios.js in Resources */ = {isa = PBXBuildFile; fileRef = E5565F472167AAEA00747A49 /* axios.js */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
 		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
@@ -1491,6 +1492,7 @@
 		E5565F2221666CE800747A49 /* ZLPhotoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoConfiguration.m; sourceTree = "<group>"; };
 		E5565F4321666D6000747A49 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		E5565F4521666D6F00747A49 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
+		E5565F472167AAEA00747A49 /* axios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = axios.js; sourceTree = "<group>"; };
 		E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRealNameAuthController.h; sourceTree = "<group>"; };
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
 		E591D66E21534C6000F6802A /* ZRSWIPCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWIPCardView.h; sourceTree = "<group>"; };
@@ -2547,6 +2549,7 @@
 		3CD937E9216074CB0091CCC6 /* js */ = {
 			isa = PBXGroup;
 			children = (
+				E5565F472167AAEA00747A49 /* axios.js */,
 				3CD937EA216074CB0091CCC6 /* rem.js */,
 				3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */,
 			);
@@ -4864,6 +4867,7 @@
 				E5B59B3B214EC15600726DE9 /* share_wechat@2x.png in Resources */,
 				E5B59BA8214EC15600726DE9 /* share_blog@3x.png in Resources */,
 				E5B59B5F214EC15600726DE9 /* currency_line_720@2x.png in Resources */,
+				E5565F482167AAEA00747A49 /* axios.js in Resources */,
 				E5B59B5C214EC15600726DE9 /* currency_top_bg@2x.png in Resources */,
 				E5B59B3F214EC15600726DE9 /* currency_line_750@2x.png in Resources */,
 				E5B59B94214EC15600726DE9 /* currency_shadow_lower@3x.png in Resources */,

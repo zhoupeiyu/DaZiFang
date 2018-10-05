@@ -43,6 +43,8 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }else if (self.type == DetailsTypeCommentQuestion){
         [self requsetCommentQuestionDetail];
     }
+    NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+    [self.webView loadRequest:resquest];
 }
 
 - (void)setupConfig {
@@ -113,14 +115,20 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     //options:nil 不能修改否则h5识别不了
     JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     if (self.detailContensModel || self.questionDetailContentModel) {
-        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
-        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
-        NSString *detailsDicJsonString = nil;
+//        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+//        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+        //
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[BaseNetWorkService netWorkHeader]];
         if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
-            detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            [dic setObject:@"news" forKey:@"htmlType"];
+            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/newsInfo"] forKey:@"url"];
+            [dic setObject:self.detailModel.id forKey:@"newsId"];
         }else if (self.type == DetailsTypeCommentQuestion){
-            detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":questionJsonString}.yy_modelToJSONString;
+            [dic setObject:@"faqInfo" forKey:@"htmlType"];
+            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/faqInfo"] forKey:@"url"];
+            [dic setObject:self.questionModel.id forKey:@"faqId"];
         }
+        NSString *detailsDicJsonString = dic.yy_modelToJSONString;
         [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
     }
 }
