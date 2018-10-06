@@ -81,6 +81,9 @@
 }
 - (void)goBack {
     NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+    if (![UserModel hasLogin]) {
+        lastIndex = 0;
+    }
     [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }

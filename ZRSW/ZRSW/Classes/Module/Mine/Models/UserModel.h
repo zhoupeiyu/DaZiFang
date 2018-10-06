@@ -234,6 +234,9 @@
 //原文链接地址
 @property (nonatomic, strong) NSString *sourceUrl;
 
+@property (nonatomic, strong) NSString *contentStr;
+
+
 @end
 @interface NewDetailContenModel : BaseModel
 @property (nonatomic, strong) NewDetailContensModel *data;

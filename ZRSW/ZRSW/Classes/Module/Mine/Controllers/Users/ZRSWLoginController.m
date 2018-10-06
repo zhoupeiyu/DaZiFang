@@ -30,19 +30,20 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *password;
 
-@property (nonatomic, assign) LoginVCType type;
-
 @end
 
 @implementation ZRSWLoginController
 
 - (void)goBack {
+    if (self.cancelBlock) {
+        self.cancelBlock();
+        return;
+    }
     [super goBack];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-+ (ZRSWLoginController *)getLoginViewController:(LoginVCType)type {
++ (ZRSWLoginController *)getLoginViewController {
     ZRSWLoginController *vc = [[ZRSWLoginController alloc] init];
-    vc.type = type;
     return vc;
 }
 - (void)viewDidLoad {

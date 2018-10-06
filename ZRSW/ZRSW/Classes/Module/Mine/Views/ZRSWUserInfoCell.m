@@ -126,6 +126,8 @@
         self.arrowImageView.hidden = NO;
         self.textField.hidden = YES;
         self.desLbl.hidden = YES;
+        _iconImageView.layer.cornerRadius = IconViewHeight * 0.5;
+        _iconImageView.layer.masksToBounds = YES;
     }
     else if (cellType == UserInfoCellTypeInfo || cellType == UserInfoCellTypeInput) {
         self.iconImageView.hidden = YES;

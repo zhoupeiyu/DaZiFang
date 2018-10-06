@@ -18,7 +18,7 @@
 #import "ZRSWRemindListController.h"
 #import "UserService.h"
 #import "ZRSWOrderListController.h"
-
+#import "ZRSWLoginController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -34,9 +34,27 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if ([UserModel hasLogin]) {
+        self.tableView.hidden = NO;
+    }
+    else {
+        self.tableView.hidden = YES;
+        ZRSWLoginController *loginVC = [ZRSWLoginController getLoginViewController];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:loginVC];
+        WS(weakSelf);
+        [loginVC setCancelBlock:^{
+//            NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+            [weakSelf.tabBarController setSelectedIndex:0];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }];
+        [self presentViewController:nav animated:YES completion:nil];
+        return;
+    }
     
     [super viewWillAppear:animated];
     [self updateUserInfo];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -8,14 +8,16 @@
 
 #import "BaseScrollViewController.h"
 
-typedef enum : NSUInteger {
-    LoginVCTypeNormal, // 正常
-    LoginVCTypeMine
-} LoginVCType;
+typedef void(^CancelBlock)(void);
+
 @interface ZRSWLoginController : BaseScrollViewController
 
-+ (ZRSWLoginController *)getLoginViewController:(LoginVCType)type;
+@property (nonatomic, copy) CancelBlock cancelBlock;
+
++ (ZRSWLoginController *)getLoginViewController;
 
 + (void)showLoginViewController;
+
+
 
 @end

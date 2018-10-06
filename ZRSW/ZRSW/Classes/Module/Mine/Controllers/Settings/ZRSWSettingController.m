@@ -72,6 +72,8 @@
 
 - (void)logoutAction {
     [UserModel removeUserData];
+    [self.tabBarController setSelectedIndex:0];
+    [self dismissViewControllerAnimated:YES completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
