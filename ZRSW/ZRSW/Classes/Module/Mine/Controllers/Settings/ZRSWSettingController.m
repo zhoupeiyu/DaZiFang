@@ -9,8 +9,14 @@
 #import "ZRSWSettingController.h"
 #import "ZRSWFeedBackController.h"
 #import "ZRSWMineListCell.h"
+
+
+#define KLogoutViewH     kUI_HeightS(84)
+#define KCellH           kUI_HeightS(44)
 @interface ZRSWSettingController ()
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) UIView *logoutView;
+
 @end
 
 @implementation ZRSWSettingController
@@ -32,6 +38,7 @@
     self.tableView.showsVerticalScrollIndicator = NO;
     self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.tableFooterView = self.logoutView;
 }
 
 
@@ -47,7 +54,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kUI_HeightS(44);
+    return KCellH;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -55,10 +62,6 @@
     ZRSWMineModel *mineModel = self.dataSource[indexPath.row];
     if (indexPath.row == 0) {
         return;
-    }else if (indexPath.row == 3) {
-        LLog(@"退出登录");
-        [UserModel removeUserData];
-        [self.navigationController popViewControllerAnimated:YES];
     }else{
         BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
                                                          alloc] init];
@@ -67,6 +70,30 @@
     }
 }
 
+- (void)logoutAction {
+    [UserModel removeUserData];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (UIView *)logoutView {
+    if (!_logoutView) {
+        _logoutView = [[UIView alloc] init];
+        _logoutView.backgroundColor = [UIColor clearColor];
+        _logoutView.frame = CGRectMake(0, 0, SCREEN_WIDTH, KLogoutViewH);
+        UIButton *_logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _logoutBtn.frame = CGRectMake(0, KLogoutViewH - KCellH, SCREEN_WIDTH, KCellH);
+        [_logoutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
+        [_logoutBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [_logoutBtn setTitleColor:[UIColor colorWithHex:0xff0000 alpha:0.6] forState:UIControlStateHighlighted];
+        [_logoutBtn adjustsImageWhenHighlighted];
+        _logoutBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_logoutBtn setBackgroundImage:[UIImage imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_logoutBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0xf9f9f9]] forState:UIControlStateHighlighted];
+        [_logoutView addSubview:_logoutBtn];
+        [_logoutBtn addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _logoutView;
+}
 
 - (void)setupData {
         {
@@ -91,14 +118,6 @@
             model.iconName = @"my_order";
             model.viewControllerName = NSStringFromClass([ZRSWFeedBackController class]);
                [self.dataSource addObject:model];
-        }
-        {
-            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
-            model.title = @"退出登录";
-            model.type = MineListTypeCommentList;
-            model.iconName = @"my_phone";
-            model.bottomLineHidden = YES;
-            [self.dataSource addObject:model];
         }
     [self.tableView reloadData];
 }
