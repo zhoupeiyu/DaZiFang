@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.title = @"基础消息";
+    self.title = @"基础信息";
     self.isCanChangeMyID = [UserModel getCurrentModel].data.myId.length == 0;
     [self setRightBarButtonWithText:@"保存"];
     [self.rightBarButton addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
@@ -85,7 +85,7 @@ typedef enum : NSUInteger {
                 UserModel *userModel = [UserModel getCurrentModel];
                 userModel.data.headImgUrl = imageUrls.firstObject;
                 [UserModel updateUserModel:userModel];
-                weakSelf.selectedImages = imageUrls;
+                [weakSelf.selectedImages addObjectsFromArray:imageUrls];
                 model.image = selectedImages.firstObject;
                 [weakSelf.tableView reloadData];
             }];
@@ -230,6 +230,12 @@ typedef enum : NSUInteger {
         _service = [[UserService alloc] init];
     }
     return _service;
+}
+- (NSMutableArray *)selectedImages {
+    if (!_selectedImages) {
+        _selectedImages = [[NSMutableArray alloc] init];
+    }
+    return _selectedImages;
 }
 - (void)sendNewObjcMsg:(id)target selector:(SEL)sel withObj:(id)obj {
     if (![target respondsToSelector:sel]) {
