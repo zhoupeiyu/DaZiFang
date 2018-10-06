@@ -39,7 +39,12 @@
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         self.lastID = @"";
-        [self.service getOrderList:self.lastID orderStatus:self.tabType delegate:self];
+        if (self.tabType == 0) {
+            [self.service getOrderList:self.lastID orderStatus:nil delegate:self];
+        }
+        else {
+            [self.service getOrderList:self.lastID orderStatus:[NSString stringWithFormat:@"%zd",self.tabType - 1] delegate:self];
+        }
         [self hiddenFooter:YES];
     }
     
@@ -48,7 +53,13 @@
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         ZRSWOrderListDetailModel *detailModel = self.totalList.lastObject;
-        [self.service getOrderList:detailModel.id orderStatus:self.tabType delegate:self];
+        if (self.tabType == 0) {
+            [self.service getOrderList:detailModel.id orderStatus:nil delegate:self];
+        }
+        else {
+            [self.service getOrderList:detailModel.id orderStatus:[NSString stringWithFormat:@"%zd",self.tabType - 1] delegate:self];
+        }
+        
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

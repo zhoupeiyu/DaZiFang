@@ -60,7 +60,7 @@ typedef enum : NSUInteger {
  @param orderStatus 订单状态
  @param delegate 代理
  */
-- (void)getOrderList:(NSString *)lastId orderStatus:(NSInteger)orderStatus delegate:(id)delegate;
+- (void)getOrderList:(NSString *)lastId orderStatus:(NSString *)orderStatus delegate:(id)delegate;
 
 
 /**
