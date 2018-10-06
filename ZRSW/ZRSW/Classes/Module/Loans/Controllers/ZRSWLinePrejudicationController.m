@@ -83,7 +83,7 @@
     if ([self checkUserInfo]) {
         WS(weakSelf);
         
-        [TipViewManager showLoadingWithText:@"图片上传中，请耐心等待..."];
+        
         NSMutableArray *allImages = [[NSMutableArray alloc] init];
         __block NSMutableArray *imageCount = [[NSMutableArray alloc] init];
         __block NSMutableArray *imageAttri = [[NSMutableArray alloc] init];
@@ -99,6 +99,11 @@
                 [imageCount addObject:@(0)];
             }
         }
+        if (allImages.count == 0) {
+            [TipViewManager showToastMessage:@"请检查资料，至少上传一张图片"];
+            return;
+        }
+        [TipViewManager showLoadingWithText:@"图片上传中，请耐心等待..."];
         [self.imageManager uploadImagesWithImagesArray:allImages completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             [TipViewManager dismissLoading];
             [TipViewManager showLoadingWithText:@"数据上传中，请耐心等待..."];
