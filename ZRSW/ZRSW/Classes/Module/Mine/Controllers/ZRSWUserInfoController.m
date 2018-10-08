@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UserService *service;
 @property (nonatomic, strong) NSString *myID;
 @property (nonatomic, assign) BOOL isCanChangeMyID;
-
+@property (nonatomic, strong) UIImage *selectedImage;
 @end
 
 @implementation ZRSWUserInfoController
@@ -88,6 +88,7 @@ typedef enum : NSUInteger {
                 [weakSelf.selectedImages addObjectsFromArray:imageUrls];
                 model.image = selectedImages.firstObject;
                 [weakSelf.tableView reloadData];
+                self.selectedImages = selectedImages.firstObject;
             }];
         }
     }];
@@ -152,6 +153,9 @@ typedef enum : NSUInteger {
             model.data.myId = self.myID;
             model.data.nickName = self.name;
             [UserModel updateUserModel:model];
+            if (self.selectedImages) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeUserInfoSuccessNotification object:self.selectedImage];
+            }
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else {

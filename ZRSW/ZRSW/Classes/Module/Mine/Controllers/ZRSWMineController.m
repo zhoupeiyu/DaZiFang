@@ -68,6 +68,7 @@
     [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_set"] AndHighLightImage:[UIImage imageNamed:@""]];
     [self.rightBarButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo) name:UserLoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserIcon:) name:ChangeUserInfoSuccessNotification object:nil];
 }
 
 - (void)setupUI {
@@ -146,6 +147,10 @@
     ZRSWSettingController *setting = [[ZRSWSettingController alloc] init];
     setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
+}
+
+- (void)changeUserIcon:(NSNotification *)noti {
+    
 }
 - (void)updateUserInfo {
     UserModel *model = [UserModel getCurrentModel];

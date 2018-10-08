@@ -161,8 +161,7 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
 }
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
-    TZPhotoPreviewController *photosPreviewController = [[TZPhotoPreviewController alloc] init];
-    
+
     [self.imageArr addObjectsFromArray:photos];
     if (self.selectedBlcok) {
         self.selectedBlcok(self.imageArr);
@@ -178,14 +177,28 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
     {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     }
+    WS(weakSelf);
     [picker dismissViewControllerAnimated:YES completion:^{
-        if (!_imageArr) {
-            _imageArr = [NSMutableArray array];
-        }
-        [_imageArr addObject:image];
-        if (self.selectedBlcok) {
-            self.selectedBlcok(self.imageArr);
-        }
+        PHFetchOptions *option = [[PHFetchOptions alloc] init];
+        PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:option];
+        PHAsset *asset = [fetchResult lastObject];
+        TZImagePickerController *photosPreviewController = [[TZImagePickerController alloc] initCropTypeWithAsset:asset photo:image completion:^(UIImage *cropImage, id asset) {
+            if (!_imageArr) {
+                _imageArr = [NSMutableArray array];
+            }
+            [_imageArr addObject:cropImage];
+            if (weakSelf.selectedBlcok) {
+                weakSelf.selectedBlcok(weakSelf.imageArr);
+            }
+        }];
+        photosPreviewController.isStatusBarDefault = YES;
+        photosPreviewController.circleCropRadius = SCREEN_WIDTH/2.f;
+        photosPreviewController.oKButtonTitleColorNormal = [UIColor getFontBlueColor];
+        photosPreviewController.navLeftBarButtonSettingBlock = ^(UIButton *leftButton) {
+            [leftButton setImage:[UIImage imageNamed:@"navi_back_26x26_"] forState:UIControlStateNormal];
+            [leftButton setImage:[UIImage imageNamed:@"navi_back_shadow_26x26_"] forState:UIControlStateHighlighted];
+        };
+        [self.presentedVC presentViewController:photosPreviewController animated:YES completion:nil];
     }];
 }
 - (void)pushImagePickerController {
