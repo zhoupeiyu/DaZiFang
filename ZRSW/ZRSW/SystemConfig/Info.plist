@@ -201,8 +201,6 @@
 	<string>为了给您提供更多服务，我们需要访问您的地理位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>以便您正常使用拍照、头像替换、图片上传等服务</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchImage</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

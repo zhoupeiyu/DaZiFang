@@ -198,7 +198,7 @@
     if (!_contentImageView) {
         _contentImageView = [[UIImageView alloc] init];
         _contentImageView.image = [ZRSWLoansFlow contentImage];
-        _contentImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _contentImageView.contentMode = UIViewContentModeScaleToFill;
     }
     return _contentImageView;
 }

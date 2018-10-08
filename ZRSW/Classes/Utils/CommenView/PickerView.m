@@ -113,7 +113,7 @@
     self.pickerHeight = 255.f;
     self.maskView.frame = CGRectMake(0.f, 0.f, self.width, self.height - self.pickerHeight - kPickerViewButtonBarHeight);
     
-    self.pickerView.frame = CGRectMake(0.f, self.height - self.pickerHeight, self.width, self.pickerHeight);
+    self.pickerView.frame = CGRectMake(0.f, self.height - self.pickerHeight - kiphonexBottom, self.width, self.pickerHeight);
     [self.pickerView setNeedsLayout];
     
     self.buttonBarView.frame = CGRectMake(0.f, self.pickerView.top - kPickerViewButtonBarHeight, self.width, kPickerViewButtonBarHeight);

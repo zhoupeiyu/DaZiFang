@@ -123,6 +123,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "320_480.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
