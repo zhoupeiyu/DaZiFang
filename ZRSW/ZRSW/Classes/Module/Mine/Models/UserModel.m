@@ -277,6 +277,20 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 @implementation NewDetailContensModel
 
+//- (void)setContent:(NSString *)content {
+//
+////    _content = content;
+//
+//    _content = [content stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\'"];
+//    NSMutableString *responseString = [NSMutableString stringWithString:_content ];
+//    NSString *character = nil;
+//    for (int i = 0; i < responseString.length; i ++) {
+//        character = [responseString substringWithRange:NSMakeRange(i, 1)];
+//        if ([character isEqualToString:@"\\"])
+//            [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//    }
+//    _content = responseString;
+//}
 @end
 
 
@@ -294,6 +308,22 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 @end
 
 @implementation CommentQuestionDetailContentModel
+
+//- (void)setFaqBody:(NSString *)faqBody {
+////    _faqBody = faqBody;
+//
+//   _faqBody = [faqBody stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\'"];
+//    NSMutableString *responseString = [NSMutableString stringWithString:_faqBody];
+//    NSString *character = nil;
+//    for (int i = 0; i < responseString.length; i ++) {
+//        character = [responseString substringWithRange:NSMakeRange(i, 1)];
+//        if ([character isEqualToString:@"\\"])
+//            [responseString deleteCharactersInRange:NSMakeRange(i, 1)];
+//        }
+//    _faqBody = responseString;
+////    _faqBody = [_faqBody stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+//
+//}
 
 @end
 

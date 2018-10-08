@@ -7,6 +7,7 @@
 //
 
 #import "PhotoManager.h"
+#import "TZPhotoPreviewController.h"
 
 @interface  PhotoManager()<UIImagePickerControllerDelegate,UIActionSheetDelegate,TZImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -160,6 +161,8 @@ SYNTHESIZE_SINGLETON_ARC(PhotoManager);
 }
 
 - (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto infos:(NSArray<NSDictionary *> *)infos {
+    TZPhotoPreviewController *photosPreviewController = [[TZPhotoPreviewController alloc] init];
+    
     [self.imageArr addObjectsFromArray:photos];
     if (self.selectedBlcok) {
         self.selectedBlcok(self.imageArr);

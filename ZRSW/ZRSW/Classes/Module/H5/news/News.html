@@ -172,7 +172,7 @@
          },
          methods: {
              getAppData(params) {
-                     alert(params)
+                     alert(3)
                      
                      var data = JSON.parse(params)
                      
@@ -183,11 +183,11 @@
                      this.json = data.contentData
                      this.json.updateTime = data.contentData.updateTime.slice(0, 10)
                      this.titleShow = true
-                     this.content = data.contentData.content
+                     this.content = data.contentData.contentStr
                  } else {
                      this.titleShow = false
                      this.json = data.contentData
-                     this.content = data.contentData.faqBody
+                     this.content = data.contentData.faqBodyStr
                  }
                      alert(this.titleShow)
                      alert(this.json.title)

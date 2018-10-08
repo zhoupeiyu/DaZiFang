@@ -275,6 +275,8 @@
 //封面图片URL
 @property (nonatomic, strong) NSString *imgUrl;
 
+@property (nonatomic, strong) NSString *faqBodyStr;
+
 @end
 
 @interface CommentQuestionDetail : BaseModel

@@ -43,8 +43,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     }else if (self.type == DetailsTypeCommentQuestion){
         [self requsetCommentQuestionDetail];
     }
-//    NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
-//    [self.webView loadRequest:resquest];
 }
 
 - (void)setupConfig {
@@ -89,23 +87,26 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
 //    NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
-//        //创建JSContext对象
-//        JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-//        //OC调用JS方法
-//        //options:nil 不能修改否则h5识别不了
-//        if (self.detailContensModel) {
-//            id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
-//            LLog(@"%@",detailsJsonString);
-//            NSString *detailsDicJsonString = nil;
-//            if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
-//                detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
-//            }else if (self.type == DetailsTypeCommentQuestion){
-//                detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
-//            }
-//            //           NSString * method = @"vm.getAppData";
-//            //         JSValue * function = [context objectForKeyedSubscript:method];
-//            //         [function callWithArguments:@[detailsDicJsonString]];
-//            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+        //创建JSContext对象
+        JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+        //OC调用JS方法
+        //options:nil 不能修改否则h5识别不了
+        if (self.detailContensModel || self.questionDetailContentModel) {
+            id detailsJsonString = nil;
+            NSString *detailsDicJsonString = nil;
+            if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+                detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+                detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }else if (self.type == DetailsTypeCommentQuestion){
+                detailsJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+                detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }
+        
+            //           NSString * method = @"vm.getAppData";
+            //         JSValue * function = [context objectForKeyedSubscript:method];
+            //         [function callWithArguments:@[detailsDicJsonString]];
+            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+        }
 //
 //
 //        }else {
@@ -113,24 +114,24 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     //        }JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     //OC调用JS方法
     //options:nil 不能修改否则h5识别不了
-    JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
-    if (self.detailContensModel || self.questionDetailContentModel) {
-//        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
-//        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
-        //
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[BaseNetWorkService netWorkHeader]];
-        if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
-            [dic setObject:@"news" forKey:@"htmlType"];
-            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/newsInfo"] forKey:@"url"];
-            [dic setObject:self.detailModel.id forKey:@"newsId"];
-        }else if (self.type == DetailsTypeCommentQuestion){
-            [dic setObject:@"faqInfo" forKey:@"htmlType"];
-            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/faqInfo"] forKey:@"url"];
-            [dic setObject:self.questionModel.id forKey:@"faqId"];
-        }
-        NSString *detailsDicJsonString = dic.yy_modelToJSONString;
-        [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
-    }
+//    JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//    if (self.detailContensModel || self.questionDetailContentModel) {
+////        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+////        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+//        //
+//        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[BaseNetWorkService netWorkHeader]];
+//        if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+//            [dic setObject:@"news" forKey:@"htmlType"];
+//            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/newsInfo"] forKey:@"url"];
+//            [dic setObject:self.detailModel.id forKey:@"newsId"];
+//        }else if (self.type == DetailsTypeCommentQuestion){
+//            [dic setObject:@"faqInfo" forKey:@"htmlType"];
+//            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/faqInfo"] forKey:@"url"];
+//            [dic setObject:self.questionModel.id forKey:@"faqId"];
+//        }
+//        NSString *detailsDicJsonString = dic.yy_modelToJSONString;
+//        [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+//    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
