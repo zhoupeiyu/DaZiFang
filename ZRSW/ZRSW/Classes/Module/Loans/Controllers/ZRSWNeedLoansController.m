@@ -18,6 +18,8 @@
 #define KIDKey              @"KIDKey"
 #define KListContentKey     @"KListContentKey"
 #define KListIDsKey         @"KListIDsKey"
+#define KPickViewTitle      @"KPickViewTitle"
+
 #define KFootBtnHeight      60
 
 @interface ZRSWNeedLoansController ()<PickerViewDelegate>
@@ -38,6 +40,8 @@
 @property (nonatomic, strong) NSString *selectedCityID;
 @property (nonatomic, strong) NSString *selectedMainTypeID;
 @property (nonatomic, strong) NSString *selectedLoanID;
+
+@property (nonatomic, strong) NSString *pickViewTitle;
 
 @end
 
@@ -103,6 +107,7 @@
 
 - (void)showPickViewWithDataSource:(NSArray *)dataSource {
     PickerView *pickView = [[PickerView alloc] initWithData:dataSource];
+    pickView.title = self.pickViewTitle;
     pickView.delegate = self;
     pickView.pickerHeight = 190.f;
     pickView.frame = self.view.bounds;
@@ -248,6 +253,7 @@
         if (indexPath.row == 0) {
             NSDictionary *dic = self.topDataSource[indexPath.row];
             NSArray *arr = dic[KListContentKey];
+            self.pickViewTitle = dic[KPickViewTitle];
             [self showPickViewWithDataSource:arr];
         }
         else {
@@ -263,6 +269,7 @@
                 else {
                     NSDictionary *dic = self.topDataSource[indexPath.row];
                     NSArray *arr = dic[KListContentKey];
+                    self.pickViewTitle = dic[KPickViewTitle];
                     [self showPickViewWithDataSource:arr];
                 }
             }
@@ -281,6 +288,7 @@
                 else {
                     NSDictionary *dic = self.topDataSource[indexPath.row];
                     NSArray *arr = dic[KListContentKey];
+                    self.pickViewTitle = dic[KPickViewTitle];
                     [self showPickViewWithDataSource:arr];
                 }
             }
@@ -292,8 +300,12 @@
     NSMutableDictionary *dic = self.topDataSource[pickerView.tag];
     NSArray *contentList = dic[KListContentKey];
     NSArray *idList = dic[KListIDsKey];
+    if (contentList.count == 0 || idList.count == 0) {
+        return;
+    }
     NSString *title = contentList[row];
     NSString *ID = idList[row];
+    
     [dic setObject:title forKey:KContentKey];
     [dic setObject:ID forKey:KIDKey];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -328,6 +340,7 @@
                 dic[KListContentKey] = [ZRSWOrderMainTypeListModel getMainTypeTitles];
                 dic[KListIDsKey] = [ZRSWOrderMainTypeListModel getMainTypeIDs];
                 NSArray *arr = dic[KListContentKey];
+                self.pickViewTitle = dic[KPickViewTitle];
                 [self showPickViewWithDataSource:arr];
                 
             }
@@ -344,6 +357,7 @@
                 dic[KListContentKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeTitles];
                 dic[KListIDsKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeIDs];
                 NSArray *arr = dic[KListContentKey];
+                self.pickViewTitle = dic[KPickViewTitle];
                 [self showPickViewWithDataSource:arr];
                 self.footBtn.enabled = YES;
             }
@@ -386,6 +400,7 @@
             [dic setObject:@"" forKey:KIDKey];
             [dic setObject:[CityListModel getCityNames] forKey:KListContentKey];
             [dic setObject:[CityListModel getCityIds] forKey:KListIDsKey];
+            [dic setObject:@"选择城市" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
         {
@@ -395,6 +410,7 @@
             [dic setObject:@"0" forKey:KIDKey];
             [dic setObject:[NSMutableArray array] forKey:KListContentKey];
             [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
+            [dic setObject:@"贷款大类" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
         {
@@ -404,6 +420,7 @@
             [dic setObject:@"0" forKey:KIDKey];
             [dic setObject:[NSMutableArray array] forKey:KListContentKey];
             [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
+            [dic setObject:@"贷款产品" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
     }
