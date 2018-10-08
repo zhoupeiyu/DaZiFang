@@ -152,8 +152,9 @@
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KUserValidationIdCardRequest]) {
             BaseModel *model = (BaseModel *)resObj;
-            if (model.error_code == 0) {
-                [TipViewManager showToastMessage:@"认证成功!"];
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"提交成功!"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];
