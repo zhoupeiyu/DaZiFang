@@ -99,8 +99,8 @@
                 [imageCount addObject:@(0)];
             }
         }
-        if (allImages.count == 0) {
-            [TipViewManager showToastMessage:@"请检查资料，至少上传一张图片"];
+        if (allImages.count == 0 || [imageCount containsObject:@(0)]) {
+            [TipViewManager showToastMessage:@"至少上传一张图片"];
             return;
         }
         [TipViewManager showLoadingWithText:@"图片上传中，请耐心等待..."];

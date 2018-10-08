@@ -178,6 +178,7 @@
     }
     else if (indexPath.section == 4) {
         ZRSWLoansFlow *cell = [ZRSWLoansFlow getCellWithTableView:tableView];
+        cell.imageURL = self.infoModel.data.loanFlowWechatUri;
         return cell;
     }
     else {

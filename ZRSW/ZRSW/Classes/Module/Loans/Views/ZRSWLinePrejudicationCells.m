@@ -636,7 +636,7 @@ static NSString * const cellIdentifier = @"photo";
 - (LinePrejudicationUserInfoInputItem *)moneyLbl {
     if (!_moneyLbl) {
         _moneyLbl = [[LinePrejudicationUserInfoInputItem alloc] init];
-        [_moneyLbl setTitle:@"贷款金额"];
+        [_moneyLbl setTitle:@"贷款金额（万）"];
         [_moneyLbl setPlaceHolder:@"请输入贷款人金额"];
         [_moneyLbl setKeyboardType:UIKeyboardTypeNumberPad];
         [_moneyLbl setBottomLineHidden:YES];

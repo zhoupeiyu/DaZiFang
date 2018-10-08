@@ -183,6 +183,10 @@
     [self setupLayout];
 }
 
+- (void)setImageURL:(NSString *)imageURL {
+    _imageURL = imageURL;
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[ZRSWLoansFlow contentImage]];
+}
 - (void)setupLayout {
     [self.contentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
@@ -194,7 +198,7 @@
     if (!_contentImageView) {
         _contentImageView = [[UIImageView alloc] init];
         _contentImageView.image = [ZRSWLoansFlow contentImage];
-        _contentImageView.contentMode = UIViewContentModeScaleToFill;
+        _contentImageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _contentImageView;
 }
