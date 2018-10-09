@@ -112,7 +112,7 @@ SYNTHESIZE_SINGLETON_ARC(TipViewManager);
 
 - (void)showToastMessage:(NSString *)errorMsg {
     UIViewController *vc = [UIViewController currentViewController];
-    [vc.view makeToast:@"" duration:0.3 position:[NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 - kNavigationBarH)] title:errorMsg image:nil style:[self toastStyle] completion:nil];
+    [vc.view makeToast:@"" duration:0.5 position:[NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH * 0.5, SCREEN_HEIGHT * 0.5 - kNavigationBarH)] title:errorMsg image:nil style:[self toastStyle] completion:nil];
 }
 
 + (BOOL)showNetErrorToast {
