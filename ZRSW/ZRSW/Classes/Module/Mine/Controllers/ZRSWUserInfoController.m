@@ -88,7 +88,7 @@ typedef enum : NSUInteger {
                 [weakSelf.selectedImages addObjectsFromArray:imageUrls];
                 model.image = selectedImages.firstObject;
                 [weakSelf.tableView reloadData];
-                self.selectedImages = selectedImages.firstObject;
+                self.selectedImage = selectedImages.firstObject;
             }];
         }
     }];
