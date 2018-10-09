@@ -11,12 +11,15 @@
 #import "OrderService.h"
 #import "ZRSWOrderModel.h"
 #import "ZRSWLinePrejudicationController.h"
+#import "ZRSWLoginController.h"
 
 #define KTitleKey           @"KTitleKey"
 #define KContentKey         @"KContentKey"
 #define KIDKey              @"KIDKey"
 #define KListContentKey     @"KListContentKey"
 #define KListIDsKey         @"KListIDsKey"
+#define KPickViewTitle      @"KPickViewTitle"
+
 #define KFootBtnHeight      60
 
 @interface ZRSWNeedLoansController ()<PickerViewDelegate>
@@ -38,6 +41,8 @@
 @property (nonatomic, strong) NSString *selectedMainTypeID;
 @property (nonatomic, strong) NSString *selectedLoanID;
 
+@property (nonatomic, strong) NSString *pickViewTitle;
+
 @end
 
 @implementation ZRSWNeedLoansController
@@ -58,7 +63,7 @@
 }
 - (void)setupUI {
     [super setupUI];
-    [self enableRefreshHeader:YES];
+//    [self enableRefreshHeader:YES];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
     [self.view addSubview:self.footBtn];
     [self setupLayOut];
@@ -80,11 +85,20 @@
 }
 - (void)goBack {
     NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+    if (![UserModel hasLogin]) {
+        lastIndex = 0;
+    }
     [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)nextAcrion {
+    if (![UserModel hasLogin]) {
+        [ZRSWLoginController showLoginViewController];
+        return;
+    }
     ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
+    vc.loanCondition = self.infoModel.data.loanCondition;
+    vc.loanId = self.selectedLoanID;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)refreshData {
@@ -93,6 +107,7 @@
 
 - (void)showPickViewWithDataSource:(NSArray *)dataSource {
     PickerView *pickView = [[PickerView alloc] initWithData:dataSource];
+    pickView.title = self.pickViewTitle;
     pickView.delegate = self;
     pickView.pickerHeight = 190.f;
     pickView.frame = self.view.bounds;
@@ -168,6 +183,7 @@
     }
     else if (indexPath.section == 4) {
         ZRSWLoansFlow *cell = [ZRSWLoansFlow getCellWithTableView:tableView];
+        cell.imageURL = self.infoModel.data.loanFlowWechatUri;
         return cell;
     }
     else {
@@ -237,6 +253,7 @@
         if (indexPath.row == 0) {
             NSDictionary *dic = self.topDataSource[indexPath.row];
             NSArray *arr = dic[KListContentKey];
+            self.pickViewTitle = dic[KPickViewTitle];
             [self showPickViewWithDataSource:arr];
         }
         else {
@@ -252,6 +269,7 @@
                 else {
                     NSDictionary *dic = self.topDataSource[indexPath.row];
                     NSArray *arr = dic[KListContentKey];
+                    self.pickViewTitle = dic[KPickViewTitle];
                     [self showPickViewWithDataSource:arr];
                 }
             }
@@ -270,6 +288,7 @@
                 else {
                     NSDictionary *dic = self.topDataSource[indexPath.row];
                     NSArray *arr = dic[KListContentKey];
+                    self.pickViewTitle = dic[KPickViewTitle];
                     [self showPickViewWithDataSource:arr];
                 }
             }
@@ -281,8 +300,12 @@
     NSMutableDictionary *dic = self.topDataSource[pickerView.tag];
     NSArray *contentList = dic[KListContentKey];
     NSArray *idList = dic[KListIDsKey];
+    if (contentList.count == 0 || idList.count == 0) {
+        return;
+    }
     NSString *title = contentList[row];
     NSString *ID = idList[row];
+    
     [dic setObject:title forKey:KContentKey];
     [dic setObject:ID forKey:KIDKey];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -317,6 +340,7 @@
                 dic[KListContentKey] = [ZRSWOrderMainTypeListModel getMainTypeTitles];
                 dic[KListIDsKey] = [ZRSWOrderMainTypeListModel getMainTypeIDs];
                 NSArray *arr = dic[KListContentKey];
+                self.pickViewTitle = dic[KPickViewTitle];
                 [self showPickViewWithDataSource:arr];
                 
             }
@@ -333,6 +357,7 @@
                 dic[KListContentKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeTitles];
                 dic[KListIDsKey] = [ZRSWOrderLoanTypeListModel getOrderLoanTypeIDs];
                 NSArray *arr = dic[KListContentKey];
+                self.pickViewTitle = dic[KPickViewTitle];
                 [self showPickViewWithDataSource:arr];
                 self.footBtn.enabled = YES;
             }
@@ -375,6 +400,7 @@
             [dic setObject:@"" forKey:KIDKey];
             [dic setObject:[CityListModel getCityNames] forKey:KListContentKey];
             [dic setObject:[CityListModel getCityIds] forKey:KListIDsKey];
+            [dic setObject:@"选择城市" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
         {
@@ -384,6 +410,7 @@
             [dic setObject:@"0" forKey:KIDKey];
             [dic setObject:[NSMutableArray array] forKey:KListContentKey];
             [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
+            [dic setObject:@"贷款大类" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
         {
@@ -393,6 +420,7 @@
             [dic setObject:@"0" forKey:KIDKey];
             [dic setObject:[NSMutableArray array] forKey:KListContentKey];
             [dic setObject:[NSMutableArray array] forKey:KListIDsKey];
+            [dic setObject:@"贷款产品" forKey:KPickViewTitle];
             [_topDataSource addObject:dic];
         }
     }

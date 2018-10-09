@@ -41,16 +41,40 @@
 
 }
 
-- (void)getOrderList:(NSString *)lastId orderStatus:(NSInteger)orderStatus delegate:(id)delegate{
+- (void)getOrderList:(NSString *)lastId orderStatus:(NSString *)orderStatus delegate:(id)delegate{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (lastId.length > 0) {
         [params setObject:lastId forKey:@"lastId"];
     }
     //订单状态：0=审核中；1=已通过；3=已放款；8=已拒绝（包含初审未过和拒绝放款）;默认为空，查询所有订单
-    [params setObject:@(orderStatus).stringValue forKey:@"orderStatus"];
+    if (orderStatus.length > 0) {
+        [params setObject:orderStatus forKey:@"orderStatus"];
+    }
     [params setObject:@(15) forKey:@"pageSize"];
     
     [self POST:KGetOrderListInterface reqType:KGetOrderListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderListModel class] NeedCache:NO];
+
+}
+
+- (void)createOrderLoanId:(NSString *)loanId loanUserName:(NSString *)loanUserName loanUserSex:(NSInteger)loanUserSex loanUserAddress:(NSString *)loanUserAddress loanUserPhone:(NSString *)loanUserPhone loanMoney:(NSString *)loanMoney remark:(NSString *)remark condition:(NSMutableArray *)condition delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:loanId forKey:@"loanId"];
+    [params setObject:loanUserName forKey:@"loanUserName"];
+    [params setObject:@(loanUserSex) forKey:@"loanUserSex"];
+    [params setObject:loanUserAddress forKey:@"loanUserAddress"];
+    [params setObject:loanUserPhone forKey:@"loanUserPhone"];
+    [params setObject:loanMoney forKey:@"loanMoney"];
+    if (remark.length > 0) {
+        [params setObject:remark forKey:@"remark"];
+    }
+    for (NSDictionary *dic in condition) {
+        for (NSString *key in dic.allKeys) {
+            NSString *value = dic[key];
+            [params setObject:value forKey:key];
+        }
+    }
+    [self POST:KCreateOrderInterface reqType:KCreateOrderRequest delegate:delegate parameters:params ObjcClass:[ZRSWCreateModel class] NeedCache:NO];
+
 
 }
 @end

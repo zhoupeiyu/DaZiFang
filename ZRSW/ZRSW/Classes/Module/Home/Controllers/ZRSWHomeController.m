@@ -339,6 +339,7 @@
 - (void)triangleButtonClck:(UIButton *)button{
     [self locationCity];
     LLog(@"更多城市");
+    
 }
 
 

@@ -16,13 +16,13 @@
 
 @end
 
-@interface LinePrejudicationImagesCell : UITableViewCell
+@interface LinePrejudicationImagesView : UIView
+
++ (LinePrejudicationImagesView *)getImagesView;
 
 @property (nonatomic, weak) UIViewController *presentedVC;
 
-+ (LinePrejudicationImagesCell *)getImageCell:(UITableView *)tebleView;
-
-+ (CGFloat)cellHeight;
++ (CGFloat)viewHeight;
 
 - (NSMutableArray *)getResultImages;
 
@@ -66,10 +66,11 @@
 - (void)setBottomLineHidden:(BOOL)bottomLineHidden;
 
 @end
-@interface LinePrejudicationUserInfoCell : UITableViewCell
+@interface LinePrejudicationUserInfoView : UIView
 
-+ (LinePrejudicationUserInfoCell *)getCellWithTableView:(UITableView *)tableView;
-+ (CGFloat)cellHeight;
++ (LinePrejudicationUserInfoView *)getUserInfoView;
+
++ (CGFloat)viewHeight;
 
 - (NSString *)loanPersonName;
 - (NSString *)loanPersonSex;
@@ -81,11 +82,11 @@
 
 #pragma mark - 备注
 
-@interface LinePrejudicationRemarksCell : UITableViewCell
+@interface LinePrejudicationRemarksView : UIView
 
-+ (LinePrejudicationRemarksCell *)getCellWithTableView:(UITableView *)tableView;
++ (LinePrejudicationRemarksView *)getRemarkView;
 
-+ (CGFloat)cellHeight;
++ (CGFloat)viewHeight;
 
 - (NSString *)remarkText;
 

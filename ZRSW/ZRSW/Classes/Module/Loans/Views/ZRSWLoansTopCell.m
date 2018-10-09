@@ -183,11 +183,15 @@
     [self setupLayout];
 }
 
+- (void)setImageURL:(NSString *)imageURL {
+    _imageURL = imageURL;
+    [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[ZRSWLoansFlow contentImage]];
+}
 - (void)setupLayout {
-    [self.contentImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.contentImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.right.mas_equalTo(-15);
-        make.centerY.mas_equalTo(self.contentView.mas_centerY);
+        make.top.bottom.mas_equalTo(0);
     }];
 }
 - (UIImageView *)contentImageView {

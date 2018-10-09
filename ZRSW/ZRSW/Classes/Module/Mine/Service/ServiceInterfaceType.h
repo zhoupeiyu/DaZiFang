@@ -86,3 +86,6 @@
 
 // 所有订单
 #define KGetOrderListRequest                         @"KGetOrderListRequest"
+
+// 下订单
+#define KCreateOrderRequest                     @"KCreateOrderRequest"

@@ -234,6 +234,9 @@
 //原文链接地址
 @property (nonatomic, strong) NSString *sourceUrl;
 
+@property (nonatomic, strong) NSString *contentStr;
+
+
 @end
 @interface NewDetailContenModel : BaseModel
 @property (nonatomic, strong) NewDetailContensModel *data;
@@ -271,6 +274,8 @@
 @property (nonatomic, strong) NSString *updateTime;
 //封面图片URL
 @property (nonatomic, strong) NSString *imgUrl;
+
+@property (nonatomic, strong) NSString *faqBodyStr;
 
 @end
 

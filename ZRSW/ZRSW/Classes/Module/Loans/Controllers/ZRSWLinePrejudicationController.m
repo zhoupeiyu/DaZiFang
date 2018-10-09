@@ -8,21 +8,26 @@
 
 #import "ZRSWLinePrejudicationController.h"
 #import "ZRSWLinePrejudicationCells.h"
+#import "OrderService.h"
+
+#define KHeaderViewKey          @"KHeaderViewKey"
+#define KMainViewKey            @"KMainViewKey"
+#define KHeaderViewHeightKey    @"KHeaderViewHeightKey"
+#define KMainViewHeightKey      @"KMainViewHeightKey"
 
 #define KFootBtnHeight      60
 #define KFootViewHeight     40
 #define KHeaderViewHeight   54
 
 @interface ZRSWLinePrejudicationController ()
-
 @property (nonatomic, strong) UIButton *footBtn;
 @property (nonatomic, strong) UIView *footView;
 @property (nonatomic, strong) NSMutableArray *headerTitles;
-@property (nonatomic, strong) LinePrejudicationUserInfoCell *userInfoCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *residenceBookCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *ipCardCell;
-@property (nonatomic, strong) LinePrejudicationImagesCell *houseCardCell;
-@property (nonatomic, strong) LinePrejudicationRemarksCell *remarkCell;
+@property (nonatomic, strong) NSMutableArray *contentViews;
+@property (nonatomic, strong) NSMutableArray *mainViews;
+@property (nonatomic, strong) LinePrejudicationUserInfoView *userInfoView;
+@property (nonatomic, strong) LinePrejudicationRemarksView *remarkView;
+@property (nonatomic, assign) CGFloat contentHeight;
 
 @property (nonatomic, strong) NSString *loanPersonName;
 @property (nonatomic, strong) NSString *loanPersonSex;
@@ -30,16 +35,14 @@
 @property (nonatomic, strong) NSString *loanPersonPhone;
 @property (nonatomic, strong) NSString *loanPersonMoney;
 @property (nonatomic, strong) NSString *remarkText;
-@property (nonatomic, strong) NSMutableArray *residenceBookImages;
-@property (nonatomic, strong) NSMutableArray *ipCardImages;
-@property (nonatomic, strong) NSMutableArray *houseCardImages;
-
+@property (nonatomic, strong) UploadImagesManager *imageManager;
+@property (nonatomic, strong) OrderService *service;
+@property (nonatomic, strong) NSMutableArray *preImages;
 @end
 
 @implementation ZRSWLinePrejudicationController
 
 - (void)viewDidLoad {
-    self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
     self.fd_interactivePopDisabled = YES;
     self.fd_prefersNavigationBarHidden = YES;
@@ -56,45 +59,86 @@
 }
 - (void)setupUI {
     [super setupUI];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, KFootBtnHeight, 0);
-    self.tableView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:self.footBtn];
-    [self setupLayOut];
+    self.scrollView.backgroundColor = [UIColor clearColor];
+    self.scrollView.alwaysBounceVertical = YES;
 }
 - (void)setupConfig {
     [super setupConfig];
     self.title = @"线上预审";
     [self setLeftBackBarButton];
 }
-- (void)setupLayOut {
-    [super setupLayOut];
-    [self.footBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(KFootBtnHeight);
-    }];
-}
+
 - (void)goBack {
     [super goBack];
 }
 
 #pragma mark - action
 
+- (void)back {
+    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+    [self.tabBarController setSelectedIndex:lastIndex];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)footBtnAction {
     if ([self checkUserInfo]) {
+        WS(weakSelf);
         
+        
+        NSMutableArray *allImages = [[NSMutableArray alloc] init];
+        __block NSMutableArray *imageCount = [[NSMutableArray alloc] init];
+        __block NSMutableArray *imageAttri = [[NSMutableArray alloc] init];
+    
+        for (NSInteger index = 0; index < self.mainViews.count; index ++) {
+            LinePrejudicationImagesView *imageView = (LinePrejudicationImagesView *)self.mainViews[index];
+            NSMutableArray *imageArr = [imageView getResultImages];
+            if (imageArr.count > 0) {
+                [allImages addObjectsFromArray:imageArr];
+                [imageCount addObject:@(imageArr.count)];
+            }
+            else {
+                [imageCount addObject:@(0)];
+            }
+        }
+        if (allImages.count == 0 || [imageCount containsObject:@(0)]) {
+            [TipViewManager showToastMessage:@"至少上传一张图片"];
+            return;
+        }
+        [TipViewManager showLoadingWithText:@"图片上传中，请耐心等待..."];
+        [self.imageManager uploadImagesWithImagesArray:allImages completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            [TipViewManager dismissLoading];
+            [TipViewManager showLoadingWithText:@"数据上传中，请耐心等待..."];
+            NSMutableArray *allImageUrls = [imageUrls copy]; // URL 数组
+            if (allImages.count != imageUrls.count) {
+                [TipViewManager dismissLoading];
+                [TipViewManager showToastMessage:@"上传图片失败，请重新上传!"];
+                return;
+            }
+            for (NSInteger count = 0; count < imageCount.count; count ++) { // 遍历存放个数的数组
+                ZRSWOrderLoanInfoCondition *loanCondition = (ZRSWOrderLoanInfoCondition *)weakSelf.loanCondition[count];// 获取对象
+                NSString *loanConditionName = loanCondition.title; // 获取对象标题
+                NSInteger imageNum = ((NSNumber *)imageCount[count]).integerValue;// 个数
+                NSMutableArray *imageUrlArray = [[NSMutableArray alloc] init];// 需要移除的数组
+                NSMutableDictionary *attri = [NSMutableDictionary dictionary]; // URL和标题的字典
+                for (NSInteger index = 0; index < imageNum; index ++) {
+                    [imageUrlArray addObject:allImageUrls[index]]; // 获取URL数组的个数
+                }
+                NSString *imageURL = [imageUrlArray componentsJoinedByString:@","];//#为分隔符
+                [attri setObject:imageURL forKey:loanConditionName];
+                [imageAttri addObject:attri];
+                [imageUrlArray removeObjectsInArray:allImageUrls];
+            }
+            [self.service createOrderLoanId:weakSelf.loanId loanUserName:weakSelf.loanPersonName loanUserSex:weakSelf.loanPersonSex.integerValue loanUserAddress:weakSelf.loanPersonAdd loanUserPhone:weakSelf.loanPersonPhone loanMoney:weakSelf.loanPersonMoney remark:weakSelf.remarkText condition:imageAttri delegate:weakSelf];
+        }];
     }
 }
 - (BOOL)checkUserInfo {
-    self.loanPersonName =   [self.userInfoCell loanPersonName];
-    self.loanPersonSex =    [self.userInfoCell loanPersonSex];
-    self.loanPersonAdd =    [self.userInfoCell loanPersonAdd];
-    self.loanPersonPhone =  [self.userInfoCell loanPersonPhone];
-    self.loanPersonMoney =  [self.userInfoCell loanPersonMoney];
-    self.remarkText =       [self.remarkCell remarkText];
-    self.residenceBookImages = [self.residenceBookCell getResultImages];
-    self.ipCardImages = [self.ipCardCell getResultImages];
-    self.houseCardImages = [self.houseCardCell getResultImages];
+    self.loanPersonName =   [self.userInfoView loanPersonName];
+    self.loanPersonSex =    [self.userInfoView loanPersonSex];
+    self.loanPersonAdd =    [self.userInfoView loanPersonAdd];
+    self.loanPersonPhone =  [self.userInfoView loanPersonPhone];
+    self.loanPersonMoney =  [self.userInfoView loanPersonMoney];
+    self.remarkText =       [self.remarkView remarkText];
+    
     NSString *errorString = @"";
     if (self.loanPersonName.length == 0) {
         errorString = @"请输入实际贷款人姓名";
@@ -111,15 +155,6 @@
     else if (self.loanPersonMoney.length == 0) {
         errorString = @"请输入贷款金额";
     }
-    else if (self.residenceBookImages.count == 0) {
-        errorString = @"请选择户口本照片";
-    }
-    else if (self.ipCardImages.count == 0) {
-        errorString = @"请选择身份证照片";
-    }
-    else if (self.houseCardImages.count == 0) {
-        errorString = @"请选择房产证照片";
-    }
     if (errorString.length != 0) {
         [TipViewManager showToastMessage:errorString];
         return NO;
@@ -128,113 +163,144 @@
         return YES;
     }
 }
-#pragma mark - delegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+- (void)setLoanCondition:(NSArray<ZRSWOrderLoanInfoCondition *> *)loanCondition {
+    _loanCondition = loanCondition;
+    [self.headerTitles removeAllObjects];
+    [self.contentViews removeAllObjects];
+    [self.mainViews removeAllObjects];
+    self.contentHeight = 0.0f;
+    [self.mainViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIView *view = (UIView *)obj;
+        [view removeFromSuperview];
+    }];
+    {// 添加第一个view数组
+        CGFloat headerH = 10;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[self getHeaderView] forKey:KHeaderViewKey];
+        [dic setObject:self.userInfoView forKey:KMainViewKey];
+        [dic setObject:@(headerH) forKey:KHeaderViewHeightKey];
+        [dic setObject:@([LinePrejudicationUserInfoView viewHeight]) forKey:KMainViewHeightKey];
+        [self.contentViews addObject:dic];
+        self.contentHeight += headerH;
+        self.contentHeight += [LinePrejudicationUserInfoView viewHeight];
+    }
+    {
+        // 常见header标题数组
+        for (ZRSWOrderLoanInfoCondition *conditionModel in loanCondition) {
+            [self.headerTitles addObject:conditionModel.title];
+        }
+        [_headerTitles addObject:@"备注"];
+        // 添加View
+        for (NSInteger index = 0; index < self.headerTitles.count; index ++) {
+            NSString *title = self.headerTitles[index];
+            UIView *headerView = [self getHeaderView:title tag:index needBtn:index != self.headerTitles.count - 1];
+            UIView *contentView = index != self.headerTitles.count - 1 ? [self getImagesView] : self.remarkView;
+            CGFloat contentHeight = index != self.headerTitles.count - 1 ? [LinePrejudicationImagesView viewHeight] : [LinePrejudicationRemarksView viewHeight];
+            CGFloat headerHeight = KHeaderViewHeight;
+            
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setObject:headerView forKey:KHeaderViewKey];
+            [dic setObject:contentView forKey:KMainViewKey];
+            [dic setObject:@(headerHeight) forKey:KHeaderViewHeightKey];
+            [dic setObject:@(contentHeight) forKey:KMainViewHeightKey];
+            [self.contentViews addObject:dic];
+            if (index != self.headerTitles.count - 1) {
+                [self.mainViews addObject:contentView];
+            }
+            self.contentHeight += headerHeight;
+            self.contentHeight += contentHeight;
+        }
+        
+    }
+    {
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setObject:[self getHeaderView] forKey:KHeaderViewKey];
+        [dic setObject:self.footView forKey:KMainViewKey];
+        [dic setObject:@(0) forKey:KHeaderViewHeightKey];
+        [dic setObject:@(KFootViewHeight) forKey:KMainViewHeightKey];
+        [self.contentViews addObject:dic];
+        self.contentHeight += KFootViewHeight;
+    }
+    [self.view addSubview:self.footBtn];
+    [self setupLayOut];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+- (void)setupLayOut {
+    [super setupLayOut];
+    __block UIView *lastView = nil;
+    [self.contentViews enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        CGFloat headerViewHeight = ((NSNumber *)dic[KHeaderViewHeightKey]).integerValue;
+        CGFloat mainViewHeight = ((NSNumber *)dic[KMainViewHeightKey]).integerValue;
+        UIView *headerView = (UIView *)dic[KHeaderViewKey];
+        UIView *mainView = (UIView *)dic[KMainViewKey];
+        if (lastView) {
+            [headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(lastView.mas_bottom);
+                make.left.mas_equalTo(0);
+                make.height.mas_equalTo(headerViewHeight);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+            }];
+            
+        }
+        else {
+            [headerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(0);
+                make.left.mas_equalTo(0);
+                make.height.mas_equalTo(headerViewHeight);
+                make.width.mas_equalTo(SCREEN_WIDTH);
+            }];
+        }
+        [mainView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(headerView.mas_bottom);
+            make.left.mas_equalTo(0);
+            make.height.mas_equalTo(mainViewHeight);
+            make.width.mas_equalTo(SCREEN_WIDTH);
+        }];
+        lastView = mainView;
+    }];
+    [self.footBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(KFootBtnHeight);
+    }];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.contentHeight + KFootBtnHeight);
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = [NSString stringWithFormat:@"%zd ----- %zd",indexPath.row,indexPath.section];
-    
-    if (indexPath.section == 0) {
-        LinePrejudicationUserInfoCell *userInfoCell = [LinePrejudicationUserInfoCell getCellWithTableView:tableView];
-        self.userInfoCell = userInfoCell;
-        return userInfoCell;
-    }
-    else if (indexPath.section == 1) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.residenceBookCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 2) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.ipCardCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 3) {
-        LinePrejudicationImagesCell *cell = [LinePrejudicationImagesCell getImageCell:tableView];
-        cell.presentedVC = self;
-        self.houseCardCell = cell;
-        return cell;
-    }
-    else if (indexPath.section == 4) {
-        LinePrejudicationRemarksCell *remarksCell = [LinePrejudicationRemarksCell getCellWithTableView:tableView];
-        self.remarkCell = remarksCell;
-        return remarksCell;
-    }
-    return cell;
-
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return [LinePrejudicationUserInfoCell cellHeight];
-    }
-    else if (indexPath.section == 4) {
-        return [LinePrejudicationRemarksCell cellHeight];
-    }
-    else {
-        return [LinePrejudicationImagesCell cellHeight];
-    }
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 4) {
-        return KFootViewHeight;
-    }
-    else {
-        return 0.00001;
-    }
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 10;
-    }
-    else {
-        return KHeaderViewHeight;
-    }
-}
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == 4) {
-        return self.footView;
-    }
-    else {
-        UIView *view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor clearColor];
-        return view;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        UIView *view = [[UIView alloc] init];
-        view.backgroundColor = [UIColor clearColor];
-        return view;
-    }
-    else {
-        NSString *title = self.headerTitles[section - 1];
-        return [self getHeaderView:title tag:section needBtn:section == 4];
-    }
-    return nil;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-
 #pragma mark - action
 - (void)exampleAction:(UIButton *)btn {
-    [TipViewManager showToastMessage:[NSString stringWithFormat:@"%zd",btn.tag]];
+    NSArray *imageURLs = self.loanCondition[btn.tag].exampleImgUrls;
+    ZLPhotoActionSheet *ac = [[ZLPhotoActionSheet alloc] init];
+    ac.configuration.maxSelectCount = 5;
+    ac.configuration.maxPreviewCount = 10;
+    ac.configuration.navBarColor = [UIColor blackColor];
+    ac.sender = self;
+    //预览网络图片
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    for (NSString *url in imageURLs) {
+        NSDictionary *dic = GetDictForPreviewPhoto(url, ZLPreviewPhotoTypeURLImage);
+        [images addObject:dic];
+    }
+    [ac previewPhotos:images index:0 hideToolBar:YES complete:^(NSArray * _Nonnull photos) {
+        
+    }];
 }
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KCreateOrderRequest]) {
+            ZRSWCreateModel *model = (ZRSWCreateModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"资料上传成功!"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+}
+
 #pragma mark - lazy
 
 - (UIButton *)footBtn {
@@ -270,13 +336,14 @@
             make.centerY.mas_equalTo(_footView.mas_centerY).offset(8);
             make.right.mas_equalTo(-15);
         }];
+        [self.scrollView addSubview:_footView];
     }
     return _footView;
 }
 - (NSMutableArray *)headerTitles {
     if (!_headerTitles) {
         _headerTitles = [[NSMutableArray alloc] init];
-        [_headerTitles addObjectsFromArray:@[@"上传户口本图片",@"上传身份证图片",@"上传房产证图片",@"备注"]];
+        
     }
     return _headerTitles;
 }
@@ -284,6 +351,7 @@
     UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor clearColor];
     bgView.frame = CGRectMake(0, 0, SCREEN_WIDTH, KHeaderViewHeight);
+    [self.view addSubview:bgView];
     
     UIView *bottomBGView = [[UIView alloc] init];
     bottomBGView.backgroundColor = [UIColor whiteColor];
@@ -335,6 +403,62 @@
         make.left.right.mas_equalTo(0);
         make.height.mas_equalTo(1);
     }];
+    
     return bgView;
+}
+
+- (UIView *)getHeaderView {
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor clearColor];
+    [self.scrollView addSubview:headerView];
+    return headerView;
+}
+
+- (LinePrejudicationImagesView *)getImagesView {
+    LinePrejudicationImagesView *imagesView = [[LinePrejudicationImagesView alloc] init];
+    imagesView.presentedVC = self;
+    [self.scrollView addSubview:imagesView];
+    return imagesView;
+}
+- (LinePrejudicationUserInfoView *)userInfoView {
+    if (!_userInfoView) {
+        _userInfoView = [[LinePrejudicationUserInfoView alloc] init];
+        [self.scrollView addSubview:_userInfoView];
+    }
+    return _userInfoView;
+}
+- (LinePrejudicationRemarksView *)remarkView {
+    if (!_remarkView) {
+        _remarkView = [[LinePrejudicationRemarksView alloc] init];
+        [self.scrollView addSubview:_remarkView];
+    }
+    return _remarkView;
+}
+- (NSMutableArray *)contentViews {
+    if (!_contentViews) {
+        _contentViews = [[NSMutableArray alloc] init];
+    }
+    return _contentViews;
+}
+- (NSMutableArray *)mainViews {
+    if (!_mainViews) {
+        _mainViews = [[NSMutableArray alloc] init];
+    }
+    return _mainViews;
+}
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
+}
+- (OrderService *)service {
+    if (!_service) {
+        _service = [[OrderService alloc] init];
+    }
+    return _service;
 }
 @end

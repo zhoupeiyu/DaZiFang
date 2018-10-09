@@ -30,7 +30,7 @@
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UIButton *confirmBtn;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
-
+@property (nonatomic, strong) UILabel *titleLbl;
 @end
 @implementation PickerView
 
@@ -81,6 +81,13 @@
     _buttonBarView.backgroundColor = [UIColor getBackgroundColor];
     [self addSubview:_buttonBarView];
     
+    _titleLbl = [[UILabel alloc] init];
+    _titleLbl.textColor = [UIColor blackColor];
+    _titleLbl.font = [UIFont boldSystemFontOfSize:18];
+    _titleLbl.textAlignment = NSTextAlignmentCenter;
+    _titleLbl.text = @"我是标题";
+    [self addSubview:_titleLbl];
+    
     _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
     [_cancelBtn setTitleColor:[UIColor getFontBlueColor] forState:UIControlStateNormal];
@@ -95,18 +102,28 @@
     
 }
 
+- (void)setTitle:(NSString *)title {
+    _title = title;
+    self.titleLbl.text = title;
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.pickerHeight = 255.f;
     self.maskView.frame = CGRectMake(0.f, 0.f, self.width, self.height - self.pickerHeight - kPickerViewButtonBarHeight);
     
-    self.pickerView.frame = CGRectMake(0.f, self.height - self.pickerHeight, self.width, self.pickerHeight);
+    self.pickerView.frame = CGRectMake(0.f, self.height - self.pickerHeight - kiphonexBottom, self.width, self.pickerHeight);
     [self.pickerView setNeedsLayout];
     
     self.buttonBarView.frame = CGRectMake(0.f, self.pickerView.top - kPickerViewButtonBarHeight, self.width, kPickerViewButtonBarHeight);
     self.cancelBtn.frame = CGRectMake(kPickerViewButtonHMargin, self.buttonBarView.top, kPickerViewButtonWidth, self.buttonBarView.height);
     self.confirmBtn.frame = CGRectMake(self.width - kPickerViewButtonHMargin - kPickerViewButtonWidth,
                                        self.buttonBarView.top, kPickerViewButtonWidth, self.buttonBarView.height);
+    [self.titleLbl sizeToFit];
+    self.titleLbl.top = self.buttonBarView.top;
+    self.titleLbl.height = self.buttonBarView.height;
+    self.titleLbl.centerX = self.buttonBarView.centerX;
 }
 
 - (void)confirmAction {
@@ -165,6 +182,14 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    for (UIView *subView in pickerView.subviews) {
+        if (subView.frame.size.height <= 1) {//获取分割线view
+            subView.hidden = NO;
+            subView.frame = CGRectMake(0, subView.frame.origin.y, subView.frame.size.width, 1);
+            subView.backgroundColor = [UIColor colorFromRGB:0xEDEDED];//设置分割线颜色
+        }
+    }
     if (self.dataDict) {
         if (0 == component) {
             return self.dataDictKeys[row];

@@ -18,7 +18,7 @@
 #import "ZRSWRemindListController.h"
 #import "UserService.h"
 #import "ZRSWOrderListController.h"
-
+#import "ZRSWLoginController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -34,9 +34,27 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if ([UserModel hasLogin]) {
+        self.tableView.hidden = NO;
+    }
+    else {
+        self.tableView.hidden = YES;
+        ZRSWLoginController *loginVC = [ZRSWLoginController getLoginViewController];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:loginVC];
+        WS(weakSelf);
+        [loginVC setCancelBlock:^{
+//            NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+            [weakSelf.tabBarController setSelectedIndex:0];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }];
+        [self presentViewController:nav animated:YES completion:nil];
+        return;
+    }
     
     [super viewWillAppear:animated];
     [self updateUserInfo];
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +68,7 @@
     [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_set"] AndHighLightImage:[UIImage imageNamed:@""]];
     [self.rightBarButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo) name:UserLoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserIcon:) name:ChangeUserInfoSuccessNotification object:nil];
 }
 
 - (void)setupUI {
@@ -129,10 +148,14 @@
     setting.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:setting animated:YES];
 }
+
+- (void)changeUserIcon:(NSNotification *)noti {
+    
+}
 - (void)updateUserInfo {
     UserModel *model = [UserModel getCurrentModel];
     ZRSWMineModel *mineModel = self.dataSource[0][0];
-    if ([UserModel hasLogin] && model) {
+    if (model) {
         mineModel.iconName = model.data.headImgUrl.length > 0 ? model.data.headImgUrl : @"";
         mineModel.title = model.data.nickName > 0 ? model.data.nickName : DefaultNickName;
         mineModel.desInfo = model.data.myId.length > 0 ? [NSString stringWithFormat:@"掮客号:%@",model.data.myId] :@"";

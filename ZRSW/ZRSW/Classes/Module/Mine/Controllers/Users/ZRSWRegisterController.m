@@ -188,6 +188,7 @@
                 [UserModel updateUserModel:model];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];

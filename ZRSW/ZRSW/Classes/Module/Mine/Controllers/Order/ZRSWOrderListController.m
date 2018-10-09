@@ -22,7 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self loadData];
+    [self loadData];
+    self.fd_interactivePopDisabled = YES;
+    self.fd_prefersNavigationBarHidden = YES;
 }
 
 - (void)viewWillLayoutSubviews {

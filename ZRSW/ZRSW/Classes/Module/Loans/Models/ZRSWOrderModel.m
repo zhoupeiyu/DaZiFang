@@ -209,3 +209,11 @@
 }
 
 @end
+
+@implementation ZRSWCreateDetailModel
+
+@end
+
+@implementation ZRSWCreateModel
+
+@end

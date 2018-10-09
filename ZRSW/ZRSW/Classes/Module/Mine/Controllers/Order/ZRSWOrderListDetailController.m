@@ -28,6 +28,8 @@
     self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
     [self setupTableView];
+    self.fd_interactivePopDisabled = YES;
+    self.fd_prefersNavigationBarHidden = YES;
 }
 - (void)setupTableView {
     [self enableLoadMore:YES];
@@ -39,16 +41,47 @@
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         self.lastID = @"";
-        [self.service getOrderList:self.lastID orderStatus:self.tabType delegate:self];
+        if (self.tabType == 0) {
+            [self.service getOrderList:self.lastID orderStatus:[self getOrderStates] delegate:self];
+        }
+        else {
+            [self.service getOrderList:self.lastID orderStatus:[self getOrderStates] delegate:self];
+        }
         [self hiddenFooter:YES];
     }
     
+}
+- (NSString *)getOrderStates {
+//    订单状态：0=审核中；1=已通过；3=已放款；8=已拒绝（包含初审未过和拒绝放款）;默认为空，查询所有订单
+    NSString *states = @"";
+    if (self.tabType == 0) {
+        states = @"";
+    }
+    else if (self.tabType == 1) {
+        states = @"0";
+    }
+    else if (self.tabType == 2) {
+        states = @"1";
+    }
+    else if (self.tabType == 3) {
+        states = @"3";
+    }
+    else if (self.tabType == 4) {
+        states = @"8";
+    }
+    return states;
 }
 - (void)loadMoreData {
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         ZRSWOrderListDetailModel *detailModel = self.totalList.lastObject;
-        [self.service getOrderList:detailModel.id orderStatus:self.tabType delegate:self];
+        if (self.tabType == 0) {
+            [self.service getOrderList:detailModel.id orderStatus:[self getOrderStates] delegate:self];
+        }
+        else {
+            [self.service getOrderList:detailModel.id orderStatus:[self getOrderStates] delegate:self];
+        }
+        
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

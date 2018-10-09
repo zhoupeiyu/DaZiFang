@@ -27,6 +27,7 @@
 @property (nonatomic, assign) CGFloat pickerHeight; // the height of picker view
 @property (nonatomic, assign) NSInteger preselectedIndex;
 @property (nonatomic, assign) NSInteger preselectedIndexForSecond;
+@property (nonatomic, strong) NSString *title;
 
 - (instancetype)initWithData:(NSArray *)data;
 - (instancetype)initWithArray:(NSArray *)firstArray andDictionary:(NSDictionary *)dict;

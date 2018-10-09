@@ -32,8 +32,11 @@
 
 
 @interface ZRSWLoansFlow : UITableViewCell
+
 + (ZRSWLoansFlow *)getCellWithTableView:(UITableView *)tableView;
 + (CGFloat)cellHeigh;
+@property (nonatomic, strong) NSString *imageURL;
+
 
 @end
 

@@ -83,7 +83,60 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 
 #pragma mark - WebView Delegate
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
+        //创建JSContext对象
+        JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+        //OC调用JS方法
+        //options:nil 不能修改否则h5识别不了
+        if (self.detailContensModel || self.questionDetailContentModel) {
+            id detailsJsonString = nil;
+            NSString *detailsDicJsonString = nil;
+            if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+                detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+                detailsDicJsonString = @{@"htmlType":@"news",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }else if (self.type == DetailsTypeCommentQuestion){
+                detailsJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+                detailsDicJsonString = @{@"htmlType":@"faqInfo",@"contentData":detailsJsonString}.yy_modelToJSONString;
+            }
+        
+            //           NSString * method = @"vm.getAppData";
+            //         JSValue * function = [context objectForKeyedSubscript:method];
+            //         [function callWithArguments:@[detailsDicJsonString]];
+            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+        }
+//
+//
+//        }else {
+//            [context evaluateScript:[NSString stringWithFormat:@"getAppData('')"]];
+    //        }JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    //OC调用JS方法
+    //options:nil 不能修改否则h5识别不了
+//    JSContext *context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+//    if (self.detailContensModel || self.questionDetailContentModel) {
+////        id detailsJsonString = [self.detailContensModel yy_modelToJSONObject];
+////        id questionJsonString = [self.questionDetailContentModel yy_modelToJSONObject];
+//        //
+//        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithDictionary:[BaseNetWorkService netWorkHeader]];
+//        if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+//            [dic setObject:@"news" forKey:@"htmlType"];
+//            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/newsInfo"] forKey:@"url"];
+//            [dic setObject:self.detailModel.id forKey:@"newsId"];
+//        }else if (self.type == DetailsTypeCommentQuestion){
+//            [dic setObject:@"faqInfo" forKey:@"htmlType"];
+//            [dic setObject:[NSString stringWithFormat:@"%@%@",API_Host,@"api/index/faqInfo"] forKey:@"url"];
+//            [dic setObject:self.questionModel.id forKey:@"faqId"];
+//        }
+//        NSString *detailsDicJsonString = dic.yy_modelToJSONString;
+//        [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
+//    }
+}
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    return YES;
+    
     NSString *url=[[[request URL]relativeString]stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];//个人情况，url里面会加入中文
 //    LLog(@"%@",url);
     if ([url hasPrefix:@"file://"] && [url containsString:@"News.html"]){
@@ -112,26 +165,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         return YES;
     }
     BOOL shouldStart = YES;
-    //TODO: Implement TOModalWebViewController Delegate callback
-
-    //if the URL is the load completed notification from JavaScript
-//    if ([request.URL.absoluteString isEqualToString:kCompleteRPCURL]){
-//        return NO;
-//    }
-//    //If the URL contrains a fragement jump (eg an anchor tag), check to see if it relates to the current page, or another
-//    //If we're merely jumping around the same page, don't perform a new loading bar sequence
-//    BOOL isFragmentJump = NO;
-//    if (request.URL.fragment){
-//        NSString *nonFragmentURL = [request.URL.absoluteString stringByReplacingOccurrencesOfString:[@"#" stringByAppendingString:request.URL.fragment] withString:@""];
-//        isFragmentJump = [nonFragmentURL isEqualToString:webView.request.URL.absoluteString];
-//    }
-//
-//    BOOL isTopLevelNavigation = [request.mainDocumentURL isEqual:request.URL];
-//    BOOL isHTTP = [request.URL.scheme isEqualToString:@"http"] || [request.URL.scheme isEqualToString:@"https"];
-//    if (shouldStart && !isFragmentJump && isHTTP && isTopLevelNavigation && navigationType != UIWebViewNavigationTypeBackForward){
-//        //Save the URL in the accessor property
-//        self.url = [request URL];
-//    }
     return shouldStart;
 }
 
@@ -173,6 +206,8 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
                 CommentQuestionDetailContentModel *questionDetailContentModel = commentQuestionDetail.data;
                 self.questionDetailContentModel = questionDetailContentModel;
                 [self setDetailContens];
+//                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+//                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",commentQuestionDetail.error_msg);
                 [TipViewManager showToastMessage:commentQuestionDetail.error_msg];
@@ -301,7 +336,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     if (!_webView) {
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT-kNavigationBarH)];
         _webView.delegate = self;
-        _webView.backgroundColor = [UIColor redColor];
+        _webView.backgroundColor = [UIColor clearColor];
         [_webView sizeToFit];
         _webView.scalesPageToFit = YES;
     }

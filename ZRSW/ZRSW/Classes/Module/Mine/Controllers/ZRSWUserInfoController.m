@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UserService *service;
 @property (nonatomic, strong) NSString *myID;
 @property (nonatomic, assign) BOOL isCanChangeMyID;
-
+@property (nonatomic, strong) UIImage *selectedImage;
 @end
 
 @implementation ZRSWUserInfoController
@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.title = @"基础消息";
+    self.title = @"基础信息";
     self.isCanChangeMyID = [UserModel getCurrentModel].data.myId.length == 0;
     [self setRightBarButtonWithText:@"保存"];
     [self.rightBarButton addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
@@ -85,9 +85,10 @@ typedef enum : NSUInteger {
                 UserModel *userModel = [UserModel getCurrentModel];
                 userModel.data.headImgUrl = imageUrls.firstObject;
                 [UserModel updateUserModel:userModel];
-                weakSelf.selectedImages = imageUrls;
+                [weakSelf.selectedImages addObjectsFromArray:imageUrls];
                 model.image = selectedImages.firstObject;
                 [weakSelf.tableView reloadData];
+                self.selectedImage = selectedImages.firstObject;
             }];
         }
     }];
@@ -152,6 +153,9 @@ typedef enum : NSUInteger {
             model.data.myId = self.myID;
             model.data.nickName = self.name;
             [UserModel updateUserModel:model];
+            if (self.selectedImages) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeUserInfoSuccessNotification object:self.selectedImage];
+            }
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         else {
@@ -230,6 +234,12 @@ typedef enum : NSUInteger {
         _service = [[UserService alloc] init];
     }
     return _service;
+}
+- (NSMutableArray *)selectedImages {
+    if (!_selectedImages) {
+        _selectedImages = [[NSMutableArray alloc] init];
+    }
+    return _selectedImages;
 }
 - (void)sendNewObjcMsg:(id)target selector:(SEL)sel withObj:(id)obj {
     if (![target respondsToSelector:sel]) {

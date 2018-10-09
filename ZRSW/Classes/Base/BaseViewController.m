@@ -7,11 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "AppDelegate.h"
+#import "ZRSWLoginController.h"
 
 @interface BaseViewController ()
-
-
-
+@property (nonatomic, assign) BOOL pushToLogin;
 
 @end
 
@@ -75,6 +75,31 @@
 }
 
 - (void)userLoginError:(NSNotification *)noti {
+    [UserModel removeUserData];
+    [TipViewManager dismissLoading];
+    if (self.pushToLogin) {
+        //防止viewWillAppear里有网络请求，导致登录界面返回后又继续跳登录
+        return;
+    }
+    self.pushToLogin = YES;
+    UIViewController *rootVC = [(AppDelegate *)[UIApplication sharedApplication].delegate window].rootViewController;
+    UIViewController *presentedVC = rootVC;
+    while (presentedVC.presentedViewController) {
+        presentedVC = presentedVC.presentedViewController;
+    }
+    if ([presentedVC isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nav = (UINavigationController *)presentedVC;
+        UIViewController *navVC = [nav.viewControllers firstObject];
+        if ([navVC isKindOfClass:[ZRSWLoginController class]]) {
+            return;
+        }
+    }
+    ZRSWLoginController *loginViewController = [[ZRSWLoginController alloc] init];
+    BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:loginViewController];
+    NSString *alertStr = noti.object[@"error_msg"];
+    [TipViewManager showAlertControllerWithTitle:@"请重新登录" message:alertStr preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"确定" handler:^(PSTAlertAction *action) {
+        [presentedVC presentViewController:nav animated:YES completion:nil];
+    } controller:self completion:nil];
     
 }
 /**

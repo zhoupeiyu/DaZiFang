@@ -30,15 +30,20 @@
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *password;
 
-@property (nonatomic, assign) LoginVCType type;
-
 @end
 
 @implementation ZRSWLoginController
 
-+ (ZRSWLoginController *)getLoginViewController:(LoginVCType)type {
+- (void)goBack {
+    if (self.cancelBlock) {
+        self.cancelBlock();
+        return;
+    }
+    [super goBack];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
++ (ZRSWLoginController *)getLoginViewController {
     ZRSWLoginController *vc = [[ZRSWLoginController alloc] init];
-    vc.type = type;
     return vc;
 }
 - (void)viewDidLoad {
@@ -150,6 +155,7 @@
                 [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];
@@ -159,6 +165,17 @@
 }
 #pragma mark - event
 
++ (void)showLoginViewController {
+    UIViewController *presentVC = [UIViewController currentViewController];
+    [TipViewManager showAlertControllerWithTitle:@"" message:@"您尚未登录，请登录！" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"确定" handler:^(PSTAlertAction *action) {
+        ZRSWLoginController *loginVC = [[ZRSWLoginController alloc] init];
+        BaseNavigationViewController *nav = [[BaseNavigationViewController alloc] initWithRootViewController:loginVC];
+        [presentVC presentViewController:nav animated:YES completion:nil];
+    } controller:presentVC completion:^{
+        
+    }];
+    
+}
 - (BOOL)checkRegisterEnabled {
     return _userName.length > 0 && _password.length >= 6;
 }
@@ -169,8 +186,7 @@
 }
 - (void)faceLogin {
     [self endEditing];
-    NSLog(@"刷脸登录");
-    [TipViewManager showToastMessage:@"下期见！！！！！！"];
+    [TipViewManager showToastMessage:@"     下期见     "];
     return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];

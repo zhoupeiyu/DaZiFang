@@ -57,7 +57,7 @@
 #define IS_IPHONE_5_OR_LESS             (IS_IPHONE && SCREEN_MAX_LENGTH <= 568.0)
 #define IS_IPHONE_6_OR_LESS             (IS_IPHONE && SCREEN_MAX_LENGTH <= 667.0)
 
-#define IS_IPHONE_X                        ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define IS_IPHONE_X                      ((int)((SCREEN_HEIGHT/SCREEN_WIDTH)*100) == 216)?YES:NO
 //scale
 #define Scare                           [[UIScreen mainScreen] scale]
 #define KSeparatorLineHeight                      (Scare >= 1 ? 1/Scare : 1)
