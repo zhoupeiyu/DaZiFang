@@ -57,13 +57,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [rightButton.titleLabel setFont:[UIFont systemFontOfSize:16]];
     [rightButton addTarget:self action:@selector(shareButtonClck:) forControlEvents:UIControlEventTouchUpInside];
     [self setRightBarRightButton:rightButton leftButton:leftButton];
-    if (self.type == DetailsTypePopularInformation) {
-        self.navigationItem.title = @"资讯详情";
-    }else if (self.type == DetailsTypeSystemNotification){
-        self.navigationItem.title = @"公告详情";
-    }else if (self.type == DetailsTypeCommentQuestion){
-        self.navigationItem.title = @"问题详情";
-    }
+//    if (self.type == DetailsTypePopularInformation) {
+//        self.navigationItem.title = @"资讯详情";
+//    }else if (self.type == DetailsTypeSystemNotification){
+//        self.navigationItem.title = @"公告详情";
+//    }else if (self.type == DetailsTypeCommentQuestion){
+//        self.navigationItem.title = @"问题详情";
+//    }
     [self setupUI];
 
 }
