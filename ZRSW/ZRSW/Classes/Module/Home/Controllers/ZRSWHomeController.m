@@ -433,7 +433,7 @@
         [loanButton.layer setMasksToBounds:YES];
         [loanButton setTitle:@"我要贷款" forState:UIControlStateNormal];
         [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
-        loanButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];;
+        [loanButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
         [loanButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_loanView addSubview:loanButton];
     }

@@ -49,6 +49,9 @@
     if (!cell) {
         cell = [[ZRSWHomeQuestionCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWHomeQuestionCell"];
     }
+    if (indexPath.row == 0) {
+        cell.topLineHidden = YES;
+    }
     CommentQuestionModel *model = self.dataListSource[indexPath.row];
     cell.questionModel = model;
     return cell;

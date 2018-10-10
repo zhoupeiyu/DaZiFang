@@ -43,6 +43,7 @@
 		3C7E4B1221525AA70058D3E2 /* ZRSWMineListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1121525AA70058D3E2 /* ZRSWMineListCell.m */; };
 		3C7E4B1521525AC30058D3E2 /* ZRSWMineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */; };
 		3C7E4B1921528D070058D3E2 /* ZRSWShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */; };
+		3CD1E50E216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1E50D216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.m */; };
 		3CD3C7BF215FC77F00DE6199 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3C6E7215FC77F00DE6199 /* UIViewController+HUD.m */; };
 		3CD3C7C0215FC77F00DE6199 /* NSDate+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3C6E8215FC77F00DE6199 /* NSDate+Category.m */; };
 		3CD3C7C1215FC77F00DE6199 /* NSString+Valid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3C6E9215FC77F00DE6199 /* NSString+Valid.m */; };
@@ -779,6 +780,8 @@
 		3C7E4B1421525AC30058D3E2 /* ZRSWMineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineModel.m; sourceTree = "<group>"; };
 		3C7E4B1721528D070058D3E2 /* ZRSWShareModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWShareModel.h; sourceTree = "<group>"; };
 		3C7E4B1821528D070058D3E2 /* ZRSWShareModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWShareModel.m; sourceTree = "<group>"; };
+		3CD1E50C216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWHomeSystemAnnouncementCell.h; sourceTree = "<group>"; };
+		3CD1E50D216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWHomeSystemAnnouncementCell.m; sourceTree = "<group>"; };
 		3CD3C6E1215FC77F00DE6199 /* EaseUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseUI.h; sourceTree = "<group>"; };
 		3CD3C6E4215FC77F00DE6199 /* EaseLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EaseLocalDefine.h; sourceTree = "<group>"; };
 		3CD3C6E6215FC77F00DE6199 /* UIViewController+DismissKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DismissKeyboard.h"; sourceTree = "<group>"; };
@@ -3861,6 +3864,8 @@
 				E5B59BAF214EC55E00726DE9 /* 6666.h */,
 				3C7E4AD8214FA2270058D3E2 /* ZRSWHomeNewsCell.h */,
 				3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */,
+				3CD1E50C216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.h */,
+				3CD1E50D216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.m */,
 				3C7E4AE22150D1360058D3E2 /* ZRSWHomeQuestionCell.h */,
 				3C7E4AE32150D1360058D3E2 /* ZRSWHomeQuestionCell.m */,
 				3C7E4ADE214FBBB10058D3E2 /* ZRSWHomeNewsHeaderView.h */,
@@ -5274,6 +5279,7 @@
 				3CD3C7C5215FC77F00DE6199 /* FixFopen.c in Sources */,
 				3C10D64821548A930019112F /* ZRSWRemindListController.m in Sources */,
 				E5565F3521666CE800747A49 /* ZLBrushBoardImageView.m in Sources */,
+				3CD1E50E216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.m in Sources */,
 				E5B59A4F214EBEE800726DE9 /* UIView+Layout.m in Sources */,
 				E5B59A23214EBEE800726DE9 /* NSDictionary+NilSafe.m in Sources */,
 				E55340A52164620F003631E6 /* NSInvocation+JKBb.m in Sources */,

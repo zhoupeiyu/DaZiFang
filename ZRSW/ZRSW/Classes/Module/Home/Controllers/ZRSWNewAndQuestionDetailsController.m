@@ -267,6 +267,17 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(30),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
         self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
         self.contentLabel.frame = CGRectMake(0,0,0,0);
+    }else  if (self.type == DetailsTypeSystemNotification){
+        [self.sourceNameLabel removeFromSuperview];
+        [self.readerIcon removeFromSuperview];
+        [self.readersLabel removeFromSuperview];
+        self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
+        self.readerIcon.frame = CGRectMake(0,0,0,0);
+        self.readersLabel.frame = CGRectMake(0,0,0,0);
+        self.dateLabel.frame = CGRectMake(self.roundupLabel.left,self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
+        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        [self.contentLabel sizeToFit];
     }else{
         self.sourceNameLabel.frame = CGRectMake(kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(64), kUI_HeightS(10));
         self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
@@ -281,25 +292,27 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         if (self.questionDetailContentModel.imgUrl == nil ||[self.questionDetailContentModel.imgUrl isEqualToString:@""] ) {
             [self.imgeView removeFromSuperview];
             self.imgeView.frame = CGRectMake(0,0,0,0);
+            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
         }else{
             self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+             self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
         }
     }else{
         if (self.detailContensModel.imgUrl == nil ||[self.detailContensModel.imgUrl isEqualToString:@""] ) {
             [self.imgeView removeFromSuperview];
             self.imgeView.frame = CGRectMake(0,0,0,0);
+            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
+
         }else{
             self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
         }
     }
-
-
-    self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.contentView.frame) + kUI_HeightS(20));
 }
 
 - (void)setDetailContens{
-    if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
+    if (self.type == DetailsTypePopularInformation) {
         self.roundupLabel.text = self.detailContensModel.roundup;
         self.sourceNameLabel.text = self.detailContensModel.sourceName;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
@@ -311,6 +324,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         [formatter setDateFormat:@"yyyy.MM.dd"];
         NSString *dateString = [formatter stringFromDate:date];
         self.dateLabel.text = dateString;
+        self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
+        NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+        self.contentLabel.attributedText = htmlString;
+        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
+    }else if (self.type == DetailsTypeSystemNotification) {
+        self.roundupLabel.text = self.detailContensModel.title;
+        self.dateLabel.text = self.detailContensModel.updateTime;
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
         NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         self.contentLabel.attributedText = htmlString;

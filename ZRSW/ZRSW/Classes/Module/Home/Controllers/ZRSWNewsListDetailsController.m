@@ -8,6 +8,7 @@
 
 #import "ZRSWNewsListDetailsController.h"
 #import "ZRSWHomeNewsCell.h"
+#import "ZRSWHomeSystemAnnouncementCell.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
 #define  kPageSize 20
 @interface ZRSWNewsListDetailsController ()<BaseNetWorkServiceDelegate>
@@ -44,23 +45,55 @@
     [self enableLoadMore:YES];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (self.type == NewListTypePopularInformation) {
+        self.tableView.frame = self.view.bounds;
+    }else if (self.type == NewListTypeSystemNotification){
+        self.tableView.frame = CGRectMake(0,kUI_HeightS(10), self.view.bounds.size.width, self.view.bounds.size.height - kUI_HeightS(10));
+    }
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataListSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ZRSWHomeNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeNewsCell"];
-    if (!cell) {
-        cell = [[ZRSWHomeNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWHomeNewsCell"];
+     NewDetailModel *model = self.dataListSource[indexPath.row];
+    if (self.type == NewListTypePopularInformation) {
+        ZRSWHomeNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ZRSWHomeNewsCell"];
+        if (!cell) {
+            cell = [[ZRSWHomeNewsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ZRSWHomeNewsCell"];
+        }
+        if (indexPath.row == 0) {
+            cell.topLineHidden = YES;
+        }
+        cell.detailModel = model;
+        return cell;
+    }else if (self.type == NewListTypeSystemNotification){
+         ZRSWHomeSystemAnnouncementCell *cell = [tableView dequeueReusableCellWithIdentifier:@" ZRSWHomeSystemAnnouncementCell"];
+        if (!cell) {
+            cell = [[ ZRSWHomeSystemAnnouncementCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@" ZRSWHomeSystemAnnouncementCell"];
+        }
+        if (indexPath.row == 0) {
+            cell.topLineHidden = YES;
+        }
+        cell.detailModel = model;
+        return cell;
+    }else{
+        return nil;
     }
-    NewDetailModel *model = self.dataListSource[indexPath.row];
-    cell.detailModel = model;
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return kUI_HeightS(120);
+    if (self.type == NewListTypePopularInformation) {
+        return kUI_HeightS(120);
+    }else if (self.type == NewListTypeSystemNotification){
+        return kUI_HeightS(90);
+    }else{
+        return kUI_HeightS(0);
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -69,7 +102,7 @@
     ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
     if (self.type == NewListTypePopularInformation) {
         detailsVC.type = DetailsTypePopularInformation;
-    }else if (self.type == NewListTypePopularInformation){
+    }else if (self.type == NewListTypeSystemNotification){
         detailsVC.type = DetailsTypeSystemNotification;
     }
     detailsVC.detailModel = self.dataListSource[indexPath.row];
