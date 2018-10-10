@@ -213,6 +213,7 @@
 
 - (void)refreshData{
     self.group = dispatch_group_create();
+    [self requsetBannerList];
     [self requsetPopularInformationList];
     [self requsetSystemNotificationList];
     [self requsetCommentQuestionList];
@@ -481,7 +482,7 @@
         _locationLabel.textAlignment = NSTextAlignmentCenter;
         _locationLabel.font = [UIFont systemFontOfSize:16];
         [_locationView addSubview:_locationLabel];
-        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), kUI_WidthS(8), kUI_HeightS(5))];
+        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
         [triangleButton addTarget:self action:@selector(triangleButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];

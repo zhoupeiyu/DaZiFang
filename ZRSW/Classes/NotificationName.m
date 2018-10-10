@@ -8,15 +8,9 @@ NSNotificationName const UserLoginErrorNotification = @"UserLoginErrorNotificati
 
 NSNotificationName const ChangeUserInfoSuccessNotification  = @"ChangeUserInfoSuccessNotification";
 
-
-
-
-
-
-
-
 NSString * const CurrentLocationKey  = @"CurrentLocationKey";
 
+NSString * const CurrentUserIocnImage  = @"CurrentUserIocnImage";
 
 
 NSString * const TabBarDidClickNotificationKey  = @"TabBarDidClickNotificationKey";
