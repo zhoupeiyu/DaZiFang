@@ -213,6 +213,7 @@
 
 - (void)refreshData{
     self.group = dispatch_group_create();
+    [self requsetBannerList];
     [self requsetPopularInformationList];
     [self requsetSystemNotificationList];
     [self requsetCommentQuestionList];
@@ -416,10 +417,15 @@
         titleLabel.font = [UIFont systemFontOfSize:15];
         [_loanView addSubview:titleLabel];
         _loanAmountLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(205))/2 , titleLabel.bottom + kUI_HeightS(16), kUI_WidthS(205), kUI_HeightS(36))];
-        _loanAmountLabel.text = @"10,000,000";
         _loanAmountLabel.textColor = [UIColor colorWithGradientStyle:UIGradientStyleLeftToRight withFrame:_loanAmountLabel.bounds andColors:@[[UIColor colorFromRGB:0xFFFF5153],[UIColor colorFromRGB:0xFFFF806B]]];;
         _loanAmountLabel.textAlignment = NSTextAlignmentLeft;
-        _loanAmountLabel.font = [UIFont systemFontOfSize:36];
+        _loanAmountLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
+        NSShadow *shadow = [[NSShadow alloc] init];
+        shadow.shadowBlurRadius = 4;
+        shadow.shadowColor = [UIColor colorWithRed:255/255.0 green:88/255.0 blue:87/255.0 alpha:0.3];
+        shadow.shadowOffset = CGSizeMake(0,2);
+        _loanAmountLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"10,000,000"attributes:@{NSShadowAttributeName: shadow}];
+
         [_loanView addSubview:_loanAmountLabel];
         UIButton *loanButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(226))/2 , _loanAmountLabel.bottom + kUI_HeightS(12), kUI_WidthS(226), kUI_HeightS(29))];
         [loanButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x4771F2]] forState:UIControlStateNormal];
@@ -428,7 +434,7 @@
         [loanButton.layer setMasksToBounds:YES];
         [loanButton setTitle:@"我要贷款" forState:UIControlStateNormal];
         [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
-        loanButton.titleLabel.font = [UIFont systemFontOfSize:15];
+        [loanButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
         [loanButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_loanView addSubview:loanButton];
     }
@@ -476,7 +482,7 @@
         _locationLabel.textAlignment = NSTextAlignmentCenter;
         _locationLabel.font = [UIFont systemFontOfSize:16];
         [_locationView addSubview:_locationLabel];
-        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), kUI_WidthS(8), kUI_HeightS(5))];
+        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
         [triangleButton addTarget:self action:@selector(triangleButtonClck:) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];

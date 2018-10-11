@@ -132,6 +132,11 @@
     self.dateLabel.text = dateString;
 }
 
+- (void)setTopLineHidden:(BOOL)topLineHidden{
+    _topLineHidden = topLineHidden;
+    self.topLineImge.hidden = topLineHidden;
+}
+
 
 
 

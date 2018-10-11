@@ -73,6 +73,16 @@
         }];
         _iconImageView.layer.cornerRadius = image.size.height * 0.5;
         _iconImageView.layer.masksToBounds = YES;
+        UIImage *iconImage = _iconImageView.image;
+        NSData *data;
+        if (UIImagePNGRepresentation(iconImage)){
+            data = UIImagePNGRepresentation(iconImage);
+        }else{
+            data = UIImageJPEGRepresentation(iconImage, 1.0);
+        }
+        if (data) {
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:CurrentUserIocnImage];
+        }
     }
     else {
         if (model.iconName.length > 0) {

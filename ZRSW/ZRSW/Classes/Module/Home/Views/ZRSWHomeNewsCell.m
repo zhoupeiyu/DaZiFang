@@ -41,7 +41,8 @@
 - (void)layoutSubviews{
     self.topLine.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
-    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(90), kUI_HeightS(90));
+//    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(115), kUI_HeightS(90));
+    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(133), kUI_HeightS(86));
     self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), (SCREEN_WIDTH - self.iconImageView.right - kUI_WidthS(30)), kUI_HeightS(15));
     self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), self.titleLabel.width, kUI_HeightS(34));
     self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
@@ -135,6 +136,10 @@
     self.dateLabel.text = dateString;
 }
 
+- (void)setTopLineHidden:(BOOL)topLineHidden{
+    _topLineHidden = topLineHidden;
+    self.topLineImge.hidden = topLineHidden;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

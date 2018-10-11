@@ -10,4 +10,5 @@
 #import "UserModel.h"
 @interface ZRSWHomeQuestionCell : UITableViewCell
 @property (nonatomic, strong) CommentQuestionModel *questionModel;
+@property (nonatomic, assign) BOOL topLineHidden;
 @end
