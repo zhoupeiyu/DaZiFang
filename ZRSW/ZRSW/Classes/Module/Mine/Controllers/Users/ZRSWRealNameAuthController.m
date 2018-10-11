@@ -105,6 +105,10 @@
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            if (arr.count != imageUrls.count) {
+                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                return ;
+            }
             NSString *idCardImg1 = [imageUrls objectAtIndex:2];
             NSString *idCardImg2 = [imageUrls objectAtIndex:3];
             NSString *idCardImg3 = [imageUrls objectAtIndex:0];

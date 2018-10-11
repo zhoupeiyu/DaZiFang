@@ -87,6 +87,10 @@
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         [self.imageManager uploadImagesWithImagesArray:[self.workCardView getSelectedImages] completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            if ([self.workCardView getSelectedImages].count != imageUrls.count) {
+                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                return ;
+            }
             NSString *idCardImg3 = [imageUrls objectAtIndex:0];
             [weakSelf.service userValidationCompany:self.companyName deptName:self.departmentName workCardUrl:idCardImg3 delegate:self];
         }];
