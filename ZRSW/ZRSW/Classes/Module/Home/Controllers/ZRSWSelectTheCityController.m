@@ -11,6 +11,7 @@
 #import "ZRSWSelectTheCityCell.h"
 @interface ZRSWSelectTheCityController ()
 @property (nonatomic, strong) NSMutableArray *dataListSource;
+@property (nonatomic, strong) NSMutableArray *indexListSource;
 @end
 
 @implementation ZRSWSelectTheCityController
@@ -18,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.dataListSource = [NSMutableArray arrayWithCapacity:0];
+    self.indexListSource = [NSMutableArray arrayWithCapacity:0];
     // Do any additional setup after loading the view.
 }
 
@@ -29,13 +31,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    self.dataListSource = [self sortObjectsAccordingToInitialWith:self.cityArray];
+    [self sortObjectsAccordingToInitialWith:self.cityArray];
     [self.tableView reloadData];
 }
 
 
 // 按首字母分组排序数组
--(NSMutableArray *)sortObjectsAccordingToInitialWith:(NSArray *)arr {
+-(void)sortObjectsAccordingToInitialWith:(NSArray *)arr {
     UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
     NSInteger sectionTitlesCount = [[collation sectionTitles] count];
     NSMutableArray *newSectionsArray = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
@@ -56,7 +58,13 @@
         NSArray *sortedCityArrayForSection = [collation sortedArrayFromArray:cityArrayForSection collationStringSelector:@selector(name)];
         newSectionsArray[index] = sortedCityArrayForSection;
     }
-    return newSectionsArray;
+    for (NSInteger index = 0; index < sectionTitlesCount; index++) {
+        NSMutableArray *cityArrayForSection = newSectionsArray[index];
+        if (cityArrayForSection.count != 0) {
+            [self.dataListSource addObject:cityArrayForSection];
+            [self.indexListSource addObject:collation.sectionTitles[index]];
+        }
+    }
 }
 
 #pragma mark - tableView
@@ -69,25 +77,21 @@
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.textColor = [UIColor colorFromRGB:0x474455];
         titleLabel.font = [UIFont systemFontOfSize:16];
-        UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
-        NSString *key = [collation.sectionTitles objectAtIndex:section];
-        titleLabel.text = key;
+        NSString *index = [self.indexListSource objectAtIndex:section];
+        titleLabel.text = index;
         [bgView addSubview:titleLabel];
         return bgView;;
     }else{
         return nil;
     }
-
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-     UILocalizedIndexedCollation *collation = [UILocalizedIndexedCollation currentCollation];
-    if (self.dataListSource.count >0 ) {
-        return collation.sectionTitles;
+    if (self.dataListSource.count > 0) {
+        return self.indexListSource;
     }else{
         return nil;
     }
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

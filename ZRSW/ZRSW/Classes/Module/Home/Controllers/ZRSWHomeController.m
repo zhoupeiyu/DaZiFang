@@ -493,7 +493,7 @@
         _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(120), kUI_HeightS(18))];
         WS(weakSelf);
         [_locationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
-//            [weakSelf goToSelectTheCityController];
+            [weakSelf goToSelectTheCityController];
         }];
         UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0, kUI_WidthS(15), kUI_HeightS(18))];
         leftImage.image = [UIImage imageNamed:@"currency_top_position"];
@@ -506,7 +506,7 @@
         [_locationView addSubview:_locationLabel];
         UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
-//        [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
+        [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];
     }
     return _locationView;
