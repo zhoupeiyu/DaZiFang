@@ -501,7 +501,7 @@
         [_locationView addSubview:_locationLabel];
         UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
-        [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
+//        [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];
     }
     return _locationView;
