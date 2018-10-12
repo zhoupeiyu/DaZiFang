@@ -65,7 +65,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
     detailsVC.type = DetailsTypeCommentQuestion;
-    detailsVC.questionModel = self.dataListSource[indexPath.row];
+    CommentQuestionModel *questionModel = self.dataListSource[indexPath.row];
+    detailsVC.questionModel = questionModel;
+    questionModel.readers = [NSString stringWithFormat:@"%ld",([questionModel.readers integerValue]+1)];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
     detailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
 }

@@ -123,7 +123,7 @@
     }
 
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
     NSString *dateStr = [questionModel.updateTime substringToIndex:10];
 //    NSString *dateStr = [questionModel.updateTime componentsSeparatedByString:@" "].firstObject;
     NSDate* date = [formatter dateFromString:dateStr];

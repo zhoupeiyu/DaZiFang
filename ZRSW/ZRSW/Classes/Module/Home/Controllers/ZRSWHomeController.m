@@ -380,15 +380,20 @@
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypePopularInformation;
         detailsVC.hidesBottomBarWhenPushed = YES;
-        detailsVC.detailModel = self.hotNewsListSource[indexPath.row];
+        NewDetailModel *detailModel = self.hotNewsListSource[indexPath.row];
+        detailsVC.detailModel = detailModel;
+        detailModel.readers = [NSString stringWithFormat:@"%ld",([detailModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }else if (indexPath.section == 1) {
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypeCommentQuestion;
         detailsVC.hidesBottomBarWhenPushed = YES;
-        detailsVC.questionModel = self.questionListSource[indexPath.row];
+        CommentQuestionModel *questionModel = self.questionListSource[indexPath.row];
+        detailsVC.questionModel = questionModel;
+        questionModel.readers = [NSString stringWithFormat:@"%ld",([questionModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
 }
 
 

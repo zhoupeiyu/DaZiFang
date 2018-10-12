@@ -10,6 +10,8 @@ NSNotificationName const ChangeUserInfoSuccessNotification  = @"ChangeUserInfoSu
 
 NSNotificationName const ChangeCityNotification  = @"ChangeCityNotification";
 
+NSNotificationName const UpdateMsgStatusNotification  = @"UpdateMsgStatusNotification";
+
 NSString * const CurrentLocationKey  = @"CurrentLocationKey";
 
 NSString * const CurrentUserIocnImageKey  = @"CurrentUserIocnImageKey";

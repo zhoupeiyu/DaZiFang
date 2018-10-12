@@ -253,6 +253,7 @@
 @property (nonatomic, strong) NSString *faqBody;
 //发布时间,格式：yyyy/MM/dd HH:mm:ss
 @property (nonatomic, strong) NSString *updateTime;
+//阅读量
 @property (nonatomic, strong) NSString *readers;
 
 
@@ -276,6 +277,8 @@
 @property (nonatomic, strong) NSString *imgUrl;
 
 @property (nonatomic, strong) NSString *faqBodyStr;
+//阅读量
+@property (nonatomic, strong) NSString *readers;
 
 @end
 

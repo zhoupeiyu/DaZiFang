@@ -85,7 +85,7 @@
 }
 
 - (void)updateMsgStatus{
-    [[[UserService alloc] init] updateMsgStatus:self.msgIds delegate:self];
+    [[[UserService alloc] init] updateMsgStatus:self.msgIds status:1 delegate:self];
 }
 
 
@@ -106,7 +106,7 @@
                     ZRSWRemindModel *remindModel = model.data[i];
                     if ([remindModel.status isEqualToString:@"0"]) {
                         if (self.msgIds.length>0) {
-                           self.msgIds = [self.msgIds stringByAppendingString:[NSString stringWithFormat:@",%@",remindModel.id]];
+                            self.msgIds = [self.msgIds stringByAppendingString:[NSString stringWithFormat:@";%@",remindModel.id]];
                         }else{
                           self.msgIds = [NSString stringWithFormat:@"%@",remindModel.id];
                         }
@@ -128,6 +128,7 @@
         }else if ([reqType isEqualToString:KUpdateMsgStatusRequest]){
             BaseModel *model = (BaseModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:UpdateMsgStatusNotification object:nil];
                 self.msgIds = nil;
             }
         }

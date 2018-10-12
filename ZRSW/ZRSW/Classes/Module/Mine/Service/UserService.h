@@ -220,11 +220,11 @@
 
 /**
  更新阅读状态
- @param msgIds 
+ @param msgIds
+ @param status -1：已删除，0：未读，1：已读；若该参数为空，则默认1
  @param delegate 代理
  */
-- (void)updateMsgStatus:(NSString *)msgIds delegate:(id)delegate;
-
+- (void)updateMsgStatus:(NSString *)msgIds status:(int)status delegate:(id)delegate;
 
 /**
  退出登录

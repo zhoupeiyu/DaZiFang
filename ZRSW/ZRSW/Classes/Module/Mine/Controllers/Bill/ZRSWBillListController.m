@@ -38,6 +38,7 @@
     self.rightBarButton.badgeOriginY = 8;
     [self.rightBarButton addTarget:self action:@selector(goToRemindListController) forControlEvents:UIControlEventTouchUpInside];
     self.title = @"账单列表";
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMsgStatus) name:UpdateMsgStatusNotification object:nil];
 }
 
 - (void)setUpTableView{
@@ -45,6 +46,11 @@
     self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES];
     [self enableLoadMore:YES];
+}
+
+- (void)updateMsgStatus{
+    self.noReadCount = 0;
+    [self.rightBarButton lf_showNumberBadge:self.noReadCount];
 }
 
 

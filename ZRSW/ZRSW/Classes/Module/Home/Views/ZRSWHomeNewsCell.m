@@ -126,8 +126,6 @@
     self.titleLabel.text = detailModel.title;
     self.contentLabel.text = detailModel.roundup;
     self.readersLabel.text = [NSString stringWithFormat:@"%@",detailModel.readers];
-//    NSTimeInterval interval = [detailModel.updateTime doubleValue] / 1000.0;
-//    NSDate *date = [NSDate dateWithTimeIntervalSince1970:interval];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
     NSDate* date = [formatter dateFromString:detailModel.updateTime];

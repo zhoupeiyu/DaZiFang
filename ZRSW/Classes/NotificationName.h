@@ -16,6 +16,8 @@ UIKIT_EXTERN NSNotificationName const ChangeUserInfoSuccessNotification;
 //切换城市
 UIKIT_EXTERN NSNotificationName const ChangeCityNotification;
 
+//更新消息阅读状态
+UIKIT_EXTERN NSNotificationName const UpdateMsgStatusNotification;
 
 //用户当前位置
 UIKIT_EXTERN NSString * const CurrentLocationKey;
