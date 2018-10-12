@@ -81,7 +81,7 @@
             data = UIImageJPEGRepresentation(iconImage, 1.0);
         }
         if (data) {
-            [[NSUserDefaults standardUserDefaults] setObject:data forKey:CurrentUserIocnImage];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:CurrentUserIocnImageKey];
         }
     }
     else {

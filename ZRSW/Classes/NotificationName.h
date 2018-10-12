@@ -13,10 +13,18 @@ UIKIT_EXTERN NSNotificationName const UserLoginErrorNotification;
 // 更新用户信息
 UIKIT_EXTERN NSNotificationName const ChangeUserInfoSuccessNotification;
 
+//切换城市
+UIKIT_EXTERN NSNotificationName const ChangeCityNotification;
+
+
 //用户当前位置
 UIKIT_EXTERN NSString * const CurrentLocationKey;
 
 //当前用户头像
-UIKIT_EXTERN NSString * const CurrentUserIocnImage;
+UIKIT_EXTERN NSString * const CurrentUserIocnImageKey;
+
+//用户请求的Cookie
+UIKIT_EXTERN NSString * const UserDefaultsCookieKey;
+
 
 UIKIT_EXTERN NSString * const TabBarDidClickNotificationKey;
