@@ -51,10 +51,13 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
     return _locationManager;
 }
 
-- (void)getCityLocationSuccess:(void (^)(id result))success{
+- (void)getCityLocationSuccess:(void (^)(id result))success failure:(void (^)(id error))failure{
     [self.locationManager requestLocationWithReGeocode:YES withNetworkState:YES completionBlock:^(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error) {
         if(error){
             LLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            if (failure) {
+                failure(error);
+            }
         }
         if(location) {//得到定位信息，添加annotation
             if (location.rgcData) {
@@ -63,10 +66,13 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
                 if (!result) {
                     result = location.rgcData.province;
                 }
-                [[NSUserDefaults standardUserDefaults] setValue:result forKey:CurrentLocationKey];
                 if (success) {
                     success(result);
                 }
+            }
+        }else{
+            if (failure) {
+                failure(error);
             }
         }
         LLog(@"netstate = %d",state);

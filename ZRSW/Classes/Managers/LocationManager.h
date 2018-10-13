@@ -13,5 +13,5 @@
 + (LocationManager *)sharedInstance;
 
 - (void)setUpLocationManager;
-- (void)getCityLocationSuccess:(void (^)(id result))success;
+- (void)getCityLocationSuccess:(void (^)(id result))success failure:(void (^)(id error))failure;
 @end

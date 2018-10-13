@@ -194,10 +194,11 @@
     [self POST:KGetRemindListInterface reqType:KGetRemindListRequest delegate:delegate parameters:params ObjcClass:[ZRSWRemindListModel class] NeedCache:NO];
 }
 
-- (void)updateMsgStatus:(NSString *)msgIds delegate:(id)delegate{
+- (void)updateMsgStatus:(NSString *)msgIds status:(int)status delegate:(id)delegate{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:msgIds forKey:@"msgIds"];
-    [self POST:KGetRemindListInterface reqType:KUpdateMsgStatusRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
+    [params setObject:@(status) forKey:@"status"];
+    [self POST:KUpdateMsgStatusInterface reqType:KUpdateMsgStatusRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
 
 

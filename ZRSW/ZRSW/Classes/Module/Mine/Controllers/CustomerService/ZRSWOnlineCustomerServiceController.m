@@ -97,7 +97,7 @@
     UserModel *userModel = [UserModel getCurrentModel];
     UserInfoModel *userInfoModel = userModel.data;
 //    NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:userInfoModel.headImgUrl]];
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentUserIocnImage];
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentUserIocnImageKey];
     self.iconImage = [UIImage imageWithData:data];
     if (!self.iconImage) {
         self.iconImage = [UIImage imageNamed:@"my_head"];

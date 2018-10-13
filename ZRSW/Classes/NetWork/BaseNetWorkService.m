@@ -60,6 +60,11 @@ SYNTHESIZE_SINGLETON_ARC(BaseNetWorkService);
                        }.yy_modelToJSONString;
 
     [header setObject:auth forKey:@"auth"];
+//    NSArray * cookies = [[NSHTTPCookieStorage  sharedHTTPCookieStorage] cookies];
+//    NSDictionary * headers = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+//    NSString *CookieString = [headers valueForKey:@"Cookie"];
+//    NSLog(@"===forHTTPHeaderField:=Cookie:%@",CookieString);
+//    [header setObject:CookieString forKey:@"Cookie"];
     return header;
 }
 + (void)configNetWorkService {

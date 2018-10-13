@@ -148,8 +148,8 @@
             [TipViewManager showToastMessage:@"请输入正确的手机号"];
         }
     }
-
 }
+
 #pragma mark - Action
 - (void)resetAction{
     [TipViewManager showLoading];

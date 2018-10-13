@@ -105,7 +105,10 @@
     }else if (self.type == NewListTypeSystemNotification){
         detailsVC.type = DetailsTypeSystemNotification;
     }
-    detailsVC.detailModel = self.dataListSource[indexPath.row];
+    NewDetailModel *detailModel = self.dataListSource[indexPath.row];
+    detailsVC.detailModel = detailModel;
+    detailModel.readers = [NSString stringWithFormat:@"%ld",([detailModel.readers integerValue]+1)];
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
     detailsVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailsVC animated:YES];
 }

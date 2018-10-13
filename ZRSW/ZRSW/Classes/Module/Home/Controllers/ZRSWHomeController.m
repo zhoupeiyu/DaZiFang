@@ -22,6 +22,7 @@
 #import "ZRSWNeedLoansController.h"
 #import "ZRSWBannerDetailsController.h"
 #import "OrderService.h"
+#import "ZRSWSelectTheCityController.h"
 
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
@@ -38,6 +39,7 @@
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *locationView;
 @property (nonatomic, strong) UILabel *locationLabel;
+@property (nonatomic, strong) NSString *locationCity;
 @property (nonatomic, strong)  dispatch_group_t group;
 @end
 
@@ -57,13 +59,24 @@
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
     [TipViewManager showLoading];
     self.group = dispatch_group_create();
-        [self requsetCityList];
+    [self requsetCityList];
     [self requsetBannerList];
     [self requsetSystemNotificationList];
     [self requsetPopularInformationList];
     [self requsetCommentQuestionList];
-    [self locationCity];
+    [self getLocationCity];
+    WS(weakSelf);
     dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
+        for (CityDetailModel *city in weakSelf.cityArray ) {
+            if ([weakSelf.locationCity isEqualToString:city.name]) {
+                weakSelf.locationLabel.text = weakSelf.locationCity;
+                [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+                break;
+            }else if ([city.name isEqualToString:@"北京市"]){
+                    weakSelf.locationLabel.text = @"北京市";
+                    [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+            }
+        }
         [TipViewManager dismissLoading];
     });
 }
@@ -74,6 +87,8 @@
     self.navigationItem.title = @"大资方";
     UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithCustomView:self.locationView];
     self.navigationItem.leftBarButtonItem = leftBar;
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLocationCity:) name:ChangeCityNotification object:nil];
+
 }
 
 - (void)setUpTableView{
@@ -83,22 +98,6 @@
     [self enableRefreshHeader:YES];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-//    [TipViewManager showLoading];
-//    self.group = dispatch_group_create();
-//    [self requsetCityList];
-//    [self requsetBannerList];
-//    [self requsetSystemNotificationList];
-//    [self requsetPopularInformationList];
-//    [self requsetCommentQuestionList];
-//    [self locationCity];
-//    dispatch_group_notify(self.group, dispatch_get_main_queue(), ^{
-//        [TipViewManager dismissLoading];
-//    });
-
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
@@ -175,18 +174,22 @@
 
 
 #pragma mark - NetWork
-- (void)locationCity{
+- (void)getLocationCity{
+    dispatch_group_enter(self.group);
     WS(weakSelf);
     [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
+        dispatch_group_leave(self.group);
         if (result) {
-            weakSelf.locationLabel.text = [NSString stringWithFormat:@"%@",result];
-
+            weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
         }
+    } failure:^(id error) {
+        dispatch_group_leave(self.group);
+        LLog(@"定位失败%@",error);
     }];
 }
 
 - (void)requsetCityList{
-     dispatch_group_enter(self.group);
+    dispatch_group_enter(self.group);
     [[[OrderService alloc] init] getCityListDelegate:self];
 }
 
@@ -234,7 +237,7 @@
                 for (NSUInteger i = 0; i < model.data.count; ++i){
                     CityDetailModel *detailModel = model.data[i];
                     LLog(@"%@",detailModel.name);
-                    [self.cityArray addObject:detailModel.name];
+                    [self.cityArray addObject:detailModel];
                 }
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
@@ -336,11 +339,21 @@
     LLog(@"系统公告");
 }
 
-#pragma mark - 我要贷款
-- (void)triangleButtonClck:(UIButton *)button{
-    [self locationCity];
-    LLog(@"更多城市");
-    
+#pragma mark - 切换城市
+- (void)goToSelectTheCityController{
+    LLog(@"切换城市");
+    ZRSWSelectTheCityController *selectTheCityVC = [[ZRSWSelectTheCityController alloc] init];
+    selectTheCityVC.cityArray = self.cityArray;
+    selectTheCityVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectTheCityVC animated:YES];
+}
+
+- (void)changeLocationCity:(NSNotification *)notification {
+     CityDetailModel *city = notification.object;
+    self.locationLabel.text = city.name;
+    if (city.name) {
+        [[NSUserDefaults standardUserDefaults] setObject:city.name forKey:CurrentLocationKey];
+    }
 }
 
 
@@ -367,15 +380,20 @@
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypePopularInformation;
         detailsVC.hidesBottomBarWhenPushed = YES;
-        detailsVC.detailModel = self.hotNewsListSource[indexPath.row];
+        NewDetailModel *detailModel = self.hotNewsListSource[indexPath.row];
+        detailsVC.detailModel = detailModel;
+        detailModel.readers = [NSString stringWithFormat:@"%ld",([detailModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }else if (indexPath.section == 1) {
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypeCommentQuestion;
         detailsVC.hidesBottomBarWhenPushed = YES;
-        detailsVC.questionModel = self.questionListSource[indexPath.row];
+        CommentQuestionModel *questionModel = self.questionListSource[indexPath.row];
+        detailsVC.questionModel = questionModel;
+        questionModel.readers = [NSString stringWithFormat:@"%ld",([questionModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
@@ -473,6 +491,10 @@
 - (UIView *)locationView{
     if (!_locationView) {
         _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(120), kUI_HeightS(18))];
+        WS(weakSelf);
+        [_locationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+            [weakSelf goToSelectTheCityController];
+        }];
         UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0, kUI_WidthS(15), kUI_HeightS(18))];
         leftImage.image = [UIImage imageNamed:@"currency_top_position"];
         [_locationView addSubview:leftImage];
@@ -484,7 +506,7 @@
         [_locationView addSubview:_locationLabel];
         UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
-        [triangleButton addTarget:self action:@selector(triangleButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];
     }
     return _locationView;
