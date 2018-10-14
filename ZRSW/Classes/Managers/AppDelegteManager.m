@@ -17,6 +17,7 @@
 @interface AppDelegteManager ()<JPUSHRegisterDelegate>
 @property (nonatomic, strong) NSString *pushURL;
 @property (nonatomic, strong) NSDictionary *pushInfo;
+@property (strong, nonatomic) CLLocationManager* locationManager;
 @end
 @implementation AppDelegteManager
 
@@ -155,8 +156,10 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 - (void)loactionManager {
     
 #ifdef NeedLocationManager
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-        [[[CLLocationManager alloc] init] requestWhenInUseAuthorization];
+        [self.locationManager requestWhenInUseAuthorization];
     }
     [[LocationManager sharedInstance] setUpLocationManager];
 #else

@@ -739,6 +739,7 @@
 		3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListModel.m; sourceTree = "<group>"; };
 		3C10D65F2154E2F50019112F /* ZRSWBillListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBillListCell.h; sourceTree = "<group>"; };
 		3C10D6602154E2F50019112F /* ZRSWBillListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListCell.m; sourceTree = "<group>"; };
+		3C3123C72172410C008D9A02 /* ZRSW.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZRSW.entitlements; sourceTree = "<group>"; };
 		3C46443E2160CFF8000122B9 /* ZRSWAchieveFilterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWAchieveFilterView.h; sourceTree = "<group>"; };
 		3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWAchieveFilterView.m; sourceTree = "<group>"; };
 		3C4644412160D0AA000122B9 /* ZRSWAchieveFilterTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWAchieveFilterTableView.h; sourceTree = "<group>"; };
@@ -3751,6 +3752,7 @@
 		E5B598E9214E9E2500726DE9 /* ZRSW */ = {
 			isa = PBXGroup;
 			children = (
+				3C3123C72172410C008D9A02 /* ZRSW.entitlements */,
 				E5B59903214EBED500726DE9 /* Classes */,
 				E5B59900214EBD0200726DE9 /* SystemConfig */,
 			);
@@ -4678,6 +4680,11 @@
 				TargetAttributes = {
 					E5B598E6214E9E2500726DE9 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

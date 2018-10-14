@@ -70,11 +70,15 @@
         for (CityDetailModel *city in weakSelf.cityArray ) {
             if ([weakSelf.locationCity isEqualToString:city.name]) {
                 weakSelf.locationLabel.text = weakSelf.locationCity;
-                [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+                NSDictionary *cityDic = nil;
+                cityDic = [city yy_modelToJSONObject];
+                [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
                 break;
             }else if ([city.name isEqualToString:@"北京市"]){
                     weakSelf.locationLabel.text = @"北京市";
-                    [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+                NSDictionary *cityDic = nil;
+                cityDic = [city yy_modelToJSONObject];
+                [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
             }
         }
         [TipViewManager dismissLoading];
@@ -175,17 +179,30 @@
 
 #pragma mark - NetWork
 - (void)getLocationCity{
-    dispatch_group_enter(self.group);
     WS(weakSelf);
-    [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
-        dispatch_group_leave(self.group);
-        if (result) {
-            weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
+    if ([CLLocationManager locationServicesEnabled]){
+        //system location enabled
+        CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+        if (authorizationStatus==kCLAuthorizationStatusAuthorizedWhenInUse||authorizationStatus==kCLAuthorizationStatusAuthorizedAlways){
+            dispatch_group_enter(self.group);
+            [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
+                dispatch_group_leave(self.group);
+                if (result) {
+                    weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
+                }
+            } failure:^(id error) {
+                dispatch_group_leave(self.group);
+                LLog(@"定位失败%@",error);
+            }];
+        }else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
+            LLog(@"对于这个应用程序，用户还没有做出选择");
+        }else{
+            //定位服务开启
+            [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
         }
-    } failure:^(id error) {
-        dispatch_group_leave(self.group);
-        LLog(@"定位失败%@",error);
-    }];
+    }else{
+        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
+    }
 }
 
 - (void)requsetCityList{
@@ -216,6 +233,7 @@
 
 - (void)refreshData{
     self.group = dispatch_group_create();
+    [self requsetCityList];
     [self requsetBannerList];
     [self requsetPopularInformationList];
     [self requsetSystemNotificationList];
@@ -351,8 +369,10 @@
 - (void)changeLocationCity:(NSNotification *)notification {
      CityDetailModel *city = notification.object;
     self.locationLabel.text = city.name;
-    if (city.name) {
-        [[NSUserDefaults standardUserDefaults] setObject:city.name forKey:CurrentLocationKey];
+    if (city) {
+        NSDictionary *cityDic = nil;
+        cityDic = [city yy_modelToJSONObject];
+        [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
     }
 }
 

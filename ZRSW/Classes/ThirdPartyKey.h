@@ -25,8 +25,8 @@
 #define kQQAppKey                           @"GSTu511a7EAgJef4"
 
 //极光
-#define kJupushKey                          @"a748387bf81b95ce912b82bf"
-#define JPushMaster                         @"4a19f8341d104e33a706c00e"
+#define kJupushKey                          @"af87ae555cb0e8e369e5086a"
+#define JPushMaster                         @"0e4b7909596a447c9a5f1669"
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
@@ -69,8 +69,8 @@
 #define kQQAppKey                           @"GSTu511a7EAgJef4"
 
 //极光
-#define kJupushKey                          @"a748387bf81b95ce912b82bf"
-#define JPushMaster                         @"4a19f8341d104e33a706c00e"
+#define kJupushKey                          @"af87ae555cb0e8e369e5086a"
+#define JPushMaster                         @"0e4b7909596a447c9a5f1669"
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
