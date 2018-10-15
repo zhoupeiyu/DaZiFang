@@ -413,7 +413,10 @@
         questionModel.readers = [NSString stringWithFormat:@"%ld",([questionModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+    [UIView performWithoutAnimation:^{
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+    }];
+
 }
 
 
