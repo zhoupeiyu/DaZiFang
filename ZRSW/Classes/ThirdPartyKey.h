@@ -30,6 +30,7 @@
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
+#define kHuanXinTenantId        @"58929" // 环信租户ID
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
 #define kHuanXinKeFu                   @"dazifang_kefu"
@@ -74,6 +75,7 @@
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
+#define kHuanXinTenantId        @"58929" // 环信租户ID
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
 #define kHuanXinKeFu                   @"dazifang_kefu"
