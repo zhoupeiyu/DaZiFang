@@ -349,7 +349,7 @@
 
 
 #pragma mark - 公告更多
-- (void)moreButtonClck:(UIButton *)button{
+- (void)getMoreSystemNotification{
     ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
     listDetailsVC.type = NewListTypeSystemNotification;
     listDetailsVC.hidesBottomBarWhenPushed = YES;
@@ -487,6 +487,10 @@
         CGFloat height = kUI_HeightS(44);
         _systemNotificationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.loanView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
         _systemNotificationView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+        WS(weakSelf);
+        [_systemNotificationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+            [weakSelf getMoreSystemNotification];
+        }];
         UIImageView *leftTitle = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),kUI_HeightS(13), kUI_WidthS(78), kUI_HeightS(18))];
         leftTitle.image = [UIImage imageNamed:@"home_notice"];
         [_systemNotificationView addSubview:leftTitle];
@@ -501,7 +505,7 @@
         [moreButton setTitleColor:[UIColor colorFromRGB:0x999999] forState:UIControlStateNormal];
         moreButton.titleLabel.font = [UIFont systemFontOfSize:12];
         UIButton *moreClickButton = [[UIButton alloc] initWithFrame:CGRectMake(_systemNotificationLabel.right,0, SCREEN_WIDTH - _systemNotificationLabel.right, kUI_HeightS(44))];
-        [moreClickButton addTarget:self action:@selector(moreButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        [moreClickButton addTarget:self action:@selector(getMoreSystemNotification) forControlEvents:UIControlEventTouchUpInside];
         [_systemNotificationView addSubview:moreButton];
         [_systemNotificationView addSubview:moreClickButton];
         UIImageView *moreImageView = [[UIImageView alloc] initWithFrame:CGRectMake(moreButton.right + kUI_WidthS(5) ,kUI_HeightS(15), kUI_WidthS(12), kUI_HeightS(12))];
