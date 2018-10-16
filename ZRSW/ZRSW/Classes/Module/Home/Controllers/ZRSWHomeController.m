@@ -70,11 +70,15 @@
         for (CityDetailModel *city in weakSelf.cityArray ) {
             if ([weakSelf.locationCity isEqualToString:city.name]) {
                 weakSelf.locationLabel.text = weakSelf.locationCity;
-                [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+                NSDictionary *cityDic = nil;
+                cityDic = [city yy_modelToJSONObject];
+                [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
                 break;
             }else if ([city.name isEqualToString:@"北京市"]){
                     weakSelf.locationLabel.text = @"北京市";
-                    [[NSUserDefaults standardUserDefaults] setObject:city.id forKey:CurrentLocationKey];
+                NSDictionary *cityDic = nil;
+                cityDic = [city yy_modelToJSONObject];
+                [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
             }
         }
         [TipViewManager dismissLoading];
@@ -175,17 +179,30 @@
 
 #pragma mark - NetWork
 - (void)getLocationCity{
-    dispatch_group_enter(self.group);
     WS(weakSelf);
-    [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
-        dispatch_group_leave(self.group);
-        if (result) {
-            weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
+    if ([CLLocationManager locationServicesEnabled]){
+        //system location enabled
+        CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+        if (authorizationStatus==kCLAuthorizationStatusAuthorizedWhenInUse||authorizationStatus==kCLAuthorizationStatusAuthorizedAlways){
+            dispatch_group_enter(self.group);
+            [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
+                dispatch_group_leave(self.group);
+                if (result) {
+                    weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
+                }
+            } failure:^(id error) {
+                dispatch_group_leave(self.group);
+                LLog(@"定位失败%@",error);
+            }];
+        }else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
+            LLog(@"对于这个应用程序，用户还没有做出选择");
+        }else{
+            //定位服务开启
+            [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
         }
-    } failure:^(id error) {
-        dispatch_group_leave(self.group);
-        LLog(@"定位失败%@",error);
-    }];
+    }else{
+        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
+    }
 }
 
 - (void)requsetCityList{
@@ -216,6 +233,7 @@
 
 - (void)refreshData{
     self.group = dispatch_group_create();
+    [self requsetCityList];
     [self requsetBannerList];
     [self requsetPopularInformationList];
     [self requsetSystemNotificationList];
@@ -331,7 +349,7 @@
 
 
 #pragma mark - 公告更多
-- (void)moreButtonClck:(UIButton *)button{
+- (void)getMoreSystemNotification{
     ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
     listDetailsVC.type = NewListTypeSystemNotification;
     listDetailsVC.hidesBottomBarWhenPushed = YES;
@@ -351,8 +369,10 @@
 - (void)changeLocationCity:(NSNotification *)notification {
      CityDetailModel *city = notification.object;
     self.locationLabel.text = city.name;
-    if (city.name) {
-        [[NSUserDefaults standardUserDefaults] setObject:city.name forKey:CurrentLocationKey];
+    if (city) {
+        NSDictionary *cityDic = nil;
+        cityDic = [city yy_modelToJSONObject];
+        [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
     }
 }
 
@@ -393,7 +413,10 @@
         questionModel.readers = [NSString stringWithFormat:@"%ld",([questionModel.readers integerValue]+1)];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
-    [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+    [UIView performWithoutAnimation:^{
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath]withRowAnimation:UITableViewRowAnimationNone];
+    }];
+
 }
 
 
@@ -464,6 +487,10 @@
         CGFloat height = kUI_HeightS(44);
         _systemNotificationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.loanView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
         _systemNotificationView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+        WS(weakSelf);
+        [_systemNotificationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+            [weakSelf getMoreSystemNotification];
+        }];
         UIImageView *leftTitle = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),kUI_HeightS(13), kUI_WidthS(78), kUI_HeightS(18))];
         leftTitle.image = [UIImage imageNamed:@"home_notice"];
         [_systemNotificationView addSubview:leftTitle];
@@ -478,7 +505,7 @@
         [moreButton setTitleColor:[UIColor colorFromRGB:0x999999] forState:UIControlStateNormal];
         moreButton.titleLabel.font = [UIFont systemFontOfSize:12];
         UIButton *moreClickButton = [[UIButton alloc] initWithFrame:CGRectMake(_systemNotificationLabel.right,0, SCREEN_WIDTH - _systemNotificationLabel.right, kUI_HeightS(44))];
-        [moreClickButton addTarget:self action:@selector(moreButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+        [moreClickButton addTarget:self action:@selector(getMoreSystemNotification) forControlEvents:UIControlEventTouchUpInside];
         [_systemNotificationView addSubview:moreButton];
         [_systemNotificationView addSubview:moreClickButton];
         UIImageView *moreImageView = [[UIImageView alloc] initWithFrame:CGRectMake(moreButton.right + kUI_WidthS(5) ,kUI_HeightS(15), kUI_WidthS(12), kUI_HeightS(12))];

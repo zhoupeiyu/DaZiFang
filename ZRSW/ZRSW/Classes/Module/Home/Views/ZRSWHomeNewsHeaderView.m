@@ -27,6 +27,10 @@
     [self addSubview:self.arrowButton];
     [self addSubview:self.nextBtn];
     self.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+    WS(weakSelf);
+    [self addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+        [weakSelf getMore:weakSelf.nextBtn];
+    }];
 
 }
 

@@ -11,7 +11,7 @@
 
 //微信
 #define kWechatAppId                        @"wx90f7a0e709f2bdf1"
-#define kWechatSecret                        @"c947ca9dabe83097556c230c85ca8c89"
+#define kWechatSecret                        @"074eb5d5baa02a4a69a900f5c043017c"
 #define kWechatPartnerId                    @"1388232102"
 #define kWechatSecurity                     @"789"
 
@@ -21,15 +21,16 @@
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppId                            @"1107805587"
-#define kQQAppKey                           @"GSTu511a7EAgJef4"
+#define kQQAppId                            @"1107829817"
+#define kQQAppKey                           @"3EvE2GAxVGuWQxo9"
 
 //极光
-#define kJupushKey                          @"a748387bf81b95ce912b82bf"
-#define JPushMaster                         @"4a19f8341d104e33a706c00e"
+#define kJupushKey                          @"af87ae555cb0e8e369e5086a"
+#define JPushMaster                         @"0e4b7909596a447c9a5f1669"
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
+#define kHuanXinTenantId        @"58929" // 环信租户ID
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
 #define kHuanXinKeFu                   @"dazifang_kefu"
@@ -57,7 +58,7 @@
 
 //微信
 #define kWechatAppId                        @"wx90f7a0e709f2bdf1"
-#define kWechatSecret                        @"c947ca9dabe83097556c230c85ca8c89"
+#define kWechatSecret                        @"074eb5d5baa02a4a69a900f5c043017c"
 
 //weibo
 #define kWeiboAppId                         @"3972746284"
@@ -65,15 +66,15 @@
 #define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
 
 //QQ
-#define kQQAppId                            @"1107805587"
-#define kQQAppKey                           @"GSTu511a7EAgJef4"
-
+#define kQQAppId                            @"1107829817"
+#define kQQAppKey                           @"3EvE2GAxVGuWQxo9"
 //极光
-#define kJupushKey                          @"a748387bf81b95ce912b82bf"
-#define JPushMaster                         @"4a19f8341d104e33a706c00e"
+#define kJupushKey                          @"af87ae555cb0e8e369e5086a"
+#define JPushMaster                         @"0e4b7909596a447c9a5f1669"
 
 // 环信key
 #define kHuanXinAppKey        @"1115180917099062#zhongrongsw-dazifang"
+#define kHuanXinTenantId        @"58929" // 环信租户ID
 //环信的登录密码
 #define kHuanXinpassword                   @"123456"
 #define kHuanXinKeFu                   @"dazifang_kefu"
