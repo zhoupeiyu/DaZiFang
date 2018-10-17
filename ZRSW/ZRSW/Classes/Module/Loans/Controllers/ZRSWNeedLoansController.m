@@ -72,7 +72,18 @@
     [super setupConfig];
     self.title = @"我要贷款";
     [self setLeftBackBarButton];
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationKey];
+    NSMutableDictionary *dataDic = self.topDataSource[0];
+    if ([dic.allKeys containsObject:@"name"] && [dic.allKeys containsObject:@"id"]) {
+        NSString *name = dic[@"name"];
+        NSString *ID = dic[@"id"];
+        [dataDic setObject:name forKey:KContentKey];
+        [dataDic setObject:ID forKey:KIDKey];
+        self.selectedNewCity = YES;
+        self.selectedCityID = ID;
+    }
     
+    LLog(@"%@",dic);
     
 }
 - (void)setupLayOut {

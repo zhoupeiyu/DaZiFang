@@ -196,7 +196,7 @@
 
 - (ZRSWIPCardView *)cardView {
     if (!_cardView) {
-        _cardView = [ZRSWIPCardView getIPCardViewWithType:IPCardViewTypePerson title:@"上传手持身份证照片" fristViewContent:@"点击上传\n身份证正面照片" secondContent:@"点击上传\n身份证反面照片" isNeedBottomLine:NO presentVC:self];
+        _cardView = [ZRSWIPCardView getIPCardViewWithType:IPCardViewTypePerson title:@"上传身份证照片" fristViewContent:@"点击上传\n身份证正面照片" secondContent:@"点击上传\n身份证反面照片" isNeedBottomLine:NO presentVC:self];
     }
     return _cardView;
 }
