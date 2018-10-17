@@ -17,7 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [self loggedInClient];
+    [self getUserInfo];
+    [self loggedInClient];
     [self setUpChatController];
     // Do any additional setup after loading the view.
 }
@@ -67,6 +68,8 @@
             model.nickname = message.ext[@"weichat"][@"agent"][@"userNickname"];
             NSString *ImageURl = [NSString stringWithFormat:@"%@%@",@"http://kefu.easemob.com/ossimages",message.ext[@"weichat"][@"agent"][@"avatar"]];
             model.avatarURLPath = ImageURl;
+        }else{
+            model.avatarImage = [UIImage imageNamed:@"EaseUIResource.bundle/user"];
         }
     }
     return model;
@@ -76,27 +79,16 @@
 
 
 - (void)setUpChatController{
-    [TipViewManager showLoading];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // 耗时的操作
-        [self getUserInfo];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // 更新界面
-             [TipViewManager dismissLoading];
-            EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
-            chatController.delegate = self;
-            chatController.dataSource = self;
-            [self addChildViewController:chatController];
-            [self.view addSubview:chatController.view];
-        });
-    });
-
+    EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"dazifang_kefu" conversationType:EMConversationTypeChat];
+    chatController.delegate = self;
+    chatController.dataSource = self;
+    [self addChildViewController:chatController];
+    [self.view addSubview:chatController.view];
 }
 
 - (void)getUserInfo{
     UserModel *userModel = [UserModel getCurrentModel];
     UserInfoModel *userInfoModel = userModel.data;
-//    NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:userInfoModel.headImgUrl]];
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentUserIocnImageKey];
     self.iconImage = [UIImage imageWithData:data];
     if (!self.iconImage) {
