@@ -54,11 +54,11 @@
     self.backView.frame = CGRectMake(kUI_WidthS(10) ,kUI_HeightS(10),SCREEN_WIDTH - kUI_WidthS(20), kUI_HeightS(150));
     self.iconView.frame = CGRectMake(kUI_WidthS(10),kUI_HeightS(18), kUI_WidthS(8), kUI_HeightS(8));
     self.loanProductLabel.frame = CGRectMake(self.iconView.right + kUI_WidthS(5) ,kUI_HeightS(15) ,kUI_WidthS(88), kUI_HeightS(16));
-    self.loanTypeLabel.frame = CGRectMake(self.loanProductLabel.right,self.loanProductLabel.top, kUI_WidthS(84), kUI_HeightS(16));
+    self.loanTypeLabel.frame = CGRectMake(self.loanProductLabel.right,self.loanProductLabel.top, kUI_WidthS(110), kUI_HeightS(16));
     self.loanDateLabel.frame = CGRectMake(self.loanTypeLabel.right,self.loanProductLabel.top, kUI_WidthS(120), kUI_HeightS(16));
     self.lineView.frame = CGRectMake(kUI_WidthS(10),self.loanProductLabel.bottom + kUI_HeightS(10), SCREEN_WIDTH - kUI_WidthS(20), kUI_HeightS(1));
     self.mortgagePaymentLabel.frame = CGRectMake(self.loanProductLabel.left,self.lineView.bottom + kUI_HeightS(15), kUI_WidthS(60), kUI_HeightS(14));
-    self.paymentsLabel.frame = CGRectMake(self.mortgagePaymentLabel.right,self.mortgagePaymentLabel.top,  kUI_WidthS(120), kUI_HeightS(14));
+    self.paymentsLabel.frame = CGRectMake(self.mortgagePaymentLabel.right,self.mortgagePaymentLabel.top,  kUI_WidthS(130), kUI_HeightS(14));
     self.lenderLabel.frame = CGRectMake(self.paymentsLabel.right,self.mortgagePaymentLabel.top, kUI_WidthS(60), kUI_HeightS(14));
     self.lenderNameLabel.frame = CGRectMake(self.lenderLabel.right,self.mortgagePaymentLabel.top, kUI_WidthS(100), kUI_HeightS(14));
     self.paymentDueDateLabel.frame = CGRectMake(self.loanProductLabel.left,self.mortgagePaymentLabel.bottom + kUI_HeightS(15), kUI_WidthS(88), kUI_HeightS(14));
@@ -208,7 +208,12 @@
     _billModel = billModel;
     self.loanTypeLabel.text = billModel.loanTitle;
     self.loanDateLabel.text = [NSString stringWithFormat:@"（%02d/%02d期）",billModel.loanNumber,billModel.loanCycle];
-    self.paymentsLabel.text = [NSString stringWithFormat:@"¥%@",billModel.loanMoney];
+    if (billModel.loanMoney.length > 9) {
+        self.paymentsLabel.text = [NSString stringWithFormat:@"¥%@",[billModel.loanMoney stringByReplacingOccurrencesOfString:@"（元）" withString:@""]];
+    }else{
+        self.paymentsLabel.text = [NSString stringWithFormat:@"¥%@",billModel.loanMoney];
+    }
+
     self.lenderNameLabel.text = billModel.loanUserName;
     self.paymentDateLabel.text = billModel.loanTime;
     if (billModel.status == 0) {
