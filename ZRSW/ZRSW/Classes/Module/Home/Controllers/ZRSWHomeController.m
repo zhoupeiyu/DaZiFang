@@ -201,7 +201,7 @@
             [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
         }
     }else{
-        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
+        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
     }
 }
 
