@@ -44,14 +44,12 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     
 }
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [JPUSHService setBadge:0];
     //环信进入后台
      [[EMClient sharedClient] applicationDidEnterBackground:application];
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [JPUSHService setBadge:0];
     //环信进入前台
@@ -123,7 +121,6 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 }
 
 - (void)remoteNotificationWith:(NSDictionary *)userInfo {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [JPUSHService setBadge:0];
 }
