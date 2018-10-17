@@ -38,7 +38,7 @@
     [super setupConfig];
     [self setLeftBackBarButton];
     self.title = @"我的订单";
-    [self setRightBarButtonWithText:@"客服"];
+    [self setRightBarButtonWithImage:[UIImage imageNamed:@"currency_top_service"] AndHighLightImage:[UIImage imageNamed:@"currency_top_service"]];
     [self.rightBarButton addTarget:self action:@selector(customerServiceAction) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)setupUI {
