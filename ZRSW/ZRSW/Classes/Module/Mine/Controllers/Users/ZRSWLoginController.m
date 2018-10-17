@@ -35,6 +35,7 @@
 @implementation ZRSWLoginController
 
 - (void)goBack {
+    [self.view endEditing:YES];
     if (self.cancelBlock) {
         self.cancelBlock();
         return;

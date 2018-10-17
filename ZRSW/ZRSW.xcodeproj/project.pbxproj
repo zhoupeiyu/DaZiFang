@@ -695,6 +695,8 @@
 		E5B59BC0214FA79700726DE9 /* ZRSWLoginCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BBF214FA79700726DE9 /* ZRSWLoginCustomView.m */; };
 		E5B59BC4214FA94300726DE9 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */; };
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
+		E5CA993821777CD200C1906D /* currency_top_service@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA993721777CD100C1906D /* currency_top_service@2x.png */; };
+		E5CA993A21777CED00C1906D /* currency_top_service@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA993921777CEC00C1906D /* currency_top_service@3x.png */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
 		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
 		E5E27980215DF621007D27A8 /* UploadImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2797F215DF621007D27A8 /* UploadImagesManager.m */; };
@@ -1912,6 +1914,8 @@
 		E5B59BC3214FA94300726DE9 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		E5B59BC6214FD2B200726DE9 /* ZRSWViewFactoryTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWViewFactoryTool.h; sourceTree = "<group>"; };
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
+		E5CA993721777CD100C1906D /* currency_top_service@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currency_top_service@2x.png"; sourceTree = "<group>"; };
+		E5CA993921777CEC00C1906D /* currency_top_service@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currency_top_service@3x.png"; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
 		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -4416,6 +4420,7 @@
 		E5B59A85214EC15600726DE9 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				E5CA993721777CD100C1906D /* currency_top_service@2x.png */,
 				3C82F5B1216F9EC8001C6441 /* choice_city_line@2x.png */,
 				3C82F5B2216F9EC8001C6441 /* choice_city_list_bg@2x.png */,
 				E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */,
@@ -4496,6 +4501,7 @@
 		E5B59ACC214EC15600726DE9 /* @3x */ = {
 			isa = PBXGroup;
 			children = (
+				E5CA993921777CEC00C1906D /* currency_top_service@3x.png */,
 				3C82F5B5216F9EE9001C6441 /* choice_city_line@3x.png */,
 				3C82F5B6216F9EE9001C6441 /* choice_city_list_bg@3x.png */,
 				E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */,
@@ -4768,6 +4774,7 @@
 				E5B59A12214EBEE800726DE9 /* navi_back_26x26_@3x.png in Resources */,
 				E5B59B39214EC15600726DE9 /* my_identity@2x.png in Resources */,
 				E5B59B3D214EC15600726DE9 /* currency_bottom_home_select@2x.png in Resources */,
+				E5CA993A21777CED00C1906D /* currency_top_service@3x.png in Resources */,
 				E5B59B84214EC15600726DE9 /* loan_process@3x.png in Resources */,
 				E5B599FF214EBEE800726DE9 /* navi_back_shadow_26x26_@2x.png in Resources */,
 				E5B59B2C214EC15600726DE9 /* sign_other_line@2x.png in Resources */,
@@ -4914,6 +4921,7 @@
 				E5565F482167AAEA00747A49 /* axios.js in Resources */,
 				E5B59B5C214EC15600726DE9 /* currency_top_bg@2x.png in Resources */,
 				E5B59B3F214EC15600726DE9 /* currency_line_750@2x.png in Resources */,
+				E5CA993821777CD200C1906D /* currency_top_service@2x.png in Resources */,
 				E5B59B94214EC15600726DE9 /* currency_shadow_lower@3x.png in Resources */,
 				E5B59B13214EC15600726DE9 /* icon_87.png in Resources */,
 				E5B59B54214EC15600726DE9 /* bill_title_instructions@2x.png in Resources */,
