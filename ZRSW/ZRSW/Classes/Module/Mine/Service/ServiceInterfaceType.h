@@ -65,8 +65,13 @@
 // 问题详情
 #define KGetCommentQuestionDetailRequest        @"KGetCommentQuestionDetailRequest"
 
+
+// 消息数
+#define KGetMessageCountRequest                @"KGetMessageCountRequest"
+
 // 账单列表
 #define KGetBillListRequest                @"KGetBillListRequest"
+
 
 // 提醒列表
 #define KGetRemindListRequest                 @"KGetRemindListRequest"

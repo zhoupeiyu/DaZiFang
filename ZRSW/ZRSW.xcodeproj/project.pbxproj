@@ -152,6 +152,7 @@
 		3CFBF534215C7D4600A7AA97 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF533215C7D4600A7AA97 /* libc++.tbd */; };
 		3CFBF536215C7D6800A7AA97 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF535215C7D6800A7AA97 /* libsqlite3.tbd */; };
 		3CFBF53D215CAE9A00A7AA97 /* ZRSWOnlineCustomerServiceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFBF53C215CAE9A00A7AA97 /* ZRSWOnlineCustomerServiceController.m */; };
+		3CFE0B7A2177954D0087C50E /* ZRSWMessageCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE0B792177954D0087C50E /* ZRSWMessageCountModel.m */; };
 		407FD762170B333C681D124F /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526F0CB3FAD378F340C7F964 /* libPods-ZRSW.a */; };
 		E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */ = {isa = PBXBuildFile; fileRef = E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */; };
 		E5533E0B21645FF8003631E6 /* ZRSWLinePrejudicationCells.m in Sources */ = {isa = PBXBuildFile; fileRef = E5533E0921645FF8003631E6 /* ZRSWLinePrejudicationCells.m */; };
@@ -1000,6 +1001,8 @@
 		3CFBF535215C7D6800A7AA97 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		3CFBF53B215CAE9A00A7AA97 /* ZRSWOnlineCustomerServiceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOnlineCustomerServiceController.h; sourceTree = "<group>"; };
 		3CFBF53C215CAE9A00A7AA97 /* ZRSWOnlineCustomerServiceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOnlineCustomerServiceController.m; sourceTree = "<group>"; };
+		3CFE0B782177954D0087C50E /* ZRSWMessageCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWMessageCountModel.h; sourceTree = "<group>"; };
+		3CFE0B792177954D0087C50E /* ZRSWMessageCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMessageCountModel.m; sourceTree = "<group>"; };
 		526F0CB3FAD378F340C7F964 /* libPods-ZRSW.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZRSW.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5131CA0215B8DC000CF362F /* NSArray+Sudoku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Sudoku.h"; sourceTree = "<group>"; };
@@ -3926,6 +3929,8 @@
 				3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */,
 				E5E27987215E750E007D27A8 /* ZRSWUserInfoListModel.h */,
 				E5E27988215E750E007D27A8 /* ZRSWUserInfoListModel.m */,
+				3CFE0B782177954D0087C50E /* ZRSWMessageCountModel.h */,
+				3CFE0B792177954D0087C50E /* ZRSWMessageCountModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5456,6 +5461,7 @@
 				E553409A2164620F003631E6 /* NSString+JKMIME.m in Sources */,
 				E55340D62164620F003631E6 /* CAAnimation+JKEasingEquations.m in Sources */,
 				E5565F2E21666CE800747A49 /* UIImage+ZLPhotoBrowser.m in Sources */,
+				3CFE0B7A2177954D0087C50E /* ZRSWMessageCountModel.m in Sources */,
 				E5565F3121666CE800747A49 /* ZLCollectionCell.m in Sources */,
 				E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */,
 				E5B59A1A214EBEE800726DE9 /* BaseModel.m in Sources */,

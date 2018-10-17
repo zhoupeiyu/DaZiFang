@@ -61,6 +61,12 @@
 - (void)setModel:(ZRSWMineModel *)model {
     _model = model;
     self.titleLbl.text = model.title;
+    if (model.unreadCount) {
+        _titleLbl.badgeOriginX = _titleLbl.width;
+        _titleLbl.badgeOriginY = -8;
+        [self.titleLbl lf_showNumberBadge:model.unreadCount];
+    }
+    
     self.descLbl.text = model.desInfo;
     self.cellType = model.type;
     self.bottomLineHidden = model.bottomLineHidden;

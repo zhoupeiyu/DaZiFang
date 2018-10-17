@@ -10,6 +10,7 @@
 #import "EnumType.h"
 #import "ZRSWRemindListModel.h"
 #import "ZRSWBillListModel.h"
+#import "ZRSWMessageCountModel.h"
 
 @interface UserService : BaseNetWorkService
 
@@ -202,6 +203,13 @@
  */
 - (void)getCommentQuestionDetail:(NSString *)faqId delegate:(id)delegate;
 
+/**
+ 查询指定状态的消息总数接口
+
+ @param status 消息状态
+ @param delegate 代理
+ */
+- (void)getMessageCount:(int)status delegate:(id)delegate;
 
 /**
  账单列表
