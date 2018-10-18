@@ -58,8 +58,7 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
             if (failure) {
                 failure(error);
             }
-        }
-        if(location) {//得到定位信息，添加annotation
+        }else{//得到定位信息，添加annotation
             if (location.rgcData) {
                 LLog(@"rgc = %@",[location.rgcData description]);
                 NSString *result = location.rgcData.city;
@@ -69,10 +68,6 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
                 if (success) {
                     success(result);
                 }
-            }
-        }else{
-            if (failure) {
-                failure(error);
             }
         }
         LLog(@"netstate = %d",state);

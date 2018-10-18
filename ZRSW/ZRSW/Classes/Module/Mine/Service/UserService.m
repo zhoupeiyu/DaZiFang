@@ -179,6 +179,11 @@
 
 }
 
+- (void)getMessageCount:(int)status delegate:(id)delegate{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@(status) forKey:@"status"];
+    [self POST:KGetMessageCountInterface reqType:KGetMessageCountRequest delegate:delegate parameters:params ObjcClass:[ZRSWMessageCountModel class] NeedCache:NO];
+}
 
 - (void)getBillList:(int)pageSize pageNum:(int)pageNum delegate:(id)delegate{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

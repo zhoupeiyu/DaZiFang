@@ -19,15 +19,20 @@
 #import "UserService.h"
 #import "ZRSWOrderListController.h"
 #import "ZRSWLoginController.h"
+#import "ZRSWMessageCountModel.h"
+#import "ZRSWBrushFaceCertificationController.h"
 
 #define KAuthFinishedPresentation       @"您已认证成功，不可再次提交！"
 #define KAuthCommitPresentation         @"您已提交审核，不可再次提交！"
 
 
-@interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
+@interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource,BaseNetWorkServiceDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, assign) NSInteger unreadCount;
+
+
 
 @end
 
@@ -58,6 +63,7 @@
     
     [super viewWillAppear:animated];
     [self updateUserInfo];
+    [self getUnreadMessageCount];
     
 }
 - (void)viewDidLoad {
@@ -73,6 +79,7 @@
     [self.rightBarButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo) name:UserLoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserIcon:) name:ChangeUserInfoSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMsgStatus) name:UpdateMsgStatusNotification object:nil];
 }
 
 - (void)setupUI {
@@ -84,6 +91,14 @@
         make.left.right.top.bottom.mas_equalTo(0);
     }];
 }
+
+- (void)updateMsgStatus{
+    self.unreadCount = 0;
+    ZRSWMineModel *mineModel = self.dataSource[1][1];
+    mineModel.unreadCount = 0;
+    [self.tableView reloadData];
+}
+
 #pragma mark - delegate && dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return ((NSMutableArray *)self.dataSource[section]).count;
@@ -155,12 +170,25 @@
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
-    if ([reqType isEqualToString:KUserLogOutRequest]) {
-        [UserModel removeUserData];
-        //设置LoginToke
-        [[BaseNetWorkService sharedInstance] setLoginToken:nil];
-        [self.tableView reloadData];
-        
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KGetMessageCountRequest]) {
+            ZRSWMessageCountModel *model= (ZRSWMessageCountModel *)resObj;
+            if ([model.error_code intValue] == 0) {
+                ZRSWMineModel *mineModel = self.dataSource[1][1];
+                mineModel.unreadCount = model.data.msg_count;
+                [self.tableView reloadData];
+            }else{
+                LLog(@"请求失败:%@",model.error_msg);
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }else if ([reqType isEqualToString:KUserLogOutRequest]) {
+            [UserModel removeUserData];
+            //设置LoginToke
+            [[BaseNetWorkService sharedInstance] setLoginToken:nil];
+            [self.tableView reloadData];
+        }
+    }else{
+        LLog(@"请求失败");
     }
 }
 #pragma mark - Action
@@ -179,6 +207,12 @@
 - (void)changeUserIcon:(NSNotification *)noti {
     
 }
+
+- (void)getUnreadMessageCount{
+     [[[UserService alloc] init] getMessageCount:0 delegate:self];
+}
+
+
 - (void)updateUserInfo {
     UserModel *model = [UserModel getCurrentModel];
     ZRSWMineModel *mineModel = self.dataSource[0][0];
@@ -268,6 +302,14 @@
             model.type = MineListTypeCommentList;
             model.iconName = @"my_phone";
             model.viewControllerName = NSStringFromClass([ZRSWResetPhoneController class]);
+            [data addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"刷脸认证";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_face";
+            model.viewControllerName = NSStringFromClass([ZRSWBrushFaceCertificationController class]);
             [data addObject:model];
         }
         [self.dataSource addObject:data];

@@ -61,6 +61,9 @@
 // 问题详情
 #define KGetCommentQuestionDetailInterface              @"api/index/faqInfo"
 
+// 消息数
+#define KGetMessageCountInterface                         @"api/message/msgCount"
+
 // 账单列表
 #define KGetBillListInterface                @"api/order/recordList"
 

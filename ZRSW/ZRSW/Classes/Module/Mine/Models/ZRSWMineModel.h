@@ -32,5 +32,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) BOOL bottomLineHidden;
 
 @property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, assign) NSInteger unreadCount;
+
 
 @end

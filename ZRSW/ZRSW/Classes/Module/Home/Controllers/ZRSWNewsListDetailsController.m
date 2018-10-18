@@ -39,8 +39,6 @@
 }
 
 - (void)setUpTableView{
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.showsHorizontalScrollIndicator = NO;
     [self enableRefreshHeader:YES];
     [self enableLoadMore:YES];
 }
