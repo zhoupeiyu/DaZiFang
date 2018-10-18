@@ -7,7 +7,7 @@
 //
 
 #import "ZRSWBrushFaceLoginController.h"
-@interface ZRSWBrushFaceLoginController ()
+@interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *phoneLabel;
@@ -21,7 +21,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [TipViewManager showLoading];
+    [self.scrollView reloadEmptyDataSet];
+    [self setViewHidden:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         self.scrollView.emptyDataSetSource = nil;
+        [self.scrollView reloadEmptyDataSet];
+        [self setViewHidden:NO];
+        [TipViewManager dismissLoading];
+    });
+}
 
+- (void)setViewHidden:(BOOL)hidden{
+    self.headView.hidden = hidden;
+    self.iconImageView.hidden = hidden;
+    self.phoneLabel.hidden = hidden;
+    self.headeImageView.hidden = hidden;
+    self.faceLoginBtn.hidden = hidden;
+    self.toggleLoginModeBtn.hidden = hidden;
 }
 
 - (void)setupUI {
@@ -32,8 +49,12 @@
     [self.scrollView addSubview:self.headeImageView];
     [self.scrollView addSubview:self.faceLoginBtn];
     [self.scrollView addSubview:self.toggleLoginModeBtn];
+    self.scrollView.emptyDataSetSource = self;
+    self.scrollView.emptyDataSetDelegate = self;
     [self setupLayOut];
 }
+
+
 
 - (void)setupConfig {
     [super setupConfig];
@@ -90,6 +111,67 @@
 
 - (void)faceLoginBtnClick {
     LLog(@"刷脸登录");
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = ![BaseNetWorkService isReachable] ? @"无网络" : @"无数据";
+    UIFont *font = [UIFont fontWithName:@"MicrosoftYaHei" size:21];
+    UIColor *textColor = [UIColor colorFromRGB:0x474455];
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    if (font) [attributes setObject:font forKey:NSFontAttributeName];
+    if (textColor) [attributes setObject:textColor forKey:NSForegroundColorAttributeName];
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = ![BaseNetWorkService isReachable] ? @"当前网络连接失败，\n快去重新连接一下试试吧！" : @"当前没有相应数据，快去看看别的吧！";
+    UIFont *font = [UIFont fontWithName:@"MicrosoftYaHei" size:16];
+    UIColor *textColor = [UIColor colorWithHex:0x666666 alpha:0.7];
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    if (font) [attributes setObject:font forKey:NSFontAttributeName];
+    if (textColor) [attributes setObject:textColor forKey:NSForegroundColorAttributeName];
+    if (paragraph) [attributes setObject:paragraph forKey:NSParagraphStyleAttributeName];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:text attributes:attributes];
+    return attributedString;
+}
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+    return ![BaseNetWorkService isReachable] ? [UIImage imageNamed:@"currency_no_network"] : [UIImage imageNamed:@"currency_no_data"];
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    return ![BaseNetWorkService isReachable] ? [[NSAttributedString alloc] initWithString:@"重试" attributes:@{
+                                                                                                             NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                                                                             NSFontAttributeName : [UIFont systemFontOfSize:16]
+                                                                                                             }] : [[NSAttributedString alloc] initWithString:@""];
+}
+- (UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    UIEdgeInsets capInsets = UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0);
+    UIEdgeInsets rectInsets = UIEdgeInsetsMake(-28, -100, -25, -100);
+    UIImage *image = [UIImage imageNamed:@"currency_no_network_button"];
+    return ![BaseNetWorkService isReachable] ? [[image resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch] imageWithAlignmentRectInsets:rectInsets] : nil;
+}
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView {
+    return - kNavigationBarH;
+}
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowTouch:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView {
+    return YES;
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view {
+
+}
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button {
+
 }
 
 
