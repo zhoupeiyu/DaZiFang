@@ -78,7 +78,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [self.contentView addSubview:self.contentLabel];
     [self.contentView addSubview:self.dateLabel];
     [self.contentView addSubview:self.lineImge];
-    [self.contentView addSubview:self.imgeView];
+//    [self.contentView addSubview:self.imgeView];
 }
 
 
@@ -286,26 +286,27 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         [self.contentLabel sizeToFit];
     }
 
-    if (self.type == DetailsTypeCommentQuestion){
-        if (self.questionDetailContentModel.imgUrl == nil ||[self.questionDetailContentModel.imgUrl isEqualToString:@""] ) {
-            [self.imgeView removeFromSuperview];
-            self.imgeView.frame = CGRectMake(0,0,0,0);
-            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
-        }else{
-            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
-             self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
-        }
-    }else{
-        if (self.detailContensModel.imgUrl == nil ||[self.detailContensModel.imgUrl isEqualToString:@""] ) {
-            [self.imgeView removeFromSuperview];
-            self.imgeView.frame = CGRectMake(0,0,0,0);
-            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
-
-        }else{
-            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
-            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
-        }
-    }
+//    if (self.type == DetailsTypeCommentQuestion){
+//        if (self.questionDetailContentModel.imgUrl == nil ||[self.questionDetailContentModel.imgUrl isEqualToString:@""] ) {
+//            [self.imgeView removeFromSuperview];
+//            self.imgeView.frame = CGRectMake(0,0,0,0);
+//            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
+//        }else{
+//            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+//             self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
+//        }
+//    }else{
+//        if (self.detailContensModel.imgUrl == nil ||[self.detailContensModel.imgUrl isEqualToString:@""] ) {
+//            [self.imgeView removeFromSuperview];
+//            self.imgeView.frame = CGRectMake(0,0,0,0);
+//            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
+//
+//        }else{
+//            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+//            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
+//        }
+//    }
+    self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, CGRectGetMaxY(self.contentView.frame) + kUI_HeightS(20));
 }
 
@@ -325,14 +326,14 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
         NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         self.contentLabel.attributedText = htmlString;
-        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
+//        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
     }else if (self.type == DetailsTypeSystemNotification) {
         self.roundupLabel.text = self.detailContensModel.title;
         self.dateLabel.text = self.detailContensModel.updateTime;
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
         NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         self.contentLabel.attributedText = htmlString;
-        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
+//        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
     }else if (self.type == DetailsTypeCommentQuestion){
         self.roundupLabel.text = self.questionDetailContentModel.title;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
@@ -347,7 +348,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
           self.dateLabel.text = self.questionDetailContentModel.updateTime;
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
         self.contentLabel.text = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
-        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.questionDetailContentModel.imgUrl] placeholderImage:nil];
+//        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.questionDetailContentModel.imgUrl] placeholderImage:nil];
     }
     [self setupLayOut];
 }
