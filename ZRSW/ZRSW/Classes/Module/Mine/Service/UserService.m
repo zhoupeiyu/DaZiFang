@@ -119,7 +119,7 @@
     [params setObject:idCardImg2 forKey:@"idCardImg2"];
     [params setObject:idCardImg3 forKey:@"idCardImg3"];
     [params setObject:idCardImg4 forKey:@"idCardImg4"];
-    [self POST:KUserValidationIdCardInterface reqType:KUserValidationIdCardRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
+    [self POST:KUserValidationIdCardInterface reqType:KUserValidationIdCardRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 
 - (void)userValidationCompany:(NSString *)companyName deptName:(NSString *)deptName workCardUrl:(NSString *)workCardUrl delegate:(id)delegate {
