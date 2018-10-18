@@ -35,8 +35,6 @@
 }
 
 - (void)setUpTableView{
-    self.tableView.showsVerticalScrollIndicator = NO;
-    self.tableView.showsHorizontalScrollIndicator = NO;
     self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.tableFooterView = self.logoutView;
 }

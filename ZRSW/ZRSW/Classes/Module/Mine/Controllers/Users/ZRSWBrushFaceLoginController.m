@@ -44,9 +44,9 @@
 - (void)setupLayOut {
     [super setupLayOut];
     [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
         make.top.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(-0);
         make.height.mas_equalTo(70);
     }];
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -64,14 +64,14 @@
     [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
         make.left.mas_equalTo(60);
-        make.width.mas_equalTo(SCREEN_WIDTH - 120);
-        make.height.mas_equalTo(SCREEN_WIDTH - 120);
+        make.right.mas_equalTo(-60);
+        make.height.mas_equalTo(kUI_HeightS(230));
     }];
 
     [self.faceLoginBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headeImageView.mas_bottom).offset(60);
         make.left.mas_equalTo(30);
-        make.width.mas_equalTo(SCREEN_WIDTH - 60);
+        make.right.mas_equalTo(-30);
         make.height.mas_equalTo(44);
     }];
     [self.toggleLoginModeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -124,6 +124,7 @@
 - (UIImageView *)headeImageView{
     if (!_headeImageView) {
         _headeImageView = [[UIImageView alloc] init];
+        _headeImageView.image = [UIImage imageNamed:@"sign_face"];
     }
     return _headeImageView;
 }

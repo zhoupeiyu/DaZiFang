@@ -20,6 +20,7 @@
 #import "ZRSWOrderListController.h"
 #import "ZRSWLoginController.h"
 #import "ZRSWMessageCountModel.h"
+#import "ZRSWBrushFaceCertificationController.h"
 
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource,BaseNetWorkServiceDelegate>
 
@@ -274,6 +275,14 @@
             model.type = MineListTypeCommentList;
             model.iconName = @"my_phone";
             model.viewControllerName = NSStringFromClass([ZRSWResetPhoneController class]);
+            [data addObject:model];
+        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"刷脸认证";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_face";
+            model.viewControllerName = NSStringFromClass([ZRSWBrushFaceCertificationController class]);
             [data addObject:model];
         }
         [self.dataSource addObject:data];
