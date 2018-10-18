@@ -137,10 +137,6 @@
 		3CD3C815215FCC8200DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
 		3CD3C816215FCC9900DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
 		3CD3C817215FCC9900DE6199 /* HelpDesk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3CD937F2216074CB0091CCC6 /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EA216074CB0091CCC6 /* rem.js */; };
-		3CD937F4216074CB0091CCC6 /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */; };
-		3CD937F6216074CB0091CCC6 /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937EE216074CB0091CCC6 /* News.html */; };
-		3CD937F7216074CB0091CCC6 /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CD937F0216074CB0091CCC6 /* eyes.png */; };
 		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
 		3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */; };
 		3CFBF528215C7CB100A7AA97 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFBF527215C7CB100A7AA97 /* CoreMedia.framework */; };
@@ -407,7 +403,6 @@
 		E5565F4221666CE800747A49 /* ZLPhotoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E5565F2221666CE800747A49 /* ZLPhotoConfiguration.m */; };
 		E5565F4421666D6000747A49 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5565F4321666D6000747A49 /* Photos.framework */; };
 		E5565F4621666D7000747A49 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5565F4521666D6F00747A49 /* PhotosUI.framework */; };
-		E5565F482167AAEA00747A49 /* axios.js in Resources */ = {isa = PBXBuildFile; fileRef = E5565F472167AAEA00747A49 /* axios.js */; };
 		E591D66D2153454800F6802A /* ZRSWRealNameAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */; };
 		E591D67021534C6000F6802A /* ZRSWIPCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D66F21534C6000F6802A /* ZRSWIPCardView.m */; };
 		E591D6BB2153EAEB00F6802A /* ZRSWResetPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E591D6BA2153EAEA00F6802A /* ZRSWResetPhoneController.m */; };
@@ -697,6 +692,13 @@
 		E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */; };
 		E5CA993821777CD200C1906D /* currency_top_service@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA993721777CD100C1906D /* currency_top_service@2x.png */; };
 		E5CA993A21777CED00C1906D /* currency_top_service@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA993921777CEC00C1906D /* currency_top_service@3x.png */; };
+		E5CA99522177933400C1906D /* btn_deleted_img_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */; };
+		E5CA995421781D9900C1906D /* pretrial_delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */; };
+		E5CA995D21781DE500C1906D /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995721781DE500C1906D /* rem.js */; };
+		E5CA995E21781DE500C1906D /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995821781DE500C1906D /* vue-2.5.13.js */; };
+		E5CA995F21781DE500C1906D /* vue-resource-1.3.4.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */; };
+		E5CA996021781DE500C1906D /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995A21781DE500C1906D /* News.html */; };
+		E5CA996121781DE500C1906D /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995C21781DE500C1906D /* eyes.png */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
 		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
 		E5E27980215DF621007D27A8 /* UploadImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2797F215DF621007D27A8 /* UploadImagesManager.m */; };
@@ -707,8 +709,6 @@
 		E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2799D215F520F007D27A8 /* ZRSWOrderListDetailController.m */; };
 		E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */; };
 		E5E27A362160D9BF007D27A8 /* ZRSWMineMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */; };
-		E5E27A4121625C7F007D27A8 /* btn_deleted_img_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */; };
-		E5E27A4321625C90007D27A8 /* btn_deleted_img_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */; };
 		E5F9F2052154F2DE009CA6B9 /* ZRSWLoansTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */; };
 		E5F9F208215A045C009CA6B9 /* ZRSWOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F9F207215A045C009CA6B9 /* ZRSWOrderModel.m */; };
 /* End PBXBuildFile section */
@@ -982,10 +982,6 @@
 		3CD3C7BD215FC77F00DE6199 /* EaseUIResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EaseUIResource.bundle; sourceTree = "<group>"; };
 		3CD3C7BE215FC77F00DE6199 /* EaseUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EaseUI.m; sourceTree = "<group>"; };
 		3CD3C814215FCC8100DE6199 /* HelpDesk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HelpDesk.framework; sourceTree = "<group>"; };
-		3CD937EA216074CB0091CCC6 /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
-		3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
-		3CD937EE216074CB0091CCC6 /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
-		3CD937F0216074CB0091CCC6 /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		3CED799A2159348800A1BE4C /* ZRSWBrushFaceLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBrushFaceLoginController.h; sourceTree = "<group>"; };
 		3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBrushFaceLoginController.m; sourceTree = "<group>"; };
 		3CED799D2159E36C00A1BE4C /* ZRSWBannerDetailsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBannerDetailsController.h; sourceTree = "<group>"; };
@@ -1512,7 +1508,6 @@
 		E5565F2221666CE800747A49 /* ZLPhotoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZLPhotoConfiguration.m; sourceTree = "<group>"; };
 		E5565F4321666D6000747A49 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		E5565F4521666D6F00747A49 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = System/Library/Frameworks/PhotosUI.framework; sourceTree = SDKROOT; };
-		E5565F472167AAEA00747A49 /* axios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = axios.js; sourceTree = "<group>"; };
 		E591D66B2153454800F6802A /* ZRSWRealNameAuthController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRealNameAuthController.h; sourceTree = "<group>"; };
 		E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRealNameAuthController.m; sourceTree = "<group>"; };
 		E591D66E21534C6000F6802A /* ZRSWIPCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWIPCardView.h; sourceTree = "<group>"; };
@@ -1916,6 +1911,13 @@
 		E5B59BC7214FD2B200726DE9 /* ZRSWViewFactoryTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWViewFactoryTool.m; sourceTree = "<group>"; };
 		E5CA993721777CD100C1906D /* currency_top_service@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currency_top_service@2x.png"; sourceTree = "<group>"; };
 		E5CA993921777CEC00C1906D /* currency_top_service@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currency_top_service@3x.png"; sourceTree = "<group>"; };
+		E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@3x.png"; sourceTree = "<group>"; };
+		E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pretrial_delete_button@2x.png"; sourceTree = "<group>"; };
+		E5CA995721781DE500C1906D /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
+		E5CA995821781DE500C1906D /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
+		E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-resource-1.3.4.js"; sourceTree = "<group>"; };
+		E5CA995A21781DE500C1906D /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
+		E5CA995C21781DE500C1906D /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
 		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -1935,8 +1937,6 @@
 		E5E279E6215F607C007D27A8 /* ZRSWOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWOrderListCell.m; sourceTree = "<group>"; };
 		E5E27A342160D9BF007D27A8 /* ZRSWMineMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWMineMainController.h; sourceTree = "<group>"; };
 		E5E27A352160D9BF007D27A8 /* ZRSWMineMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWMineMainController.m; sourceTree = "<group>"; };
-		E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@2x.png"; sourceTree = "<group>"; };
-		E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@3x.png"; sourceTree = "<group>"; };
 		E5F9F2032154F2DE009CA6B9 /* ZRSWLoansTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoansTopCell.h; sourceTree = "<group>"; };
 		E5F9F2042154F2DE009CA6B9 /* ZRSWLoansTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWLoansTopCell.m; sourceTree = "<group>"; };
 		E5F9F206215A045C009CA6B9 /* ZRSWOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWOrderModel.h; sourceTree = "<group>"; };
@@ -2556,34 +2556,6 @@
 				3CD3C814215FCC8100DE6199 /* HelpDesk.framework */,
 			);
 			path = HelpDesk;
-			sourceTree = "<group>";
-		};
-		3CD937E6216074CB0091CCC6 /* news */ = {
-			isa = PBXGroup;
-			children = (
-				3CD937E9216074CB0091CCC6 /* js */,
-				3CD937EE216074CB0091CCC6 /* News.html */,
-				3CD937EF216074CB0091CCC6 /* img */,
-			);
-			path = news;
-			sourceTree = "<group>";
-		};
-		3CD937E9216074CB0091CCC6 /* js */ = {
-			isa = PBXGroup;
-			children = (
-				E5565F472167AAEA00747A49 /* axios.js */,
-				3CD937EA216074CB0091CCC6 /* rem.js */,
-				3CD937EC216074CB0091CCC6 /* vue-2.5.13.js */,
-			);
-			path = js;
-			sourceTree = "<group>";
-		};
-		3CD937EF216074CB0091CCC6 /* img */ = {
-			isa = PBXGroup;
-			children = (
-				3CD937F0216074CB0091CCC6 /* eyes.png */,
-			);
-			path = img;
 			sourceTree = "<group>";
 		};
 		3CFBF53A215CAE2D00A7AA97 /* CustomerService */ = {
@@ -4420,10 +4392,11 @@
 		E5B59A85214EC15600726DE9 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */,
+				E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */,
 				E5CA993721777CD100C1906D /* currency_top_service@2x.png */,
 				3C82F5B1216F9EC8001C6441 /* choice_city_line@2x.png */,
 				3C82F5B2216F9EC8001C6441 /* choice_city_list_bg@2x.png */,
-				E5E27A4021625C7F007D27A8 /* btn_deleted_img_normal@2x.png */,
 				E5B59A86214EC15600726DE9 /* home_advertise_instructions_select@2x.png */,
 				E5B59A87214EC15600726DE9 /* currency_top_position@2x.png */,
 				E5B59A88214EC15600726DE9 /* share_bg@2x.png */,
@@ -4504,7 +4477,6 @@
 				E5CA993921777CEC00C1906D /* currency_top_service@3x.png */,
 				3C82F5B5216F9EE9001C6441 /* choice_city_line@3x.png */,
 				3C82F5B6216F9EE9001C6441 /* choice_city_list_bg@3x.png */,
-				E5E27A4221625C90007D27A8 /* btn_deleted_img_normal@3x.png */,
 				E5B59ACD214EC15600726DE9 /* home_advertisement_bg@3x.png */,
 				E5B59ACE214EC15600726DE9 /* currency_bottom_bg@3x.png */,
 				E5B59ACF214EC15600726DE9 /* home_information_arrow@3x.png */,
@@ -4623,6 +4595,35 @@
 			path = Module/CommentView;
 			sourceTree = "<group>";
 		};
+		E5CA995521781DE500C1906D /* news */ = {
+			isa = PBXGroup;
+			children = (
+				E5CA995621781DE500C1906D /* js */,
+				E5CA995A21781DE500C1906D /* News.html */,
+				E5CA995B21781DE500C1906D /* img */,
+			);
+			name = news;
+			path = ../../../../../../Desktop/news;
+			sourceTree = "<group>";
+		};
+		E5CA995621781DE500C1906D /* js */ = {
+			isa = PBXGroup;
+			children = (
+				E5CA995721781DE500C1906D /* rem.js */,
+				E5CA995821781DE500C1906D /* vue-2.5.13.js */,
+				E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		E5CA995B21781DE500C1906D /* img */ = {
+			isa = PBXGroup;
+			children = (
+				E5CA995C21781DE500C1906D /* eyes.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
 		E5D39183215CA95400E4F962 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -4645,7 +4646,7 @@
 		E5E279E3215F5C34007D27A8 /* H5 */ = {
 			isa = PBXGroup;
 			children = (
-				3CD937E6216074CB0091CCC6 /* news */,
+				E5CA995521781DE500C1906D /* news */,
 			);
 			path = H5;
 			sourceTree = "<group>";
@@ -4728,7 +4729,6 @@
 				E5B59B8A214EC15600726DE9 /* bill_title_instructions@3x.png in Resources */,
 				E5B59B86214EC15600726DE9 /* home_button_loan@3x.png in Resources */,
 				E5B59B50214EC15600726DE9 /* verification_code_button@2x.png in Resources */,
-				3CD937F2216074CB0091CCC6 /* rem.js in Resources */,
 				E5B59B83214EC15600726DE9 /* my_identity@3x.png in Resources */,
 				E5B59A03214EBEE800726DE9 /* navi_shadow_1x6_@3x.png in Resources */,
 				E5B59B5B214EC15600726DE9 /* pretrial_examples_button@2x.png in Resources */,
@@ -4739,6 +4739,7 @@
 				E55340DA2164620F003631E6 /* Info.plist in Resources */,
 				E5B59B53214EC15600726DE9 /* currency_top_back@2x.png in Resources */,
 				E5B59B6B214EC15600726DE9 /* pretrial_sex_select@3x.png in Resources */,
+				E5CA995D21781DE500C1906D /* rem.js in Resources */,
 				E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */,
 				E5B59BA2214EC15600726DE9 /* pretrial_examples_button@3x.png in Resources */,
 				3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */,
@@ -4754,13 +4755,12 @@
 				E5B59B66214EC15600726DE9 /* home_information_arrow@3x.png in Resources */,
 				E5B59B4A214EC15600726DE9 /* pretrial_remarks_box@2x.png in Resources */,
 				E5B59B19214EC15600726DE9 /* icon_100.png in Resources */,
+				E5CA996121781DE500C1906D /* eyes.png in Resources */,
 				E5B59B30214EC15600726DE9 /* currency_top_triangle@2x.png in Resources */,
 				E5B59B16214EC15600726DE9 /* icon_57.png in Resources */,
 				E5B59B72214EC15600726DE9 /* my_phone@3x.png in Resources */,
 				E5B59A0A214EBEE800726DE9 /* post_originalimage_normal@3x.png in Resources */,
-				E5E27A4321625C90007D27A8 /* btn_deleted_img_normal@3x.png in Resources */,
 				E5B59B9D214EC15600726DE9 /* news_dialog_them@3x.png in Resources */,
-				3CD937F4216074CB0091CCC6 /* vue-2.5.13.js in Resources */,
 				E5B599F2214EBEE800726DE9 /* fav_list_img_default_45x36_@2x.png in Resources */,
 				E5B59B48214EC15600726DE9 /* authentication_button_enterprise@2x.png in Resources */,
 				E5B59B34214EC15600726DE9 /* my_enterprise@2x.png in Resources */,
@@ -4797,6 +4797,7 @@
 				E5B59BA3214EC15600726DE9 /* currency_top_bg@3x.png in Resources */,
 				E5B59B31214EC15600726DE9 /* home_information_arrow@2x.png in Resources */,
 				E5B59B51214EC15600726DE9 /* currency_button@2x.png in Resources */,
+				E5CA995E21781DE500C1906D /* vue-2.5.13.js in Resources */,
 				E5B59BA6214EC15600726DE9 /* pretrial_sex_default@3x.png in Resources */,
 				E5B59B70214EC15600726DE9 /* sign_other_blog@3x.png in Resources */,
 				E5B59A0B214EBEE800726DE9 /* currency_no_network@3x.png in Resources */,
@@ -4810,7 +4811,6 @@
 				E5B59BA1214EC15600726DE9 /* pretrial_title_instructions@3x.png in Resources */,
 				E5B59B35214EC15600726DE9 /* register_select@2x.png in Resources */,
 				E5B59B46214EC15600726DE9 /* currency_title_instructions@2x.png in Resources */,
-				3CD937F6216074CB0091CCC6 /* News.html in Resources */,
 				E5B599FC214EBEE800726DE9 /* post_originalimage_selected@2x.png in Resources */,
 				E5B59B42214EC15600726DE9 /* authentication_button_name@2x.png in Resources */,
 				E5B59B9C214EC15600726DE9 /* home_advertise_instructions_default@3x.png in Resources */,
@@ -4842,6 +4842,7 @@
 				E5B59B2B214EC15600726DE9 /* pretrial_sex_select@2x.png in Resources */,
 				E5B59B14214EC15600726DE9 /* icon_50.png in Resources */,
 				E5B59A0C214EBEE800726DE9 /* navi_back_shadow_26x26_@3x.png in Resources */,
+				E5CA996021781DE500C1906D /* News.html in Resources */,
 				E5B59A07214EBEE800726DE9 /* tabbar_background@3x.png in Resources */,
 				E5B59B67214EC15600726DE9 /* currency_top_triangle@3x.png in Resources */,
 				E5B59B75214EC15600726DE9 /* bill_list_bg@3x.png in Resources */,
@@ -4855,7 +4856,6 @@
 				E5B59A09214EBEE800726DE9 /* currency_no_network_button@3x.png in Resources */,
 				E5B59B2E214EC15600726DE9 /* share_cancel_button@2x.png in Resources */,
 				E5B59B33214EC15600726DE9 /* home_advertisement_bg@2x.png in Resources */,
-				3CD937F7216074CB0091CCC6 /* eyes.png in Resources */,
 				E5B59B2F214EC15600726DE9 /* currency_arrow_option@2x.png in Resources */,
 				E5B59B7B214EC15600726DE9 /* currency_bottom_my_default@3x.png in Resources */,
 				E5B599F9214EBEE800726DE9 /* toast_background_white@2x.png in Resources */,
@@ -4866,6 +4866,7 @@
 				3C82F5B8216F9EEA001C6441 /* choice_city_list_bg@3x.png in Resources */,
 				E5B59B5A214EC15600726DE9 /* currency_bottom_home_default@2x.png in Resources */,
 				E5B59A02214EBEE800726DE9 /* navi_back_26x26_@2x.png in Resources */,
+				E5CA99522177933400C1906D /* btn_deleted_img_normal@3x.png in Resources */,
 				E5B59B59214EC15600726DE9 /* register_unchecked@2x.png in Resources */,
 				E5B59B63214EC15600726DE9 /* currency_shadow_upper@2x.png in Resources */,
 				E5B599FE214EBEE800726DE9 /* toast_done@2x.png in Resources */,
@@ -4876,6 +4877,7 @@
 				E5B599F0214EBEE800726DE9 /* navi_shadow_1x6_@1x.png in Resources */,
 				E5B59B56214EC15600726DE9 /* share_blog@2x.png in Resources */,
 				E5B59B37214EC15600726DE9 /* home_information_bg@2x.png in Resources */,
+				E5CA995F21781DE500C1906D /* vue-resource-1.3.4.js in Resources */,
 				3CD3C811215FC77F00DE6199 /* EaseUIResource.bundle in Resources */,
 				E5B59BA5214EC15600726DE9 /* register_unchecked@3x.png in Resources */,
 				E5B59B24214EC15600726DE9 /* currency_top_share@2x.png in Resources */,
@@ -4886,6 +4888,7 @@
 				E5B59B32214EC15600726DE9 /* currency_bottom_bg@2x.png in Resources */,
 				E5B59B22214EC15600726DE9 /* bill_list_bg@2x.png in Resources */,
 				E5B59B7C214EC15600726DE9 /* home_notice_arrow@3x.png in Resources */,
+				E5CA995421781D9900C1906D /* pretrial_delete_button@2x.png in Resources */,
 				E5B59B6C214EC15600726DE9 /* sign_other_line@3x.png in Resources */,
 				E5B59B6D214EC15600726DE9 /* currency_top_tips_bg@3x.png in Resources */,
 				E5B59B69214EC15600726DE9 /* share_cancel_button@3x.png in Resources */,
@@ -4899,7 +4902,6 @@
 				E5B59BA9214EC15600726DE9 /* news_dialog_arrow_them@3x.png in Resources */,
 				E5B59B3A214EC15600726DE9 /* currency_bottom_button@2x.png in Resources */,
 				E5B59B77214EC15600726DE9 /* currency_top_position@3x.png in Resources */,
-				E5E27A4121625C7F007D27A8 /* btn_deleted_img_normal@2x.png in Resources */,
 				E5B59B15214EC15600726DE9 /* icon_40.png in Resources */,
 				E5B59B8E214EC15600726DE9 /* currency_watch_number@3x.png in Resources */,
 				E5B59B4B214EC15600726DE9 /* bill_content_bg@2x.png in Resources */,
@@ -4918,7 +4920,6 @@
 				E5B59B3B214EC15600726DE9 /* share_wechat@2x.png in Resources */,
 				E5B59BA8214EC15600726DE9 /* share_blog@3x.png in Resources */,
 				E5B59B5F214EC15600726DE9 /* currency_line_720@2x.png in Resources */,
-				E5565F482167AAEA00747A49 /* axios.js in Resources */,
 				E5B59B5C214EC15600726DE9 /* currency_top_bg@2x.png in Resources */,
 				E5B59B3F214EC15600726DE9 /* currency_line_750@2x.png in Resources */,
 				E5CA993821777CD200C1906D /* currency_top_service@2x.png in Resources */,

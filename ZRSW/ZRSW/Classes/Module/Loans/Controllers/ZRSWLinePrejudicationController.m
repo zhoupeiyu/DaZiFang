@@ -115,7 +115,7 @@
             }
             for (NSInteger count = 0; count < imageCount.count; count ++) { // 遍历存放个数的数组
                 ZRSWOrderLoanInfoCondition *loanCondition = (ZRSWOrderLoanInfoCondition *)weakSelf.loanCondition[count];// 获取对象
-                NSString *loanConditionName = loanCondition.title; // 获取对象标题
+                NSString *loanConditionName = loanCondition.conditionID; // 获取对象标题
                 NSInteger imageNum = ((NSNumber *)imageCount[count]).integerValue;// 个数
                 NSMutableArray *imageUrlArray = [[NSMutableArray alloc] init];// 需要移除的数组
                 NSMutableDictionary *attri = [NSMutableDictionary dictionary]; // URL和标题的字典

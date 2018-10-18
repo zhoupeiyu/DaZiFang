@@ -77,7 +77,10 @@
 - (void)userLoginError:(NSNotification *)noti {
     [UserModel removeUserData];
     [TipViewManager dismissLoading];
-    if (self.pushToLogin) {
+    
+    UIViewController *currntVC = [UIViewController currentViewController];
+    
+    if (self.pushToLogin || [currntVC isKindOfClass:NSClassFromString(@"PSTExtendedAlertController")]) {
         //防止viewWillAppear里有网络请求，导致登录界面返回后又继续跳登录
         return;
     }

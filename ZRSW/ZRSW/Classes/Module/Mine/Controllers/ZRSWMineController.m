@@ -20,6 +20,10 @@
 #import "ZRSWOrderListController.h"
 #import "ZRSWLoginController.h"
 
+#define KAuthFinishedPresentation       @"您已认证成功，不可再次提交！"
+#define KAuthCommitPresentation         @"您已提交审核，不可再次提交！"
+
+
 @interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -114,14 +118,37 @@
         [self updateUserInfo];
         return;
     }
-    if (![UserModel hasLogin]) {
+    if (![UserModel hasLogin]) { 
         ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
         login.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:login animated:YES];
         return;
     }
+    
     BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
                                                      alloc] init];
+    if ([vc isKindOfClass:[ZRSWRealNameAuthController class]]) {
+        UserInfoModel *userModel = [UserModel getCurrentModel].data;
+        if (userModel.authName.integerValue == 0) {
+            [TipViewManager showToastMessage:KAuthCommitPresentation];
+            return;
+        }
+        else if (userModel.authName.integerValue == 1) {
+            [TipViewManager showToastMessage:KAuthFinishedPresentation];
+            return;
+        }
+    }
+    if ([vc isKindOfClass:[ZRSWEnterpriseAuthController class]]) {
+        UserInfoModel *userModel = [UserModel getCurrentModel].data;
+        if (userModel.authCompany.integerValue == 0) {
+            [TipViewManager showToastMessage:KAuthCommitPresentation];
+            return;
+        }
+        else if (userModel.authCompany.integerValue == 1) {
+            [TipViewManager showToastMessage:KAuthFinishedPresentation];
+            return;
+        }
+    }
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
