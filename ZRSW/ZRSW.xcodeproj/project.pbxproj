@@ -722,11 +722,11 @@
 		E5CA993A21777CED00C1906D /* currency_top_service@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA993921777CEC00C1906D /* currency_top_service@3x.png */; };
 		E5CA99522177933400C1906D /* btn_deleted_img_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */; };
 		E5CA995421781D9900C1906D /* pretrial_delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */; };
-		E5CA995D21781DE500C1906D /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995721781DE500C1906D /* rem.js */; };
-		E5CA995E21781DE500C1906D /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995821781DE500C1906D /* vue-2.5.13.js */; };
-		E5CA995F21781DE500C1906D /* vue-resource-1.3.4.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */; };
-		E5CA996021781DE500C1906D /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995A21781DE500C1906D /* News.html */; };
-		E5CA996121781DE500C1906D /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995C21781DE500C1906D /* eyes.png */; };
+		E5CA99922178CEA800C1906D /* rem.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA998C2178CEA800C1906D /* rem.js */; };
+		E5CA99932178CEA800C1906D /* vue-2.5.13.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA998D2178CEA800C1906D /* vue-2.5.13.js */; };
+		E5CA99942178CEA800C1906D /* vue-resource-1.3.4.js in Resources */ = {isa = PBXBuildFile; fileRef = E5CA998E2178CEA800C1906D /* vue-resource-1.3.4.js */; };
+		E5CA99952178CEA800C1906D /* News.html in Resources */ = {isa = PBXBuildFile; fileRef = E5CA998F2178CEA800C1906D /* News.html */; };
+		E5CA99962178CEA800C1906D /* eyes.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA99912178CEA800C1906D /* eyes.png */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
 		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
 		E5E27980215DF621007D27A8 /* UploadImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2797F215DF621007D27A8 /* UploadImagesManager.m */; };
@@ -1971,11 +1971,11 @@
 		E5CA993921777CEC00C1906D /* currency_top_service@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "currency_top_service@3x.png"; sourceTree = "<group>"; };
 		E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_deleted_img_normal@3x.png"; sourceTree = "<group>"; };
 		E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pretrial_delete_button@2x.png"; sourceTree = "<group>"; };
-		E5CA995721781DE500C1906D /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
-		E5CA995821781DE500C1906D /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
-		E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-resource-1.3.4.js"; sourceTree = "<group>"; };
-		E5CA995A21781DE500C1906D /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
-		E5CA995C21781DE500C1906D /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
+		E5CA998C2178CEA800C1906D /* rem.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = rem.js; sourceTree = "<group>"; };
+		E5CA998D2178CEA800C1906D /* vue-2.5.13.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-2.5.13.js"; sourceTree = "<group>"; };
+		E5CA998E2178CEA800C1906D /* vue-resource-1.3.4.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "vue-resource-1.3.4.js"; sourceTree = "<group>"; };
+		E5CA998F2178CEA800C1906D /* News.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = News.html; sourceTree = "<group>"; };
+		E5CA99912178CEA800C1906D /* eyes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eyes.png; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
 		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -4691,31 +4691,30 @@
 			path = Module/CommentView;
 			sourceTree = "<group>";
 		};
-		E5CA995521781DE500C1906D /* news */ = {
+		E5CA998A2178CEA800C1906D /* news */ = {
 			isa = PBXGroup;
 			children = (
-				E5CA995621781DE500C1906D /* js */,
-				E5CA995A21781DE500C1906D /* News.html */,
-				E5CA995B21781DE500C1906D /* img */,
+				E5CA998B2178CEA800C1906D /* js */,
+				E5CA998F2178CEA800C1906D /* News.html */,
+				E5CA99902178CEA800C1906D /* img */,
 			);
-			name = news;
-			path = ../../../../../../Desktop/news;
+			path = news;
 			sourceTree = "<group>";
 		};
-		E5CA995621781DE500C1906D /* js */ = {
+		E5CA998B2178CEA800C1906D /* js */ = {
 			isa = PBXGroup;
 			children = (
-				E5CA995721781DE500C1906D /* rem.js */,
-				E5CA995821781DE500C1906D /* vue-2.5.13.js */,
-				E5CA995921781DE500C1906D /* vue-resource-1.3.4.js */,
+				E5CA998C2178CEA800C1906D /* rem.js */,
+				E5CA998D2178CEA800C1906D /* vue-2.5.13.js */,
+				E5CA998E2178CEA800C1906D /* vue-resource-1.3.4.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
 		};
-		E5CA995B21781DE500C1906D /* img */ = {
+		E5CA99902178CEA800C1906D /* img */ = {
 			isa = PBXGroup;
 			children = (
-				E5CA995C21781DE500C1906D /* eyes.png */,
+				E5CA99912178CEA800C1906D /* eyes.png */,
 			);
 			path = img;
 			sourceTree = "<group>";
@@ -4742,7 +4741,7 @@
 		E5E279E3215F5C34007D27A8 /* H5 */ = {
 			isa = PBXGroup;
 			children = (
-				E5CA995521781DE500C1906D /* news */,
+				E5CA998A2178CEA800C1906D /* news */,
 			);
 			path = H5;
 			sourceTree = "<group>";
@@ -4839,7 +4838,6 @@
 				E55340DA2164620F003631E6 /* Info.plist in Resources */,
 				E5B59B53214EC15600726DE9 /* currency_top_back@2x.png in Resources */,
 				E5B59B6B214EC15600726DE9 /* pretrial_sex_select@3x.png in Resources */,
-				E5CA995D21781DE500C1906D /* rem.js in Resources */,
 				E5B598F4214E9E2600726DE9 /* Assets.xcassets in Resources */,
 				E5B59BA2214EC15600726DE9 /* pretrial_examples_button@3x.png in Resources */,
 				3C7E4AD3214F6B900058D3E2 /* guide_point_selected@2x.png in Resources */,
@@ -4856,7 +4854,6 @@
 				E5B59B4A214EC15600726DE9 /* pretrial_remarks_box@2x.png in Resources */,
 				3C4574B52178CD8D0009383F /* face_icon_uncertified@3x.png in Resources */,
 				E5B59B19214EC15600726DE9 /* icon_100.png in Resources */,
-				E5CA996121781DE500C1906D /* eyes.png in Resources */,
 				E5B59B30214EC15600726DE9 /* currency_top_triangle@2x.png in Resources */,
 				E5B59B16214EC15600726DE9 /* icon_57.png in Resources */,
 				3CFE0B9121785D6B0087C50E /* face_icon_certification_default@2x.png in Resources */,
@@ -4877,6 +4874,7 @@
 				E5B59B39214EC15600726DE9 /* my_identity@2x.png in Resources */,
 				E5B59B3D214EC15600726DE9 /* currency_bottom_home_select@2x.png in Resources */,
 				3CFE0B9721785D6B0087C50E /* face_icon_certification_shake_04@2x.png in Resources */,
+				E5CA99922178CEA800C1906D /* rem.js in Resources */,
 				E5CA993A21777CED00C1906D /* currency_top_service@3x.png in Resources */,
 				E5B59B84214EC15600726DE9 /* loan_process@3x.png in Resources */,
 				E5B599FF214EBEE800726DE9 /* navi_back_shadow_26x26_@2x.png in Resources */,
@@ -4902,7 +4900,6 @@
 				E5B59B31214EC15600726DE9 /* home_information_arrow@2x.png in Resources */,
 				3CFE0BA821785DBC0087C50E /* face_icon_certification_blink_02@3x.png in Resources */,
 				E5B59B51214EC15600726DE9 /* currency_button@2x.png in Resources */,
-				E5CA995E21781DE500C1906D /* vue-2.5.13.js in Resources */,
 				E5B59BA6214EC15600726DE9 /* pretrial_sex_default@3x.png in Resources */,
 				E5B59B70214EC15600726DE9 /* sign_other_blog@3x.png in Resources */,
 				E5B59A0B214EBEE800726DE9 /* currency_no_network@3x.png in Resources */,
@@ -4910,6 +4907,7 @@
 				E5B59B5E214EC15600726DE9 /* news_dialog_me@2x.png in Resources */,
 				E5B59B82214EC15600726DE9 /* share_wechat@3x.png in Resources */,
 				E5B59B1E214EC15600726DE9 /* home_advertise_instructions_select@2x.png in Resources */,
+				E5CA99932178CEA800C1906D /* vue-2.5.13.js in Resources */,
 				E5B59B71214EC15600726DE9 /* pretrial_upload_button@3x.png in Resources */,
 				E5B59B5D214EC15600726DE9 /* pretrial_title_instructions@2x.png in Resources */,
 				E5B59B55214EC15600726DE9 /* news_dialog_arrow_them@2x.png in Resources */,
@@ -4917,6 +4915,7 @@
 				E5B59B35214EC15600726DE9 /* register_select@2x.png in Resources */,
 				E5B59B46214EC15600726DE9 /* currency_title_instructions@2x.png in Resources */,
 				3CFE0B9621785D6B0087C50E /* face_icon_certification_shake_02@2x.png in Resources */,
+				E5CA99942178CEA800C1906D /* vue-resource-1.3.4.js in Resources */,
 				E5B599FC214EBEE800726DE9 /* post_originalimage_selected@2x.png in Resources */,
 				E5B59B42214EC15600726DE9 /* authentication_button_name@2x.png in Resources */,
 				E5B59B9C214EC15600726DE9 /* home_advertise_instructions_default@3x.png in Resources */,
@@ -4952,7 +4951,6 @@
 				E5B59B2B214EC15600726DE9 /* pretrial_sex_select@2x.png in Resources */,
 				E5B59B14214EC15600726DE9 /* icon_50.png in Resources */,
 				E5B59A0C214EBEE800726DE9 /* navi_back_shadow_26x26_@3x.png in Resources */,
-				E5CA996021781DE500C1906D /* News.html in Resources */,
 				E5B59A07214EBEE800726DE9 /* tabbar_background@3x.png in Resources */,
 				E5B59B67214EC15600726DE9 /* currency_top_triangle@3x.png in Resources */,
 				E5B59B75214EC15600726DE9 /* bill_list_bg@3x.png in Resources */,
@@ -4961,6 +4959,7 @@
 				3CFE0B9A21785D6B0087C50E /* face_icon_certification_shake_01@2x.png in Resources */,
 				3C82F5B7216F9EEA001C6441 /* choice_city_line@3x.png in Resources */,
 				E5B599EF214EBEE800726DE9 /* navi_back_shadow_26x26_@1x.png in Resources */,
+				E5CA99962178CEA800C1906D /* eyes.png in Resources */,
 				E5B59B27214EC15600726DE9 /* sign_other_blog@2x.png in Resources */,
 				E5B59B7A214EC15600726DE9 /* authentication_button_name@3x.png in Resources */,
 				E5B59B9E214EC15600726DE9 /* my_order@3x.png in Resources */,
@@ -4990,8 +4989,8 @@
 				E5B599F0214EBEE800726DE9 /* navi_shadow_1x6_@1x.png in Resources */,
 				3CFE0B9321785D6B0087C50E /* face_icon_certification_blink_02@2x.png in Resources */,
 				E5B59B56214EC15600726DE9 /* share_blog@2x.png in Resources */,
+				E5CA99952178CEA800C1906D /* News.html in Resources */,
 				E5B59B37214EC15600726DE9 /* home_information_bg@2x.png in Resources */,
-				E5CA995F21781DE500C1906D /* vue-resource-1.3.4.js in Resources */,
 				3CD3C811215FC77F00DE6199 /* EaseUIResource.bundle in Resources */,
 				E5B59BA5214EC15600726DE9 /* register_unchecked@3x.png in Resources */,
 				E5B59B24214EC15600726DE9 /* currency_top_share@2x.png in Resources */,
