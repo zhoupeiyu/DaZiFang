@@ -258,13 +258,13 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [self.roundupLabel sizeToFit];
     if (self.type == DetailsTypeCommentQuestion){
         [self.sourceNameLabel removeFromSuperview];
-        [self.contentLabel removeFromSuperview];
         self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
         self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
         self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
         self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(5),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
         self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
-        self.contentLabel.frame = CGRectMake(0,0,0,0);
+        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        [self.contentLabel sizeToFit];
     }else  if (self.type == DetailsTypeSystemNotification){
         [self.sourceNameLabel removeFromSuperview];
         [self.readerIcon removeFromSuperview];
@@ -334,7 +334,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.contentLabel.attributedText = htmlString;
         [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
     }else if (self.type == DetailsTypeCommentQuestion){
-        self.roundupLabel.text = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
+        self.roundupLabel.text = self.questionDetailContentModel.title;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
         self.readersLabel.text = [NSString stringWithFormat:@"%@",self.questionDetailContentModel.readers];
 //        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -346,6 +346,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //        self.dateLabel.text = dateString;
           self.dateLabel.text = self.questionDetailContentModel.updateTime;
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
+        self.contentLabel.text = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
         [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.questionDetailContentModel.imgUrl] placeholderImage:nil];
     }
     [self setupLayOut];
