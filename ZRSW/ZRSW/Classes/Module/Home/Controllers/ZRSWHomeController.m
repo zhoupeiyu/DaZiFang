@@ -294,7 +294,7 @@
                     [self.systemNewsListSource removeAllObjects];
                 }
                 [self.systemNewsListSource addObjectsFromArray:model.data];
-                NewDetailModel *model = self.systemNewsListSource.lastObject;
+                NewDetailModel *model = self.systemNewsListSource.firstObject;
                 if (model) {
                     _systemNotificationLabel.text = model.title;
                 }
@@ -391,6 +391,17 @@
     }
 }
 
+-(void)goToMoreSystemNotificationDetailsVC{
+    ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
+    detailsVC.type = DetailsTypeSystemNotification;
+    NewDetailModel *detailModel = self.systemNewsListSource.firstObject;
+    detailsVC.detailModel = detailModel;
+    detailsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailsVC animated:YES];
+
+
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     LLog(@"详情");
@@ -485,17 +496,18 @@
         CGFloat height = kUI_HeightS(44);
         _systemNotificationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.loanView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
         _systemNotificationView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
-        WS(weakSelf);
-        [_systemNotificationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
-            [weakSelf getMoreSystemNotification];
-        }];
         UIImageView *leftTitle = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),kUI_HeightS(13), kUI_WidthS(78), kUI_HeightS(18))];
         leftTitle.image = [UIImage imageNamed:@"home_notice"];
         [_systemNotificationView addSubview:leftTitle];
-        _systemNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(168))/2 ,kUI_HeightS(16), kUI_WidthS(168), kUI_HeightS(12))];
+        _systemNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(168))/2 ,0, kUI_WidthS(168), height)];
         _systemNotificationLabel.textColor = [UIColor colorFromRGB:0x333333];
         _systemNotificationLabel.textAlignment = NSTextAlignmentCenter;
         _systemNotificationLabel.font = [UIFont systemFontOfSize:12];
+        _systemNotificationLabel.userInteractionEnabled = YES;
+        WS(weakSelf);
+        [_systemNotificationLabel addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
+            [weakSelf goToMoreSystemNotificationDetailsVC];
+        }];
         [_systemNotificationView addSubview:_systemNotificationLabel];
 
         UIButton *moreButton = [[UIButton alloc] initWithFrame:CGRectMake(_systemNotificationLabel.right + kUI_WidthS(44) ,kUI_HeightS(15), kUI_WidthS(28), kUI_HeightS(14))];
