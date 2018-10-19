@@ -14,6 +14,17 @@
 		3C10D65B2154E23C0019112F /* ZRSWBillListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D65A2154E23C0019112F /* ZRSWBillListController.m */; };
 		3C10D65E2154E29E0019112F /* ZRSWBillListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */; };
 		3C10D6612154E2F50019112F /* ZRSWBillListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D6602154E2F50019112F /* ZRSWBillListCell.m */; };
+		3C158A492179835B00CC2366 /* CanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A482179835B00CC2366 /* CanvasView.m */; };
+		3C158A4C217983C400CC2366 /* CaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A4B217983C400CC2366 /* CaptureManager.m */; };
+		3C158A552179845100CC2366 /* IFlyFaceImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A4D2179845000CC2366 /* IFlyFaceImage.m */; };
+		3C158A562179845100CC2366 /* UIImage+compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A4E2179845000CC2366 /* UIImage+compress.m */; };
+		3C158A572179845100CC2366 /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A522179845100CC2366 /* UIImage+Extensions.m */; };
+		3C158A582179845100CC2366 /* CalculatorTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A532179845100CC2366 /* CalculatorTools.m */; };
+		3C158A5B217984A900CC2366 /* PermissionDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A5A217984A900CC2366 /* PermissionDetector.m */; };
+		3C158A5E217984E500CC2366 /* IFlyFaceResultKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A5C217984E500CC2366 /* IFlyFaceResultKeys.m */; };
+		3C158A612179852D00CC2366 /* FaceStreamDetectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A602179852C00CC2366 /* FaceStreamDetectorViewController.m */; };
+		3C158A632179A82C00CC2366 /* face_certification_tips_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C158A622179A82B00CC2366 /* face_certification_tips_frame@2x.png */; };
+		3C158A652179A84600CC2366 /* face_certification_tips_frame@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */; };
 		3C4574B021785EF10009383F /* my_face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574AF21785EF10009383F /* my_face@2x.png */; };
 		3C4574B221785EFC0009383F /* my_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B121785EFC0009383F /* my_face@3x.png */; };
 		3C4574B92178D0450009383F /* sign_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B72178D0450009383F /* sign_face@3x.png */; };
@@ -769,6 +780,26 @@
 		3C10D65D2154E29E0019112F /* ZRSWBillListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListModel.m; sourceTree = "<group>"; };
 		3C10D65F2154E2F50019112F /* ZRSWBillListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBillListCell.h; sourceTree = "<group>"; };
 		3C10D6602154E2F50019112F /* ZRSWBillListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBillListCell.m; sourceTree = "<group>"; };
+		3C158A472179835B00CC2366 /* CanvasView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasView.h; sourceTree = "<group>"; };
+		3C158A482179835B00CC2366 /* CanvasView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasView.m; sourceTree = "<group>"; };
+		3C158A4A217983C400CC2366 /* CaptureManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptureManager.h; sourceTree = "<group>"; };
+		3C158A4B217983C400CC2366 /* CaptureManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CaptureManager.m; sourceTree = "<group>"; };
+		3C158A4D2179845000CC2366 /* IFlyFaceImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFlyFaceImage.m; sourceTree = "<group>"; };
+		3C158A4E2179845000CC2366 /* UIImage+compress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+compress.m"; sourceTree = "<group>"; };
+		3C158A4F2179845000CC2366 /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
+		3C158A502179845000CC2366 /* CalculatorTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorTools.h; sourceTree = "<group>"; };
+		3C158A512179845100CC2366 /* IFlyFaceImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyFaceImage.h; sourceTree = "<group>"; };
+		3C158A522179845100CC2366 /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extensions.m"; sourceTree = "<group>"; };
+		3C158A532179845100CC2366 /* CalculatorTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorTools.m; sourceTree = "<group>"; };
+		3C158A542179845100CC2366 /* UIImage+compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+compress.h"; sourceTree = "<group>"; };
+		3C158A59217984A900CC2366 /* PermissionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionDetector.h; sourceTree = "<group>"; };
+		3C158A5A217984A900CC2366 /* PermissionDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionDetector.m; sourceTree = "<group>"; };
+		3C158A5C217984E500CC2366 /* IFlyFaceResultKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IFlyFaceResultKeys.m; sourceTree = "<group>"; };
+		3C158A5D217984E500CC2366 /* IFlyFaceResultKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IFlyFaceResultKeys.h; sourceTree = "<group>"; };
+		3C158A5F2179852C00CC2366 /* FaceStreamDetectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceStreamDetectorViewController.h; sourceTree = "<group>"; };
+		3C158A602179852C00CC2366 /* FaceStreamDetectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceStreamDetectorViewController.m; sourceTree = "<group>"; };
+		3C158A622179A82B00CC2366 /* face_certification_tips_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_certification_tips_frame@2x.png"; sourceTree = "<group>"; };
+		3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_certification_tips_frame@3x.png"; sourceTree = "<group>"; };
 		3C3123C72172410C008D9A02 /* ZRSW.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZRSW.entitlements; sourceTree = "<group>"; };
 		3C4574AF21785EF10009383F /* my_face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@2x.png"; sourceTree = "<group>"; };
 		3C4574B121785EFC0009383F /* my_face@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@3x.png"; sourceTree = "<group>"; };
@@ -2071,6 +2102,87 @@
 				3C10D65A2154E23C0019112F /* ZRSWBillListController.m */,
 			);
 			path = Bill;
+			sourceTree = "<group>";
+		};
+		3C158A3F2179831600CC2366 /* FaceRecognition */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A402179831600CC2366 /* Tools */,
+				3C158A462179831600CC2366 /* FaceDetector */,
+			);
+			path = FaceRecognition;
+			sourceTree = "<group>";
+		};
+		3C158A402179831600CC2366 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A412179831600CC2366 /* CanvasView */,
+				3C158A422179831600CC2366 /* Capture */,
+				3C158A432179831600CC2366 /* Result */,
+				3C158A442179831600CC2366 /* Image */,
+				3C158A452179831600CC2366 /* Permission */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		3C158A412179831600CC2366 /* CanvasView */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A472179835B00CC2366 /* CanvasView.h */,
+				3C158A482179835B00CC2366 /* CanvasView.m */,
+			);
+			path = CanvasView;
+			sourceTree = "<group>";
+		};
+		3C158A422179831600CC2366 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A4A217983C400CC2366 /* CaptureManager.h */,
+				3C158A4B217983C400CC2366 /* CaptureManager.m */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		3C158A432179831600CC2366 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A5D217984E500CC2366 /* IFlyFaceResultKeys.h */,
+				3C158A5C217984E500CC2366 /* IFlyFaceResultKeys.m */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		3C158A442179831600CC2366 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A502179845000CC2366 /* CalculatorTools.h */,
+				3C158A532179845100CC2366 /* CalculatorTools.m */,
+				3C158A512179845100CC2366 /* IFlyFaceImage.h */,
+				3C158A4D2179845000CC2366 /* IFlyFaceImage.m */,
+				3C158A542179845100CC2366 /* UIImage+compress.h */,
+				3C158A4E2179845000CC2366 /* UIImage+compress.m */,
+				3C158A4F2179845000CC2366 /* UIImage+Extensions.h */,
+				3C158A522179845100CC2366 /* UIImage+Extensions.m */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		3C158A452179831600CC2366 /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A59217984A900CC2366 /* PermissionDetector.h */,
+				3C158A5A217984A900CC2366 /* PermissionDetector.m */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
+		3C158A462179831600CC2366 /* FaceDetector */ = {
+			isa = PBXGroup;
+			children = (
+				3C158A5F2179852C00CC2366 /* FaceStreamDetectorViewController.h */,
+				3C158A602179852C00CC2366 /* FaceStreamDetectorViewController.m */,
+			);
+			path = FaceDetector;
 			sourceTree = "<group>";
 		};
 		3C7E4B06215222C60058D3E2 /* Settings */ = {
@@ -4289,6 +4401,7 @@
 				E5B59BC1214FA94300726DE9 /* JKCountDownButton */,
 				E5B599AA214EBEE800726DE9 /* LNRefresh */,
 				E5B599C1214EBEE800726DE9 /* TZImagePickerController */,
+				3C158A3F2179831600CC2366 /* FaceRecognition */,
 				E5B599DF214EBEE800726DE9 /* YYModel */,
 			);
 			path = Thirdparty;
@@ -4462,6 +4575,7 @@
 		E5B59A85214EC15600726DE9 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				3C158A622179A82B00CC2366 /* face_certification_tips_frame@2x.png */,
 				E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */,
 				E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */,
 				3C4574AF21785EF10009383F /* my_face@2x.png */,
@@ -4557,6 +4671,7 @@
 		E5B59ACC214EC15600726DE9 /* @3x */ = {
 			isa = PBXGroup;
 			children = (
+				3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */,
 				3C4574B82178D0450009383F /* face_icon_uncertified@3x.png */,
 				3C4574B72178D0450009383F /* sign_face@3x.png */,
 				3C4574B121785EFC0009383F /* my_face@3x.png */,
@@ -4833,6 +4948,7 @@
 				3CFE0BAC21785DBC0087C50E /* face_icon_certification_shake_04@3x.png in Resources */,
 				E5B59B25214EC15600726DE9 /* my_phone@2x.png in Resources */,
 				E5B59B62214EC15600726DE9 /* home_advertise_instructions_default@2x.png in Resources */,
+				3C158A632179A82C00CC2366 /* face_certification_tips_frame@2x.png in Resources */,
 				E5B59B4E214EC15600726DE9 /* home_notice@2x.png in Resources */,
 				3CFE0B9421785D6B0087C50E /* face_icon_certification_shut_02@2x.png in Resources */,
 				E55340DA2164620F003631E6 /* Info.plist in Resources */,
@@ -4896,6 +5012,7 @@
 				E5B59B38214EC15600726DE9 /* loan_process@2x.png in Resources */,
 				E5B59B99214EC15600726DE9 /* currency_top_set@3x.png in Resources */,
 				E5B59BA3214EC15600726DE9 /* currency_top_bg@3x.png in Resources */,
+				3C158A652179A84600CC2366 /* face_certification_tips_frame@3x.png in Resources */,
 				E5B59B31214EC15600726DE9 /* home_information_arrow@2x.png in Resources */,
 				3CFE0BA821785DBC0087C50E /* face_icon_certification_blink_02@3x.png in Resources */,
 				E5B59B51214EC15600726DE9 /* currency_button@2x.png in Resources */,
@@ -5204,6 +5321,7 @@
 				E5B59A17214EBEE800726DE9 /* MatchManager.m in Sources */,
 				E553405F2164620F003631E6 /* UIImageView+JKBetterFace.m in Sources */,
 				E553402E2164620F003631E6 /* UIButton+JKCountDown.m in Sources */,
+				3C158A612179852D00CC2366 /* FaceStreamDetectorViewController.m in Sources */,
 				3CD3C7F8215FC77F00DE6199 /* EaseMessageViewController.m in Sources */,
 				E55340AE2164620F003631E6 /* NSNumber+JKRound.m in Sources */,
 				3C10D65E2154E29E0019112F /* ZRSWBillListModel.m in Sources */,
@@ -5225,6 +5343,7 @@
 				E55340202164620F003631E6 /* UIApplication+JKApplicationSize.m in Sources */,
 				E5B59A5A214EBEE800726DE9 /* YYClassInfo.m in Sources */,
 				3CD3C806215FC77F00DE6199 /* EaseRecordView.m in Sources */,
+				3C158A582179845100CC2366 /* CalculatorTools.m in Sources */,
 				E5B59A1B214EBEE800726DE9 /* BaseNetWorkService.m in Sources */,
 				3CD3C810215FC77F00DE6199 /* EaseSDKHelper.m in Sources */,
 				E553400A2164620F003631E6 /* UIImage+JKVector.m in Sources */,
@@ -5279,6 +5398,7 @@
 				E55340292164620F003631E6 /* UIButton+JKBackgroundColor.m in Sources */,
 				3CD3C7E7215FC77F00DE6199 /* PSTCollectionViewFlowLayout.m in Sources */,
 				3CD3C7BF215FC77F00DE6199 /* UIViewController+HUD.m in Sources */,
+				3C158A552179845100CC2366 /* IFlyFaceImage.m in Sources */,
 				3CD3C7DA215FC77F00DE6199 /* EMAudioPlayerUtil.m in Sources */,
 				E55340C62164620F003631E6 /* NSDate+JKUtilities.m in Sources */,
 				E553403F2164620F003631E6 /* UIView+JKNib.m in Sources */,
@@ -5340,12 +5460,14 @@
 				3CD3C80D215FC77F00DE6199 /* EaseBubbleView+Voice.m in Sources */,
 				E5533E1021646040003631E6 /* ZRSWLoginController.m in Sources */,
 				E55340512164620F003631E6 /* UINavigationItem+JKLoading.m in Sources */,
+				3C158A562179845100CC2366 /* UIImage+compress.m in Sources */,
 				E553400D2164620F003631E6 /* UIImage+JKRemoteSize.m in Sources */,
 				E55340082164620F003631E6 /* UIImage+JKBlur.m in Sources */,
 				3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */,
 				E55340372164620F003631E6 /* UIWebView+JKMetaParser.m in Sources */,
 				E5B59914214EBED500726DE9 /* AppDelegate.m in Sources */,
 				E553407B2164620F003631E6 /* NSDictionary+JKURL.m in Sources */,
+				3C158A572179845100CC2366 /* UIImage+Extensions.m in Sources */,
 				E55340D22164620F003631E6 /* MKMapView+JKZoomLevel.m in Sources */,
 				3CD3C7D7215FC77F00DE6199 /* EMCDDeviceManager+Media.m in Sources */,
 				3CD3C7F0215FC77F00DE6199 /* PSTGridLayoutRow.m in Sources */,
@@ -5382,6 +5504,7 @@
 				E55340122164620F003631E6 /* UIImage+JKAlpha.m in Sources */,
 				E5B59A42214EBEE800726DE9 /* LNRefreshFooter.m in Sources */,
 				E5B59BC8214FD2B200726DE9 /* ZRSWViewFactoryTool.m in Sources */,
+				3C158A5E217984E500CC2366 /* IFlyFaceResultKeys.m in Sources */,
 				E553400F2164620F003631E6 /* UIImage+JKColor.m in Sources */,
 				E553406B2164620F003631E6 /* UINavigationController+JKStackManager.m in Sources */,
 				E55340C12164620F003631E6 /* NSRunLoop+JKPerformBlock.m in Sources */,
@@ -5457,6 +5580,7 @@
 				E55340A52164620F003631E6 /* NSInvocation+JKBb.m in Sources */,
 				E55340902164620F003631E6 /* NSURL+JKParam.m in Sources */,
 				E55340A42164620F003631E6 /* NSString+JKXMLDictionary.m in Sources */,
+				3C158A492179835B00CC2366 /* CanvasView.m in Sources */,
 				3CD3C809215FC77F00DE6199 /* EaseBubbleView+Location.m in Sources */,
 				3CD3C7F5215FC77F00DE6199 /* EaseConversationListViewController.m in Sources */,
 				E5E279E7215F607C007D27A8 /* ZRSWOrderListCell.m in Sources */,
@@ -5600,6 +5724,7 @@
 				E5565EDD2166695000747A49 /* SDPhotoBrowser.m in Sources */,
 				E553407A2164620F003631E6 /* NSDictionary+JKMerge.m in Sources */,
 				E55340AB2164620F003631E6 /* NSUserDefaults+JKiCloudSync.m in Sources */,
+				3C158A5B217984A900CC2366 /* PermissionDetector.m in Sources */,
 				E5B59A3F214EBEE800726DE9 /* NotificationName.m in Sources */,
 				3CD3C7FE215FC77F00DE6199 /* EaseMessageCell.m in Sources */,
 				E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */,
@@ -5610,6 +5735,7 @@
 				E5B59A26214EBEE800726DE9 /* UIImage+Utility.m in Sources */,
 				E5B59BBA214FA5CA00726DE9 /* ZRSWRegisterController.m in Sources */,
 				E55340612164620F003631E6 /* UIImageView+JKReflect.m in Sources */,
+				3C158A4C217983C400CC2366 /* CaptureManager.m in Sources */,
 				3CD3C7D5215FC77F00DE6199 /* EMCDDeviceManager+Remind.m in Sources */,
 				E5565EDE2166695000747A49 /* SDWaitingView.m in Sources */,
 				E553403A2164620F003631E6 /* UIWebView+JKBlocks.m in Sources */,

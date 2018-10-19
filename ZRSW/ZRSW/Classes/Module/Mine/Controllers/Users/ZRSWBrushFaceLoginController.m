@@ -7,7 +7,8 @@
 //
 
 #import "ZRSWBrushFaceLoginController.h"
-@interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
+#import "FaceStreamDetectorViewController.h"
+@interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate,FaceDetectorDelegate>
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *phoneLabel;
@@ -111,6 +112,13 @@
 
 - (void)faceLoginBtnClick {
     LLog(@"刷脸登录");
+//    FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
+//    faceVC.faceDelegate = self;
+//    [self.navigationController pushViewController:faceVC animated:YES];
+}
+
+-(void)sendFaceImage:(UIImage *)faceImage{
+    self.headeImageView.image = faceImage;
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
