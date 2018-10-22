@@ -69,8 +69,8 @@
         [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
             make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.width.mas_equalTo(SCREEN_WIDTH-84);
-            make.height.mas_equalTo(kUI_HeightS(371));
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(290,371));
         }];
         [self.certificeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.imageView.mas_bottom).offset(40);
@@ -92,12 +92,18 @@
 
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.imageView.image = faceImage;
+    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(240,320));
+    }];
+    self.titleLabel.hidden = YES;
     self.certificeBtn.hidden = YES;
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObject:faceImage];
     if ([TipViewManager showNetErrorToast]) {
-        [TipViewManager showLoading];
+        [TipViewManager showLoadingWithText:@"认证中..."];
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             if (arr.count != imageUrls.count) {
                 [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
@@ -140,7 +146,25 @@
         }
     }
     else {
-        [TipViewManager showNetErrorToast];
+        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+        self.titleLabel.hidden = NO;
+        self.certificeBtn.hidden = NO;
+        if (self.isCertificed) {
+            self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(150, 150));
+            }];
+        }else{
+            self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(290,371));
+            }];
+        }
     }
 }
 

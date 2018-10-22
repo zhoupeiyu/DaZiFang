@@ -80,8 +80,7 @@
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(111);
         make.top.mas_equalTo(10);
-        make.width.mas_equalTo(50);
-        make.height.mas_equalTo(50);
+        make.size.mas_equalTo(CGSizeMake(50,50));
     }];
     [self.phoneLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.iconImageView.mas_right).offset(10);
@@ -91,9 +90,8 @@
 
     [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
-        make.left.mas_equalTo(60);
-        make.width.mas_equalTo(SCREEN_WIDTH-120);
-        make.height.mas_equalTo(kUI_HeightS(230));
+        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(255,230));
     }];
 
     [self.faceLoginBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -125,13 +123,18 @@
 
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.headeImageView.image = faceImage;
+    [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
+        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(240,320));
+    }];
     self.faceLoginBtn.hidden = YES;
     self.toggleLoginModeBtn.hidden = YES;
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObject:faceImage];
     if ([TipViewManager showNetErrorToast]) {
-        [TipViewManager showLoading];
+        [TipViewManager showLoadingWithText:@"认证中..."];
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             if (arr.count != imageUrls.count) {
                 [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
@@ -179,7 +182,16 @@
         }
     }
     else {
-        [TipViewManager showNetErrorToast];
+        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+        self.faceLoginBtn.hidden = NO;
+        self.toggleLoginModeBtn.hidden = NO;
+        self.headeImageView.image = [UIImage imageNamed:@"sign_face"];
+        [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(255,230));
+        }];
+
     }
 }
 
