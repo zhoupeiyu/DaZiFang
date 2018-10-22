@@ -222,6 +222,30 @@
 }
 
 
+- (void)userAddFace:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:loginId forKey:@"loginId"];
+    [params setObject:faceToken forKey:@"faceToken"];
+    [self POST:KFaceAddFaceInterface reqType:KFaceAddFaceRequest delegate:delegate parameters:params ObjcClass:[UserAddFaceModel class] NeedCache:NO];
+}
+
+- (void)userFaceDetect:(NSString *)faceImgUrl delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:faceImgUrl forKey:@"faceImgUrl"];
+    [self POST:KFaceDetectInterface reqType:KFaceDetectRequest delegate:delegate parameters:params ObjcClass:[UserFaceDetectModel class] NeedCache:NO];
+}
+
+- (void)userFaceCompare:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:loginId forKey:@"loginId"];
+    [params setObject:faceToken forKey:@"faceToken"];
+    [self POST:KFaceCompareFaceInterface reqType:KFaceCompareFaceRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
+}
+
+
+
+
+
 
 
 

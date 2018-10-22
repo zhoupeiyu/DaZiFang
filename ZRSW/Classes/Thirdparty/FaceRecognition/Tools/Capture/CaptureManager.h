@@ -11,7 +11,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
-
+#define clamp(a) (a>255?255:(a<0?0:a))
 typedef NS_ENUM(NSUInteger, CaptureContextType)
 {
     CaptureContextTypeRunningAndDeviceAuthorized,
@@ -27,15 +27,21 @@ typedef NS_ENUM(NSUInteger, CaptureContextType)
 
 -(void)onOutputFaceImage:(IFlyFaceImage*)img;
 -(void)observerContext:(CaptureContextType)type Changed:(BOOL)boolValue;
+-(void)returnNowShowImage:(UIImage *)image;
 
 @end
 
+@protocol CaptureNowImageDelegate <NSObject>
+
+@optional
+-(void)returnNowShowImage:(UIImage *)image;
+@end
 
 @interface CaptureManager : NSObject
 
 // delegate
-@property (nonatomic,weak) id<CaptureManagerDelegate> delegate;
-
+@property (nonatomic,weak) id<CaptureManagerDelegate> capturedelegate;
+@property (nonatomic,weak) id<CaptureNowImageDelegate> nowImageDelegate;
 // Device orientation
 @property (nonatomic) CMMotionManager *motionManager;
 

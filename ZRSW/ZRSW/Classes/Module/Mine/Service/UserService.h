@@ -11,6 +11,8 @@
 #import "ZRSWRemindListModel.h"
 #import "ZRSWBillListModel.h"
 #import "ZRSWMessageCountModel.h"
+#import "UserFaceDetectModel.h"
+#import "UserAddFaceModel.h"
 
 @interface UserService : BaseNetWorkService
 
@@ -243,6 +245,27 @@
 - (void)logOutWithDelegate:(id)delegate;
 
 
+/**
+ 人脸认证
+ @param loginId 用户登录标识
+ @param faceToken 人脸标识集；
+ @param delegate
+ */
+- (void)userAddFace:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate;
+/**
+ 人脸检测
+ @param faceImgUrl 用户面照
+ @param delegate
+ */
+- (void)userFaceDetect:(NSString *)faceImgUrl delegate:(id)delegate;
+
+/**
+ 人脸对比
+ @param loginId 用户登录标识
+ @param faceToken 人脸标识集；
+ @param delegate
+ */
+- (void)userFaceCompare:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate;
 
 
 @end

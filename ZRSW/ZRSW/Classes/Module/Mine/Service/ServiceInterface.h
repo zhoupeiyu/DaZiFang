@@ -35,6 +35,7 @@
 // 实名认证
 #define KUserValidationIdCardInterface                  @"api/user/validationIdCard"
 
+
 // 公司认证
 #define KUserValidationCompanyInterface                 @"api/user/validationCompany"
 
@@ -90,6 +91,15 @@
 
 // 创建l订单
 #define KCreateOrderInterface                           @"api/order/createOrder"
+
+
+//人脸认证
+#define KFaceAddFaceInterface                  @"api/face/addFace"
+//人脸检测
+#define KFaceDetectInterface                  @"api/face/faceDetect"
+//人脸对比
+#define KFaceCompareFaceInterface                  @"api/face/compareFace"
+
 
 
 

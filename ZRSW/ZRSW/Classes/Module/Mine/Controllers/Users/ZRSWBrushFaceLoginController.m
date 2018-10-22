@@ -8,6 +8,8 @@
 
 #import "ZRSWBrushFaceLoginController.h"
 #import "FaceStreamDetectorViewController.h"
+#import "UserService.h"
+
 @interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate,FaceDetectorDelegate>
 @property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -15,6 +17,10 @@
 @property (nonatomic, strong) UIImageView *headeImageView;
 @property (nonatomic, strong) UIButton *faceLoginBtn;
 @property (nonatomic, strong) UIButton *toggleLoginModeBtn;
+@property (nonatomic, strong) UserService *service;
+@property (nonatomic, strong) UploadImagesManager *imageManager;
+@property (nonatomic, strong) NSString *loginId;
+
 
 @end
 
@@ -86,14 +92,14 @@
     [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
         make.left.mas_equalTo(60);
-        make.right.mas_equalTo(-60);
+        make.width.mas_equalTo(SCREEN_WIDTH-120);
         make.height.mas_equalTo(kUI_HeightS(230));
     }];
 
     [self.faceLoginBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headeImageView.mas_bottom).offset(60);
         make.left.mas_equalTo(30);
-        make.right.mas_equalTo(-30);
+        make.right.mas_equalTo(SCREEN_WIDTH-60);
         make.height.mas_equalTo(44);
     }];
     [self.toggleLoginModeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -112,13 +118,69 @@
 
 - (void)faceLoginBtnClick {
     LLog(@"刷脸登录");
-//    FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
-//    faceVC.faceDelegate = self;
-//    [self.navigationController pushViewController:faceVC animated:YES];
+    FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
+    faceVC.faceDelegate = self;
+    [self.navigationController pushViewController:faceVC animated:YES];
 }
 
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.headeImageView.image = faceImage;
+    self.faceLoginBtn.hidden = YES;
+    self.toggleLoginModeBtn.hidden = YES;
+    WS(weakSelf);
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:faceImage];
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            if (arr.count != imageUrls.count) {
+                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                return ;
+            }
+            NSString *faceImgUrl = [imageUrls objectAtIndex:0];
+            [weakSelf.service userFaceDetect:faceImgUrl delegate:self];
+        }];
+    }
+}
+
+
+
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KFaceDetectRequest]) {
+            UserFaceDetectModel *model = (UserFaceDetectModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                 WS(weakSelf);
+                FaceTokenModel *faceTokenModel = model.data;
+                NSString *faceToken = faceTokenModel.faceToken;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   [weakSelf.service userFaceCompare:self.loginId faceToken:faceToken delegate:self];
+                });
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }else if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                model.data.hasLogin = YES;
+                [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+    else {
+        [TipViewManager showNetErrorToast];
+    }
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
@@ -233,6 +295,22 @@
     return _toggleLoginModeBtn;
 }
 
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
+}
+- (UserService *)service {
+    if (!_service) {
+        _service = [[UserService alloc] init];
+    }
+    return _service;
+}
+
 
 - (UIButton *)getGrayBtn:(NSString *)title action:(SEL)action {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -244,6 +322,8 @@
     [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {

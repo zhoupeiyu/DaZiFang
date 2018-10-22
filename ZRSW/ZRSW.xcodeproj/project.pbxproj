@@ -25,6 +25,8 @@
 		3C158A612179852D00CC2366 /* FaceStreamDetectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A602179852C00CC2366 /* FaceStreamDetectorViewController.m */; };
 		3C158A632179A82C00CC2366 /* face_certification_tips_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C158A622179A82B00CC2366 /* face_certification_tips_frame@2x.png */; };
 		3C158A652179A84600CC2366 /* face_certification_tips_frame@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */; };
+		3C158A6B217D782800CC2366 /* UserFaceDetectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A6A217D782800CC2366 /* UserFaceDetectModel.m */; };
+		3C158A6E217D7CA600CC2366 /* UserAddFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A6D217D7CA600CC2366 /* UserAddFaceModel.m */; };
 		3C4574B021785EF10009383F /* my_face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574AF21785EF10009383F /* my_face@2x.png */; };
 		3C4574B221785EFC0009383F /* my_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B121785EFC0009383F /* my_face@3x.png */; };
 		3C4574B92178D0450009383F /* sign_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B72178D0450009383F /* sign_face@3x.png */; };
@@ -800,6 +802,10 @@
 		3C158A602179852C00CC2366 /* FaceStreamDetectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceStreamDetectorViewController.m; sourceTree = "<group>"; };
 		3C158A622179A82B00CC2366 /* face_certification_tips_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_certification_tips_frame@2x.png"; sourceTree = "<group>"; };
 		3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_certification_tips_frame@3x.png"; sourceTree = "<group>"; };
+		3C158A69217D782800CC2366 /* UserFaceDetectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserFaceDetectModel.h; sourceTree = "<group>"; };
+		3C158A6A217D782800CC2366 /* UserFaceDetectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserFaceDetectModel.m; sourceTree = "<group>"; };
+		3C158A6C217D7CA600CC2366 /* UserAddFaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAddFaceModel.h; sourceTree = "<group>"; };
+		3C158A6D217D7CA600CC2366 /* UserAddFaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAddFaceModel.m; sourceTree = "<group>"; };
 		3C3123C72172410C008D9A02 /* ZRSW.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZRSW.entitlements; sourceTree = "<group>"; };
 		3C4574AF21785EF10009383F /* my_face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@2x.png"; sourceTree = "<group>"; };
 		3C4574B121785EFC0009383F /* my_face@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@3x.png"; sourceTree = "<group>"; };
@@ -4079,6 +4085,10 @@
 				E5E27988215E750E007D27A8 /* ZRSWUserInfoListModel.m */,
 				3CFE0B782177954D0087C50E /* ZRSWMessageCountModel.h */,
 				3CFE0B792177954D0087C50E /* ZRSWMessageCountModel.m */,
+				3C158A69217D782800CC2366 /* UserFaceDetectModel.h */,
+				3C158A6A217D782800CC2366 /* UserFaceDetectModel.m */,
+				3C158A6C217D7CA600CC2366 /* UserAddFaceModel.h */,
+				3C158A6D217D7CA600CC2366 /* UserAddFaceModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5272,6 +5282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C158A6B217D782800CC2366 /* UserFaceDetectModel.m in Sources */,
 				E553408F2164620F003631E6 /* NSURL+JKQueryDictionary.m in Sources */,
 				E5B59A3A214EBEE800726DE9 /* LNHeaderDIYAnimator.m in Sources */,
 				E5B59A29214EBEE800726DE9 /* UIButton+Help.m in Sources */,
@@ -5680,6 +5691,7 @@
 				E553406A2164620F003631E6 /* UIViewController+JKBackButtonItemTitle.m in Sources */,
 				E55340662164620F003631E6 /* UIViewController+JKBackButtonTouched.m in Sources */,
 				3C7E4AFF21513C8E0058D3E2 /* ZRSWThirdLoginView.m in Sources */,
+				3C158A6E217D7CA600CC2366 /* UserAddFaceModel.m in Sources */,
 				E5E27A362160D9BF007D27A8 /* ZRSWMineMainController.m in Sources */,
 				E55340602164620F003631E6 /* UIImageView+JKLetters.m in Sources */,
 				E55340BB2164620F003631E6 /* NSObject+JKAssociatedObject.m in Sources */,

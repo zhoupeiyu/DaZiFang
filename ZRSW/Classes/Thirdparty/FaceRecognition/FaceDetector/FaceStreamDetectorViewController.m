@@ -21,7 +21,7 @@
 #import "IFlyFaceImage.h"
 #import "IFlyFaceResultKeys.h"
 
-@interface FaceStreamDetectorViewController ()<CaptureManagerDelegate>
+@interface FaceStreamDetectorViewController ()<CaptureManagerDelegate,CaptureNowImageDelegate>
 {
     UILabel *alignLabel;
     int number;//
@@ -78,6 +78,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [BaseTheme baseViewColor];
+
     //创建界面
     [self makeUI];
     //创建摄像页面
@@ -88,12 +89,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
       [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
      [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
+
     //停止摄像
     [self.previewLayer.session stopRunning];
     [self.captureManager removeObserver];
@@ -156,6 +161,7 @@
 -(void)cancelButtonClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 #pragma mark --- 创建相机
 -(void)makeCamera{
     //adjust the UI for iOS 7
@@ -176,7 +182,7 @@
 //
     //初始化 CaptureSessionManager
     self.captureManager=[[CaptureManager alloc] init];
-    self.captureManager.delegate=self;
+    self.captureManager.capturedelegate=self;
     
     self.previewLayer=self.captureManager.previewLayer;
     
@@ -227,6 +233,11 @@
             self.textLabel.text = @"认证完毕";
             [self delateNumber];//清数据
         });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//       [self didClickTakePhoto];
+         self.captureManager.nowImageDelegate=self;
+    });
+
 
 }
 
@@ -662,14 +673,32 @@
             
             imageView.frame = CGRectMake(0, 10, ScreenWidth, ScreenWidth*myImage.size.height/myImage.size.width);
             
-            [self.view addSubview:backView];
-            
+//            [self.view addSubview:backView];
+
             //停止摄像
             [self.previewLayer.session stopRunning];
-            
             [self delateNumber];
+            [self.faceDelegate sendFaceImage:myImage];
+            UIImageWriteToSavedPhotosAlbum(myImage, self, NULL, NULL);
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }];
+}
+
+
+-(void)returnNowShowImage:(UIImage *)image{
+    //停止摄像
+    [self.previewLayer.session stopRunning];
+    //延时操作
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //取得的静态影像
+        [self delateNumber];
+        self.captureManager.nowImageDelegate=nil;
+        [self.faceDelegate sendFaceImage:image];
+//        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
+        [self.navigationController popViewControllerAnimated:YES];
+    });
+
 }
 
 #pragma mark --- 重拍按钮点击事件
