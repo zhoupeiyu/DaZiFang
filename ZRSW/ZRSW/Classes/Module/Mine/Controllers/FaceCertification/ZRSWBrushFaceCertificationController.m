@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UserService *service;
 @property (nonatomic, strong) UploadImagesManager *imageManager;
 @property (nonatomic, strong) NSString *loginId;
+@property (nonatomic, assign) NSInteger sendFaceCount;
 
 
 @end
@@ -25,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.sendFaceCount = 0;
 }
 
 - (void)setupUI {
@@ -91,6 +93,7 @@
 }
 
 -(void)sendFaceImage:(UIImage *)faceImage{
+    self.sendFaceCount++;
     self.imageView.image = faceImage;
     [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
@@ -103,9 +106,13 @@
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObject:faceImage];
     if ([TipViewManager showNetErrorToast]) {
-        [TipViewManager showLoadingWithText:@"认证中..."];
+        if (self.sendFaceCount == 6) {
+            [TipViewManager showLoadingWithText:@"认证中..."];
+        }
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             if (arr.count != imageUrls.count) {
+                LLog(@"图片上传失败，请重新上传！");
+                [TipViewManager dismissLoading];
                 [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
                 return ;
             }
@@ -114,8 +121,6 @@
         }];
     }
 }
-
-
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {

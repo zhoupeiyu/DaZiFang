@@ -67,6 +67,7 @@
 //@property (nonatomic, retain ) IFlyFaceDetector           *faceDetector;
 @property (nonatomic, strong ) CanvasView                 *viewCanvas;
 @property (nonatomic, strong ) UITapGestureRecognizer     *tapGesture;
+@property (nonatomic, strong) UIImage *currentImage;
 
 @end
 
@@ -183,6 +184,7 @@
     //初始化 CaptureSessionManager
     self.captureManager=[[CaptureManager alloc] init];
     self.captureManager.capturedelegate=self;
+    self.captureManager.nowImageDelegate=self;
     
     self.previewLayer=self.captureManager.previewLayer;
     
@@ -213,32 +215,58 @@
     //开始摄像
     [self.captureManager setup];
     [self.captureManager addObserver];
-
+    WS(weakSelf);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        weakSelf.textLabel.text = @"请重复张嘴动作...";
+        [weakSelf tomAnimationWithName:@"face_icon_certification_shut_0" count:2];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+            LLog(@"====张嘴时照片");
+            });
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        imgView.animationImages = nil;
+        weakSelf.textLabel.text = @"请重复摇头动作...";
+        [weakSelf tomAnimationWithName:@"face_icon_certification_shake_0" count:4];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.textLabel.text = @"请重复张嘴动作...";
-            [self tomAnimationWithName:@"face_icon_certification_shut_0" count:2];
+            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+            LLog(@"====摇头时照片1");
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            imgView.animationImages = nil;
-            self.textLabel.text = @"请重复摇头动作...";
-            [self tomAnimationWithName:@"face_icon_certification_shake_0" count:4];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+            LLog(@"====摇头时照片2");
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(14 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            imgView.animationImages = nil;
-            self.textLabel.text = @"请重复眨眼动作...";
-            [self tomAnimationWithName:@"face_icon_certification_blink_0" count:2];
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(14 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        imgView.animationImages = nil;
+        weakSelf.textLabel.text = @"请重复眨眼动作...";
+        [weakSelf tomAnimationWithName:@"face_icon_certification_blink_0" count:2];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+            LLog(@"====眨眼时照片");
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(18 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            imgView.animationImages = nil;
-            self.textLabel.text = @"认证完毕";
-            [self delateNumber];//清数据
+    });
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(18 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        imgView.animationImages = nil;
+        self.textLabel.text = @"认证完毕";
+        [self delateNumber];//清数据
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+            LLog(@"====认证时照片");
         });
+    });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //       [self didClickTakePhoto];
-         self.captureManager.nowImageDelegate=self;
+        //延时操作
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //取得的静态影像
+            self.captureManager.nowImageDelegate=nil;
+            LLog(@"====完成时照片");
+            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+        //        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
+            [self.navigationController popViewControllerAnimated:YES];
+        });
     });
-
-
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -688,17 +716,17 @@
 
 -(void)returnNowShowImage:(UIImage *)image{
     //停止摄像
-    [self.previewLayer.session stopRunning];
+//    [self.previewLayer.session stopRunning];
     //延时操作
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //取得的静态影像
-        [self delateNumber];
-        self.captureManager.nowImageDelegate=nil;
-        [self.faceDelegate sendFaceImage:image];
-//        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
-        [self.navigationController popViewControllerAnimated:YES];
-    });
-
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        //取得的静态影像
+//        [self delateNumber];
+//        self.captureManager.nowImageDelegate=nil;
+//        [self.faceDelegate sendFaceImage:image];
+////        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
+//        [self.navigationController popViewControllerAnimated:YES];
+//    });
+    self.currentImage = image;
 }
 
 #pragma mark --- 重拍按钮点击事件

@@ -316,11 +316,11 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationLeftMirrored];
         [self.nowImageDelegate returnNowShowImage:image];
     }
-    if(self.capturedelegate && [self.capturedelegate respondsToSelector:@selector(onOutputFaceImage:)]){
-        IFlyFaceImage* faceImage=[self faceImageFromSampleBuffer:sampleBuffer];
-        [self.capturedelegate onOutputFaceImage:nil];
-        faceImage=nil;
-    }
+//    if(self.capturedelegate && [self.capturedelegate respondsToSelector:@selector(onOutputFaceImage:)]){
+//        IFlyFaceImage* faceImage=[self faceImageFromSampleBuffer:sampleBuffer];
+//        [self.capturedelegate onOutputFaceImage:nil];
+//        faceImage=nil;
+//    }
 }
 
 #pragma mark - Device Configuration

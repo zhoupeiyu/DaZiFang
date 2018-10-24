@@ -532,7 +532,7 @@
         [_locationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
             [weakSelf goToSelectTheCityController];
         }];
-        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0, kUI_WidthS(15), kUI_HeightS(18))];
+        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0,15,18)];
         leftImage.image = [UIImage imageNamed:@"currency_top_position"];
         [_locationView addSubview:leftImage];
         _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftImage.right + kUI_WidthS(4) ,kUI_HeightS(1), kUI_WidthS(64), kUI_HeightS(16))];

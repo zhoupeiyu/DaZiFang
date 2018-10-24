@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UserService *service;
 @property (nonatomic, strong) UploadImagesManager *imageManager;
 @property (nonatomic, strong) NSString *loginId;
+@property (nonatomic, assign) NSInteger sendFaceCount;
+
 
 
 @end
@@ -31,6 +33,7 @@
     [TipViewManager showLoading];
     [self.scrollView reloadEmptyDataSet];
     [self setViewHidden:YES];
+    self.sendFaceCount = 0;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          self.scrollView.emptyDataSetSource = nil;
         [self.scrollView reloadEmptyDataSet];
@@ -122,27 +125,30 @@
 }
 
 -(void)sendFaceImage:(UIImage *)faceImage{
-    self.headeImageView.image = faceImage;
-    [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
-        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(240,320));
-    }];
-    self.faceLoginBtn.hidden = YES;
-    self.toggleLoginModeBtn.hidden = YES;
-    WS(weakSelf);
-    NSMutableArray *arr = [NSMutableArray array];
-    [arr addObject:faceImage];
-    if ([TipViewManager showNetErrorToast]) {
-        [TipViewManager showLoadingWithText:@"认证中..."];
-        [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
-            if (arr.count != imageUrls.count) {
-                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
-                return ;
-            }
-            NSString *faceImgUrl = [imageUrls objectAtIndex:0];
-            [weakSelf.service userFaceDetect:faceImgUrl delegate:self];
+    self.sendFaceCount++;
+    if (self.sendFaceCount == 6) {
+        self.headeImageView.image = faceImage;
+        [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(240,320));
         }];
+        self.faceLoginBtn.hidden = YES;
+        self.toggleLoginModeBtn.hidden = YES;
+        WS(weakSelf);
+        NSMutableArray *arr = [NSMutableArray array];
+        [arr addObject:faceImage];
+        if ([TipViewManager showNetErrorToast]) {
+            [TipViewManager showLoadingWithText:@"认证中..."];
+            [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+                if (arr.count != imageUrls.count) {
+                    [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                    return ;
+                }
+                NSString *faceImgUrl = [imageUrls objectAtIndex:0];
+                [weakSelf.service userFaceDetect:faceImgUrl delegate:self];
+            }];
+        }
     }
 }
 
