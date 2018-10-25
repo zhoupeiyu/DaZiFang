@@ -496,7 +496,7 @@
         CGFloat height = kUI_HeightS(44);
         _systemNotificationView = [[UIView alloc] initWithFrame:CGRectMake(0, self.loanView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
         _systemNotificationView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
-        UIImageView *leftTitle = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),kUI_HeightS(13), kUI_WidthS(78), kUI_HeightS(18))];
+        UIImageView *leftTitle = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),kUI_HeightS(13), 78, 18)];
         leftTitle.image = [UIImage imageNamed:@"home_notice"];
         [_systemNotificationView addSubview:leftTitle];
         _systemNotificationLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(168))/2 ,0, kUI_WidthS(168), height)];
@@ -518,7 +518,7 @@
         [moreClickButton addTarget:self action:@selector(getMoreSystemNotification) forControlEvents:UIControlEventTouchUpInside];
         [_systemNotificationView addSubview:moreButton];
         [_systemNotificationView addSubview:moreClickButton];
-        UIImageView *moreImageView = [[UIImageView alloc] initWithFrame:CGRectMake(moreButton.right + kUI_WidthS(5) ,kUI_HeightS(15), kUI_WidthS(12), kUI_HeightS(12))];
+        UIImageView *moreImageView = [[UIImageView alloc] initWithFrame:CGRectMake(moreButton.right + kUI_WidthS(5) ,kUI_HeightS(15),12,12)];
         moreImageView.image = [UIImage imageNamed:@"home_notice_arrow"];
         [_systemNotificationView addSubview:moreImageView];
     }
@@ -527,21 +527,21 @@
 
 - (UIView *)locationView{
     if (!_locationView) {
-        _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,kUI_HeightS(18), kUI_WidthS(120), kUI_HeightS(18))];
+        _locationView = [[UIView alloc] initWithFrame:CGRectMake(0,18,120,18)];
         WS(weakSelf);
         [_locationView addTapActionWithBlock:^(UITapGestureRecognizer *gestureRecoginzer) {
             [weakSelf goToSelectTheCityController];
         }];
-        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(kUI_WidthS(15),0,15,18)];
+        UIImageView *leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(15,0,15,18)];
         leftImage.image = [UIImage imageNamed:@"currency_top_position"];
         [_locationView addSubview:leftImage];
-        _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftImage.right + kUI_WidthS(4) ,kUI_HeightS(1), kUI_WidthS(64), kUI_HeightS(16))];
+        _locationLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftImage.right+4 ,1,64,16)];
         _locationLabel.text = @"北京市";
         _locationLabel.textColor = [UIColor colorFromRGB:0xFFFFFFFF];
         _locationLabel.textAlignment = NSTextAlignmentCenter;
         _locationLabel.font = [UIFont systemFontOfSize:16];
         [_locationView addSubview:_locationLabel];
-        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + kUI_WidthS(5) ,kUI_HeightS(7), 8, 5)];
+        UIButton *triangleButton = [[UIButton alloc] initWithFrame:CGRectMake(_locationLabel.right + 5,7, 8, 5)];
         [triangleButton setImage:[UIImage imageNamed:@"currency_top_triangle"] forState:UIControlStateNormal];
         [triangleButton addTarget:self action:@selector(goToSelectTheCityController) forControlEvents:UIControlEventTouchUpInside];
         [_locationView addSubview:triangleButton];

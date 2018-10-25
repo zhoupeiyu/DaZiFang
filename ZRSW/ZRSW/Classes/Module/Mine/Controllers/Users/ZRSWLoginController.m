@@ -52,6 +52,16 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
+    BOOL faceCertification = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",loginId,BrushFaceCertificationKey]];
+    if (faceCertification) {
+        self.faceLoginBtn.hidden = NO;
+    }else{
+        self.faceLoginBtn.hidden = YES;
+    }
+}
+
 
 - (void)setupUI {
     [super setupUI];
@@ -150,6 +160,9 @@
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 model.data.hasLogin = YES;
+                if (model.data.loginId) {
+                    [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
+                }
                 [UserModel updateUserModel:model];
                 UserInfoModel *suer = model.data;
                 //设置LoginToke

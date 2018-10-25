@@ -225,7 +225,7 @@
 - (void)userAddFace:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:loginId forKey:@"loginId"];
-    [params setObject:faceToken forKey:@"faceToken"];
+    [params setObject:faceToken forKey:@"faceTokens"];
     [self POST:KFaceAddFaceInterface reqType:KFaceAddFaceRequest delegate:delegate parameters:params ObjcClass:[UserAddFaceModel class] NeedCache:NO];
 }
 

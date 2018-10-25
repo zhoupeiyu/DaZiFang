@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UploadImagesManager *imageManager;
 @property (nonatomic, strong) NSString *loginId;
 @property (nonatomic, assign) NSInteger sendFaceCount;
-
+@property (nonatomic, assign) NSInteger addFaceCount;
 
 @end
 
@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sendFaceCount = 0;
+    self.addFaceCount = 0;
 }
 
 - (void)setupUI {
@@ -40,11 +41,11 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.isCertificed = NO;
-    self.title = @"刷脸认证";
     UserModel *userModel = [UserModel getCurrentModel];
     UserInfoModel *userInfoModel = userModel.data;
     self.loginId = userInfoModel.loginId;
+    self.isCertificed = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
+    self.title = @"刷脸认证";
 }
 
 - (void)setupLayOut {
@@ -94,20 +95,20 @@
 
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.sendFaceCount++;
-    self.imageView.image = faceImage;
-    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(240,320));
-    }];
-    self.titleLabel.hidden = YES;
-    self.certificeBtn.hidden = YES;
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObject:faceImage];
     if ([TipViewManager showNetErrorToast]) {
         if (self.sendFaceCount == 6) {
             [TipViewManager showLoadingWithText:@"认证中..."];
+            self.imageView.image = faceImage;
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(240,320));
+            }];
+            self.titleLabel.hidden = YES;
+            self.certificeBtn.hidden = YES;
         }
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             if (arr.count != imageUrls.count) {
@@ -117,10 +118,22 @@
                 return ;
             }
             NSString *faceImgUrl = [imageUrls objectAtIndex:0];
-            [weakSelf.service userFaceDetect:faceImgUrl delegate:self];
+            [weakSelf userFaceDetect:faceImgUrl];
+
         }];
     }
 }
+
+- (void)userFaceDetect:(NSString *)faceImgUrl{
+  [self.service userFaceDetect:faceImgUrl delegate:self];
+}
+
+
+- (void)userAddFace:(NSString *)faceToken{
+    [self.service userAddFace:self.loginId faceToken:faceToken delegate:self];
+}
+
+
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
@@ -133,7 +146,7 @@
                 FaceTokenModel *faceTokenModel = model.data;
                 NSString *faceToken = faceTokenModel.faceToken;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakSelf.service userAddFace:self.loginId faceToken:faceToken delegate:self];
+                    [weakSelf userAddFace:faceToken];
                 });
             }
             else {
@@ -142,9 +155,13 @@
         }else if ([reqType isEqualToString:KFaceAddFaceRequest]) {
             UserAddFaceModel *model = (UserAddFaceModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                AddFaceModel *addFaceModel = model.data;
-                [TipViewManager showToastMessage:addFaceModel.successMsg];
-                [self.navigationController popViewControllerAnimated:YES];
+                self.addFaceCount++;
+                if (self.addFaceCount == 6) {
+                    AddFaceModel *addFaceModel = model.data;
+                    [TipViewManager showToastMessage:@"认证成功"];
+                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
             }else {
                 [TipViewManager showToastMessage:model.error_msg];
             }

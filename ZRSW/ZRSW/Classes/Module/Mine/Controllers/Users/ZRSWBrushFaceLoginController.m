@@ -34,7 +34,18 @@
     [self.scrollView reloadEmptyDataSet];
     [self setViewHidden:YES];
     self.sendFaceCount = 0;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentUserIocnImageKey];
+    self.iconImageView.image = [UIImage imageWithData:data];
+    if (!self.iconImageView.image) {
+        self.iconImageView.image = [UIImage imageNamed:@"my_head"];
+    }
+    self.loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
+    NSMutableString *phoneNum = [NSMutableString stringWithString:self.loginId];
+    if ([MatchManager checkTelNumber:phoneNum]){
+        [phoneNum replaceCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    }
+    self.phoneLabel.text = phoneNum.copy;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
          self.scrollView.emptyDataSetSource = nil;
         [self.scrollView reloadEmptyDataSet];
         [self setViewHidden:NO];
@@ -284,7 +295,6 @@
 - (UILabel *)phoneLabel {
     if (!_phoneLabel) {
         _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.text = @"185****1169";
         _phoneLabel.textColor = [UIColor colorFromRGB:0xFF1D1D26];
         _phoneLabel.font = [UIFont systemFontOfSize:16];
     }
