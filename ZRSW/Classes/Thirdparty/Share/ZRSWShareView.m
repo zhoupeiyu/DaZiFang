@@ -64,55 +64,25 @@ SYNTHESIZE_SINGLETON_ARC(ZRSWShareView)
     BOOL qqavailable = [ZRSWShareManager isInstallQQ];
     BOOL wxavailable = [ZRSWShareManager isInstallWeChat];
     BOOL wbavailable = [ZRSWShareManager isImstallWeiBo];
-    switch (btn.tag)
-    {
-        case 0:
-        {
-            type = UMSocialPlatformType_WechatSession;
-            LLog(@"微信好友");
-        }
-            break;
-        case 1:
-        {
-            type = UMSocialPlatformType_QQ;
-             LLog(@"QQ好友");
-
-        }
-            break;
-        case 2:
-        {
-            type = UMSocialPlatformType_WechatTimeLine;
-             LLog(@"朋友圈");
-
-        }
-            break;
-        case 3:
-        {
-             type = UMSocialPlatformType_Sina;
-             LLog(@"新浪微博");
-
-        }
-            break;
-        default:
-        {
-
-        }
-            break;
-    }
-    if (type == UMSocialPlatformType_WechatSession || type == UMSocialPlatformType_WechatTimeLine) {
+    type = btn.tag;
+    if (type == UMSocialPlatformType_WechatSession) {
         if (wxavailable) {
+             LLog(@"微信好友");
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
         }
     }else  if (type == UMSocialPlatformType_QQ) {
         if (qqavailable) {
+             LLog(@"QQ好友");
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
         }
-    }else  if (type == UMSocialPlatformType_WechatSession) {
-        if (wbavailable) {
+    }else  if (type == UMSocialPlatformType_WechatTimeLine) {
+        if (wxavailable) {
+            LLog(@"朋友圈");
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
         }
     }else  if (type == UMSocialPlatformType_Sina) {
-        if (wxavailable) {
+        if (wbavailable) {
+            LLog(@"新浪微博");
             [self shareActionWithUMSocialPlatformType:type content:self.content shareSourceType:self.shareType delegate:self.shareDelegate];
         }
     }

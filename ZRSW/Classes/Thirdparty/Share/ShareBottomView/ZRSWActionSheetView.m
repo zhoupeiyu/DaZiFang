@@ -91,14 +91,10 @@
         cell.backgroundColor=[UIColor colorFromRGB:0xFFFFFF];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.layer.cornerRadius = 10;
-        [cell.shareBtn1 addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.shareBtn2 addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.shareBtn3 addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.shareBtn4 addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.buttonsArr addObject:cell.shareBtn1];
-        [self.buttonsArr addObject:cell.shareBtn2];
-        [self.buttonsArr addObject:cell.shareBtn3];
-        [self.buttonsArr addObject:cell.shareBtn4];
+        for (ZRSWActionSheetButton *shareBtn in cell.shareBtnArray) {
+             [shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        [self.buttonsArr addObjectsFromArray:cell.shareBtnArray.copy];
         [self.buttonsArr enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [UIView animateWithDuration:1.1 delay:0.05 * (idx +1) usingSpringWithDamping:0.7 initialSpringVelocity:10 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 obj.transform = CGAffineTransformIdentity;
@@ -149,7 +145,6 @@
 -(void)shareBtnClick:(ZRSWActionSheetButton *)btn{
     if ([_delegate respondsToSelector:@selector(customActionSheetButtonClick:)]) {
         [_delegate customActionSheetButtonClick:btn];
-
     }
     [self dismiss];
 }
