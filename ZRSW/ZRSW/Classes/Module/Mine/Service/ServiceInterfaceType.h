@@ -94,3 +94,11 @@
 
 // 下订单
 #define KCreateOrderRequest                     @"KCreateOrderRequest"
+
+//人脸检测
+#define KFaceDetectRequest                      @"KFaceDetectRequest"
+//人脸对比
+#define KFaceCompareFaceRequest                 @"KFaceCompareFaceRequest"
+//人脸认证
+#define KFaceAddFaceRequest                     @"KFaceAddFaceRequest"
+

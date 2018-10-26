@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ZRSWActionSheetButton.h"
 @interface ZRSWShareTableViewCell : UITableViewCell
-@property(nonatomic,strong)ZRSWActionSheetButton * shareBtn1;
-@property(nonatomic,strong)ZRSWActionSheetButton * shareBtn2;
-@property(nonatomic,strong)ZRSWActionSheetButton * shareBtn3;
-@property(nonatomic,strong)ZRSWActionSheetButton * shareBtn4;
+@property (nonatomic, strong) NSMutableArray *shareBtnArray;
 
 @end

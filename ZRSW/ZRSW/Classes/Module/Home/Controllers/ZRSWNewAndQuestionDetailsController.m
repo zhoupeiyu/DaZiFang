@@ -22,6 +22,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 
 @property (nonatomic, strong) UIView *contentView;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *roundupLabel;
 @property (nonatomic, strong) UILabel *sourceNameLabel;
 @property (nonatomic, strong) UIImageView *readerIcon;
@@ -71,6 +72,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 - (void)setupUI {
     [super setupUI];
     [self.scrollView addSubview:self.contentView];
+    [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.roundupLabel];
     [self.contentView addSubview:self.sourceNameLabel];
     [self.contentView addSubview:self.readerIcon];
@@ -257,6 +259,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     self.roundupLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
     [self.roundupLabel sizeToFit];
     if (self.type == DetailsTypeCommentQuestion){
+        [self.titleLabel removeFromSuperview];
         [self.sourceNameLabel removeFromSuperview];
         self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
         self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
@@ -266,6 +269,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
         [self.contentLabel sizeToFit];
     }else  if (self.type == DetailsTypeSystemNotification){
+        [self.titleLabel removeFromSuperview];
         [self.sourceNameLabel removeFromSuperview];
         [self.readerIcon removeFromSuperview];
         [self.readersLabel removeFromSuperview];
@@ -277,6 +281,8 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
         [self.contentLabel sizeToFit];
     }else{
+        self.titleLabel.frame = CGRectMake(kUI_WidthS(20),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(16));
+        self.roundupLabel.frame = CGRectMake(kUI_WidthS(15),self.titleLabel.bottom+kUI_HeightS(5), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
         self.sourceNameLabel.frame = CGRectMake(kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(64), kUI_HeightS(10));
         self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
         self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
@@ -312,6 +318,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 - (void)setDetailContens{
     if (self.type == DetailsTypePopularInformation) {
+        self.titleLabel.text = self.detailContensModel.title;
         self.roundupLabel.text = self.detailContensModel.roundup;
         self.sourceNameLabel.text = self.detailContensModel.sourceName;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
@@ -375,6 +382,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     return _url;
 }
 
+
 - (UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
@@ -390,7 +398,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     return _lineImge;
 }
 
-
 - (UILabel *)roundupLabel{
     if (!_roundupLabel) {
         _roundupLabel = [[UILabel alloc] init];
@@ -400,6 +407,16 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         _roundupLabel.numberOfLines = 0;
     }
     return _roundupLabel;
+}
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textColor = [UIColor colorFromRGB:0xFF444152];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    }
+    return _titleLabel;
 }
 
 - (UILabel *)sourceNameLabel{

@@ -28,5 +28,12 @@ UIKIT_EXTERN NSString * const CurrentUserIocnImageKey;
 //用户请求的Cookie
 UIKIT_EXTERN NSString * const UserDefaultsCookieKey;
 
+//用户是否刷脸认证
+UIKIT_EXTERN NSString * const BrushFaceCertificationKey;
+
+//最后登录成功用户的loginID
+UIKIT_EXTERN NSString * const LastLoginSuccessfulUserLoginIdKey;
+
+
 
 UIKIT_EXTERN NSString * const TabBarDidClickNotificationKey;

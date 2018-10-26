@@ -18,5 +18,8 @@ NSString * const CurrentUserIocnImageKey  = @"CurrentUserIocnImageKey";
 
 NSString * const UserDefaultsCookieKey  = @"UserDefaultsCookieKey";
 
+NSString * const BrushFaceCertificationKey  = @"BrushFaceCertificationKey";
+NSString * const LastLoginSuccessfulUserLoginIdKey  = @"LastLoginSuccessfulUserLoginIdKey";
+
 
 NSString * const TabBarDidClickNotificationKey  = @"TabBarDidClickNotificationKey";

@@ -36,6 +36,7 @@
         BOOL qqavailable = [ZRSWShareManager isInstallQQ];
         BOOL wbavailable = [ZRSWShareManager isImstallWeiBo];
         NSMutableArray *contentArray = [NSMutableArray arrayWithCapacity:0];
+        self.shareBtnArray = [NSMutableArray arrayWithCapacity:0];
         if (wxavailable) {
             [contentArray addObject:@{@"name":@"微信好友",@"icon":@"share_wechat"}];
             if (qqavailable) {
@@ -53,13 +54,24 @@
                 [contentArray addObject:@{@"name":@"新浪微博",@"icon":@"share_blog"}];
             }
         }
+        if (!wxavailable && !qqavailable && !wbavailable) {
+            titleLabel.text = @"暂无可分享应用";
+        }
         for (int i = 0; i < contentArray.count; i++)
         {
             NSDictionary *dic = [contentArray objectAtIndex:i];
             NSString *name = dic[@"name"];
             NSString *icon = dic[@"icon"];
             ZRSWActionSheetButton *btn = [ZRSWActionSheetButton buttonWithType:UIButtonTypeCustom];
-            btn.tag = i;
+            if ([name isEqualToString:@"微信好友"]) {
+                btn.tag = UMSocialPlatformType_WechatSession;
+            }else if ([name isEqualToString:@"QQ好友"]){
+                btn.tag = UMSocialPlatformType_QQ;
+            }else if ([name isEqualToString:@"朋友圈"]){
+                btn.tag = UMSocialPlatformType_WechatTimeLine;
+            }else if ([name isEqualToString:@"新浪微博"]){
+                btn.tag = UMSocialPlatformType_Sina;
+            }
             [btn setTitle:name forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
             CGFloat marginX = (SCREEN_WIDTH-20 - 4 * btnW) / (4 + 1);
@@ -67,33 +79,7 @@
             CGFloat btnX = marginX + (marginX + btnW) * col;
             btn.frame = CGRectMake(btnX,kUI_HeightS(80), btnW, btnH);
             btn.transform = CGAffineTransformMakeTranslation(0, 100);
-            switch (i) {
-                case 0:
-                {
-                    self.shareBtn1=btn;
-
-                }
-                    break;
-                case 1:
-                {
-
-                    self.shareBtn2=btn;
-                }
-                    break;
-                case 2:
-                {
-                    self.shareBtn3=btn;
-                }
-                    break;
-                case 3:
-                {
-                    self.shareBtn4=btn;
-                }
-                    break;
-
-                default:
-                    break;
-            }
+            [self.shareBtnArray addObject:btn];
             [self addSubview:btn];
         }
     }

@@ -7,13 +7,18 @@
 //
 
 #import "ZRSWBrushFaceCertificationController.h"
-
-@interface ZRSWBrushFaceCertificationController ()
+#import "FaceStreamDetectorViewController.h"
+#import "UserService.h"
+@interface ZRSWBrushFaceCertificationController ()<FaceDetectorDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIButton *certificeBtn;
 @property (nonatomic, assign) BOOL isCertificed;
-
+@property (nonatomic, strong) UserService *service;
+@property (nonatomic, strong) UploadImagesManager *imageManager;
+@property (nonatomic, strong) NSString *loginId;
+@property (nonatomic, assign) NSInteger sendFaceCount;
+@property (nonatomic, assign) NSInteger addFaceCount;
 
 @end
 
@@ -21,6 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.sendFaceCount = 0;
+    self.addFaceCount = 0;
 }
 
 - (void)setupUI {
@@ -34,7 +41,10 @@
 - (void)setupConfig {
     [super setupConfig];
     [self setLeftBackBarButton];
-    self.isCertificed = NO;
+    UserModel *userModel = [UserModel getCurrentModel];
+    UserInfoModel *userInfoModel = userModel.data;
+    self.loginId = userInfoModel.loginId;
+    self.isCertificed = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
     self.title = @"刷脸认证";
 }
 
@@ -43,44 +53,141 @@
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(30);
         make.left.mas_equalTo(0);
-        make.right.mas_equalTo(-0);
+        make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(16);
     }];
     if (self.isCertificed) {
         [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-            make.left.mas_equalTo(112);
-            make.right.mas_equalTo(-112);
-            make.height.mas_equalTo(kUI_HeightS(150));
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(150, 150));
         }];
         [self.certificeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.imageView.mas_bottom).offset(50);
             make.left.mas_equalTo(30);
-            make.right.mas_equalTo(-30);
+            make.width.mas_equalTo(SCREEN_WIDTH-60);
             make.height.mas_equalTo(44);
         }];
     }else{
         [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-            make.left.mas_equalTo(42);
-            make.right.mas_equalTo(-42);
-            make.height.mas_equalTo(kUI_HeightS(371));
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(290,371));
         }];
         [self.certificeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.imageView.mas_bottom).offset(40);
             make.left.mas_equalTo(30);
-            make.right.mas_equalTo(-30);
+            make.width.mas_equalTo(SCREEN_WIDTH-60);
             make.height.mas_equalTo(44);
         }];
-
     }
-
 }
 
 
 #pragma mark - event
 - (void)certificeBtnClick {
     LLog(@"开始认证");
+    FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
+    faceVC.faceDelegate = self;
+    [self.navigationController pushViewController:faceVC animated:YES];
+}
+
+-(void)sendFaceImage:(UIImage *)faceImage{
+    self.sendFaceCount++;
+    WS(weakSelf);
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObject:faceImage];
+    if ([TipViewManager showNetErrorToast]) {
+        if (self.sendFaceCount == 6) {
+            [TipViewManager showLoadingWithText:@"认证中..."];
+            self.imageView.image = faceImage;
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(240,320));
+            }];
+            self.titleLabel.hidden = YES;
+            self.certificeBtn.hidden = YES;
+        }
+        [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            if (arr.count != imageUrls.count) {
+                LLog(@"图片上传失败，请重新上传！");
+                [TipViewManager dismissLoading];
+                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                return ;
+            }
+            NSString *faceImgUrl = [imageUrls objectAtIndex:0];
+            [weakSelf userFaceDetect:faceImgUrl];
+
+        }];
+    }
+}
+
+- (void)userFaceDetect:(NSString *)faceImgUrl{
+  [self.service userFaceDetect:faceImgUrl delegate:self];
+}
+
+
+- (void)userAddFace:(NSString *)faceToken{
+    [self.service userAddFace:self.loginId faceToken:faceToken delegate:self];
+}
+
+
+
+
+- (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KFaceDetectRequest]) {
+            UserFaceDetectModel *model = (UserFaceDetectModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                WS(weakSelf);
+                FaceTokenModel *faceTokenModel = model.data;
+                NSString *faceToken = faceTokenModel.faceToken;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf userAddFace:faceToken];
+                });
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }else if ([reqType isEqualToString:KFaceAddFaceRequest]) {
+            UserAddFaceModel *model = (UserAddFaceModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                self.addFaceCount++;
+                if (self.addFaceCount == 6) {
+                    AddFaceModel *addFaceModel = model.data;
+                    [TipViewManager showToastMessage:@"认证成功"];
+                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }else {
+                [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+    }
+    else {
+        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+        self.titleLabel.hidden = NO;
+        self.certificeBtn.hidden = NO;
+        if (self.isCertificed) {
+            self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(150, 150));
+            }];
+        }else{
+            self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
+            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                make.size.mas_equalTo(CGSizeMake(290,371));
+            }];
+        }
+    }
 }
 
 
@@ -124,6 +231,22 @@
         }
     }
     return _certificeBtn;
+}
+
+- (UploadImagesManager *)imageManager {
+    if (!_imageManager) {
+        _imageManager = [UploadImagesManager sharedInstance];
+        _imageManager.imageType = UploadImageTypeJpg;
+        _imageManager.name = @"file";
+        _imageManager.url = @"api/user/uploadFile";
+    }
+    return _imageManager;
+}
+- (UserService *)service {
+    if (!_service) {
+        _service = [[UserService alloc] init];
+    }
+    return _service;
 }
 
 
