@@ -151,18 +151,27 @@
         [arr addObject:faceImage];
         if ([TipViewManager showNetErrorToast]) {
             [TipViewManager showLoadingWithText:@"认证中..."];
-            [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
+            [weakSelf.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
                 if (arr.count != imageUrls.count) {
-                    [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                    [TipViewManager dismissLoading];
+                    [TipViewManager showToastMessage:@"认证失败，请重新认证"];
                     return ;
                 }
                 NSString *faceImgUrl = [imageUrls objectAtIndex:0];
-                [weakSelf.service userFaceDetect:faceImgUrl delegate:self];
+                [weakSelf userFaceDetect:faceImgUrl];
             }];
         }
     }
 }
 
+- (void)userFaceDetect:(NSString *)faceImgUrl{
+    [self.service userFaceDetect:faceImgUrl delegate:self];
+}
+
+
+- (void)userFaceCompare:(NSString *)faceToken{
+    [self.service userFaceCompare:self.loginId faceToken:faceToken delegate:self];
+}
 
 
 
@@ -176,7 +185,7 @@
                 FaceTokenModel *faceTokenModel = model.data;
                 NSString *faceToken = faceTokenModel.faceToken;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                   [weakSelf.service userFaceCompare:self.loginId faceToken:faceToken delegate:self];
+                   [weakSelf userFaceCompare:faceToken];
                 });
             }
             else {
@@ -185,6 +194,7 @@
         }else if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                [TipViewManager showToastMessage:@"登录成功"];
                 model.data.hasLogin = YES;
                 [UserModel updateUserModel:model];
                 UserInfoModel *suer = model.data;
@@ -194,7 +204,18 @@
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }else {
+
                 [TipViewManager showToastMessage:model.error_msg];
+//                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                self.faceLoginBtn.hidden = NO;
+                self.toggleLoginModeBtn.hidden = NO;
+                self.headeImageView.image = [UIImage imageNamed:@"sign_face"];
+                [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
+                    make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                    make.size.mas_equalTo(CGSizeMake(255,230));
+                }];
+
             }
         }
     }
