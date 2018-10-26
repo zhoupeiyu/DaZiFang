@@ -7,6 +7,7 @@
 //
 
 #import "ControllerUtilsManager.h"
+#import "BaseWebViewController.h"
 
 @implementation ControllerUtilsManager
 
@@ -24,6 +25,23 @@
     return NO;
 }
 
++ (void)showNormalWebViewWithURL:(NSString *)url {
+    if (0 == url.length) {
+        return;
+    }
+    if (![self canShowViewWithURL:url]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"无法打开连接" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    if ([self isHTTPURL:url]) {
+        BaseWebViewController *webViewController = [[BaseWebViewController alloc] init];
+        BaseNavigationViewController *nvc = [[BaseNavigationViewController alloc]initWithRootViewController:webViewController];
+        [webViewController showWebView:url];
+        [[UIViewController currentViewController] presentViewController:nvc animated:YES completion:nil];
+        return;
+    }
+}
 + (void)showViewWithURL:(NSString *)url {
     if (0 == url.length) {
         return;
@@ -37,6 +55,9 @@
         NSURL *rurl = [NSURL URLWithString:url];
         TOWebViewController *webViewController = [self webViewControllerWithURL:rurl];
         BaseNavigationViewController *nvc = [[BaseNavigationViewController alloc]initWithRootViewController:webViewController];
+        webViewController.doneButtonTitle = @"取消";
+        webViewController.buttonTintColor = [UIColor whiteColor];
+        webViewController.showActionButton = NO;
         [[UIViewController currentViewController] presentViewController:nvc animated:YES completion:nil];
         return;
     }

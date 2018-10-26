@@ -29,7 +29,8 @@
 
     #define API_Upload               @""
 
-
+    #define API_Agree_Html          @"http://zhongrong.ijiaoban.cn/pages/index/agreement.html"
+//    #define API_Protocol_Html           @"http://zhongrong.ijiaoban.cn/api/user/protocolDoc"
 
 
 
@@ -54,7 +55,8 @@
 
     #define API_Host                @""
 
-
+    #define API_Agree_Html          @"http://zhongrong.ijiaoban.cn/pages/index/agreement.html"
+//    #define API_Protocol_Html           @"http://zhongrong.ijiaoban.cn/api/user/protocolDoc"
 
     #define UMKey                   @""
     #define TencentAppID @"1104177532"

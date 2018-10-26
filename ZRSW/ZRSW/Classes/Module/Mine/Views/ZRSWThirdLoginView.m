@@ -206,11 +206,6 @@
     
     self.wechatBtn.hidden = ![ZRSWShareManager isInstallWeChat];
     
-    self.qqBtn.enabled = NO;
-    self.wbBtn.enabled = NO;
-    self.wechatBtn.enabled = NO;
-    
-    
     [self setNeedsLayout];
 }
 -(void)onResp:(BaseResp*)resp {

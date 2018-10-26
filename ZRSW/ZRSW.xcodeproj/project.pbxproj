@@ -178,6 +178,8 @@
 		3CFE0BAE21785DBC0087C50E /* face_icon_certification_shake_03@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFE0BA421785DBC0087C50E /* face_icon_certification_shake_03@3x.png */; };
 		407FD762170B333C681D124F /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526F0CB3FAD378F340C7F964 /* libPods-ZRSW.a */; };
 		E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */ = {isa = PBXBuildFile; fileRef = E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */; };
+		E54EEE8D2182DDB7003A67F6 /* ZRSWBindPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54EEE8C2182DDB7003A67F6 /* ZRSWBindPhoneController.m */; };
+		E54EEE922182EAA0003A67F6 /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54EEE912182EAA0003A67F6 /* BaseWebViewController.m */; };
 		E5533E0B21645FF8003631E6 /* ZRSWLinePrejudicationCells.m in Sources */ = {isa = PBXBuildFile; fileRef = E5533E0921645FF8003631E6 /* ZRSWLinePrejudicationCells.m */; };
 		E5533E0E2164601B003631E6 /* ZRSWLinePrejudicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5533E0D2164601B003631E6 /* ZRSWLinePrejudicationController.m */; };
 		E5533E1021646040003631E6 /* ZRSWLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5533E0F21646040003631E6 /* ZRSWLoginController.m */; };
@@ -1058,6 +1060,10 @@
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5131CA0215B8DC000CF362F /* NSArray+Sudoku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Sudoku.h"; sourceTree = "<group>"; };
 		E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Sudoku.m"; sourceTree = "<group>"; };
+		E54EEE8B2182DDB7003A67F6 /* ZRSWBindPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBindPhoneController.h; sourceTree = "<group>"; };
+		E54EEE8C2182DDB7003A67F6 /* ZRSWBindPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBindPhoneController.m; sourceTree = "<group>"; };
+		E54EEE902182EAA0003A67F6 /* BaseWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseWebViewController.h; sourceTree = "<group>"; };
+		E54EEE912182EAA0003A67F6 /* BaseWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseWebViewController.m; sourceTree = "<group>"; };
 		E5533E0921645FF8003631E6 /* ZRSWLinePrejudicationCells.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRSWLinePrejudicationCells.m; sourceTree = "<group>"; };
 		E5533E0A21645FF8003631E6 /* ZRSWLinePrejudicationCells.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWLinePrejudicationCells.h; sourceTree = "<group>"; };
 		E5533E0C2164601B003631E6 /* ZRSWLinePrejudicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRSWLinePrejudicationController.h; sourceTree = "<group>"; };
@@ -4390,6 +4396,8 @@
 				E591D6D02153F67200F6802A /* BaseTabBarViewController.m */,
 				E5B599E8214EBEE800726DE9 /* BaseScrollViewController.h */,
 				E5B599EC214EBEE800726DE9 /* BaseScrollViewController.m */,
+				E54EEE902182EAA0003A67F6 /* BaseWebViewController.h */,
+				E54EEE912182EAA0003A67F6 /* BaseWebViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -4668,6 +4676,8 @@
 				E591D66C2153454800F6802A /* ZRSWRealNameAuthController.m */,
 				E591D6CC2153ECB600F6802A /* ZRSWEnterpriseAuthController.h */,
 				E591D6CD2153ECB600F6802A /* ZRSWEnterpriseAuthController.m */,
+				E54EEE8B2182DDB7003A67F6 /* ZRSWBindPhoneController.h */,
+				E54EEE8C2182DDB7003A67F6 /* ZRSWBindPhoneController.m */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -5428,6 +5438,7 @@
 				E553409F2164620F003631E6 /* NSString+JKRemoveEmoji.m in Sources */,
 				E55340492164620F003631E6 /* UIView+JKCustomBorder.m in Sources */,
 				E55340D72164620F003631E6 /* CAShapeLayer+JKUIBezierPath.m in Sources */,
+				E54EEE8D2182DDB7003A67F6 /* ZRSWBindPhoneController.m in Sources */,
 				E5B59A3C214EBEE800726DE9 /* DeviceID.m in Sources */,
 				E5B59A18214EBEE800726DE9 /* BaseTheme.m in Sources */,
 				E55340992164620F003631E6 /* NSString+JKMatcher.m in Sources */,
@@ -5527,6 +5538,7 @@
 				E5B59A13214EBEE800726DE9 /* TipViewManager.m in Sources */,
 				E55340742164620F003631E6 /* UITextField+JKShake.m in Sources */,
 				E55340432164620F003631E6 /* UIView+JKBlockGesture.m in Sources */,
+				E54EEE922182EAA0003A67F6 /* BaseWebViewController.m in Sources */,
 				E553408D2164620F003631E6 /* NSData+JKPCM.m in Sources */,
 				E55340B52164620F003631E6 /* NSObject+JKAppInfo.m in Sources */,
 				E553403B2164620F003631E6 /* UIWebVIew+JKSwipeGesture.m in Sources */,
