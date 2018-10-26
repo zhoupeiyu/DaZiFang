@@ -311,9 +311,7 @@
     }
 }
 - (void)agreeBtnAction {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"LoginAgreement" ofType:@"html"];
-    NSURL *rurl = [NSURL URLWithString:path];
-    
+    [ControllerUtilsManager showNormalWebViewWithURL:API_Agree_Html];
 }
 
 #pragma mark - lazy
