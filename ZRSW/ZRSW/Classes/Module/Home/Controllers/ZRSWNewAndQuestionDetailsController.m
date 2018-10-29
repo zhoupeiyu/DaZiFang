@@ -73,7 +73,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     [super setupUI];
     [self.scrollView addSubview:self.contentView];
     [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.roundupLabel];
     [self.contentView addSubview:self.sourceNameLabel];
     [self.contentView addSubview:self.readerIcon];
     [self.contentView addSubview:self.readersLabel];
@@ -256,39 +255,35 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 - (void)setupLayOut {
     [super setupLayOut];
-    self.roundupLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
-    [self.roundupLabel sizeToFit];
+    self.titleLabel.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
+    [self.titleLabel sizeToFit];
     if (self.type == DetailsTypeCommentQuestion){
-        [self.titleLabel removeFromSuperview];
         [self.sourceNameLabel removeFromSuperview];
         self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
-        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
-        self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
-        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(5),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
+        self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
+        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(5),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
         self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
-        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
         [self.contentLabel sizeToFit];
     }else  if (self.type == DetailsTypeSystemNotification){
-        [self.titleLabel removeFromSuperview];
         [self.sourceNameLabel removeFromSuperview];
         [self.readerIcon removeFromSuperview];
         [self.readersLabel removeFromSuperview];
         self.sourceNameLabel.frame = CGRectMake(0,0,0,0);
         self.readerIcon.frame = CGRectMake(0,0,0,0);
         self.readersLabel.frame = CGRectMake(0,0,0,0);
-        self.dateLabel.frame = CGRectMake(self.roundupLabel.left,self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.dateLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
         self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
-        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
         [self.contentLabel sizeToFit];
     }else{
-        self.titleLabel.frame = CGRectMake(kUI_WidthS(20),kUI_HeightS(13), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(16));
-        self.roundupLabel.frame = CGRectMake(kUI_WidthS(15),self.titleLabel.bottom+kUI_HeightS(5), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(64));
-        self.sourceNameLabel.frame = CGRectMake(kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(64), kUI_HeightS(10));
-        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
-        self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
-        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(30),self.roundupLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
+        self.sourceNameLabel.frame = CGRectMake(kUI_WidthS(15),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(64), kUI_HeightS(10));
+        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(15),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(15), kUI_HeightS(10));
+        self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(33), kUI_HeightS(10));
+        self.dateLabel.frame = CGRectMake(self.readersLabel.right +  kUI_WidthS(30),self.titleLabel.bottom + kUI_HeightS(9), kUI_WidthS(150), kUI_HeightS(10));
         self.lineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,self.dateLabel.bottom + kUI_HeightS(15), kUI_WidthS(360), kUI_HeightS(1));
-        self.contentLabel.frame = CGRectMake(self.roundupLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
+        self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.lineImge.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(114));
         [self.contentLabel sizeToFit];
     }
 
@@ -308,7 +303,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.contentLabel.bottom + kUI_HeightS(20));
 //
 //        }else{
-//            self.imgeView.frame = CGRectMake(self.roundupLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
+//            self.imgeView.frame = CGRectMake(self.titleLabel.left,self.contentLabel.bottom + kUI_HeightS(15), SCREEN_WIDTH - kUI_WidthS(30), kUI_HeightS(150));
 //            self.contentView.frame = CGRectMake(0,kUI_HeightS(10), SCREEN_WIDTH, self.imgeView.bottom + kUI_HeightS(20));
 //        }
 //    }
@@ -319,7 +314,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 - (void)setDetailContens{
     if (self.type == DetailsTypePopularInformation) {
         self.titleLabel.text = self.detailContensModel.title;
-        self.roundupLabel.text = self.detailContensModel.roundup;
         self.sourceNameLabel.text = self.detailContensModel.sourceName;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
         self.readersLabel.text = [NSString stringWithFormat:@"%@",self.detailContensModel.readers];
@@ -335,14 +329,14 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         self.contentLabel.attributedText = htmlString;
 //        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
     }else if (self.type == DetailsTypeSystemNotification) {
-        self.roundupLabel.text = self.detailContensModel.title;
+        self.titleLabel.text = self.detailContensModel.title;
         self.dateLabel.text = self.detailContensModel.updateTime;
         self.lineImge.image = [UIImage imageNamed:@"currency_line_720"];
         NSMutableAttributedString * htmlString = [[NSMutableAttributedString alloc] initWithData:[self.detailContensModel.content dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType} documentAttributes:nil error:nil];
         self.contentLabel.attributedText = htmlString;
 //        [self.imgeView sd_setImageWithURL:[NSURL URLWithString:self.detailContensModel.imgUrl] placeholderImage:nil];
     }else if (self.type == DetailsTypeCommentQuestion){
-        self.roundupLabel.text = self.questionDetailContentModel.title;
+        self.titleLabel.text = self.questionDetailContentModel.title;
         self.readerIcon.image = [UIImage imageNamed:@"currency_watch_number"];
         self.readersLabel.text = [NSString stringWithFormat:@"%@",self.questionDetailContentModel.readers];
 //        NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -398,6 +392,17 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     return _lineImge;
 }
 
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.textColor = [UIColor colorFromRGB:0xFF444152];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.font = [UIFont systemFontOfSize:16];
+        _titleLabel.numberOfLines = 0;
+    }
+    return _titleLabel;
+}
+
 - (UILabel *)roundupLabel{
     if (!_roundupLabel) {
         _roundupLabel = [[UILabel alloc] init];
@@ -409,15 +414,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     return _roundupLabel;
 }
 
-- (UILabel *)titleLabel{
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] init];
-        _titleLabel.textColor = [UIColor colorFromRGB:0xFF444152];
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    }
-    return _titleLabel;
-}
+
 
 - (UILabel *)sourceNameLabel{
     if (!_sourceNameLabel) {
