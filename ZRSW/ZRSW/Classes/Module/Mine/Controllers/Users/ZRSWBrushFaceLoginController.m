@@ -138,6 +138,7 @@
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.sendFaceCount++;
     if (self.sendFaceCount == 6) {
+        self.sendFaceCount = 0;
         self.headeImageView.image = faceImage;
         [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.headView.mas_bottom).offset(50);

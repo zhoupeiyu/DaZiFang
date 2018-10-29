@@ -160,8 +160,11 @@
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 model.data.hasLogin = YES;
-                if (model.data.loginId) {
+                if (model.data.phone) {
                     [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
+                }
+                if (model.data.faceTokens != nil && ![model.data.faceTokens isEqualToString:@""]) {
+                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",model.data.phone,BrushFaceCertificationKey]];
                 }
                 [UserModel updateUserModel:model];
                 UserInfoModel *suer = model.data;
