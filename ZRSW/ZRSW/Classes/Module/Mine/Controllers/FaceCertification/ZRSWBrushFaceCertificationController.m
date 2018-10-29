@@ -43,7 +43,7 @@
     [self setLeftBackBarButton];
     UserModel *userModel = [UserModel getCurrentModel];
     UserInfoModel *userInfoModel = userModel.data;
-    self.loginId = userInfoModel.loginId;
+    self.loginId = userInfoModel.phone;
     self.isCertificed = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
     self.title = @"刷脸认证";
 }
@@ -114,7 +114,25 @@
             if (arr.count != imageUrls.count) {
                 LLog(@"图片上传失败，请重新上传！");
                 [TipViewManager dismissLoading];
-                [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
+                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                self.titleLabel.hidden = NO;
+                self.certificeBtn.hidden = NO;
+                if (self.isCertificed) {
+                    self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
+                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                        make.size.mas_equalTo(CGSizeMake(150, 150));
+                    }];
+                }else{
+                    self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
+                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                        make.size.mas_equalTo(CGSizeMake(290,371));
+                    }];
+                }
                 return ;
             }
             NSString *faceImgUrl = [imageUrls objectAtIndex:0];
@@ -137,7 +155,6 @@
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
-    [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KFaceDetectRequest]) {
             UserFaceDetectModel *model = (UserFaceDetectModel *)resObj;
@@ -157,36 +174,55 @@
             if (model.error_code.integerValue == 0) {
                 self.addFaceCount++;
                 if (self.addFaceCount == 6) {
-                    AddFaceModel *addFaceModel = model.data;
+//                    AddFaceModel *addFaceModel = model.data;
+                    [TipViewManager dismissLoading];
                     [TipViewManager showToastMessage:@"认证成功"];
+                    self.titleLabel.hidden = NO;
+                    self.certificeBtn.hidden = NO;
+                    self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
+                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+                        make.size.mas_equalTo(CGSizeMake(150, 150));
+                    }];
                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    });
                 }
             }else {
+                [TipViewManager dismissLoading];
                 [TipViewManager showToastMessage:model.error_msg];
+                [self faceCertificationFail];
             }
         }
     }
     else {
+        [TipViewManager dismissLoading];
         [TipViewManager showToastMessage:@"认证失败，请重新认证"];
-        self.titleLabel.hidden = NO;
-        self.certificeBtn.hidden = NO;
-        if (self.isCertificed) {
-            self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
-            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                make.size.mas_equalTo(CGSizeMake(150, 150));
-            }];
-        }else{
-            self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
-            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                make.size.mas_equalTo(CGSizeMake(290,371));
-            }];
-        }
+        [self faceCertificationFail];
+    }
+}
+
+
+- (void)faceCertificationFail{
+    self.titleLabel.hidden = NO;
+    self.certificeBtn.hidden = NO;
+    if (self.isCertificed) {
+        self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
+        [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(150, 150));
+        }];
+    }else{
+        self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
+        [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(290,371));
+        }];
     }
 }
 

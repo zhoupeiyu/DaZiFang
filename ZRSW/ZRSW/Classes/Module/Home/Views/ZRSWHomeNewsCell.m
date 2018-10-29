@@ -9,10 +9,10 @@
 #import "ZRSWHomeNewsCell.h"
 @interface ZRSWHomeNewsCell()
 @property (nonatomic, strong) UIImageView *topLineImge;
-@property (nonatomic, strong) UIView *topLine;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UILabel *sourceNameLabel;
 @property (nonatomic, strong) UIImageView *readerIcon;
 @property (nonatomic, strong) UILabel *readersLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
@@ -28,35 +28,32 @@
     return self;
 }
 - (void)setUpUI{
-//    [self.contentView addSubview:self.topLine];
     [self.contentView addSubview:self.topLineImge];
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.titleLabel];
     [self.contentView addSubview:self.contentLabel];
+    [self.contentView addSubview:self.sourceNameLabel];
     [self.contentView addSubview:self.readerIcon];
     [self.contentView addSubview:self.readersLabel];
     [self.contentView addSubview:self.dateLabel];
 }
 
 - (void)layoutSubviews{
-    self.topLine.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
     self.topLineImge.frame = CGRectMake((SCREEN_WIDTH - kUI_WidthS(360))/2 ,0, kUI_WidthS(360), kUI_HeightS(1));
-//    self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(115), kUI_HeightS(90));
     self.iconImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(15), kUI_WidthS(133), kUI_HeightS(86));
     self.titleLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(15),kUI_HeightS(20), (SCREEN_WIDTH - self.iconImageView.right - kUI_WidthS(30)), kUI_HeightS(15));
     self.contentLabel.frame = CGRectMake(self.titleLabel.left,self.titleLabel.bottom + kUI_HeightS(9), self.titleLabel.width, kUI_HeightS(34));
-    self.readerIcon.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+     self.sourceNameLabel.frame = CGRectMake(self.iconImageView.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(64), kUI_HeightS(10));
+    [self.sourceNameLabel sizeToFit];
+    if (self.sourceNameLabel.text.length == 0) {
+        self.readerIcon.frame = CGRectMake(self.iconImageView.right+kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+    }else{
+        self.readerIcon.frame = CGRectMake(self.sourceNameLabel.right + kUI_WidthS(16),self.contentLabel.bottom + kUI_HeightS(12), kUI_WidthS(15), kUI_HeightS(10));
+    }
     self.readersLabel.frame = CGRectMake(self.readerIcon.right + kUI_WidthS(3),self.contentLabel.bottom + kUI_HeightS(13), kUI_WidthS(33), kUI_HeightS(10));
-    self.dateLabel.frame = CGRectMake(kUI_WidthS(211),self.readersLabel.top, kUI_WidthS(150), kUI_HeightS(10));
+    self.dateLabel.frame = CGRectMake(self.readersLabel.right + kUI_WidthS(8),self.readersLabel.top, kUI_WidthS(150), kUI_HeightS(10));
 }
 
-- (UIView *)topLine{
-    if (!_topLine) {
-        _topLine = [[UIView alloc] init];
-        _topLine.backgroundColor = [UIColor colorFromRGB:0xFFC8C8C8];
-    }
-    return _topLine;
-}
 - (UIImageView *)topLineImge{
     if (!_topLineImge) {
         _topLineImge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"currency_line_720"]];
@@ -91,6 +88,16 @@
     return _contentLabel;
 }
 
+
+- (UILabel *)sourceNameLabel{
+    if (!_sourceNameLabel) {
+        _sourceNameLabel = [[UILabel alloc] init];
+        _sourceNameLabel.textColor = [UIColor colorFromRGB:0xFF4F4E5C];
+        _sourceNameLabel.textAlignment = NSTextAlignmentLeft;
+        _sourceNameLabel.font = [UIFont systemFontOfSize:10];
+    }
+    return _sourceNameLabel;
+}
 - (UIImageView *)readerIcon{
     if (!_readerIcon) {
         _readerIcon = [[UIImageView alloc]initWithFrame:CGRectZero];
@@ -125,6 +132,7 @@
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@",detailModel.imgUrl]] placeholderImage:[UIImage imageNamed:@"home_information_bg"]];
     self.titleLabel.text = detailModel.title;
     self.contentLabel.text = detailModel.roundup;
+    self.sourceNameLabel.text = detailModel.sourceName;
     self.readersLabel.text = [NSString stringWithFormat:@"%@",detailModel.readers];
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy/MM/dd HH:mm:ss"];

@@ -27,6 +27,7 @@
 		3C158A652179A84600CC2366 /* face_certification_tips_frame@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C158A642179A84500CC2366 /* face_certification_tips_frame@3x.png */; };
 		3C158A6B217D782800CC2366 /* UserFaceDetectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A6A217D782800CC2366 /* UserFaceDetectModel.m */; };
 		3C158A6E217D7CA600CC2366 /* UserAddFaceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C158A6D217D7CA600CC2366 /* UserAddFaceModel.m */; };
+		3C3345242187112F005289EE /* ZRSWUserAgreementController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3345232187112F005289EE /* ZRSWUserAgreementController.m */; };
 		3C4574B021785EF10009383F /* my_face@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574AF21785EF10009383F /* my_face@2x.png */; };
 		3C4574B221785EFC0009383F /* my_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B121785EFC0009383F /* my_face@3x.png */; };
 		3C4574B92178D0450009383F /* sign_face@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B72178D0450009383F /* sign_face@3x.png */; };
@@ -809,6 +810,8 @@
 		3C158A6C217D7CA600CC2366 /* UserAddFaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserAddFaceModel.h; sourceTree = "<group>"; };
 		3C158A6D217D7CA600CC2366 /* UserAddFaceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserAddFaceModel.m; sourceTree = "<group>"; };
 		3C3123C72172410C008D9A02 /* ZRSW.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZRSW.entitlements; sourceTree = "<group>"; };
+		3C3345222187112F005289EE /* ZRSWUserAgreementController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWUserAgreementController.h; sourceTree = "<group>"; };
+		3C3345232187112F005289EE /* ZRSWUserAgreementController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWUserAgreementController.m; sourceTree = "<group>"; };
 		3C4574AF21785EF10009383F /* my_face@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@2x.png"; sourceTree = "<group>"; };
 		3C4574B121785EFC0009383F /* my_face@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_face@3x.png"; sourceTree = "<group>"; };
 		3C4574B72178D0450009383F /* sign_face@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sign_face@3x.png"; sourceTree = "<group>"; };
@@ -2204,6 +2207,8 @@
 				3C7E4B082152232A0058D3E2 /* ZRSWSettingController.m */,
 				3C7E4B0A21522E3C0058D3E2 /* ZRSWFeedBackController.h */,
 				3C7E4B0B21522E3C0058D3E2 /* ZRSWFeedBackController.m */,
+				3C3345222187112F005289EE /* ZRSWUserAgreementController.h */,
+				3C3345232187112F005289EE /* ZRSWUserAgreementController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -5740,6 +5745,7 @@
 				3CD3C805215FC77F00DE6199 /* EaseChatToolbar.m in Sources */,
 				E553404B2164620F003631E6 /* UIView+JKFind.m in Sources */,
 				3CD3C7CD215FC77F00DE6199 /* EaseMessageModel.m in Sources */,
+				3C3345242187112F005289EE /* ZRSWUserAgreementController.m in Sources */,
 				E55340D82164620F003631E6 /* CALayer+JKBorderColor.m in Sources */,
 				E55340BE2164620F003631E6 /* NSObject+JKBlocks.m in Sources */,
 				E5B598FA214E9E2600726DE9 /* main.m in Sources */,

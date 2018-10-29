@@ -124,6 +124,8 @@
 @property (nonatomic, assign) BOOL hasLogin;
 //环信id,其值为用户id，环信密码默认为123456，昵称为用户昵称或手机号
 @property (nonatomic, strong) NSString *huanXinName;
+//刷脸认证faceTokens
+@property (nonatomic, strong) NSString *faceTokens;
 @end
 
 @interface UserModel : BaseModel

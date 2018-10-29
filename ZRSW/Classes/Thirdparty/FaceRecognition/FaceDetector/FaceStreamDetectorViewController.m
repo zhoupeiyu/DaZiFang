@@ -216,29 +216,31 @@
     [self.captureManager setup];
     [self.captureManager addObserver];
     WS(weakSelf);
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         weakSelf.textLabel.text = @"请重复张嘴动作...";
         [weakSelf tomAnimationWithName:@"face_icon_certification_shut_0" count:2];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
             LLog(@"====张嘴时照片");
             });
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         imgView.animationImages = nil;
+        [imgView stopAnimating];
         weakSelf.textLabel.text = @"请重复摇头动作...";
         [weakSelf tomAnimationWithName:@"face_icon_certification_shake_0" count:4];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
             LLog(@"====摇头时照片1");
         });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
             LLog(@"====摇头时照片2");
         });
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(14 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         imgView.animationImages = nil;
+        [imgView stopAnimating];
         weakSelf.textLabel.text = @"请重复眨眼动作...";
         [weakSelf tomAnimationWithName:@"face_icon_certification_blink_0" count:2];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -246,26 +248,23 @@
             LLog(@"====眨眼时照片");
         });
     });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(18 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(19 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         imgView.animationImages = nil;
         self.textLabel.text = @"认证完毕";
         [self delateNumber];//清数据
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
             LLog(@"====认证时照片");
         });
     });
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //       [self didClickTakePhoto];
-        //延时操作
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //取得的静态影像
-            self.captureManager.nowImageDelegate=nil;
-            LLog(@"====完成时照片");
-            [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
-        //        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        //取得的静态影像
+        self.captureManager.nowImageDelegate=nil;
+        LLog(@"====完成时照片");
+        [weakSelf.faceDelegate sendFaceImage:weakSelf.currentImage];
+    //        UIImageWriteToSavedPhotosAlbum(image, self, NULL, NULL);
+        [self.navigationController popViewControllerAnimated:YES];
     });
 }
 
@@ -774,6 +773,7 @@
 #pragma mark --- 清掉对应的数
 -(void)delateNumber
 {
+    [imgView stopAnimating];
     number = 0;
     takePhotoNumber = 0;
     

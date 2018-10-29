@@ -9,6 +9,7 @@
 #import "ZRSWSettingController.h"
 #import "ZRSWFeedBackController.h"
 #import "ZRSWMineListCell.h"
+#import "ZRSWUserAgreementController.h"
 
 
 #define KLogoutViewH     kUI_HeightS(84)
@@ -63,7 +64,6 @@
     }else{
         BaseViewController *vc = [(BaseViewController *)[NSClassFromString(mineModel.viewControllerName)
                                                          alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -109,6 +109,7 @@
             model.title = @"用户协议";
             model.type = MineListTypeCommentList;
             model.iconName = @"my_order";
+            model.viewControllerName = NSStringFromClass([ZRSWUserAgreementController class]);
             [self.dataSource addObject:model];
         }
         {
