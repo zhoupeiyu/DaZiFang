@@ -52,6 +52,9 @@
     
 }
 
+- (void)dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)viewWillAppear:(BOOL)animated{
     NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
     BOOL faceCertification = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",loginId,BrushFaceCertificationKey]];

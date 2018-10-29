@@ -11,7 +11,7 @@
 
 //微信
 #define kWechatAppId                        @"wx90f7a0e709f2bdf1"
-#define kWechatSecret                        @"074eb5d5baa02a4a69a900f5c043017c"
+#define kWechatSecret                        @"8ca69c1eed1066b556932d3ef4838ed1"
 #define kWechatPartnerId                    @"1388232102"
 #define kWechatSecurity                     @"789"
 
