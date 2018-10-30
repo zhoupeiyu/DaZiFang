@@ -80,6 +80,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserInfo) name:UserLoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUserIcon:) name:ChangeUserInfoSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMsgStatus) name:UpdateMsgStatusNotification object:nil];
+    
 }
 
 - (void)setupUI {

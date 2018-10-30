@@ -19,6 +19,12 @@ UIKIT_EXTERN NSNotificationName const ChangeCityNotification;
 //更新消息阅读状态
 UIKIT_EXTERN NSNotificationName const UpdateMsgStatusNotification;
 
+//刷脸登录成功
+UIKIT_EXTERN NSNotificationName const BrushFaceLoginResultNotification;
+
+//刷脸认证成功
+UIKIT_EXTERN NSNotificationName const BrushFaceCertificationResultNotification;
+
 //用户当前位置
 UIKIT_EXTERN NSString * const CurrentLocationKey;
 

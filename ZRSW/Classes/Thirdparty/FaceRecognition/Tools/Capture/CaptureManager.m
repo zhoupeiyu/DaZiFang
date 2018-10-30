@@ -311,7 +311,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 #pragma mark - VideoData OutputSampleBuffer Delegate
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    if(self.nowImageDelegate && [self.nowImageDelegate respondsToSelector:@selector(onOutputFaceImage:)]){
+    if(self.nowImageDelegate && [self.nowImageDelegate respondsToSelector:@selector(returnNowShowImage:)]){
         UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
         image = [UIImage imageWithCGImage:image.CGImage scale:1 orientation:UIImageOrientationLeftMirrored];
         [self.nowImageDelegate returnNowShowImage:image];

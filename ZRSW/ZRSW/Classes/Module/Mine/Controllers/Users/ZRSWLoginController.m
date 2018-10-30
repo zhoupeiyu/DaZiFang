@@ -53,7 +53,7 @@
 }
 
 - (void)dismissViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 - (void)viewWillAppear:(BOOL)animated{
     NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
