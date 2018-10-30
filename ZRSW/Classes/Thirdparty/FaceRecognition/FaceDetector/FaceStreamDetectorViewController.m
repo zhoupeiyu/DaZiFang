@@ -75,17 +75,16 @@
     NSString *resultStr = [resultDic valueForKey:@"result"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([resultStr isEqualToString:@"Successful"]) {
-            [self.navigationController popToRootViewControllerAnimated:NO];
             for (BaseViewController *vc in self.navigationController.viewControllers) {
                 if ([vc isKindOfClass:[ZRSWLoginController class]]) {
-                    [(ZRSWLoginController *)vc dismissViewController];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [(ZRSWLoginController *)vc dismissViewControllerAnimated:NO completion:nil];
                 }
             }
         }else{
             [self.navigationController popViewControllerAnimated:YES];
         }
     });
-
 }
 
 - (void)brushFaceCertificationResult:(NSNotification *)result{
