@@ -9,6 +9,7 @@
 #import "ZRSWBrushFaceLoginController.h"
 #import "FaceStreamDetectorViewController.h"
 #import "UserService.h"
+#import "ZRSWLoginController.h"
 
 @interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate,FaceDetectorDelegate>
 @property (nonatomic, strong) UIView *headView;
@@ -202,8 +203,12 @@
                 //设置LoginToke
                 [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController popToRootViewControllerAnimated:NO];
+                for (BaseViewController *vc in self.navigationController.viewControllers) {
+                    if ([vc isKindOfClass:[ZRSWLoginController class]]) {
+                        [(ZRSWLoginController *)vc dismissViewController];
+                    }
+                }
             }else {
 
                 [TipViewManager showToastMessage:model.error_msg];
