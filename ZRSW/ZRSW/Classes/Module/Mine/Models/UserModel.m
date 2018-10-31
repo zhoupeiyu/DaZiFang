@@ -122,6 +122,7 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
         if (model.data.faceTokens.length > 0) {
             userModel.data.faceTokens = model.data.faceTokens;
         }
+        userModel.data.faceLogin = model.data.faceLogin;
         if (model.data.authNameAudit) {
             if (!userModel.data.authNameAudit) {
                 UserAuthNameAudit *auth = [[UserAuthNameAudit alloc] init];

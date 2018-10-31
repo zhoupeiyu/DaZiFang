@@ -117,7 +117,7 @@
     [self.faceLoginBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headeImageView.mas_bottom).offset(60);
         make.left.mas_equalTo(30);
-        make.right.mas_equalTo(SCREEN_WIDTH-60);
+        make.width.mas_equalTo(SCREEN_WIDTH-60);
         make.height.mas_equalTo(44);
     }];
     [self.toggleLoginModeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -161,44 +161,23 @@
                     return ;
                 }
                 NSString *faceImgUrl = [imageUrls objectAtIndex:0];
-                [weakSelf userFaceDetect:faceImgUrl];
+                [self userFaceCompare:faceImgUrl];
             }];
         }
     }
 }
 
-- (void)userFaceDetect:(NSString *)faceImgUrl{
-    [self.service userFaceDetect:faceImgUrl delegate:self];
-}
 
 
-- (void)userFaceCompare:(NSString *)faceToken{
-    [self.service userFaceCompare:self.loginId faceToken:faceToken delegate:self];
+- (void)userFaceCompare:(NSString *)faceImgUrl{
+    [self.service userFaceCompare:self.loginId faceToken:nil orFaceImgUrl:faceImgUrl delegate:self];
 }
 
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KFaceDetectRequest]) {
-            UserFaceDetectModel *model = (UserFaceDetectModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                 WS(weakSelf);
-                FaceTokenModel *faceTokenModel = model.data;
-                NSString *faceToken = faceTokenModel.faceToken;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                   [weakSelf userFaceCompare:faceToken];
-                });
-            }
-            else {
-                [TipViewManager dismissLoading];
-                if (!self.certificationError) {
-                    self.certificationError = YES;
-                    [TipViewManager showToastMessage:model.error_msg];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
-                }
-            }
-        }else if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
+        if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
             [TipViewManager dismissLoading];
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
@@ -218,9 +197,16 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
                 }
             }
+        }else {
+            [TipViewManager dismissLoading];
+            if (!self.certificationError) {
+                self.certificationError = YES;
+                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+            }
         }
-    }
-    else {
+    }else{
+        LLog(@"请求失败");
         [TipViewManager dismissLoading];
         if (!self.certificationError) {
             self.certificationError = YES;

@@ -263,9 +263,10 @@
  人脸对比
  @param loginId 用户登录标识
  @param faceToken 人脸标识集；
+ @param faceImgUrl 用户面照;
  @param delegate
  */
-- (void)userFaceCompare:(NSString *)loginId faceToken:(NSString *)faceToken delegate:(id)delegate;
+- (void)userFaceCompare:(NSString *)loginId faceToken:(NSString *)faceToken orFaceImgUrl:(NSString *)faceImgUrl delegate:(id)delegate;
 
 
 @end

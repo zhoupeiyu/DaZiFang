@@ -97,7 +97,9 @@
     self.unreadCount = 0;
     ZRSWMineModel *mineModel = self.dataSource[1][1];
     mineModel.unreadCount = 0;
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark - delegate && dataSource
@@ -129,11 +131,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
-    if ([mineModel.title isEqualToString:@"退出登录"]) {
-        [UserModel removeUserData];
-        [self updateUserInfo];
+    if ([mineModel.title isEqualToString:@"刷脸认证"]) {
+        [TipViewManager showToastMessage:@"     敬请期待     "];
         return;
     }
+
     if (![UserModel hasLogin]) { 
         ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
         login.hidesBottomBarWhenPushed = YES;
@@ -177,7 +179,9 @@
             if ([model.error_code intValue] == 0) {
                 ZRSWMineModel *mineModel = self.dataSource[1][1];
                 mineModel.unreadCount = model.data.msg_count;
-                [self.tableView reloadData];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
                 [TipViewManager showToastMessage:model.error_msg];
