@@ -232,7 +232,7 @@
 
 - (void)setupLayout {
     NSInteger count = [self.infoDetailModel warpCount];
-    CGFloat width = (SCREEN_WIDTH - count * [self.infoDetailModel attrsLeft]) * 0.5;
+    CGFloat width = (SCREEN_WIDTH - count * 2 * [self.infoDetailModel attrsLeft]);
     CGFloat height = [self.infoDetailModel attrsItemHeight];
     CGFloat margin = [self.infoDetailModel attrsItemMargin];
     CGFloat top = [self.infoDetailModel attrsTop];

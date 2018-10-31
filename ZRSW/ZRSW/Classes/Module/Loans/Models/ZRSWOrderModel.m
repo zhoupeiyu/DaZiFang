@@ -104,7 +104,7 @@
              };
 }
 - (NSInteger)warpCount {
-    return 2;
+    return 1;
 }
 - (CGFloat)attrsTop {
     return 15;
