@@ -88,7 +88,7 @@
 
 - (void)setupConfig {
     [super setupConfig];
-    self.navigationItem.title = @"大资方";
+    self.navigationItem.title = @"中融盛旺";
     UIBarButtonItem *leftBar = [[UIBarButtonItem alloc] initWithCustomView:self.locationView];
     self.navigationItem.leftBarButtonItem = leftBar;
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeLocationCity:) name:ChangeCityNotification object:nil];
