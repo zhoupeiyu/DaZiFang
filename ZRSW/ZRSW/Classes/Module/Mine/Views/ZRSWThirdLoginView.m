@@ -123,10 +123,15 @@
 
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
         if (error) {
-            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginFailedWithType:error:)]) {
+                [self.delegate loginFailedWithType:ThirdLoginTypeQQ error:error];
+            }
         } else {
             UMSocialUserInfoResponse *resp = result;
-            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccessWithType:userInfoResponse:)]) {
+                [self.delegate loginSuccessWithType:ThirdLoginTypeQQ userInfoResponse:resp];
+            }
+            LLog(@"------------------------------------------------\n");
             // 授权信息
             NSLog(@"QQ uid: %@", resp.uid);
             NSLog(@"QQ openid: %@", resp.openid);
@@ -141,6 +146,7 @@
             
             // 第三方平台SDK源数据
             NSLog(@"QQ originalResponse: %@", resp.originalResponse);
+            LLog(@"------------------------------------------------\n");
         }
     }];
 }
@@ -148,10 +154,15 @@
 - (void)WeiboLoginAction {
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_Sina currentViewController:nil completion:^(id result, NSError *error) {
         if (error) {
-            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginFailedWithType:error:)]) {
+                [self.delegate loginFailedWithType:ThirdLoginTypeSina error:error];
+            }
         } else {
             UMSocialUserInfoResponse *resp = result;
-            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccessWithType:userInfoResponse:)]) {
+                [self.delegate loginSuccessWithType:ThirdLoginTypeSina userInfoResponse:resp];
+            }
+            LLog(@"------------------------------------------------\n");
             // 授权信息
             NSLog(@"Sina uid: %@", resp.uid);
             NSLog(@"Sina accessToken: %@", resp.accessToken);
@@ -165,6 +176,7 @@
             
             // 第三方平台SDK源数据
             NSLog(@"Sina originalResponse: %@", resp.originalResponse);
+            LLog(@"------------------------------------------------\n");
         }
     }];
 }
@@ -172,10 +184,16 @@
 - (void)WeChatLoginActionid {
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
         if (error) {
-            
+            LLog(@"%@",error);
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginFailedWithType:error:)]) {
+                [self.delegate loginFailedWithType:ThirdLoginTypeWeChat error:error];
+            }
         } else {
             UMSocialUserInfoResponse *resp = result;
-            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(loginSuccessWithType:userInfoResponse:)]) {
+                [self.delegate loginSuccessWithType:ThirdLoginTypeWeChat userInfoResponse:resp];
+            }
+            LLog(@"------------------------------------------------\n");
             // 授权信息
             NSLog(@"Wechat uid: %@", resp.uid);
             NSLog(@"Wechat openid: %@", resp.openid);
@@ -188,16 +206,12 @@
             NSLog(@"Wechat name: %@", resp.name);
             NSLog(@"Wechat iconurl: %@", resp.iconurl);
             NSLog(@"Wechat gender: %@", resp.unionGender);
-            
-            // 第三方平台SDK源数据
             NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+            LLog(@"------------------------------------------------\n");
         }
     }];
 }
 
-- (void)informDelegateFailed {
-   
-}
 
 - (void)updateAvailable {
     self.qqBtn.hidden = ![ZRSWShareManager isInstallQQ];

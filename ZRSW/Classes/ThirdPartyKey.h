@@ -12,13 +12,14 @@
 //微信
 #define kWechatAppId                        @"wx90f7a0e709f2bdf1"
 #define kWechatSecret                        @"8ca69c1eed1066b556932d3ef4838ed1"
+
 #define kWechatPartnerId                    @"1388232102"
 #define kWechatSecurity                     @"789"
 
 //weibo
 #define kWeiboAppId                         @"3972746284"
 #define kWeiboSeret                         @"f751af1aa54591cc915c528fbb0173dd"
-#define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
+#define kWeiboUrl                           @"https://api.weibo.com/oauth2/default.html"
 
 //QQ
 #define kQQAppId                            @"1107829817"
@@ -58,12 +59,12 @@
 
 //微信
 #define kWechatAppId                        @"wx90f7a0e709f2bdf1"
-#define kWechatSecret                        @"074eb5d5baa02a4a69a900f5c043017c"
+#define kWechatSecret                       @"8ca69c1eed1066b556932d3ef4838ed1"
 
 //weibo
 #define kWeiboAppId                         @"3972746284"
 #define kWeiboSeret                        @"f751af1aa54591cc915c528fbb0173dd"
-#define kWeiboUrl                           @"http://sns.whalecloud.com/sina2/callback"
+#define kWeiboUrl                           @"https://api.weibo.com/oauth2/default.html"
 
 //QQ
 #define kQQAppId                            @"1107829817"

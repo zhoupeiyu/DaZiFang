@@ -241,6 +241,7 @@
 
 @property (nonatomic, strong) NSString *contentStr;
 
++(NSString*)encodeString:(NSString*)unencodedString;
 
 @end
 @interface NewDetailContenModel : BaseModel

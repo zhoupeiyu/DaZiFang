@@ -68,6 +68,14 @@
 - (void)userLoginWithWeChatOpenID:(NSString *)openID delegate:(id)delegate;
 
 
+/**
+ 手机号短信验证码登录
+
+ @param phone 手机号
+ @param code 验证码
+ @param delegate 代理
+ */
+- (void)userLoginWithPhoneNum:(NSString *)phone code:(NSString *)code qqOpenID:(NSString *)qqOpenID wechatOpenID:(NSString *)wechatOpenID weiboUid:(NSString *)uid delegate:(id)delegate;
 
 /**
  QQ登录

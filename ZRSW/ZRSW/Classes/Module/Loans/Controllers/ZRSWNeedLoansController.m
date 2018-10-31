@@ -107,6 +107,15 @@
         [ZRSWLoginController showLoginViewController];
         return;
     }
+    UserInfoModel *userModel = [UserModel getCurrentModel].data;
+    if (userModel.authName.integerValue == -1) {
+        [TipViewManager showToastMessage:@"请先去实名认证！"];
+        return;
+    }
+    else if (userModel.authName.integerValue == 0) {
+        [TipViewManager showToastMessage:@"实名认证中，请耐心等待！"];
+        return;
+    }
     ZRSWLinePrejudicationController *vc = [[ZRSWLinePrejudicationController alloc] init];
     vc.loanCondition = self.infoModel.data.loanCondition;
     vc.loanId = self.selectedLoanID;

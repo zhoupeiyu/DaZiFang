@@ -6,17 +6,24 @@
 #define KGetPhoneCodeRequest                    @"KGetPhoneCodeRequest"
 
 // 重置新手机验证码
-#define KGetNewPhoneCodeRequest              @"KGetNewPhoneCodeRequest"
+#define KGetNewPhoneCodeRequest                 @"KGetNewPhoneCodeRequest"
 
 // 重置旧手机验证码
-#define KGetOldPhoneCodeRequest              @"KGetOldPhoneCodeRequest"
+#define KGetOldPhoneCodeRequest                 @"KGetOldPhoneCodeRequest"
 
+// 登录
+#define KGetLoginCodeRequest                    @"KGetLoginCodeRequest"
 
 // 用户注册
 #define KUserRegisterRequest                    @"KUserRegisterRequest"
 
 // 用户登录
 #define KUserLoginRequest                       @"KUserLoginRequest"
+#define KWeXinLoginRequest                      @"KWeXinLoginRequest"
+#define KQQLoginRequest                         @"KQQLoginRequest"
+#define KWeiBoLoginRequest                      @"KWeiBoLoginRequest"
+#define KCodeLoginRequest                       @"KCodeLoginRequest"
+
 
 // 退出登录
 #define KUserLogOutRequest                      @"KUserLogOutRequest"

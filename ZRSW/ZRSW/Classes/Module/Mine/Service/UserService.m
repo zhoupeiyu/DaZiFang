@@ -24,6 +24,9 @@
     else if (imageCodeType == ImageCodeTypeResetPhone2) {
         imageType = @"resetPhone2";
     }
+    else if (imageCodeType == ImageCodeTypeLogin) {
+        imageType = @"login";
+    }
     return imageType;
 }
 - (void)getUserImageCode:(ImageCodeType)imageCodeType delegate:(id)delegate {
@@ -42,6 +45,9 @@
         type = KGetNewPhoneCodeRequest;
     }else if(imageCodeType == ImageCodeTypeResetPhone2){
         type = KGetOldPhoneCodeRequest;
+    }
+    else if (imageCodeType == ImageCodeTypeLogin) {
+        type = KGetLoginCodeRequest;
     }
     [self POST:KGetPhoneCodeInterface reqType:type delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
@@ -65,19 +71,33 @@
 - (void)userLoginWithWeChatOpenID:(NSString *)openID delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:openID forKey:@"openid"];
-    [self POST:KUserLoginInterface reqType:KUserLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
+    [self POST:KUserLoginInterface reqType:KWeXinLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
-
+- (void)userLoginWithPhoneNum:(NSString *)phone code:(NSString *)code qqOpenID:(NSString *)qqOpenID wechatOpenID:(NSString *)wechatOpenID weiboUid:(NSString *)uid delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:phone forKey:@"userName"];
+    [params setObject:code forKey:@"authCode"];
+    if (qqOpenID.length > 0) {
+        [params setObject:qqOpenID forKey:@"qq"];
+    }
+    if (wechatOpenID.length > 0) {
+        [params setObject:wechatOpenID forKey:@"openid"];
+    }
+    if (uid.length > 0) {
+       [params setObject:uid forKey:@"blogId"];
+    }
+    [self POST:KUserBindInterface reqType:KCodeLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
+}
 - (void)userLoginWithQQID:(NSString *)qq delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:qq forKey:@"qq"];
-    [self POST:KUserLoginInterface reqType:KUserLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
+    [self POST:KUserLoginInterface reqType:KQQLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 
 - (void)userLoginWithWeiBo:(NSString *)blogId delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:blogId forKey:@"blogId"];
-    [self POST:KUserLoginInterface reqType:KUserLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
+    [self POST:KUserLoginInterface reqType:KWeiBoLoginRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 
 - (void)userResetPassword:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode delegate:(id)delegate {

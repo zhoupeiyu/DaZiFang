@@ -37,7 +37,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self.view addSubview:self.webView];
+    [self.view addSubview:self.webView];
     // Do any additional setup after loading the view.
     if (self.type == DetailsTypePopularInformation || self.type == DetailsTypeSystemNotification) {
         [self requsetNewDetail];
@@ -65,7 +65,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 //    }else if (self.type == DetailsTypeCommentQuestion){
 //        self.navigationItem.title = @"问题详情";
 //    }
-    [self setupUI];
+//    [self setupUI];
 
 }
 
@@ -157,6 +157,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
  //           NSString * method = @"vm.getAppData";
    //         JSValue * function = [context objectForKeyedSubscript:method];
    //         [function callWithArguments:@[detailsDicJsonString]];
+            LLog(@"%@",detailsDicJsonString);
            [context evaluateScript:[NSString stringWithFormat:@"vm.getAppData('%@')",detailsDicJsonString]];
 
 
@@ -193,10 +194,10 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
                 self.detailContensModel = detailContensModel;
                 NSData *data = [NSData dataWithContentsOfURL:[NSURL  URLWithString:detailContensModel.imgUrl]];
                 self.image = [UIImage imageWithData:data]; // 取得图片
-                 [self setDetailContens];
+//                 [self setDetailContens];
                 //加载h5
-//                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
-//                [self.webView loadRequest:resquest];
+                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
                    [TipViewManager showToastMessage:model.error_msg];
@@ -206,9 +207,9 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
             if (commentQuestionDetail.error_code.integerValue == 0) {
                 CommentQuestionDetailContentModel *questionDetailContentModel = commentQuestionDetail.data;
                 self.questionDetailContentModel = questionDetailContentModel;
-                [self setDetailContens];
-//                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
-//                [self.webView loadRequest:resquest];
+//                [self setDetailContens];
+                NSURLRequest *resquest = [NSURLRequest requestWithURL:self.url];
+                [self.webView loadRequest:resquest];
             }else{
                 LLog(@"请求失败:%@",commentQuestionDetail.error_msg);
                 [TipViewManager showToastMessage:commentQuestionDetail.error_msg];

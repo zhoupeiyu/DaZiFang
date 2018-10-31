@@ -14,8 +14,9 @@
 #import "UserService.h"
 #import "ZRSWBrushFaceLoginController.h"
 #import "ZRSWForgetPwdViewController.h"
+#import "ZRSWBindPhoneController.h"
 
-@interface ZRSWLoginController ()<LoginCustomViewDelegate>
+@interface ZRSWLoginController ()<LoginCustomViewDelegate,ZRSWThirdLoginViewDelegate>
 
 @property (nonatomic, strong) ZRSWLoginCustomView *userNameView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
@@ -29,6 +30,10 @@
 
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSString *password;
+
+@property (nonatomic, strong) NSString *wechatOpenID;
+@property (nonatomic, strong) NSString *qqOpenID;
+@property (nonatomic, strong) NSString *weiBoUid;
 
 @end
 
@@ -45,6 +50,7 @@
 }
 + (ZRSWLoginController *)getLoginViewController {
     ZRSWLoginController *vc = [[ZRSWLoginController alloc] init];
+    
     return vc;
 }
 - (void)viewDidLoad {
@@ -126,6 +132,30 @@
 
 #pragma mark - delegate && dataSource
 
+- (void)loginSuccessWithType:(ThirdLoginType)loginType userInfoResponse:(UMSocialUserInfoResponse *)response {
+    [TipViewManager showLoadingWithText:@"登录中..."];
+    if (loginType == ThirdLoginTypeWeChat) {
+        NSString *openID = response.openid;
+        self.wechatOpenID = openID;
+        [[[UserService alloc] init] userLoginWithWeChatOpenID:openID delegate:self];
+    }
+    else if (loginType == ThirdLoginTypeQQ) {
+        NSString *openID = response.openid;
+        self.qqOpenID = openID;
+        [[[UserService alloc] init] userLoginWithQQID:openID delegate:self];
+    }
+    else if (loginType == ThirdLoginTypeSina) {
+        NSString *uid = response.uid;
+        self.weiBoUid = uid;
+        [[[UserService alloc] init] userLoginWithWeiBo:uid delegate:self];
+    }
+}
+
+- (void)loginFailedWithType:(ThirdLoginType)loginType error:(NSError *)error {
+    NSDictionary<NSErrorUserInfoKey, id> *dict = error.userInfo;
+    NSString *err = dict[NSLocalizedFailureReasonErrorKey];
+    [TipViewManager showToastMessage:err];
+}
 - (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView {
     NSString *text = textField.text;
     if (customView == self.userNameView) {
@@ -175,6 +205,37 @@
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];
+            }
+        }
+        else if ([reqType isEqualToString:KWeXinLoginRequest] || [reqType isEqualToString:KQQLoginRequest] || [reqType isEqualToString:KWeiBoLoginRequest]) {
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                model.data.hasLogin = YES;
+                if (model.data.phone) {
+                    [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
+                }
+                if (model.data.faceLogin == 1) {
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",model.data.phone,BrushFaceCertificationKey]];
+                }
+                [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+                [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else {
+                [TipViewManager showToastMessage:model.error_msg];
+                if (model.error_code.integerValue == 1008 || model.error_code.integerValue == 1009 || model.error_code.integerValue == 1010) { // 1008 微信未绑定
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        ZRSWBindPhoneController *bindVC = [[ZRSWBindPhoneController alloc] init];
+                        bindVC.qqOpenID = self.qqOpenID;
+                        bindVC.weiboUid = self.weiBoUid;
+                        bindVC.weiChatOpenID = self.wechatOpenID;
+                        [self.navigationController pushViewController:bindVC animated:YES];
+                    });
+                }
             }
         }
     }
@@ -315,6 +376,7 @@
     if (!_loginView) {
         _loginView = [[ZRSWThirdLoginView alloc] init];
         [_loginView updateAvailable];
+        _loginView.delegate = self;
     }
     return _loginView;
 }

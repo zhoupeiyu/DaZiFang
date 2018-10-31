@@ -11,5 +11,9 @@
 
 @interface ZRSWBindPhoneController : BaseScrollViewController
 
+@property (nonatomic, strong) NSString *weiChatOpenID;
+@property (nonatomic, strong) NSString *qqOpenID;
+@property (nonatomic, strong) NSString *weiboUid;
+
 @end
 

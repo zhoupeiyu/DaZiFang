@@ -21,6 +21,8 @@
 // 用户登录
 #define KUserLoginInterface                             @"api/user/login"
 
+#define KUserBindInterface                              @"api/user/bindingThird"
+
 // 退出登录
 #define KUserLogOutInterface                            @"api/user/deleteUser"
 // 重置密码
