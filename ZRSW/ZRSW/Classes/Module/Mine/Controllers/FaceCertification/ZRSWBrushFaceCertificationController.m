@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSString *loginId;
 @property (nonatomic, assign) NSInteger sendFaceCount;
 @property (nonatomic, assign) NSInteger addFaceCount;
+@property (nonatomic, assign) BOOL certificationError;
+
 
 @end
 
@@ -26,9 +28,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     self.sendFaceCount = 0;
     self.addFaceCount = 0;
+    self.certificationError = NO;
 }
+
 
 - (void)setupUI {
     [super setupUI];
@@ -88,56 +96,56 @@
 #pragma mark - event
 - (void)certificeBtnClick {
     LLog(@"开始认证");
-    FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
-    faceVC.faceDelegate = self;
-    [self.navigationController pushViewController:faceVC animated:YES];
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if ((authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) && iOS7Later) {
+        // 无相机权限 做一个友好的提示
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:@"无法使用相机" message:@"请在iPhone的""设置-隐私-相机""中允许访问相机" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+        [alert show];
+    } else if (authStatus == AVAuthorizationStatusNotDetermined) {
+        // 防止用户首次拍照拒绝授权时相机页黑屏
+        if (iOS7Later) {
+             WS(weakSelf);
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [weakSelf certificeBtnClick];
+                    });
+                }
+            }];
+        } else {
+            [self certificeBtnClick];
+        }
+    }else{
+        FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
+        faceVC.faceDelegate = self;
+        [self.navigationController pushViewController:faceVC animated:YES];
+    }
 }
 
 -(void)sendFaceImage:(UIImage *)faceImage{
     self.sendFaceCount++;
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
-    [arr addObject:faceImage];
+    if (faceImage) {
+        [arr addObject:faceImage];
+    }
     if ([TipViewManager showNetErrorToast]) {
         if (self.sendFaceCount == 6) {
             [TipViewManager showLoadingWithText:@"认证中..."];
-            self.imageView.image = faceImage;
-            [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                make.size.mas_equalTo(CGSizeMake(240,320));
-            }];
-            self.titleLabel.hidden = YES;
-            self.certificeBtn.hidden = YES;
         }
         [self.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
             if (arr.count != imageUrls.count) {
                 LLog(@"图片上传失败，请重新上传！");
                 [TipViewManager dismissLoading];
-                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
-                self.titleLabel.hidden = NO;
-                self.certificeBtn.hidden = NO;
-                if (self.isCertificed) {
-                    self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
-                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                        make.size.mas_equalTo(CGSizeMake(150, 150));
-                    }];
-                }else{
-                    self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
-                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                        make.size.mas_equalTo(CGSizeMake(290,371));
-                    }];
+                if (!self.certificationError) {
+                    self.certificationError = YES;
+                    [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
                 }
                 return ;
             }
             NSString *faceImgUrl = [imageUrls objectAtIndex:0];
             [weakSelf userFaceDetect:faceImgUrl];
-
         }];
     }
 }
@@ -150,8 +158,6 @@
 - (void)userAddFace:(NSString *)faceToken{
     [self.service userAddFace:self.loginId faceToken:faceToken delegate:self];
 }
-
-
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
@@ -167,65 +173,42 @@
                 });
             }
             else {
-                [TipViewManager showToastMessage:model.error_msg];
+                [TipViewManager dismissLoading];
+                if (!self.certificationError) {
+                    self.certificationError = YES;
+                    [TipViewManager showToastMessage:model.error_msg];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+                }
             }
         }else if ([reqType isEqualToString:KFaceAddFaceRequest]) {
             UserAddFaceModel *model = (UserAddFaceModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 self.addFaceCount++;
                 if (self.addFaceCount == 6) {
-//                    AddFaceModel *addFaceModel = model.data;
                     [TipViewManager dismissLoading];
                     [TipViewManager showToastMessage:@"认证成功"];
-                    self.titleLabel.hidden = NO;
-                    self.certificeBtn.hidden = NO;
-                    self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
-                    [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                        make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-                        make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                        make.size.mas_equalTo(CGSizeMake(150, 150));
-                    }];
                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self.navigationController popViewControllerAnimated:YES];
-                    });
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Successful",@"result", nil]];
                 }
             }else {
                 [TipViewManager dismissLoading];
-                [TipViewManager showToastMessage:model.error_msg];
-                [self faceCertificationFail];
+                if (!self.certificationError) {
+                    self.certificationError = YES;
+                    [TipViewManager showToastMessage:model.error_msg];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+                }
             }
         }
     }
     else {
         [TipViewManager dismissLoading];
-        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
-        [self faceCertificationFail];
+        if (!self.certificationError) {
+            self.certificationError = YES;
+            [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+        }
     }
 }
-
-
-- (void)faceCertificationFail{
-    self.titleLabel.hidden = NO;
-    self.certificeBtn.hidden = NO;
-    if (self.isCertificed) {
-        self.imageView.image = [UIImage imageNamed:@"face_icon_certified"];
-        [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.size.mas_equalTo(CGSizeMake(150, 150));
-        }];
-    }else{
-        self.imageView.image = [UIImage imageNamed:@"face_icon_uncertified"];
-        [self.imageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(30);
-            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.size.mas_equalTo(CGSizeMake(290,371));
-        }];
-    }
-}
-
 
 #pragma mark - lazy
 - (UILabel *)titleLabel {

@@ -48,13 +48,9 @@
     return vc;
 }
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
+    [super viewDidLoad];    
 }
 
-- (void)dismissViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 - (void)viewWillAppear:(BOOL)animated{
     NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
     BOOL faceCertification = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",loginId,BrushFaceCertificationKey]];
@@ -166,7 +162,7 @@
                 if (model.data.phone) {
                     [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
                 }
-                if (model.data.faceTokens != nil && ![model.data.faceTokens isEqualToString:@""]) {
+                if (model.data.faceLogin == 1) {
                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",model.data.phone,BrushFaceCertificationKey]];
                 }
                 [UserModel updateUserModel:model];
@@ -206,8 +202,8 @@
 }
 - (void)faceLogin {
     [self endEditing];
-//    [TipViewManager showToastMessage:@"     下期见     "];
-//    return;
+    [TipViewManager showToastMessage:@"     敬请期待     "];
+    return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
 

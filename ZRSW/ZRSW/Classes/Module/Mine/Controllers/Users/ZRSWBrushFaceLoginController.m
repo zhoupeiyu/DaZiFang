@@ -9,7 +9,6 @@
 #import "ZRSWBrushFaceLoginController.h"
 #import "FaceStreamDetectorViewController.h"
 #import "UserService.h"
-#import "ZRSWLoginController.h"
 
 @interface ZRSWBrushFaceLoginController ()<DZNEmptyDataSetSource, DZNEmptyDataSetDelegate,FaceDetectorDelegate>
 @property (nonatomic, strong) UIView *headView;
@@ -22,8 +21,7 @@
 @property (nonatomic, strong) UploadImagesManager *imageManager;
 @property (nonatomic, strong) NSString *loginId;
 @property (nonatomic, assign) NSInteger sendFaceCount;
-
-
+@property (nonatomic, assign) BOOL certificationError;
 
 @end
 
@@ -53,6 +51,13 @@
         [TipViewManager dismissLoading];
     });
 }
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    self.sendFaceCount = 0;
+    self.certificationError = NO;
+}
+
 
 - (void)setViewHidden:(BOOL)hidden{
     self.headView.hidden = hidden;
@@ -112,7 +117,7 @@
     [self.faceLoginBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.headeImageView.mas_bottom).offset(60);
         make.left.mas_equalTo(30);
-        make.right.mas_equalTo(SCREEN_WIDTH-60);
+        make.width.mas_equalTo(SCREEN_WIDTH-60);
         make.height.mas_equalTo(44);
     }];
     [self.toggleLoginModeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -140,14 +145,6 @@
     self.sendFaceCount++;
     if (self.sendFaceCount == 6) {
         self.sendFaceCount = 0;
-        self.headeImageView.image = faceImage;
-        [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
-            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.size.mas_equalTo(CGSizeMake(240,320));
-        }];
-        self.faceLoginBtn.hidden = YES;
-        self.toggleLoginModeBtn.hidden = YES;
         WS(weakSelf);
         NSMutableArray *arr = [NSMutableArray array];
         [arr addObject:faceImage];
@@ -156,44 +153,32 @@
             [weakSelf.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
                 if (arr.count != imageUrls.count) {
                     [TipViewManager dismissLoading];
-                    [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                    if (!self.certificationError) {
+                        self.certificationError = YES;
+                        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+                    }
                     return ;
                 }
                 NSString *faceImgUrl = [imageUrls objectAtIndex:0];
-                [weakSelf userFaceDetect:faceImgUrl];
+                [self userFaceCompare:faceImgUrl];
             }];
         }
     }
 }
 
-- (void)userFaceDetect:(NSString *)faceImgUrl{
-    [self.service userFaceDetect:faceImgUrl delegate:self];
-}
 
 
-- (void)userFaceCompare:(NSString *)faceToken{
-    [self.service userFaceCompare:self.loginId faceToken:faceToken delegate:self];
+- (void)userFaceCompare:(NSString *)faceImgUrl{
+    [self.service userFaceCompare:self.loginId faceToken:nil orFaceImgUrl:faceImgUrl delegate:self];
 }
 
 
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
-    [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KFaceDetectRequest]) {
-            UserFaceDetectModel *model = (UserFaceDetectModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                 WS(weakSelf);
-                FaceTokenModel *faceTokenModel = model.data;
-                NSString *faceToken = faceTokenModel.faceToken;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                   [weakSelf userFaceCompare:faceToken];
-                });
-            }
-            else {
-                [TipViewManager showToastMessage:model.error_msg];
-            }
-        }else if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
+        if ([reqType isEqualToString:KFaceCompareFaceRequest]) {
+            [TipViewManager dismissLoading];
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 [TipViewManager showToastMessage:@"登录成功"];
@@ -203,39 +188,31 @@
                 //设置LoginToke
                 [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
-                [self.navigationController popToRootViewControllerAnimated:NO];
-                for (BaseViewController *vc in self.navigationController.viewControllers) {
-                    if ([vc isKindOfClass:[ZRSWLoginController class]]) {
-                        [(ZRSWLoginController *)vc dismissViewController];
-                    }
-                }
+                [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Successful",@"result", nil]];
             }else {
-
-                [TipViewManager showToastMessage:model.error_msg];
-//                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
-                self.faceLoginBtn.hidden = NO;
-                self.toggleLoginModeBtn.hidden = NO;
-                self.headeImageView.image = [UIImage imageNamed:@"sign_face"];
-                [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
-                    make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-                    make.size.mas_equalTo(CGSizeMake(255,230));
-                }];
-
+                if (!self.certificationError) {
+                    self.certificationError = YES;
+                    [TipViewManager showToastMessage:model.error_msg];
+                    //              [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+                }
+            }
+        }else {
+            [TipViewManager dismissLoading];
+            if (!self.certificationError) {
+                self.certificationError = YES;
+                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
             }
         }
-    }
-    else {
-        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
-        self.faceLoginBtn.hidden = NO;
-        self.toggleLoginModeBtn.hidden = NO;
-        self.headeImageView.image = [UIImage imageNamed:@"sign_face"];
-        [self.headeImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headView.mas_bottom).offset(50);
-            make.centerX.mas_equalTo(self.scrollView.mas_centerX);
-            make.size.mas_equalTo(CGSizeMake(255,230));
-        }];
-
+    }else{
+        LLog(@"请求失败");
+        [TipViewManager dismissLoading];
+        if (!self.certificationError) {
+            self.certificationError = YES;
+            [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
+        }
     }
 }
 

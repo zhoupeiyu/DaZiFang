@@ -14,8 +14,6 @@ typedef void(^CancelBlock)(void);
 
 @property (nonatomic, copy) CancelBlock cancelBlock;
 
-- (void)dismissViewController;
-
 + (ZRSWLoginController *)getLoginViewController;
 
 + (void)showLoginViewController;

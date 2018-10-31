@@ -126,6 +126,9 @@
 @property (nonatomic, strong) NSString *huanXinName;
 //刷脸认证faceTokens
 @property (nonatomic, strong) NSString *faceTokens;
+//是否开启刷脸认证
+@property (nonatomic, assign) int faceLogin;
+
 @end
 
 @interface UserModel : BaseModel
