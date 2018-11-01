@@ -149,7 +149,6 @@
 					<span class="item time">{{json.updateTime}}</span>
 				</div>
 				<div class="option" v-show="!titleShow">
-					<span class="item reader"><img src="eyes.png" class="eyes">{{json.readers}}</span>
 					<span class="item time">{{json.updateTime}}</span>
 				</div>
 			</div>
@@ -183,7 +182,11 @@
 					} else {
 						this.titleShow = false
 						this.json = data.contentData
-						content = decodeURIComponent(data.contentData.faqBody)  
+						if(data.contentData.faqBody){
+							content = decodeURIComponent(data.contentData.faqBody)  
+						} else{
+							content = decodeURIComponent(data.contentData.content)  
+						}			
 					}
           this.content = content	
 				}		
