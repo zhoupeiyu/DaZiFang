@@ -69,18 +69,18 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 }
 
-- (void)setupUI {
-    [super setupUI];
-    [self.scrollView addSubview:self.contentView];
-    [self.contentView addSubview:self.titleLabel];
-    [self.contentView addSubview:self.sourceNameLabel];
-    [self.contentView addSubview:self.readerIcon];
-    [self.contentView addSubview:self.readersLabel];
-    [self.contentView addSubview:self.contentLabel];
-    [self.contentView addSubview:self.dateLabel];
-    [self.contentView addSubview:self.lineImge];
-//    [self.contentView addSubview:self.imgeView];
-}
+//- (void)setupUI {
+//    [super setupUI];
+//    [self.scrollView addSubview:self.contentView];
+//    [self.contentView addSubview:self.titleLabel];
+//    [self.contentView addSubview:self.sourceNameLabel];
+//    [self.contentView addSubview:self.readerIcon];
+//    [self.contentView addSubview:self.readersLabel];
+//    [self.contentView addSubview:self.contentLabel];
+//    [self.contentView addSubview:self.dateLabel];
+//    [self.contentView addSubview:self.lineImge];
+////    [self.contentView addSubview:self.imgeView];
+//}
 
 
 #pragma mark - WebView Delegate
@@ -226,12 +226,6 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 
 - (void)shareButtonClck:(UIButton *)button{
     LLog(@"第三方分享");
-//    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Sina)]];
-//    //显示分享面板
-//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-//        // 根据获取的platformType确定所选平台进行下一步操作
-//
-//    }];
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
     model.sourceUrlStr = self.detailContensModel.sourceUrl;
     if (self.image) {
