@@ -151,15 +151,23 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
 - (void)shareButtonClck:(UIButton *)button{
     LLog(@"第三方分享");
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
-    model.sourceUrlStr = self.detailContensModel.sourceUrl;
+    if (self.type == DetailsTypeSystemNotification){
+        model.title = self.detailContensModel.title;
+        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=1",self.detailContensModel.id];
+    }else if (self.type == DetailsTypePopularInformation) {
+        model.title = self.detailContensModel.title;
+        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=2",self.detailContensModel.id];
+        model.content = self.detailContensModel.roundup;;
+    }else if (self.type == DetailsTypeCommentQuestion){
+        model.title = self.questionDetailContentModel.title;
+        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=3",self.questionDetailContentModel.id];
+        model.content = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
+    }
     if (self.image) {
         model.thumbImage = self.image;
     }else{
         model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
     }
-    model.title = self.detailContensModel.title;
-    model.content = self.detailContensModel.roundup;
-
     [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
 }
 

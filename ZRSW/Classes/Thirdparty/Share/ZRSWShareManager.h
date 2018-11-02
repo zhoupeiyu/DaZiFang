@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ZRSWShareModel.h"
 typedef NS_ENUM(NSUInteger, ShareSourceType) {
+    ShareSourceMessage,//网页文本
     ShareSourceWap,//网页分享
     ShareSourceImage // 分享图片
 };
