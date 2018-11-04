@@ -277,5 +277,13 @@
 - (void)userFaceCompare:(NSString *)loginId faceToken:(NSString *)faceToken orFaceImgUrl:(NSString *)faceImgUrl delegate:(id)delegate;
 
 
+/**
+ 获得用户信息
+
+ @param userID 用户ID
+ @param delegate 代理
+ */
+- (void)getUserInfo:(NSString *)userID delegate:(id)delegate;
+
 @end
 

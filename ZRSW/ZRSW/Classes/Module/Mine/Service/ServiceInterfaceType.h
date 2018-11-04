@@ -109,3 +109,5 @@
 //人脸认证
 #define KFaceAddFaceRequest                     @"KFaceAddFaceRequest"
 
+// 用户信息
+#define KGetUserInfoRequest                     @"KGetUserInfoRequest"

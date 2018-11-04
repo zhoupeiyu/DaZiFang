@@ -192,6 +192,15 @@
             [[BaseNetWorkService sharedInstance] setLoginToken:nil];
             [self.tableView reloadData];
         }
+        else if ([reqType isEqualToString:KGetUserInfoRequest]) {
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+            }
+        }
     }else{
         LLog(@"请求失败");
     }
@@ -217,7 +226,15 @@
      [[[UserService alloc] init] getMessageCount:0 delegate:self];
 }
 
-
+- (void)getUserInfo {
+    if ([UserModel hasLogin]) {
+        UserInfoModel *model = [UserModel getCurrentModel].data;
+        if (model.loginId.length > 0) {
+            [[[UserService alloc] init] getUserInfo:model.loginId delegate:self];
+        }
+    }
+    
+}
 - (void)updateUserInfo {
     UserModel *model = [UserModel getCurrentModel];
     ZRSWMineModel *mineModel = self.dataSource[0][0];
