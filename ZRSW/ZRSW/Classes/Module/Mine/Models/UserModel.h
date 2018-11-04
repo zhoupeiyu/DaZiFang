@@ -8,6 +8,7 @@
 
 #import "BaseModel.h"
 #import "BaseUploadModel.h"
+#import "NSString+JKHash.h"
 
 #define DefaultNickName         @"小明"
 

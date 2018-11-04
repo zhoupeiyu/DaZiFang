@@ -191,8 +191,13 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
     }
     [[NSUserDefaults standardUserDefaults] setObject:userDic forKey:KUserModelKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    //注册极光
+    if (userModel.data.id) {
+        [JPUSHService setAlias:[userModel.data.id jk_md5String] completion:nil seq:1];
+    }
 }
 + (UserModel *)getCurrentModel {
+    [JPUSHService deleteAlias:nil seq:1];
     NSDictionary *userDic = [[NSUserDefaults standardUserDefaults] objectForKey:KUserModelKey];
     UserModel *model = [UserModel yy_modelWithJSON:userDic];
     return model;

@@ -37,8 +37,9 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //设置文本
     messageObject.text = shareModel.content;
-
-    if (sourcetype == ShareSourceWap) {
+    if (sourcetype == ShareSourceMessage) {
+        messageObject.title = shareModel.title;
+    }else if (sourcetype == ShareSourceWap) {
         UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:shareModel.title descr:shareModel.content thumImage:shareModel.thumbImage];
         //设置网页地址
         shareObject.webpageUrl = shareModel.sourceUrlStr;

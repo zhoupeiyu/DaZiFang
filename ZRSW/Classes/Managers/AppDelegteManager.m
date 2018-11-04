@@ -54,7 +54,7 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [JPUSHService setBadge:0];
     //环信进入前台
     [[EMClient sharedClient] applicationWillEnterForeground:application];
-    
+//    [self updateMessageCount];
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     
@@ -90,12 +90,14 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     LLog(@"---%@---",userInfo);
     [JPUSHService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
+    [self updateMessageCount];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [self remoteNotificationWith:userInfo];
     // Required,For systems with less than or equal to iOS6
     [JPUSHService handleRemoteNotification:userInfo];
+    [self updateMessageCount];
 }
 
 #pragma mark - JPUSHRegisterDelegate
@@ -105,6 +107,7 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
+        [self updateMessageCount];
     }
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
@@ -172,6 +175,7 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 
 //推送
 - (void)setupJpushWithOptions:(NSDictionary *)launchOptions {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMessageCount) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -202,7 +206,10 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     //设置红色角标
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService setBadge:0];
+}
 
+- (void)updateMessageCount{
+     [[NSNotificationCenter defaultCenter] postNotificationName:UpdateMsgStatusNotification object:nil];
 }
 
 //环信

@@ -2007,8 +2007,6 @@
 		E5B59B11214EC15600726DE9 /* share_blog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_blog@3x.png"; sourceTree = "<group>"; };
 		E5B59B12214EC15600726DE9 /* news_dialog_arrow_them@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news_dialog_arrow_them@3x.png"; sourceTree = "<group>"; };
 		E5B59BAD214EC54D00726DE9 /* 444.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 444.h; sourceTree = "<group>"; };
-		E5B59BAE214EC55600726DE9 /* 5555.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 5555.h; sourceTree = "<group>"; };
-		E5B59BAF214EC55E00726DE9 /* 6666.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = 6666.h; sourceTree = "<group>"; };
 		E5B59BB5214FA2A600726DE9 /* ZRSWLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWLoginController.h; sourceTree = "<group>"; };
 		E5B59BB8214FA5CA00726DE9 /* ZRSWRegisterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRegisterController.h; sourceTree = "<group>"; };
 		E5B59BB9214FA5CA00726DE9 /* ZRSWRegisterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRegisterController.m; sourceTree = "<group>"; };
@@ -4050,7 +4048,6 @@
 		E5B5990A214EBED500726DE9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAE214EC55600726DE9 /* 5555.h */,
 				3C7E4ADB214FA4800058D3E2 /* ZRSWHomeBannerModel.h */,
 				3C7E4ADC214FA4800058D3E2 /* ZRSWHomeBannerModel.m */,
 			);
@@ -4079,7 +4076,6 @@
 		E5B5990C214EBED500726DE9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E5B59BAF214EC55E00726DE9 /* 6666.h */,
 				3C7E4AD8214FA2270058D3E2 /* ZRSWHomeNewsCell.h */,
 				3C7E4AD9214FA2270058D3E2 /* ZRSWHomeNewsCell.m */,
 				3CD1E50C216D97DE00DF415B /* ZRSWHomeSystemAnnouncementCell.h */,

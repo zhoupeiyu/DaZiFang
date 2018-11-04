@@ -173,18 +173,22 @@
 			methods: {
 				getAppData(params) {
 					let data = JSON.parse(params)
-                    let content = decodeURIComponent(data.contentData.content)
-                         
+          let content                 
 					if (data.htmlType == 'news') {
 						this.json = data.contentData
 						this.json.updateTime = data.contentData.updateTime.slice(0, 10)
-						this.titleShow = true
-					
+						this.titleShow = true	
+						content = decodeURIComponent(data.contentData.content)  
 					} else {
 						this.titleShow = false
 						this.json = data.contentData
+						if(data.contentData.faqBody){
+							content = decodeURIComponent(data.contentData.faqBody)  
+						} else{
+							content = decodeURIComponent(data.contentData.content)  
+						}			
 					}
-                    this.content = content	
+          this.content = content	
 				}		
 			},
 			created() {

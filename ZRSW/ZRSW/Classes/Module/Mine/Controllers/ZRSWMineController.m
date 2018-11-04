@@ -95,12 +95,7 @@
 }
 
 - (void)updateMsgStatus{
-    self.unreadCount = 0;
-    ZRSWMineModel *mineModel = self.dataSource[1][1];
-    mineModel.unreadCount = 0;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    [self getUnreadMessageCount];
 }
 
 #pragma mark - delegate && dataSource
@@ -172,6 +167,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)getUnreadMessageCount{
+    [[[UserService alloc] init] getMessageCount:0 delegate:self];
+}
+
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
     if (status == RequestFinishedStatusSuccess) {
@@ -223,9 +222,6 @@
     
 }
 
-- (void)getUnreadMessageCount{
-     [[[UserService alloc] init] getMessageCount:0 delegate:self];
-}
 
 - (void)getUserInfo {
     if ([UserModel hasLogin]) {
