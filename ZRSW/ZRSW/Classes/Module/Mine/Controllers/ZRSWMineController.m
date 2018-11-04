@@ -45,6 +45,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     if ([UserModel hasLogin]) {
         self.tableView.hidden = NO;
+        [self getUserInfo];
     }
     else {
         self.tableView.hidden = YES;
