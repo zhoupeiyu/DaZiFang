@@ -198,7 +198,9 @@
                 [UserModel updateUserModel:model];
                 UserInfoModel *suer = model.data;
                 //设置LoginToke
-                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+                if (suer.token.length > 0) {
+                    [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+                }
             }
         }
     }else{
