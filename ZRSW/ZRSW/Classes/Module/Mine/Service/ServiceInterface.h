@@ -102,6 +102,7 @@
 //人脸对比
 #define KFaceCompareFaceInterface                  @"api/face/compareFace"
 
+#define KGetUserInfoInterface               @"api/user/userInfo"
 
 
 

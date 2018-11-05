@@ -9,6 +9,7 @@
 #import "ZRSWRegisterController.h"
 #import "ZRSWLoginCustomView.h"
 #import "UserService.h"
+#import "ZRSWLoginController.h"
 
 #define CountDownSecond             60
 
@@ -188,7 +189,12 @@
                 [UserModel updateUserModel:model];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                for (BaseViewController *vc in self.navigationController.viewControllers) {
+                    if ([vc isKindOfClass:[ZRSWLoginController class]]) {
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        [(ZRSWLoginController *)vc dismissViewControllerAnimated:NO completion:nil];
+                    }
+                }
             }
             else {
                 [TipViewManager showToastMessage:model.error_msg];

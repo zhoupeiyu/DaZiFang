@@ -266,7 +266,12 @@
     [self POST:KFaceCompareFaceInterface reqType:KFaceCompareFaceRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 
+- (void)getUserInfo:(NSString *)userID delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userID forKey:@"id"];
+    [self POST:KGetUserInfoInterface reqType:KGetUserInfoRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 
+}
 
 
 

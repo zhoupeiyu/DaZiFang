@@ -55,7 +55,6 @@ typedef enum : NSUInteger {
     WS(weakSelf);
     [TipViewManager dismissLoading];
     if ([TipViewManager showNetErrorToast]) {
-        [TipViewManager showLoading];
         NSString *url = self.selectedImages.count > 0 ? self.selectedImages.firstObject : @"";
         if (self.name.length == 0) {
             [TipViewManager showToastMessage:@"请输入昵称！"];
@@ -70,6 +69,7 @@ typedef enum : NSUInteger {
         else {
             self.myID = @"";
         }
+        [TipViewManager showLoading];
         [weakSelf.service updateUserInfoMyId:self.myID nickName:self.name headImgUrl:url email:nil delegate:self];
     }
 }
