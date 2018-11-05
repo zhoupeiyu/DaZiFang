@@ -263,8 +263,8 @@
 }
 - (void)faceLogin {
     [self endEditing];
-    [TipViewManager showToastMessage:@"     敬请期待     "];
-    return;
+//    [TipViewManager showToastMessage:@"     敬请期待     "];
+//    return;
     ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
     [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
 

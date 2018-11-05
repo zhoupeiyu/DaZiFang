@@ -29,27 +29,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [TipViewManager showLoading];
-    [self.scrollView reloadEmptyDataSet];
-    [self setViewHidden:YES];
     self.sendFaceCount = 0;
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentUserIocnImageKey];
-    self.iconImageView.image = [UIImage imageWithData:data];
-    if (!self.iconImageView.image) {
-        self.iconImageView.image = [UIImage imageNamed:@"my_head"];
+    UIImage *image = [UIImage imageWithData:data];
+    if (image) {
+        self.iconImageView.image = image;
     }
+    self.iconImageView.layer.cornerRadius = 25;
+    self.iconImageView.layer.masksToBounds = YES;
     self.loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
     NSMutableString *phoneNum = [NSMutableString stringWithString:self.loginId];
     if ([MatchManager checkTelNumber:phoneNum]){
         [phoneNum replaceCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
     }
     self.phoneLabel.text = phoneNum.copy;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         self.scrollView.emptyDataSetSource = nil;
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
+        [self.scrollView reloadEmptyDataSet];
+        [self setViewHidden:YES];
+    }else{
+        self.scrollView.emptyDataSetSource = nil;
         [self.scrollView reloadEmptyDataSet];
         [self setViewHidden:NO];
-        [TipViewManager dismissLoading];
-    });
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -138,6 +144,7 @@
     LLog(@"刷脸登录");
     FaceStreamDetectorViewController *faceVC = [[FaceStreamDetectorViewController alloc]init];
     faceVC.faceDelegate = self;
+    faceVC.isLogin = YES;
     [self.navigationController pushViewController:faceVC animated:YES];
 }
 
@@ -149,13 +156,13 @@
         NSMutableArray *arr = [NSMutableArray array];
         [arr addObject:faceImage];
         if ([TipViewManager showNetErrorToast]) {
-            [TipViewManager showLoadingWithText:@"认证中..."];
+            [TipViewManager showLoadingWithText:@"登录中..."];
             [weakSelf.imageManager uploadImagesWithImagesArray:arr completeBlock:^(NSMutableArray * _Nullable imageUrls) {
                 if (arr.count != imageUrls.count) {
                     [TipViewManager dismissLoading];
                     if (!self.certificationError) {
                         self.certificationError = YES;
-                        [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                        [TipViewManager showToastMessage:@"登录失败，请重新刷脸登录"];
                         [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
                     }
                     return ;
@@ -201,7 +208,7 @@
             [TipViewManager dismissLoading];
             if (!self.certificationError) {
                 self.certificationError = YES;
-                [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+                [TipViewManager showToastMessage:@"登录失败，请重新刷脸登录"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
             }
         }
@@ -210,7 +217,7 @@
         [TipViewManager dismissLoading];
         if (!self.certificationError) {
             self.certificationError = YES;
-            [TipViewManager showToastMessage:@"认证失败，请重新认证"];
+            [TipViewManager showToastMessage:@"登录失败，请重新刷脸登录"];
             [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceLoginResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Error",@"result", nil]];
         }
     }
@@ -226,6 +233,7 @@
     return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    [self setViewHidden:YES];
     NSString *text = ![BaseNetWorkService isReachable] ? @"当前网络连接失败，\n快去重新连接一下试试吧！" : @"当前没有相应数据，快去看看别的吧！";
     UIFont *font = [UIFont fontWithName:@"MicrosoftYaHei" size:16];
     UIColor *textColor = [UIColor colorWithHex:0x666666 alpha:0.7];
@@ -290,6 +298,7 @@
 - (UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
+        _iconImageView.contentMode = UIViewContentModeScaleToFill;
         _iconImageView.image = [UIImage imageNamed:@"my_head"];
     }
     return _iconImageView;
