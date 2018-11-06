@@ -128,6 +128,20 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     [JPUSHService setBadge:0];
 }
 
+#pragma mark -
+-(void)resetBageNumber{
+    UILocalNotification *clearEpisodeNotification = [[UILocalNotification alloc] init];
+    /*
+     iOS 11后，直接设置badgeNumber不生效了。故先发一个静默push（即没有soundName和alert）。如果原来app的badge是0也无所谓。对于本地push0就是不操作。
+     后面在applicationIconBadgeNumber = -1
+     */
+    clearEpisodeNotification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
+    [[UIApplication sharedApplication] scheduleLocalNotification:clearEpisodeNotification];
+    clearEpisodeNotification.applicationIconBadgeNumber = -1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:clearEpisodeNotification];
+}
+
+
 #pragma mark - event
 - (void)addNotify {
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginError:) name:UserLoginErrorNotification object:nil];
@@ -206,6 +220,14 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     //设置红色角标
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [JPUSHService setBadge:0];
+
+    UIApplication *application = [UIApplication sharedApplication];
+    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
 }
 
 - (void)updateMessageCount{

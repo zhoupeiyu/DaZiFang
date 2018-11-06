@@ -23,5 +23,7 @@
 @interface FaceStreamDetectorViewController : UIViewController
 
 @property (assign,nonatomic) id<FaceDetectorDelegate> faceDelegate;
+@property (nonatomic, assign) BOOL isLogin;
+
 
 @end

@@ -115,7 +115,14 @@
 - (void)setQuestionModel:(CommentQuestionModel *)questionModel{
     _questionModel = questionModel;
     self.titleLabel.text = questionModel.title;
-    self.contentLabel.text = [questionModel.faqBody getZZwithString:questionModel.faqBody];
+    NSString *content = [NSString stringWithFormat:@"%@",self.questionModel.faqBody];
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+        content = [content stringByRemovingPercentEncoding];
+    }else{
+        content = [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    self.contentLabel.text = [content filterHTML:content];
+//    self.contentLabel.text = [questionModel.faqBody getZZwithString:questionModel.faqBody];
     if (questionModel.readers) {
         self.readersLabel.text = [NSString stringWithFormat:@"%@",questionModel.readers];
     }else{

@@ -127,10 +127,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
-    if ([mineModel.title isEqualToString:@"刷脸认证"]) {
-        [TipViewManager showToastMessage:@"     敬请期待     "];
-        return;
-    }
+//    if ([mineModel.title isEqualToString:@"刷脸认证"]) {
+//        [TipViewManager showToastMessage:@"     敬请期待     "];
+//        return;
+//    }
 
     if (![UserModel hasLogin]) { 
         ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
