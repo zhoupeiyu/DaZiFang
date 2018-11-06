@@ -324,7 +324,7 @@
         
         UILabel *lbl = [[UILabel alloc] init];
         lbl.backgroundColor = [UIColor clearColor];
-        lbl.text = @"材料审核需7个工作日，如有疑问，请拨打客服热线:010-67228038";
+        lbl.text = @"材料审核需7个工作日，如有疑问，请拨打客服热线:010-57038774";
         lbl.textColor = [UIColor colorFromRGB:0x999999];
         lbl.font = [UIFont systemFontOfSize:12];
         lbl.textAlignment = NSTextAlignmentLeft;
