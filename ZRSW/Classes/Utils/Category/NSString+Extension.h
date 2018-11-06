@@ -26,4 +26,6 @@
 
 + (NSString*)uniqueString;
 
+-(NSString *)filterHTML:(NSString *)html;
+
 @end

@@ -78,6 +78,17 @@
     return string;
 }
 
+-(NSString *)filterHTML:(NSString *)html{
+    NSScanner * scanner = [NSScanner scannerWithString:html];
+    NSString * text = nil;
+    while([scanner isAtEnd]==NO){
+        [scanner scanUpToString:@"<" intoString:nil];
+        [scanner scanUpToString:@">" intoString:&text];
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>",text] withString:@""];
+    }
+    return html;
+}
+
 + (NSString*)uniqueString {
     CFUUIDRef    uuidObj = CFUUIDCreate(nil);
     NSString    *uuidString = (__bridge_transfer NSString*)CFUUIDCreateString(nil, uuidObj);

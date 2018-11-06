@@ -154,14 +154,33 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     if (self.type == DetailsTypeSystemNotification){
         model.title = self.detailContensModel.title;
         model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=1",self.detailContensModel.id];
+        NSString *content = [NSString stringWithFormat:@"%@",self.detailContensModel.content];
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+            content = [content stringByRemovingPercentEncoding];
+        }else{
+            content = [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        model.content = [content filterHTML:content];
     }else if (self.type == DetailsTypePopularInformation) {
         model.title = self.detailContensModel.title;
         model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=2",self.detailContensModel.id];
-        model.content = self.detailContensModel.roundup;;
+        NSString *content = [NSString stringWithFormat:@"%@",self.detailContensModel.content];
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+            content = [content stringByRemovingPercentEncoding];
+        }else{
+            content = [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        model.content = [content filterHTML:content];
     }else if (self.type == DetailsTypeCommentQuestion){
         model.title = self.questionDetailContentModel.title;
         model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=3",self.questionDetailContentModel.id];
-        model.content = [self.questionDetailContentModel.faqBody getZZwithString:self.questionDetailContentModel.faqBody];
+        NSString *content = [NSString stringWithFormat:@"%@",self.questionDetailContentModel.faqBody];
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+            content = [content stringByRemovingPercentEncoding];
+        }else{
+            content = [content stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        }
+        model.content = [content filterHTML:content];
     }
     if (self.image) {
         model.thumbImage = self.image;
