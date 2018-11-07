@@ -118,6 +118,8 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
+
+//         [[NSNotificationCenter defaultCenter] postNotificationName:NotifyReceiveNotification object:userInfo];
     }
     completionHandler();  // 系统要求执行这个方法
     [self remoteNotificationWith:userInfo];

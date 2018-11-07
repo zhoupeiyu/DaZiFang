@@ -12,6 +12,10 @@ NSNotificationName const ChangeCityNotification  = @"ChangeCityNotification";
 
 NSNotificationName const UpdateMsgStatusNotification  = @"UpdateMsgStatusNotification";
 
+NSNotificationName const NotifyReceiveNotification  = @"NotifyReceiveNotification";
+
+
+
 NSNotificationName const BrushFaceLoginResultNotification  = @"BrushFaceLoginResultNotification";
 
 NSNotificationName const BrushFaceCertificationResultNotification  = @"BrushFaceCertificationResultNotification";
