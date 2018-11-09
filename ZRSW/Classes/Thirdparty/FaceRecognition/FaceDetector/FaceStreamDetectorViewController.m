@@ -263,145 +263,153 @@
 -(void)returnNowShowImage:(UIImage *)image{
     WS(weakSelf);
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (numberStart > 80) {
-            if (isFinishHeaderRigth != YES) {
-                if (!isStartHeaderRigth) {
-                    [weakSelf playVoiceWithWithName:@"headerRigth"];
-                    weakSelf.textLabel.text = @"请向右转头";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_header_right_" count:2];
-                    isStartHeaderRigth = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberHeaderRigth ++;
-                    LLog(@"====向右转头%d",numberHeaderRigth);
-                    if (numberHeaderRigth == 35) {
-                        LLog(@"====向右转头图片");
-                        [weakSelf.faceDelegate sendFaceImage:image];
-                    }
-                }else{
-                    isFinishHeaderRigth = YES;
-                    imgView.animationImages = nil;
-                }
+        if (self.isLogin) {
+            if (numberStart > 80) {
+                [weakSelf.faceDelegate sendFaceImage:image];
+                self.captureManager.nowImageDelegate=nil;
+                [weakSelf.previewLayer.session stopRunning];
+                [weakSelf playVoiceWithWithName:@"login"];
+                self.textLabel.text = @"正在登录，请稍后";
+            }else{
+                numberStart ++;
+                LLog(@"====请正对屏幕%d",numberStart);
             }
-            if (isFinishHeaderRigth == YES && isFinishHeaderLeft != YES) {
-                if (!isStartHeaderLeft) {
-                    [weakSelf playVoiceWithWithName:@"headerLeft"];
-                    weakSelf.textLabel.text = @"请向左转头";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_header_left_" count:2];
-                    isStartHeaderLeft = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberHeaderLeft ++;
-                    LLog(@"====向左转头%d",numberHeaderRigth);
-                    if (numberHeaderLeft == 35) {
-                        LLog(@"====向左转头图片");
-                        [weakSelf.faceDelegate sendFaceImage:image];
+        }else{
+            if (numberStart > 80) {
+                if (isFinishHeaderRigth != YES) {
+                    if (!isStartHeaderRigth) {
+                        [weakSelf playVoiceWithWithName:@"headerRigth"];
+                        weakSelf.textLabel.text = @"请向右转头";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_header_right_" count:2];
+                        isStartHeaderRigth = YES;
                     }
-                }else{
-                    isFinishHeaderLeft = YES;
-                    imgView.animationImages = nil;
-                }
-            }
-            if (isFinishHeaderLeft == YES && isFinishMouthOpen != YES) {
-                if (!isStartMouthOpen) {
-                    [weakSelf playVoiceWithWithName:@"mouthOpen"];
-                    weakSelf.textLabel.text = @"请张嘴";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_mouth_open_" count:2];
-                    isStartMouthOpen = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberMouthOpen ++;
-                    LLog(@"====张嘴%d",numberMouthOpen);
-                    if (numberMouthOpen == 35) {
-                        LLog(@"====张嘴图片");
-                        [weakSelf.faceDelegate sendFaceImage:image];
-                    }
-                }else{
-                    isFinishMouthOpen = YES;
-                    imgView.animationImages = nil;
-                }
-            }
-            if (isFinishMouthOpen == YES && isFinishMouthClose != YES) {
-                if (!isStartMouthClose) {
-                    [weakSelf playVoiceWithWithName:@"mouthClose"];
-                    weakSelf.textLabel.text = @"请闭嘴";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_mouth_close_" count:2];
-                    isStartMouthClose = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberMouthClose ++;
-                    LLog(@"====闭嘴%d",numberMouthClose);
-                    if (numberMouthClose == 35) {
-                        LLog(@"====闭嘴图片");
-                        [weakSelf.faceDelegate sendFaceImage:image];
-                    }
-                }else{
-                    isFinishMouthClose = YES;
-                    imgView.animationImages = nil;
-                }
-            }
-
-            if (isFinishMouthClose == YES && isFinishEyeOpen != YES) {
-                if (!isStartEyeOpen) {
-                    [weakSelf playVoiceWithWithName:@"eyeOpen"];
-                    weakSelf.textLabel.text = @"请睁眼";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_eye_open_" count:2];
-                    isStartEyeOpen = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberEyeOpen ++;
-                    LLog(@"====睁眼%d",numberEyeClose);
-                    if (numberEyeOpen == 20) {
-                        LLog(@"====睁眼图片");
-                    }
-                }else{
-                    isFinishEyeOpen = YES;
-                    imgView.animationImages = nil;
-                }
-            }
-            if (isFinishEyeOpen == YES && isFinishEyeClose != YES) {
-                if (!isStartEyeClose) {
-                    [weakSelf playVoiceWithWithName:@"eyeClose"];
-                    weakSelf.textLabel.text = @"请闭眼";
-                    [weakSelf tomAnimationWithName:@"face_icon_certification_eye_close_" count:2];
-                    isStartEyeClose = YES;
-                }
-                if ([imgView isAnimating]) {
-                    numberEyeClose ++;
-                    LLog(@"====闭眼%d",numberEyeClose);
-                    if (numberEyeClose == 35) {
-                        LLog(@"====闭眼图片");
-                        [weakSelf.faceDelegate sendFaceImage:image];
-                    }
-                }else{
-                    isFinishEyeClose = YES;
-                    imgView.animationImages = nil;
-                }
-            }
-            if (isFinishEyeClose == YES) {
-                imgView.image = [UIImage imageNamed:@"face_icon_certification_default"];
-                numberComplete ++;
-                LLog(@"====可正对屏幕%d",numberComplete);
-                if (numberComplete==10) {
-                    [weakSelf playVoiceWithWithName:@"canOpposite"];
-                    self.textLabel.text = @"可正对屏幕";
-                }else if (numberComplete == 80) {
-                    [weakSelf.faceDelegate sendFaceImage:image];
-                    self.captureManager.nowImageDelegate=nil;
-                    [self delateNumber];//清数据
-                    [weakSelf.previewLayer.session stopRunning];
-                    if (weakSelf.isLogin) {
-                        [weakSelf playVoiceWithWithName:@"login"];
-                        self.textLabel.text = @"正在登录，请稍后";
+                    if ([imgView isAnimating]) {
+                        numberHeaderRigth ++;
+                        LLog(@"====向右转头%d",numberHeaderRigth);
+                        if (numberHeaderRigth == 35) {
+                            LLog(@"====向右转头图片");
+                            [weakSelf.faceDelegate sendFaceImage:image];
+                        }
                     }else{
+                        isFinishHeaderRigth = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+                if (isFinishHeaderRigth == YES && isFinishHeaderLeft != YES) {
+                    if (!isStartHeaderLeft) {
+                        [weakSelf playVoiceWithWithName:@"headerLeft"];
+                        weakSelf.textLabel.text = @"请向左转头";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_header_left_" count:2];
+                        isStartHeaderLeft = YES;
+                    }
+                    if ([imgView isAnimating]) {
+                        numberHeaderLeft ++;
+                        LLog(@"====向左转头%d",numberHeaderRigth);
+                        if (numberHeaderLeft == 35) {
+                            LLog(@"====向左转头图片");
+                            [weakSelf.faceDelegate sendFaceImage:image];
+                        }
+                    }else{
+                        isFinishHeaderLeft = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+                if (isFinishHeaderLeft == YES && isFinishMouthOpen != YES) {
+                    if (!isStartMouthOpen) {
+                        [weakSelf playVoiceWithWithName:@"mouthOpen"];
+                        weakSelf.textLabel.text = @"请张嘴";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_mouth_open_" count:2];
+                        isStartMouthOpen = YES;
+                    }
+                    if ([imgView isAnimating]) {
+                        numberMouthOpen ++;
+                        LLog(@"====张嘴%d",numberMouthOpen);
+                        if (numberMouthOpen == 35) {
+                            LLog(@"====张嘴图片");
+                            [weakSelf.faceDelegate sendFaceImage:image];
+                        }
+                    }else{
+                        isFinishMouthOpen = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+                if (isFinishMouthOpen == YES && isFinishMouthClose != YES) {
+                    if (!isStartMouthClose) {
+                        [weakSelf playVoiceWithWithName:@"mouthClose"];
+                        weakSelf.textLabel.text = @"请闭嘴";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_mouth_close_" count:2];
+                        isStartMouthClose = YES;
+                    }
+                    if ([imgView isAnimating]) {
+                        numberMouthClose ++;
+                        LLog(@"====闭嘴%d",numberMouthClose);
+                        if (numberMouthClose == 35) {
+                            LLog(@"====闭嘴图片");
+                            [weakSelf.faceDelegate sendFaceImage:image];
+                        }
+                    }else{
+                        isFinishMouthClose = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+
+                if (isFinishMouthClose == YES && isFinishEyeOpen != YES) {
+                    if (!isStartEyeOpen) {
+                        [weakSelf playVoiceWithWithName:@"eyeOpen"];
+                        weakSelf.textLabel.text = @"请睁眼";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_eye_open_" count:2];
+                        isStartEyeOpen = YES;
+                    }
+                    if ([imgView isAnimating]) {
+                        numberEyeOpen ++;
+                        LLog(@"====睁眼%d",numberEyeClose);
+                        if (numberEyeOpen == 20) {
+                            LLog(@"====睁眼图片");
+                        }
+                    }else{
+                        isFinishEyeOpen = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+                if (isFinishEyeOpen == YES && isFinishEyeClose != YES) {
+                    if (!isStartEyeClose) {
+                        [weakSelf playVoiceWithWithName:@"eyeClose"];
+                        weakSelf.textLabel.text = @"请闭眼";
+                        [weakSelf tomAnimationWithName:@"face_icon_certification_eye_close_" count:2];
+                        isStartEyeClose = YES;
+                    }
+                    if ([imgView isAnimating]) {
+                        numberEyeClose ++;
+                        LLog(@"====闭眼%d",numberEyeClose);
+                        if (numberEyeClose == 35) {
+                            LLog(@"====闭眼图片");
+                            [weakSelf.faceDelegate sendFaceImage:image];
+                        }
+                    }else{
+                        isFinishEyeClose = YES;
+                        imgView.animationImages = nil;
+                    }
+                }
+                if (isFinishEyeClose == YES) {
+                    imgView.image = [UIImage imageNamed:@"face_icon_certification_default"];
+                    numberComplete ++;
+                    LLog(@"====可正对屏幕%d",numberComplete);
+                    if (numberComplete==10) {
+                        [weakSelf playVoiceWithWithName:@"canOpposite"];
+                        self.textLabel.text = @"可正对屏幕";
+                    }else if (numberComplete == 80) {
+                        [weakSelf.faceDelegate sendFaceImage:image];
+                        self.captureManager.nowImageDelegate=nil;
+                        [self delateNumber];//清数据
+                        [weakSelf.previewLayer.session stopRunning];
                         [weakSelf playVoiceWithWithName:@"certification"];
                         self.textLabel.text = @"正在认证，请稍后";
                     }
                 }
+            }else{
+                numberStart ++;
+                LLog(@"====请正对屏幕%d",numberStart);
             }
-        }else{
-            numberStart ++;
-            LLog(@"====请正对屏幕%d",numberStart);
         }
     });
 }
