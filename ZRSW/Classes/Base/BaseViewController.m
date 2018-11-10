@@ -9,6 +9,7 @@
 #import "BaseViewController.h"
 #import "AppDelegate.h"
 #import "ZRSWLoginController.h"
+#import "ZRSWRemindListController.h"
 
 @interface BaseViewController ()
 @property (nonatomic, assign) BOOL pushToLogin;
@@ -22,6 +23,7 @@
     [self setupConfig];
     [self setupUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoginError:) name:UserLoginErrorNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:NotifyReceiveNotification object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -105,6 +107,20 @@
     } controller:self completion:nil];
     
 }
+
+- (void)receiveNotification:(NSNotification *)notify{
+    NSDictionary *info = [notify object];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotifyReceiveNotification object:nil];
+    NSLog(@"************\n%@",notify);
+    if (![UserModel hasLogin]) {
+        return;
+    }
+    if ([self.navigationController.topViewController isKindOfClass:[ZRSWRemindListController class]]) {
+        return;
+    }
+    [self.navigationController pushViewController:[ZRSWRemindListController new] animated:YES];
+}
+
 /**
  *  设置导航默认返回按钮
  */

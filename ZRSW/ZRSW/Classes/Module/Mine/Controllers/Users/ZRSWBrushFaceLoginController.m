@@ -149,9 +149,9 @@
 }
 
 -(void)sendFaceImage:(UIImage *)faceImage{
-    self.sendFaceCount++;
-    if (self.sendFaceCount == 6) {
-        self.sendFaceCount = 0;
+//    self.sendFaceCount++;
+//    if (self.sendFaceCount == 6) {
+//        self.sendFaceCount = 0;
         WS(weakSelf);
         NSMutableArray *arr = [NSMutableArray array];
         [arr addObject:faceImage];
@@ -171,7 +171,7 @@
                 [self userFaceCompare:faceImgUrl];
             }];
         }
-    }
+//    }
 }
 
 
