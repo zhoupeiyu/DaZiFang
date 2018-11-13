@@ -21,7 +21,7 @@
 
 // 如果是测试环境，将这句话打开
 
-#define Api_Test
+//#define Api_Test
 
 #ifdef Api_Test // 测试环境
 
@@ -33,7 +33,7 @@
 
 #else // 正式环境
 
-    #define API_Host                @""
+#define API_Host                    @"http://www.zhongrongsw.com/"
 
     #define API_Agree_Html          @"http://zhongrong.ijiaoban.cn/pages/index/agreement.html"
 
