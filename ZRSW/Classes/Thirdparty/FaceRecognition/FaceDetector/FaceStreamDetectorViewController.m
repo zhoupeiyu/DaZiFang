@@ -86,6 +86,7 @@
         if ([resultStr isEqualToString:@"Successful"]) {
             for (BaseViewController *vc in self.navigationController.viewControllers) {
                 if ([vc isKindOfClass:[ZRSWLoginController class]]) {
+                     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
                     [self.navigationController popToRootViewControllerAnimated:YES];
                     [(ZRSWLoginController *)vc dismissViewControllerAnimated:NO completion:nil];
                 }
@@ -101,6 +102,7 @@
     NSString *resultStr = [resultDic valueForKey:@"result"];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([resultStr isEqualToString:@"Successful"]) {
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
             [self.navigationController popViewControllerAnimated:YES];
@@ -118,7 +120,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
     //停止摄像
     [self.previewLayer.session stopRunning];

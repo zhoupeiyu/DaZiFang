@@ -14,6 +14,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView;
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;
 - (void)textFieldDidEndEditing:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;
 
 - (void)textFieldTextDidChange:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView;

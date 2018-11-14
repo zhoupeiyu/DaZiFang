@@ -21,12 +21,14 @@
 #import "ZRSWLoginController.h"
 #import "ZRSWMessageCountModel.h"
 #import "ZRSWBrushFaceCertificationController.h"
+#import "ZRSWActionSheetView.h"
+#import "ZRSWShareView.h"
 
 #define KAuthFinishedPresentation       @"您已认证成功，不可再次提交！"
 #define KAuthCommitPresentation         @"您已提交审核，不可再次提交！"
 
 
-@interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource,BaseNetWorkServiceDelegate>
+@interface ZRSWMineController ()<UITableViewDelegate, UITableViewDataSource,BaseNetWorkServiceDelegate,ShareHandlerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -127,10 +129,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
-//    if ([mineModel.title isEqualToString:@"刷脸认证"]) {
-//        [TipViewManager showToastMessage:@"     敬请期待     "];
-//        return;
-//    }
+    if ([mineModel.title isEqualToString:@"推荐中融盛旺给朋友"]) {
+        ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
+        model.title = @"中融盛旺";
+        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/toRecommend"];
+        [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
+        return;
+    }
 
     if (![UserModel hasLogin]) { 
         ZRSWLoginController *login = [[ZRSWLoginController alloc] init];
@@ -333,6 +338,13 @@
             model.viewControllerName = NSStringFromClass([ZRSWBrushFaceCertificationController class]);
             [data addObject:model];
         }
+//        {
+//            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+//            model.title = @"推荐中融盛旺给朋友";
+//            model.type = MineListTypeCommentList;
+//            model.iconName = @"my_face";
+//            [data addObject:model];
+//        }
         [self.dataSource addObject:data];
     }
     [self.tableView reloadData];
