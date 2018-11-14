@@ -160,8 +160,11 @@
     self.registerBtn.enabled = [self checkRegisterEnabled];
 }
 - (void)countDownButtonAction:(UIButton *)button customView:(ZRSWLoginCustomView *)customView{
+    [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
+    return;
+    
     if ([MatchManager checkTelNumber:self.phoneNum]) {
-        [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
+        
     }
     else {
         [TipViewManager showToastMessage:@"请输入正确的手机号"];

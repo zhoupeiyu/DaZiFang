@@ -351,7 +351,7 @@
     [dic setObject:ID forKey:KIDKey];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
     if (self.currentIndexPath.row == 0) {
-        self.selectedNewCity = ![ID isEqualToString:self.selectedCityID];
+        self.selectedNewCity = YES;
         self.selectedCityID = ID;
     }
     else if (self.currentIndexPath.row == 1) {

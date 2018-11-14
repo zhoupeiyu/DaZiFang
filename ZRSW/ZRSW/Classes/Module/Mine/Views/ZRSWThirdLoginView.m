@@ -78,12 +78,12 @@
         [self.btnArray addObject:self.wechatBtn];
     }
     
-    if (![ZRSWShareManager isInstallQQ]) {
-        self.qqBtn.hidden = YES;
-    }
-    else {
-        [self.btnArray addObject:self.qqBtn];
-    }
+//    if (![ZRSWShareManager isInstallQQ]) {
+//        self.qqBtn.hidden = YES;
+//    }
+//    else {
+//        [self.btnArray addObject:self.qqBtn];
+//    }
     self.bottomSeparator.hidden = (self.btnArray.count == 0);
     
     [self setNeedsLayout];
@@ -215,6 +215,8 @@
 
 - (void)updateAvailable {
     self.qqBtn.hidden = ![ZRSWShareManager isInstallQQ];
+    self.qqBtn.hidden = YES;
+    
     
     self.wbBtn.hidden = ![ZRSWShareManager isImstallWeiBo];
     
