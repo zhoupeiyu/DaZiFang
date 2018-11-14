@@ -57,16 +57,6 @@
     [super viewDidLoad];    
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
-    BOOL faceCertification = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",loginId,BrushFaceCertificationKey]];
-    if (faceCertification) {
-        self.faceLoginBtn.hidden = NO;
-    }else{
-        self.faceLoginBtn.hidden = YES;
-    }
-}
-
 
 - (void)setupUI {
     [super setupUI];
@@ -263,11 +253,14 @@
 }
 - (void)faceLogin {
     [self endEditing];
-//    [TipViewManager showToastMessage:@"     敬请期待     "];
-//    return;
-    ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
-    [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
-
+    NSString  *loginId = [[NSUserDefaults standardUserDefaults] objectForKey:LastLoginSuccessfulUserLoginIdKey];
+    BOOL faceCertification = [[NSUserDefaults standardUserDefaults] boolForKey:[NSString stringWithFormat:@"%@%@",loginId,BrushFaceCertificationKey]];
+    if (faceCertification) {
+        ZRSWBrushFaceLoginController *brushFaceLoginVC = [[ZRSWBrushFaceLoginController alloc] init];
+        [self.navigationController pushViewController:brushFaceLoginVC animated:YES];
+    }else{
+        [TipViewManager showAlertControllerWithTitle:@"温馨提示" message:@"您尚未进行刷脸认证，请登录后在个人中心的刷脸认证菜单中认证后使用" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:nil completion:nil];
+    }
 }
 - (void)login {
     [self endEditing];

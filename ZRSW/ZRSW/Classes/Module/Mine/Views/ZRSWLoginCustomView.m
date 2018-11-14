@@ -91,6 +91,13 @@
     }];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidBeginEditing:customView:)]) {
+        [self.delegate textFieldDidBeginEditing:textField customView:self];
+    }
+
+}
+
 - (void)textFieldTextDidChange:(NSNotification *)noti {
     if (noti.object == self.inputTextField) {
         if (self.delegate && [self.delegate respondsToSelector:@selector(textFieldTextDidChange:customView:)]) {
