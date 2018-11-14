@@ -12,6 +12,7 @@
 #import "ZRSWOrderModel.h"
 #import "ZRSWLinePrejudicationController.h"
 #import "ZRSWLoginController.h"
+#import "UserService.h"
 
 #define KTitleKey           @"KTitleKey"
 #define KContentKey         @"KContentKey"
@@ -102,7 +103,27 @@
     [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)getUserInfo {
+    if ([UserModel hasLogin]) {
+        UserInfoModel *model = [UserModel getCurrentModel].data;
+        if (model.loginId.length > 0) {
+            [TipViewManager showLoadingWithText:@"加载中..."];
+            [[[UserService alloc] init] getUserInfo:model.loginId delegate:self];
+        }
+    }
+    else {
+        [ZRSWLoginController showLoginViewController];
+    }
+    
+}
+
 - (void)nextAcrion {
+    
+    [self getUserInfo];
+}
+
+- (void)goNextPage {
     if (![UserModel hasLogin]) {
         [ZRSWLoginController showLoginViewController];
         return;
@@ -388,6 +409,18 @@
         else if ([reqType isEqualToString:KGetOrderLoanInfoRequest]) {
             ZRSWOrderLoanInfoModel *listModel = (ZRSWOrderLoanInfoModel *)resObj;
             self.infoModel = listModel;
+        }
+        else if ([reqType isEqualToString:KGetUserInfoRequest]) {
+            UserModel *model = (UserModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                if (suer.token.length > 0) {
+                    [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
+                }
+            }
+            [self goNextPage];
         }
     }
     else {

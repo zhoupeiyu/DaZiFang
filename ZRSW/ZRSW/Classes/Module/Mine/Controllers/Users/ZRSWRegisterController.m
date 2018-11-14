@@ -186,7 +186,17 @@
         if ([reqType isEqualToString:KUserRegisterRequest]) {
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
+                model.data.hasLogin = YES;
+                if (model.data.phone) {
+                    [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
+                }
+                if (model.data.faceLogin == 1) {
+                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",model.data.phone,BrushFaceCertificationKey]];
+                }
                 [UserModel updateUserModel:model];
+                UserInfoModel *suer = model.data;
+                //设置LoginToke
+                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 for (BaseViewController *vc in self.navigationController.viewControllers) {
