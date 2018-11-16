@@ -18,6 +18,7 @@
 @property (nonatomic, strong) ZRSWLoginCustomView *phoneView;
 @property (nonatomic, strong) ZRSWLoginCustomView *codeView;
 @property (nonatomic, strong) ZRSWLoginCustomView *pwdView;
+@property (nonatomic, strong) ZRSWLoginCustomView *inviteCodeView;
 @property (nonatomic, strong) ZRSWUserAgreementView *agreeView;
 @property (nonatomic, strong) UIButton *registerBtn;
 @property (nonatomic, strong) UserService *userService;
@@ -26,7 +27,9 @@
 @property (nonatomic, strong) NSString *phoneNum;
 @property (nonatomic, strong) NSString *codeNum;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *inviteCodeNum;
 @property (nonatomic, assign) BOOL isChecked;
+@property (nonatomic, assign) BOOL isTransform;
 
 @end
 
@@ -43,7 +46,11 @@
     [self setRightBarButtonWithText:@"登录"];
     self.scrollView.scrollEnabled = YES;
     [self.rightBarButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+
 
 - (void)setupUI {
     [super setupUI];
@@ -51,6 +58,7 @@
     [self.scrollView addSubview:self.phoneView];
     [self.scrollView addSubview:self.codeView];
     [self.scrollView addSubview:self.pwdView];
+    [self.scrollView addSubview:self.inviteCodeView];
     [self.scrollView addSubview:self.agreeView];
     [self.scrollView addSubview:self.registerBtn];
     [self setupLayOut];
@@ -82,9 +90,16 @@
         make.top.mas_equalTo(self.codeView.mas_bottom);
         make.height.mas_equalTo([ZRSWLoginCustomView loginInputViewHeight]);
     }];
+    [self.inviteCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.userNameView);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.top.mas_equalTo(self.pwdView.mas_bottom);
+        make.height.mas_equalTo([ZRSWLoginCustomView loginInputViewHeight]);
+    }];
+
     [self.agreeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
-        make.top.mas_equalTo(self.pwdView.mas_bottom);
+        make.top.mas_equalTo(self.inviteCodeView.mas_bottom);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo([ZRSWUserAgreementView viewHeight]);
     }];
@@ -97,6 +112,31 @@
 }
 
 #pragma mark - delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField customView:(ZRSWLoginCustomView *)customView{
+    CGRect frame = customView.frame;
+    int ofset = kNavigationBarH+90-frame.origin.y;
+    if (ofset < 0 ) {
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.view setFrame:CGRectMake(0, ofset, self.view.frame.size.width, self.view.frame.size.height)];
+        }];
+    }else{
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.view setFrame:CGRectMake(0, kNavigationBarH, self.view.frame.size.width, self.view.frame.size.height)];
+        }];
+    }
+}
+
+
+///键盘消失事件
+- (void) keyboardWillHide:(NSNotification *)notify {
+    // 键盘动画时间
+    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //视图下沉恢复原状
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = CGRectMake(0, kNavigationBarH, self.view.frame.size.width, self.view.frame.size.height);
+    }];
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string customView:(ZRSWLoginCustomView *)customView {
     if (customView == self.userNameView) {
         
@@ -135,6 +175,12 @@
         }
         return YES;
     }
+    else if (customView == self.inviteCodeView) {
+        NSUInteger proposedNewLength = textField.text.length - range.length + string.length;
+        if (proposedNewLength > 6) {
+            return NO;//限制长度
+        }
+    }
     
     return YES;
 }
@@ -153,6 +199,9 @@
     else if (customView == self.pwdView) {
         self.password = text;
     }
+    else if (customView == self.inviteCodeView) {
+        self.inviteCodeNum = text;
+    }
     self.registerBtn.enabled = [self checkRegisterEnabled];
 }
 - (void)userAgreementViewChecked:(BOOL)check {
@@ -160,11 +209,8 @@
     self.registerBtn.enabled = [self checkRegisterEnabled];
 }
 - (void)countDownButtonAction:(UIButton *)button customView:(ZRSWLoginCustomView *)customView{
-    [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
-    return;
-    
     if ([MatchManager checkTelNumber:self.phoneNum]) {
-        
+        [self.userService getUserPhoneCode:ImageCodeTypeRegister phone:self.phoneNum delegate:self];
     }
     else {
         [TipViewManager showToastMessage:@"请输入正确的手机号"];
@@ -174,7 +220,7 @@
 - (void)registerAction {
     
     [TipViewManager showLoading];
-    [self.userService userRegisterLoginId:self.userName phone:self.phoneNum password:self.password validateCode:self.codeNum nickName:self.userName delegate:self];
+    [self.userService userRegisterLoginId:self.userName phone:self.phoneNum password:self.password validateCode:self.codeNum beInvitedCode:self.inviteCodeNum nickName:self.userName delegate:self];
 }
 
 - (BOOL)checkRegisterEnabled {
@@ -189,17 +235,7 @@
         if ([reqType isEqualToString:KUserRegisterRequest]) {
             UserModel *model = (UserModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                model.data.hasLogin = YES;
-                if (model.data.phone) {
-                    [[NSUserDefaults standardUserDefaults] setObject:model.data.phone forKey:LastLoginSuccessfulUserLoginIdKey];
-                }
-                if (model.data.faceLogin == 1) {
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",model.data.phone,BrushFaceCertificationKey]];
-                }
                 [UserModel updateUserModel:model];
-                UserInfoModel *suer = model.data;
-                //设置LoginToke
-                [[BaseNetWorkService sharedInstance] setLoginToken:suer.token];
                 [[NSNotificationCenter defaultCenter] postNotificationName:UserLoginSuccessNotification object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 for (BaseViewController *vc in self.navigationController.viewControllers) {
@@ -266,6 +302,15 @@
     }
     return _pwdView;
 }
+
+- (ZRSWLoginCustomView *)inviteCodeView {
+    if (!_inviteCodeView) {
+        _inviteCodeView = [ZRSWLoginCustomView getLoginInputViewWithTitle:@"邀请码" placeHoled:[[NSAttributedString alloc] initWithString:@"请输入邀请码" attributes:@{NSForegroundColorAttributeName : [ZRSWLoginCustomView placeHoledColor]}] keyboardType:UIKeyboardTypeASCIICapable isNeedCountDownButton:NO isNeedBottomLine:YES];
+        _inviteCodeView.delegate = self;
+    }
+    return _inviteCodeView;
+}
+
 - (ZRSWUserAgreementView *)agreeView {
     if (!_agreeView) {
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"我已阅读并同意《中融盛旺用户协议》"];

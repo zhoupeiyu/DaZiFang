@@ -349,13 +349,13 @@
             model.viewControllerName = NSStringFromClass([ZRSWBrushFaceCertificationController class]);
             [data addObject:model];
         }
-//        {
-//            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
-//            model.title = @"推荐中融盛旺给朋友";
-//            model.type = MineListTypeCommentList;
-//            model.iconName = @"my_face";
-//            [data addObject:model];
-//        }
+        {
+            ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
+            model.title = @"推荐中融盛旺给朋友";
+            model.type = MineListTypeCommentList;
+            model.iconName = @"my_face";
+            [data addObject:model];
+        }
         [self.dataSource addObject:data];
     }
     [self.tableView reloadData];

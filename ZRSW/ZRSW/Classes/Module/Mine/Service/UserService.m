@@ -51,13 +51,15 @@
     }
     [self POST:KGetPhoneCodeInterface reqType:type delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 }
-- (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode nickName:(NSString *)nickName delegate:(id)delegate {
+- (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode beInvitedCode:(NSString *)beInvitedCode nickName:(NSString *)nickName delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:loginId forKey:@"loginId"];
     [params setObject:phone forKey:@"phone"];
     [params setObject:password forKey:@"password"];
     [params setObject:validateCode forKey:@"validateCode"];
+    [params setObject:beInvitedCode forKey:@"beInvitedCode"];
     [params setObject:nickName forKey:@"nickName"];
+
     [self POST:KUserRegisterInterface reqType:KUserRegisterRequest delegate:delegate parameters:params ObjcClass:[UserModel class] NeedCache:NO];
 }
 - (void)userLoginWithUserName:(NSString *)username password:(NSString *)password  delegate:(id)delegate {

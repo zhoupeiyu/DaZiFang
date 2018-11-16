@@ -122,6 +122,10 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
         if (model.data.faceTokens.length > 0) {
             userModel.data.faceTokens = model.data.faceTokens;
         }
+        if (model.data.myInvitationCode.length > 0) {
+            userModel.data.myInvitationCode = model.data.myInvitationCode;
+        }
+
         userModel.data.faceLogin = model.data.faceLogin;
         if (model.data.authNameAudit) {
             if (!userModel.data.authNameAudit) {
