@@ -130,10 +130,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZRSWMineModel *mineModel = ((NSMutableArray *)self.dataSource[indexPath.section])[indexPath.row];
     if ([mineModel.title isEqualToString:@"推荐中融盛旺给朋友"]) {
-        ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
-        model.title = @"中融盛旺";
-        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/toRecommend"];
-        [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
+        [self shareAPP];
         return;
     }
 
@@ -171,6 +168,20 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+//推荐给朋友
+- (void)shareAPP{
+    UserModel *userModel = [UserModel getCurrentModel];
+    UserInfoModel *userInfoModel = userModel.data;
+    ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
+    model.title = @"中融盛旺APP";
+    model.content = @"中融贷款服务，为您提供量身定制的服务。";
+    model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
+    model.sourceUrlStr = [NSString stringWithFormat:@"http://www.zhongrongsw.com/wechat/share/toRecommend?"];
+    [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
+}
+
+
 
 - (void)getUnreadMessageCount{
     [[[UserService alloc] init] getMessageCount:0 delegate:self];
