@@ -188,7 +188,6 @@
 		3CD3C811215FC77F00DE6199 /* EaseUIResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3CD3C7BD215FC77F00DE6199 /* EaseUIResource.bundle */; };
 		3CD3C812215FC77F00DE6199 /* EaseUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD3C7BE215FC77F00DE6199 /* EaseUI.m */; };
 		3CD3C815215FCC8200DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
-		3CD3C816215FCC9900DE6199 /* HelpDesk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; };
 		3CD3C817215FCC9900DE6199 /* HelpDesk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD3C814215FCC8100DE6199 /* HelpDesk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3CED799C2159348800A1BE4C /* ZRSWBrushFaceLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799B2159348800A1BE4C /* ZRSWBrushFaceLoginController.m */; };
 		3CED799F2159E36C00A1BE4C /* ZRSWBannerDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CED799E2159E36C00A1BE4C /* ZRSWBannerDetailsController.m */; };
@@ -2098,7 +2097,6 @@
 				3CD3C7D1215FC77F00DE6199 /* libopencore-amrnb.a in Frameworks */,
 				3CFBF52E215C7CD500A7AA97 /* MobileCoreServices.framework in Frameworks */,
 				3CFBF52C215C7CCB00A7AA97 /* AVFoundation.framework in Frameworks */,
-				3CD3C816215FCC9900DE6199 /* HelpDesk.framework in Frameworks */,
 				3CD3C7D0215FC77F00DE6199 /* libopencore-amrwb.a in Frameworks */,
 				3CFBF52A215C7CBD00A7AA97 /* AudioToolbox.framework in Frameworks */,
 				3CFBF528215C7CB100A7AA97 /* CoreMedia.framework in Frameworks */,
