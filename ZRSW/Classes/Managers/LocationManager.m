@@ -51,7 +51,7 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
     return _locationManager;
 }
 
-- (void)getCityLocationSuccess:(void (^)(id result))success failure:(void (^)(id error))failure{
+- (void)getCityLocationSuccess:(void (^)(id result,CLLocation *location))success failure:(void (^)(id error))failure{
     [self.locationManager requestLocationWithReGeocode:YES withNetworkState:YES completionBlock:^(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error) {
         if(error){
             LLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
@@ -66,7 +66,7 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
                     result = location.rgcData.province;
                 }
                 if (success) {
-                    success(result);
+                    success(result,location.location);
                 }
             }
         }

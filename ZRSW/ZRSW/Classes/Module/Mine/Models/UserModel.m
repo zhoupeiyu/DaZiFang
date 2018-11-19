@@ -342,9 +342,13 @@ SYNTHESIZE_SINGLETON_ARC(UserModel);
 
 @end
 
+@implementation SignModel
 
+@end
 
+@implementation SignStatesModel
 
+@end
 
 
 

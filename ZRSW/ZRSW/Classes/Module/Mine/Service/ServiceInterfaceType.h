@@ -111,3 +111,7 @@
 
 // 用户信息
 #define KGetUserInfoRequest                     @"KGetUserInfoRequest"
+
+#define KUpdateUserLocationRequest              @"KUpdateUserLocationRequest"
+
+#define KCheckUserSignStatesRequest             @"KCheckUserSignStatesRequest"

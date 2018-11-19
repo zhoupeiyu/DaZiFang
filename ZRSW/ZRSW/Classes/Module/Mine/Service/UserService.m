@@ -273,8 +273,25 @@
 
 }
 
+- (void)updateUserLocation:(NSString *)longitude latitude:(NSString *)latitude signType:(SignType)signType delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:latitude forKey:@"latitude"];
+    [params setObject:longitude forKey:@"longitude"];
+    if (signType == SignTypeRegistration) {
+        [params setObject:@1 forKey:@"signType"];
+    }
+    else {
+        [params setObject:@0 forKey:@"signType"];
+    }
+    [self POST:KUpdateUserLocationInterface reqType:KUpdateUserLocationRequest delegate:delegate parameters:params ObjcClass:[BaseModel class] NeedCache:NO];
 
+}
 
+- (void)checkSignStates:(NSString *)userName delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:userName forKey:@"userName"];
+    [self POST:KCheckUserSignStatesInterface reqType:KCheckUserSignStatesRequest delegate:delegate parameters:params ObjcClass:[SignModel class] NeedCache:NO];
+}
 
 
 
