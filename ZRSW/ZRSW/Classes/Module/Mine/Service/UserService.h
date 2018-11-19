@@ -45,7 +45,7 @@
  @param nickName 昵称
  @param delegate 代理
  */
-- (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode nickName:(NSString *)nickName delegate:(id)delegate;
+- (void)userRegisterLoginId:(NSString *)loginId phone:(NSString *)phone password:(NSString *)password validateCode:(NSString *)validateCode beInvitedCode:(NSString *)beInvitedCode nickName:(NSString *)nickName delegate:(id)delegate;
 
 
 

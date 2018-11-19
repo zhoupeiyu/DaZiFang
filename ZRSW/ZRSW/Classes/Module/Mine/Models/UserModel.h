@@ -129,6 +129,8 @@
 @property (nonatomic, strong) NSString *faceTokens;
 //是否开启刷脸认证
 @property (nonatomic, assign) int faceLogin;
+//我的邀请码
+@property (nonatomic, strong) NSString *myInvitationCode;
 
 @end
 
