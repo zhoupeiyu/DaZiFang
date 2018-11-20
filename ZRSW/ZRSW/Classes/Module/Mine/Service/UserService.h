@@ -285,5 +285,24 @@
  */
 - (void)getUserInfo:(NSString *)userID delegate:(id)delegate;
 
+
+/**
+ 签到 签退接口
+
+ @param longitude 签到位置经度
+ @param latitude 签到位置维度
+ @param signType 签到类型
+ @param delegate 代理
+ */
+- (void)updateUserLocation:(NSString *)longitude latitude:(NSString *)latitude signType:(SignType)signType delegate:(id)delegate;
+
+
+/**
+ 检查用户签到状态
+
+ @param userName 用户名字
+ @param delegate 代理
+ */
+- (void)checkSignStates:(NSString *)userName delegate:(id)delegate;
 @end
 

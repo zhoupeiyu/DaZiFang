@@ -23,6 +23,7 @@
 #import "ZRSWBannerDetailsController.h"
 #import "OrderService.h"
 #import "ZRSWSelectTheCityController.h"
+#import "ZRSWLoginController.h"
 
 @interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
@@ -41,11 +42,19 @@
 @property (nonatomic, strong) UILabel *locationLabel;
 @property (nonatomic, strong) NSString *locationCity;
 @property (nonatomic, strong)  dispatch_group_t group;
+// 签到签退
+@property (nonatomic, strong) UIButton *registrationBtn;
+@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, assign) SignType currentSignType;
 @end
 
 
 @implementation ZRSWHomeController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self checkSignStates];
+}
 - (void)viewDidLoad {
     self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
@@ -83,6 +92,7 @@
         }
         [TipViewManager dismissLoading];
     });
+    [self setupRegistration];
 }
 
 
@@ -95,6 +105,26 @@
 
 }
 
+
+#pragma mark - 签到签退按钮
+
+- (void)setupRegistration {
+    [self setRightBarButtonWithText:@"签到"];
+
+    [self.rightBarButton addTarget:self action:@selector(updateUserLocation) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)updateRightItem:(BOOL)registration {
+    if (!registration) {
+        [self.rightBarButton setTitle:@"签退" forState:UIControlStateNormal];
+        [self.rightBarButton setTitle:@"签退" forState:UIControlStateHighlighted];
+    }
+    else {
+        [self.rightBarButton setTitle:@"签到" forState:UIControlStateNormal];
+        [self.rightBarButton setTitle:@"签到" forState:UIControlStateHighlighted];
+
+    }
+}
 - (void)setUpTableView{
     self.tableView.tableHeaderView = self.headerView;
     [self enableRefreshHeader:YES];
@@ -176,20 +206,51 @@
 
 
 #pragma mark - NetWork
+
+- (void)checkSignStates {
+    UserModel *model = [UserModel getCurrentModel];
+    if (model) {
+        [[[UserService alloc] init] checkSignStates:model.data.id delegate:self];
+    }
+    
+}
+- (void)updateUserLocation {
+    if (![UserModel hasLogin]) {
+        [ZRSWLoginController showLoginViewController];
+        return;
+    }
+    if (!self.location) {
+        [TipViewManager showToastMessage:@"请检查定位！"];
+        return;
+    }
+    SignType signType = SignTypeRegistration;
+    if ([self.rightBarButton.currentTitle isEqualToString:@"签退"]) {
+        signType = SignTypeSignOut;
+        [TipViewManager showLoadingWithText:@"签退中,请稍后..."];
+        self.currentSignType = SignTypeSignOut;
+    }
+    else {
+        [TipViewManager showLoadingWithText:@"签到中,请稍后..."];
+        signType = SignTypeRegistration;
+        self.currentSignType = SignTypeRegistration;
+    }
+    [[[UserService alloc] init] updateUserLocation:@(self.location.coordinate.longitude).stringValue latitude:@(self.location.coordinate.latitude).stringValue signType:signType delegate:self];
+}
 - (void)getLocationCity{
     WS(weakSelf);
     if ([CLLocationManager locationServicesEnabled]){
         //system location enabled
         CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
         if (authorizationStatus==kCLAuthorizationStatusAuthorizedWhenInUse||authorizationStatus==kCLAuthorizationStatusAuthorizedAlways){
-            dispatch_group_enter(self.group);
-            [[LocationManager sharedInstance] getCityLocationSuccess:^(id result) {
-                dispatch_group_leave(self.group);
+//            dispatch_group_enter(self.group);
+            [[LocationManager sharedInstance] getCityLocationSuccess:^(id result, CLLocation *location) {
+//                dispatch_group_leave(self.group);
                 if (result) {
                     weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
                 }
+                self.location = location;
             } failure:^(id error) {
-                dispatch_group_leave(self.group);
+//                dispatch_group_leave(self.group);
                 LLog(@"定位失败%@",error);
             }];
         }else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
@@ -242,6 +303,44 @@
 }
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
+    if (status == RequestFinishedStatusSuccess) {
+        if ([reqType isEqualToString:KUpdateUserLocationRequest]) {
+            [TipViewManager dismissLoading];
+            BaseModel *baseModel = (BaseModel *)resObj;
+            if (baseModel.error_code.integerValue == 0) {
+                if (self.currentSignType == SignTypeRegistration) {
+                    [TipViewManager showToastMessage:@"签到成功啦^_^"];
+                }
+                else {
+                    [TipViewManager showToastMessage:@"签退成功啦^_^"];
+                }
+                [self updateRightItem:self.currentSignType == SignTypeSignOut];
+            }
+            else {
+                [TipViewManager showToastMessage:baseModel.error_msg];
+            }
+            return;
+        }
+        else if ([reqType isEqualToString:KCheckUserSignStatesRequest]) {
+            [TipViewManager dismissLoading];
+            SignModel *model = (SignModel *)resObj;
+            if (model.error_code.integerValue == 0) {
+                BOOL regis = model.data.signIn.boolValue == NO;
+                BOOL signOut = model.data.signOut.boolValue == NO;
+                [self.rightBarButton setTitle:@"签到" forState:UIControlStateNormal];
+                [self.rightBarButton setTitle:@"签到" forState:UIControlStateHighlighted];
+                if (regis) {
+                    [self.rightBarButton setTitle:@"签到" forState:UIControlStateNormal];
+                    [self.rightBarButton setTitle:@"签到" forState:UIControlStateHighlighted];
+                }
+                if (!regis && signOut) {
+                    [self.rightBarButton setTitle:@"签退" forState:UIControlStateNormal];
+                    [self.rightBarButton setTitle:@"签退" forState:UIControlStateHighlighted];
+                }
+            }
+            return;
+        }
+    }
      dispatch_group_leave(self.group);
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KCityListRequest]) {

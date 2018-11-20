@@ -26,6 +26,7 @@ typedef enum : NSUInteger {
 - (void)getCityListDelegate:(id)delegate;
 
 
+
 /**
  查询指定城市下贷款大类列表接口
 

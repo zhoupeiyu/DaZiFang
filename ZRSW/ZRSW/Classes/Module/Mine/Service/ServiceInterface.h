@@ -104,8 +104,9 @@
 
 #define KGetUserInfoInterface               @"api/user/userInfo"
 
+#define KUpdateUserLocationInterface            @"api/user/sign"
 
-
+#define KCheckUserSignStatesInterface           @"api/user/signStatus"
 
 
 

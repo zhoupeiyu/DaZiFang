@@ -311,9 +311,16 @@
 @end
 
 
+@interface SignStatesModel : BaseModel
+// 是否已签到：true=已签到，false=未签到
+@property (nonatomic, strong) NSNumber *signIn;
+// 是否已签退：true=已签退，false=未签退
+@property (nonatomic, strong) NSNumber *signOut;
+@end
 
-
-
+@interface SignModel : BaseModel
+@property (nonatomic, strong) SignStatesModel *data;
+@end
 
 
 

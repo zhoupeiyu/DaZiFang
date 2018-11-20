@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <BMKLocationKit/BMKLocation.h>
 
 @interface LocationManager : NSObject
 
 + (LocationManager *)sharedInstance;
 
 - (void)setUpLocationManager;
-- (void)getCityLocationSuccess:(void (^)(id result))success failure:(void (^)(id error))failure;
+- (void)getCityLocationSuccess:(void (^)(id result,CLLocation *location))success failure:(void (^)(id error))failure;
 @end

@@ -29,3 +29,8 @@ typedef enum : NSUInteger {
     UseInfoSexMan = 1, // 男
     UseInfoSexWoman // 女
 } UseInfoSex;
+
+typedef enum : NSUInteger {
+    SignTypeRegistration, // 签到
+    SignTypeSignOut, // 签退
+} SignType;
