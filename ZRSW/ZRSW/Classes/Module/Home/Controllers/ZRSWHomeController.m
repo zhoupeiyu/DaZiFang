@@ -305,6 +305,7 @@
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType{
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KUpdateUserLocationRequest]) {
+            [TipViewManager dismissLoading];
             BaseModel *baseModel = (BaseModel *)resObj;
             if (baseModel.error_code.integerValue == 0) {
                 if (self.currentSignType == SignTypeRegistration) {
@@ -407,8 +408,11 @@
             }
         }
     }else{
-        if (![reqType isEqualToString:KUpdateUserLocationRequest] && ![reqType isEqualToString:KCheckUserSignStatesRequest]){
-              dispatch_group_leave(self.group);
+        if ([reqType isEqualToString:KCheckUserSignStatesRequest]){
+        }else  if ([reqType isEqualToString:KUpdateUserLocationRequest]){
+            [TipViewManager dismissLoading];
+        }else{
+            dispatch_group_leave(self.group);
         }
         LLog(@"%@请求失败",reqType);
     }
