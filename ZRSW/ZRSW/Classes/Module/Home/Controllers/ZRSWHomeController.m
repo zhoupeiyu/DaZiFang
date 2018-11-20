@@ -84,7 +84,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
                 break;
             }else if ([city.name isEqualToString:@"北京市"]){
-                    weakSelf.locationLabel.text = @"北京市";
+                weakSelf.locationLabel.text = @"北京市";
                 NSDictionary *cityDic = nil;
                 cityDic = [city yy_modelToJSONObject];
                 [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
