@@ -37,7 +37,7 @@
     [super setupUI];
     [self.scrollView addSubview:self.userNameView];
     [self.scrollView addSubview:self.ipCardView];
-    [self.scrollView addSubview:self.userCardView];
+//    [self.scrollView addSubview:self.userCardView];
     [self.scrollView addSubview:self.cardView];
     [self setupLayOut];
 }
@@ -65,18 +65,25 @@
         make.top.mas_equalTo(self.userNameView.mas_bottom);
         make.height.mas_equalTo([ZRSWLoginCustomView loginInputViewHeight]);
     }];
-    [self.userCardView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.cardView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(0);
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.top.mas_equalTo(self.ipCardView.mas_bottom);
         make.height.mas_equalTo([ZRSWIPCardView viewHeight:IPCardViewTypePerson]);
     }];
-    [self.cardView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(self.userCardView.mas_bottom);
-        make.height.mas_equalTo([ZRSWIPCardView viewHeight:IPCardViewTypePerson]);
-    }];
+    
+//    [self.userCardView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(0);
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//        make.top.mas_equalTo(self.ipCardView.mas_bottom);
+//        make.height.mas_equalTo([ZRSWIPCardView viewHeight:IPCardViewTypePerson]);
+//    }];
+//    [self.cardView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(0);
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//        make.top.mas_equalTo(self.userCardView.mas_bottom);
+//        make.height.mas_equalTo([ZRSWIPCardView viewHeight:IPCardViewTypePerson]);
+//    }];
 }
 #pragma mark - action
 
@@ -89,10 +96,10 @@
         [TipViewManager showToastMessage:@"请输入正确的身份证号码！"];
         return;
     }
-    if ([self.userCardView getSelectedImages].count < 2) {
-        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
-        return;
-    }
+//    if ([self.userCardView getSelectedImages].count < 2) {
+//        [TipViewManager showToastMessage:@"请上传手持身份证照片！"];
+//        return;
+//    }
     if ([self.cardView getSelectedImages].count < 2) {
         [TipViewManager showToastMessage:@"请上传身份证照片！"];
         return;
@@ -100,7 +107,7 @@
     
     WS(weakSelf);
     NSMutableArray *arr = [NSMutableArray array];
-    [arr addObjectsFromArray:[self.userCardView getSelectedImages]];
+//    [arr addObjectsFromArray:[self.userCardView getSelectedImages]];
     [arr addObjectsFromArray:[self.cardView getSelectedImages]];
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
@@ -109,10 +116,12 @@
                 [TipViewManager showToastMessage:@"图片上传失败，请重新上传！"];
                 return ;
             }
-            NSString *idCardImg1 = [imageUrls objectAtIndex:2];
-            NSString *idCardImg2 = [imageUrls objectAtIndex:3];
-            NSString *idCardImg3 = [imageUrls objectAtIndex:0];
-            NSString *idCardImg4 = [imageUrls objectAtIndex:1];
+            NSString *idCardImg1 = [imageUrls objectAtIndex:0];
+            NSString *idCardImg2 = [imageUrls objectAtIndex:1];
+            NSString *idCardImg3 = @"";
+//            [imageUrls objectAtIndex:0];
+            NSString *idCardImg4 = @"";
+//            [imageUrls objectAtIndex:1];
             [weakSelf.service userRealNameValidationIdCard:self.userName idCard:self.ipCard idCardImg1:idCardImg1 idCardImg2:idCardImg2 idCardImg3:idCardImg3 idCardImg4:idCardImg4 delegate:self];
         }];
     }
