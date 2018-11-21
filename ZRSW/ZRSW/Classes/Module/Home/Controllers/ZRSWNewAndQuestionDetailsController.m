@@ -153,7 +153,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
     if (self.type == DetailsTypeSystemNotification){
         model.title = self.detailContensModel.title;
-        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=1",self.detailContensModel.id];
+        model.sourceUrlStr = [NSString stringWithFormat:@"%@wechat/share/articlesDetail?articlesId=%@&articlesNum=1",API_Host,self.detailContensModel.id];
         NSString *content = [NSString stringWithFormat:@"%@",self.detailContensModel.content];
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
             content = [content stringByRemovingPercentEncoding];
@@ -163,7 +163,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         model.content = [content filterHTML:content];
     }else if (self.type == DetailsTypePopularInformation) {
         model.title = self.detailContensModel.title;
-        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=2",self.detailContensModel.id];
+        model.sourceUrlStr = [NSString stringWithFormat:@"%@wechat/share/articlesDetail?articlesId=%@&articlesNum=2",API_Host,self.detailContensModel.id];
         NSString *content = [NSString stringWithFormat:@"%@",self.detailContensModel.content];
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
             content = [content stringByRemovingPercentEncoding];
@@ -173,7 +173,7 @@ NSString *kCompleteRPCURL = @"webviewprogress:///complete";
         model.content = [content filterHTML:content];
     }else if (self.type == DetailsTypeCommentQuestion){
         model.title = self.questionDetailContentModel.title;
-        model.sourceUrlStr = [NSString stringWithFormat:@"http://zhongrong.ijiaoban.cn/wechat/share/articlesDetail?articlesId=%@&articlesNum=3",self.questionDetailContentModel.id];
+        model.sourceUrlStr = [NSString stringWithFormat:@"%@wechat/share/articlesDetail?articlesId=%@&articlesNum=3",API_Host,self.questionDetailContentModel.id];
         NSString *content = [NSString stringWithFormat:@"%@",self.questionDetailContentModel.faqBody];
         if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
             content = [content stringByRemovingPercentEncoding];

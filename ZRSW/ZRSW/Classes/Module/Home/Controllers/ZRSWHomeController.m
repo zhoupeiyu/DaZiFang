@@ -248,7 +248,7 @@
                 if (result) {
                     weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
                 }
-                self.location = location;
+                weakSelf.location = location;
             } failure:^(id error) {
 //                dispatch_group_leave(self.group);
                 LLog(@"定位失败%@",error);
