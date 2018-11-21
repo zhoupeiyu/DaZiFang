@@ -25,7 +25,7 @@
 #import "ZRSWSelectTheCityController.h"
 #import "ZRSWLoginController.h"
 
-@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
+@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate,LocationManagerDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
@@ -66,6 +66,7 @@
     self.hotNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.systemNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
+    [LocationManager sharedInstance].delegate = self;
     [TipViewManager showLoading];
     self.group = dispatch_group_create();
     [self requsetCityList];
@@ -255,6 +256,7 @@
             }];
         }else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
             LLog(@"对于这个应用程序，用户还没有做出选择");
+//            [self getLocationCity];
         }else{
             //定位服务开启
             [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
@@ -262,6 +264,10 @@
     }else{
         [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
     }
+}
+
+- (void)didChangeAuthorizationStatus{
+    [self getLocationCity];
 }
 
 - (void)requsetCityList{
