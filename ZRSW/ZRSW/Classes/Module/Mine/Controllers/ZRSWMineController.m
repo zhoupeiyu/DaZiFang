@@ -174,10 +174,14 @@
     UserModel *userModel = [UserModel getCurrentModel];
     UserInfoModel *userInfoModel = userModel.data;
     ZRSWShareModel *model = [[ZRSWShareModel alloc] init];
-    model.title = @"中融盛旺APP";
-    model.content = @"中融贷款服务，为您提供量身定制的服务。";
+    model.title = @"欢迎加入中融盛旺";
+    model.content = @"中融盛旺，为您提供量身定制贷款业务！从此刻起，让你的贷款业务更安全。从此刻起，让你的贷款业务更方便。使用邀请码注册中融盛旺，更多惊喜等着您！";
     model.thumbImage = [UIImage imageNamed:@"icon_80.png"];
-    model.sourceUrlStr = [NSString stringWithFormat:@"http://www.zhongrongsw.com/wechat/share/toRecommend?"];
+    if (userInfoModel.myInvitationCode) {
+        model.sourceUrlStr = [NSString stringWithFormat:@"%@wechat/share/personal?invitedCode=%@",API_Host,userInfoModel.myInvitationCode];
+    }else{
+        model.sourceUrlStr = [NSString stringWithFormat:@"%@wechat/share/personal?memId=%@",API_Host,userInfoModel.id];
+    }
     [ZRSWShareView shareContent:model shareSourceType:ShareSourceWap delegate:self];
 }
 

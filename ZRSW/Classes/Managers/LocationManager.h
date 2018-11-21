@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <BMKLocationKit/BMKLocation.h>
 
+@protocol LocationManagerDelegate <NSObject>
+- (void)didChangeAuthorizationStatus;
+@end
+
 @interface LocationManager : NSObject
+
+@property (nonatomic, weak) id<LocationManagerDelegate> delegate;
 
 + (LocationManager *)sharedInstance;
 

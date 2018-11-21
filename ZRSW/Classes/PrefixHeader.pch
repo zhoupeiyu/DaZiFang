@@ -21,7 +21,7 @@
 
 // 如果是测试环境，将这句话打开
 
-#define Api_Test
+//#define Api_Test
 
 #ifdef Api_Test // 测试环境
 

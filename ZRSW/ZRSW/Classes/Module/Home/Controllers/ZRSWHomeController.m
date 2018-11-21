@@ -25,7 +25,7 @@
 #import "ZRSWSelectTheCityController.h"
 #import "ZRSWLoginController.h"
 
-@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate>
+@interface ZRSWHomeController ()<SDCycleScrollViewDelegate,BaseNetWorkServiceDelegate,ZRSWHomeNewsHeaderViewDelegate,LocationManagerDelegate>
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) NSMutableArray *cityArray;
 @property (nonatomic, strong) NSMutableArray *pictureArray;
@@ -66,6 +66,7 @@
     self.hotNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.systemNewsListSource = [NSMutableArray arrayWithCapacity:0];
     self.questionListSource = [NSMutableArray arrayWithCapacity:0];
+    [LocationManager sharedInstance].delegate = self;
     [TipViewManager showLoading];
     self.group = dispatch_group_create();
     [self requsetCityList];
@@ -84,7 +85,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
                 break;
             }else if ([city.name isEqualToString:@"北京市"]){
-                    weakSelf.locationLabel.text = @"北京市";
+                weakSelf.locationLabel.text = @"北京市";
                 NSDictionary *cityDic = nil;
                 cityDic = [city yy_modelToJSONObject];
                 [[NSUserDefaults standardUserDefaults] setObject:cityDic forKey:CurrentLocationKey];
@@ -248,13 +249,14 @@
                 if (result) {
                     weakSelf.locationCity = [NSString stringWithFormat:@"%@",result];
                 }
-                self.location = location;
+                weakSelf.location = location;
             } failure:^(id error) {
 //                dispatch_group_leave(self.group);
                 LLog(@"定位失败%@",error);
             }];
         }else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
             LLog(@"对于这个应用程序，用户还没有做出选择");
+//            [self getLocationCity];
         }else{
             //定位服务开启
             [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
@@ -262,6 +264,10 @@
     }else{
         [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
     }
+}
+
+- (void)didChangeAuthorizationStatus{
+    [self getLocationCity];
 }
 
 - (void)requsetCityList{
@@ -319,10 +325,7 @@
             else {
                 [TipViewManager showToastMessage:baseModel.error_msg];
             }
-            return;
-        }
-        else if ([reqType isEqualToString:KCheckUserSignStatesRequest]) {
-            [TipViewManager dismissLoading];
+        }else if ([reqType isEqualToString:KCheckUserSignStatesRequest]) {
             SignModel *model = (SignModel *)resObj;
             if (model.error_code.integerValue == 0) {
                 BOOL regis = model.data.signIn.boolValue == NO;
@@ -338,82 +341,86 @@
                     [self.rightBarButton setTitle:@"签退" forState:UIControlStateHighlighted];
                 }
             }
-            return;
-        }
-    }
-     dispatch_group_leave(self.group);
-    if (status == RequestFinishedStatusSuccess) {
-        if ([reqType isEqualToString:KCityListRequest]) {
-            CityListModel *model = (CityListModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                if (self.cityArray.count > 0) {
-                    [self.cityArray removeAllObjects];
+        }else{
+            dispatch_group_leave(self.group);
+            if ([reqType isEqualToString:KCityListRequest]) {
+                CityListModel *model = (CityListModel *)resObj;
+                if (model.error_code.integerValue == 0) {
+                    if (self.cityArray.count > 0) {
+                        [self.cityArray removeAllObjects];
+                    }
+                    for (NSUInteger i = 0; i < model.data.count; ++i){
+                        CityDetailModel *detailModel = model.data[i];
+                        LLog(@"%@",detailModel.name);
+                        [self.cityArray addObject:detailModel];
+                    }
+                }else{
+                    LLog(@"请求失败:%@",model.error_msg);
                 }
-                for (NSUInteger i = 0; i < model.data.count; ++i){
-                    CityDetailModel *detailModel = model.data[i];
-                    LLog(@"%@",detailModel.name);
-                    [self.cityArray addObject:detailModel];
-                }
-            }else{
-                LLog(@"请求失败:%@",model.error_msg);
-            }
-        }else if ([reqType isEqualToString:KBannerRequest]) {
-            BannerListModel *bannerListModel = (BannerListModel *)resObj;
-            if (bannerListModel.error_code.integerValue == 0) {
-                if (self.pictureArray.count > 0) {
-                    [self.pictureArray removeAllObjects];
-                     [self.bannerArray removeAllObjects];
-                }
-                for (NSUInteger i = 0; i < bannerListModel.data.count; ++i){
-                    BannerModel *bannerModel = bannerListModel.data[i];
-                    LLog(@"%@",bannerModel.imgUrl);
-                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",bannerModel.imgUrl]];
-                     [self.bannerArray addObject:bannerModel];
+            }else if ([reqType isEqualToString:KBannerRequest]) {
+                BannerListModel *bannerListModel = (BannerListModel *)resObj;
+                if (bannerListModel.error_code.integerValue == 0) {
+                    if (self.pictureArray.count > 0) {
+                        [self.pictureArray removeAllObjects];
+                        [self.bannerArray removeAllObjects];
+                    }
+                    for (NSUInteger i = 0; i < bannerListModel.data.count; ++i){
+                        BannerModel *bannerModel = bannerListModel.data[i];
+                        LLog(@"%@",bannerModel.imgUrl);
+                        [self.pictureArray addObject:[NSString stringWithFormat:@"%@",bannerModel.imgUrl]];
+                        [self.bannerArray addObject:bannerModel];
 
+                    }
+                    self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
+                }else{
+                    LLog(@"请求失败:%@",bannerListModel.error_msg);
                 }
-                self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
-            }else{
-                LLog(@"请求失败:%@",bannerListModel.error_msg);
-            }
-        }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
-            NewListModel *model = (NewListModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                if (self.hotNewsListSource.count > 0) {
-                    [self.hotNewsListSource removeAllObjects];
+            }else if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
+                NewListModel *model = (NewListModel *)resObj;
+                if (model.error_code.integerValue == 0) {
+                    if (self.hotNewsListSource.count > 0) {
+                        [self.hotNewsListSource removeAllObjects];
+                    }
+                    [self.hotNewsListSource addObjectsFromArray:model.data];
+                    [self.tableView reloadData];
+                }else{
+                    LLog(@"请求失败:%@",model.error_msg);
                 }
-                [self.hotNewsListSource addObjectsFromArray:model.data];
-                [self.tableView reloadData];
-            }else{
-                LLog(@"请求失败:%@",model.error_msg);
-            }
-        }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
-            NewListModel *model = (NewListModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                if (self.systemNewsListSource.count > 0) {
-                    [self.systemNewsListSource removeAllObjects];
+            }else if ([reqType isEqualToString:KGetNewsListSysNotiRequest]) {
+                NewListModel *model = (NewListModel *)resObj;
+                if (model.error_code.integerValue == 0) {
+                    if (self.systemNewsListSource.count > 0) {
+                        [self.systemNewsListSource removeAllObjects];
+                    }
+                    [self.systemNewsListSource addObjectsFromArray:model.data];
+                    NewDetailModel *model = self.systemNewsListSource.firstObject;
+                    if (model) {
+                        _systemNotificationLabel.text = model.title;
+                    }
+                }else{
+                    LLog(@"请求失败:%@",model.error_msg);
                 }
-                [self.systemNewsListSource addObjectsFromArray:model.data];
-                NewDetailModel *model = self.systemNewsListSource.firstObject;
-                if (model) {
-                    _systemNotificationLabel.text = model.title;
+            }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
+                CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
+                if (model.error_code.integerValue == 0) {
+                    if (self.questionListSource.count > 0) {
+                        [self.questionListSource removeAllObjects];
+                    }
+                    [self.questionListSource addObjectsFromArray:model.data];
+                    [self.tableView reloadData];
+                }else{
+                    LLog(@"请求失败:%@",model.error_msg);
                 }
-            }else{
-                LLog(@"请求失败:%@",model.error_msg);
-            }
-        }else if ([reqType isEqualToString:KGetCommentQuestionListRequest]) {
-            CommentQuestionListModel *model = (CommentQuestionListModel *)resObj;
-            if (model.error_code.integerValue == 0) {
-                if (self.questionListSource.count > 0) {
-                    [self.questionListSource removeAllObjects];
-                }
-                [self.questionListSource addObjectsFromArray:model.data];
-                 [self.tableView reloadData];
-            }else{
-                LLog(@"请求失败:%@",model.error_msg);
             }
         }
     }else{
-        LLog(@"请求失败");
+        if ([reqType isEqualToString:KCheckUserSignStatesRequest]){
+        }else  if ([reqType isEqualToString:KUpdateUserLocationRequest]){
+            [TipViewManager dismissLoading];
+        }else{
+            dispatch_group_leave(self.group);
+        }
+        LLog(@"%@请求失败",reqType);
     }
 }
 

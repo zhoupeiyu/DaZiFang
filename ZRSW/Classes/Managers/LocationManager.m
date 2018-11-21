@@ -74,4 +74,14 @@ SYNTHESIZE_SINGLETON_ARC(LocationManager);
     }];
 }
 
+- (void)BMKLocationManager:(BMKLocationManager * _Nonnull)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status==kCLAuthorizationStatusAuthorizedWhenInUse||status==kCLAuthorizationStatusAuthorizedAlways){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(didChangeAuthorizationStatus)]) {
+            [self.delegate didChangeAuthorizationStatus];
+        }
+    }
+}
+
+
+
 @end
