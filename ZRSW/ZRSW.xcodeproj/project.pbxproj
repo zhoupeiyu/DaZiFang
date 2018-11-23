@@ -43,6 +43,8 @@
 		3C003EA0219012500030E9A4 /* face_icon_certification_header_left_0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C003E94219012500030E9A4 /* face_icon_certification_header_left_0@3x.png */; };
 		3C003EA1219012500030E9A4 /* face_icon_certification_eye_open_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C003E95219012500030E9A4 /* face_icon_certification_eye_open_1@3x.png */; };
 		3C003EA2219012500030E9A4 /* face_icon_certification_eye_close_1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C003E96219012500030E9A4 /* face_icon_certification_eye_close_1@3x.png */; };
+		3C09EBD721A7DD87005BDEE3 /* my_recommend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C09EBD621A7DD86005BDEE3 /* my_recommend@2x.png */; };
+		3C09EBD921A7DDD6005BDEE3 /* my_recommend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C09EBD821A7DDD5005BDEE3 /* my_recommend@3x.png */; };
 		3C10D64821548A930019112F /* ZRSWRemindListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64721548A930019112F /* ZRSWRemindListController.m */; };
 		3C10D64B21548B790019112F /* ZRSWRemindListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64A21548B790019112F /* ZRSWRemindListCell.m */; };
 		3C10D64E2154939B0019112F /* ZRSWRemindListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C10D64D2154939B0019112F /* ZRSWRemindListModel.m */; };
@@ -826,6 +828,8 @@
 		3C003E94219012500030E9A4 /* face_icon_certification_header_left_0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_icon_certification_header_left_0@3x.png"; sourceTree = "<group>"; };
 		3C003E95219012500030E9A4 /* face_icon_certification_eye_open_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_icon_certification_eye_open_1@3x.png"; sourceTree = "<group>"; };
 		3C003E96219012500030E9A4 /* face_icon_certification_eye_close_1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "face_icon_certification_eye_close_1@3x.png"; sourceTree = "<group>"; };
+		3C09EBD621A7DD86005BDEE3 /* my_recommend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_recommend@2x.png"; sourceTree = "<group>"; };
+		3C09EBD821A7DDD5005BDEE3 /* my_recommend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_recommend@3x.png"; sourceTree = "<group>"; };
 		3C10D64621548A930019112F /* ZRSWRemindListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRemindListController.h; sourceTree = "<group>"; };
 		3C10D64721548A930019112F /* ZRSWRemindListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWRemindListController.m; sourceTree = "<group>"; };
 		3C10D64921548B790019112F /* ZRSWRemindListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWRemindListCell.h; sourceTree = "<group>"; };
@@ -4677,6 +4681,7 @@
 		E5B59A85214EC15600726DE9 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				3C09EBD621A7DD86005BDEE3 /* my_recommend@2x.png */,
 				3C003E7D219012120030E9A4 /* face_icon_certification_eye_close_0@2x.png */,
 				3C003E7E219012130030E9A4 /* face_icon_certification_eye_close_1@2x.png */,
 				3C003E732190120F0030E9A4 /* face_icon_certification_eye_open_0@2x.png */,
@@ -4777,6 +4782,7 @@
 		E5B59ACC214EC15600726DE9 /* @3x */ = {
 			isa = PBXGroup;
 			children = (
+				3C09EBD821A7DDD5005BDEE3 /* my_recommend@3x.png */,
 				3C003E8F2190124F0030E9A4 /* face_icon_certification_eye_close_0@3x.png */,
 				3C003E96219012500030E9A4 /* face_icon_certification_eye_close_1@3x.png */,
 				3C003E8E2190124F0030E9A4 /* face_icon_certification_eye_open_0@3x.png */,
@@ -5120,7 +5126,9 @@
 				3C003E84219012130030E9A4 /* face_icon_certification_header_right_0@2x.png in Resources */,
 				E5B59BA1214EC15600726DE9 /* pretrial_title_instructions@3x.png in Resources */,
 				E5767B332189F4DE00214570 /* vue-2.5.13.js in Resources */,
+				3C09EBD721A7DD87005BDEE3 /* my_recommend@2x.png in Resources */,
 				E5B59B35214EC15600726DE9 /* register_select@2x.png in Resources */,
+				3C09EBD921A7DDD6005BDEE3 /* my_recommend@3x.png in Resources */,
 				3C003E6A218FF3AB0030E9A4 /* headerUp.mp3 in Resources */,
 				E5B59B46214EC15600726DE9 /* currency_title_instructions@2x.png in Resources */,
 				E5B599FC214EBEE800726DE9 /* post_originalimage_selected@2x.png in Resources */,

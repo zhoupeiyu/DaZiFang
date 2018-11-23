@@ -357,7 +357,7 @@
             ZRSWMineModel *model = [[ZRSWMineModel alloc] init];
             model.title = @"推荐中融盛旺给朋友";
             model.type = MineListTypeCommentList;
-            model.iconName = @"my_face";
+            model.iconName = @"my_recommend";
             [data addObject:model];
         }
         [self.dataSource addObject:data];
