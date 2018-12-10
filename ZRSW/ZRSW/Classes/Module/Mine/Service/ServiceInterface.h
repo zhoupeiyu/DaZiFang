@@ -108,7 +108,7 @@
 
 #define KCheckUserSignStatesInterface           @"api/user/signStatus"
 
-
+#define KGetAppVersionInfoInterface             @"api/index/checkAppVersion"
 
 
 

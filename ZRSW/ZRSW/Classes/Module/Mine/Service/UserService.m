@@ -295,7 +295,13 @@
     [self POST:KCheckUserSignStatesInterface reqType:KCheckUserSignStatesRequest delegate:delegate parameters:params ObjcClass:[SignModel class] NeedCache:NO];
 }
 
+- (void)getAppVersionInfoDelegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setObject:[VersionManager currentVersion] forKey:@"currentVersion"];
+    NSString *interface = [NSString stringWithFormat:@"%@%@",API_Host,KGetAppVersionInfoInterface];
+    [self POST:interface reqType:KGetAppVersionInfoRequest delegate:delegate parameters:params ObjcClass:[UpdateVersionModel class] NeedCache:NO];
 
+}
 
 
 

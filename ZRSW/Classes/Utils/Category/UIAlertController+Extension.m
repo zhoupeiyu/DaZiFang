@@ -27,10 +27,53 @@
 }
 
 - (UILabel *)titleLabel {
-    return [self viewArray:self.view][0];
+    
+    UILabel *targetLbl = nil;
+    
+    UIView *subView1 = self.view.subviews[0];
+    
+    UIView *subView2 = subView1.subviews[0];
+    
+    UIView *subView3 = subView2.subviews[0];
+    
+    UIView *subView4 = subView3.subviews[0];
+    
+    UIView *subView5 = subView4.subviews[0];
+    
+    for (UIView *view in subView5.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            targetLbl = (UILabel *)view;
+            return targetLbl;
+        }
+    }
+    return targetLbl;
 }
 
 - (UILabel *)messageLabel {
-    return [self viewArray:self.view][1];
+    
+    UILabel *targetLbl = nil;
+    NSInteger count = 0;
+    
+    UIView *subView1 = self.view.subviews[0];
+    
+    UIView *subView2 = subView1.subviews[0];
+    
+    UIView *subView3 = subView2.subviews[0];
+    
+    UIView *subView4 = subView3.subviews[0];
+    
+    UIView *subView5 = subView4.subviews[0];
+    
+    for (UIView *view in subView5.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            if (count != 1) {
+                count ++;
+            }
+            else {
+                targetLbl = (UILabel *)view;
+            }
+        }
+    }
+    return targetLbl;
 }
 @end

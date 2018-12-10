@@ -24,6 +24,8 @@
 SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // 版本升级
+    [self versionManager];
     // 键盘管理
     [self keyboardManager];
     // 百度统计
@@ -57,7 +59,7 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 //    [self updateMessageCount];
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+    [VersionManager showUpdateAlerts];
 }
 - (void)applicationWillTerminate:(UIApplication *)application {
     
@@ -154,6 +156,9 @@ SYNTHESIZE_SINGLETON_ARC(AppDelegteManager);
 }
 #pragma mark -  manager
 
+-(void)versionManager {
+    [VersionManager updateVersionInfo];
+}
 - (void)keyboardManager {
     [[IQKeyboardManager sharedManager] setEnable:NO];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];

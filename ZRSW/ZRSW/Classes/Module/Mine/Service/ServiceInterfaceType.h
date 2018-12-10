@@ -115,3 +115,5 @@
 #define KUpdateUserLocationRequest              @"KUpdateUserLocationRequest"
 
 #define KCheckUserSignStatesRequest             @"KCheckUserSignStatesRequest"
+
+#define KGetAppVersionInfoRequest               @"KGetAppVersionInfoRequest"

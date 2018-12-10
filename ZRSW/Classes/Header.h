@@ -69,7 +69,7 @@
 #import "DatePickerView.h"
 #import "ControllerUtilsManager.h"
 #import "UploadImagesManager.h"
-
+#import "VersionManager.h"
 
 #pragma mark - 第三方
 

@@ -304,5 +304,13 @@
  @param delegate 代理
  */
 - (void)checkSignStates:(NSString *)userName delegate:(id)delegate;
+
+
+/**
+ 检测版本信息
+
+ @param delegate 代理
+ */
+- (void)getAppVersionInfoDelegate:(id)delegate;
 @end
 
