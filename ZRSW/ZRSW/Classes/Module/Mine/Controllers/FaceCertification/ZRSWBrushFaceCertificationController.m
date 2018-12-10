@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSInteger sendFaceCount;
 @property (nonatomic, assign) NSInteger addFaceCount;
 @property (nonatomic, assign) BOOL certificationError;
+@property (nonatomic, copy) NSString *faceTokens;
 
 
 @end
@@ -34,6 +35,7 @@
     [super viewDidDisappear:animated];
     self.sendFaceCount = 0;
     self.addFaceCount = 0;
+    self.faceTokens = nil;
     self.certificationError = NO;
 }
 
@@ -169,10 +171,18 @@
                 FaceTokenModel *faceTokenModel = model.data;
                 NSString *faceToken = faceTokenModel.faceToken;
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakSelf userAddFace:faceToken];
+//                    [weakSelf userAddFace:faceToken];
+                    self.addFaceCount++;
+                    if (self.faceTokens.length>0) {
+                        self.faceTokens = [self.faceTokens stringByAppendingString:[NSString stringWithFormat:@",%@",faceToken]];
+                    }else{
+                        self.faceTokens = [NSString stringWithFormat:@"%@",faceToken];
+                    }
+                    if (self.addFaceCount == 6) {
+                        [weakSelf userAddFace:self.faceTokens];
+                    }
                 });
-            }
-            else {
+            }else {
                 [TipViewManager dismissLoading];
                 if (!self.certificationError) {
                     self.certificationError = YES;
@@ -183,13 +193,10 @@
         }else if ([reqType isEqualToString:KFaceAddFaceRequest]) {
             UserAddFaceModel *model = (UserAddFaceModel *)resObj;
             if (model.error_code.integerValue == 0) {
-                self.addFaceCount++;
-                if (self.addFaceCount == 6) {
-                    [TipViewManager dismissLoading];
-                    [TipViewManager showToastMessage:@"认证成功"];
-                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Successful",@"result", nil]];
-                }
+                [TipViewManager dismissLoading];
+                [TipViewManager showToastMessage:@"认证成功"];
+                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[NSString stringWithFormat:@"%@%@",self.loginId,BrushFaceCertificationKey]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BrushFaceCertificationResultNotification object:[NSDictionary dictionaryWithObjectsAndKeys:@"Successful",@"result", nil]];
             }else {
                 [TipViewManager dismissLoading];
                 if (!self.certificationError) {
