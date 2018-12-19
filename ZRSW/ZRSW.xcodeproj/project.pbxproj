@@ -71,6 +71,7 @@
 		3C4574BA2178D0450009383F /* face_icon_uncertified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C4574B82178D0450009383F /* face_icon_uncertified@3x.png */; };
 		3C4644402160CFF8000122B9 /* ZRSWAchieveFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */; };
 		3C4644432160D0AA000122B9 /* ZRSWAchieveFilterTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4644422160D0AA000122B9 /* ZRSWAchieveFilterTableView.m */; };
+		3C46B35721BE5B6D00DB03BA /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C46B35621BE5B6C00DB03BA /* VersionManager.m */; };
 		3C5E9639216DF61E00483D3B /* ZRSWSelectTheCityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5E9638216DF61E00483D3B /* ZRSWSelectTheCityController.m */; };
 		3C7E4ACF214F6B6F0058D3E2 /* guide_point_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */; };
 		3C7E4AD0214F6B6F0058D3E2 /* guide_point_else@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C7E4ACE214F6B6E0058D3E2 /* guide_point_else@3x.png */; };
@@ -212,7 +213,6 @@
 		3CFE0BA721785DBC0087C50E /* face_icon_certification_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3CFE0B9D21785DBA0087C50E /* face_icon_certification_default@3x.png */; };
 		407FD762170B333C681D124F /* libPods-ZRSW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 526F0CB3FAD378F340C7F964 /* libPods-ZRSW.a */; };
 		E5131CA2215B8DC000CF362F /* NSArray+Sudoku.m in Sources */ = {isa = PBXBuildFile; fileRef = E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */; };
-		E53FA83021A845F6000C8661 /* VersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E53FA82F21A845F6000C8661 /* VersionManager.m */; };
 		E54EEE8D2182DDB7003A67F6 /* ZRSWBindPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54EEE8C2182DDB7003A67F6 /* ZRSWBindPhoneController.m */; };
 		E54EEE922182EAA0003A67F6 /* BaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E54EEE912182EAA0003A67F6 /* BaseWebViewController.m */; };
 		E5533E0B21645FF8003631E6 /* ZRSWLinePrejudicationCells.m in Sources */ = {isa = PBXBuildFile; fileRef = E5533E0921645FF8003631E6 /* ZRSWLinePrejudicationCells.m */; };
@@ -878,6 +878,8 @@
 		3C46443F2160CFF8000122B9 /* ZRSWAchieveFilterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWAchieveFilterView.m; sourceTree = "<group>"; };
 		3C4644412160D0AA000122B9 /* ZRSWAchieveFilterTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWAchieveFilterTableView.h; sourceTree = "<group>"; };
 		3C4644422160D0AA000122B9 /* ZRSWAchieveFilterTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWAchieveFilterTableView.m; sourceTree = "<group>"; };
+		3C46B35521BE5B6400DB03BA /* VersionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionManager.h; sourceTree = "<group>"; };
+		3C46B35621BE5B6C00DB03BA /* VersionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionManager.m; sourceTree = "<group>"; };
 		3C5E9637216DF61E00483D3B /* ZRSWSelectTheCityController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWSelectTheCityController.h; sourceTree = "<group>"; };
 		3C5E9638216DF61E00483D3B /* ZRSWSelectTheCityController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWSelectTheCityController.m; sourceTree = "<group>"; };
 		3C7E4ACD214F6B6E0058D3E2 /* guide_point_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide_point_selected@3x.png"; sourceTree = "<group>"; };
@@ -1142,8 +1144,6 @@
 		9620111F9BCAE38697E242E5 /* Pods-ZRSW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZRSW.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZRSW/Pods-ZRSW.debug.xcconfig"; sourceTree = "<group>"; };
 		E5131CA0215B8DC000CF362F /* NSArray+Sudoku.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Sudoku.h"; sourceTree = "<group>"; };
 		E5131CA1215B8DC000CF362F /* NSArray+Sudoku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Sudoku.m"; sourceTree = "<group>"; };
-		E53FA82E21A845F6000C8661 /* VersionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionManager.h; sourceTree = "<group>"; };
-		E53FA82F21A845F6000C8661 /* VersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionManager.m; sourceTree = "<group>"; };
 		E54EEE8B2182DDB7003A67F6 /* ZRSWBindPhoneController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWBindPhoneController.h; sourceTree = "<group>"; };
 		E54EEE8C2182DDB7003A67F6 /* ZRSWBindPhoneController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWBindPhoneController.m; sourceTree = "<group>"; };
 		E54EEE902182EAA0003A67F6 /* BaseWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseWebViewController.h; sourceTree = "<group>"; };
@@ -4337,6 +4337,8 @@
 			children = (
 				E5B5994D214EBEE800726DE9 /* AppDelegteManager.h */,
 				E5B59945214EBEE800726DE9 /* AppDelegteManager.m */,
+				3C46B35521BE5B6400DB03BA /* VersionManager.h */,
+				3C46B35621BE5B6C00DB03BA /* VersionManager.m */,
 				E5B59949214EBEE800726DE9 /* ControllerUtilsManager.h */,
 				E5B59944214EBEE800726DE9 /* ControllerUtilsManager.m */,
 				E5B59948214EBEE800726DE9 /* BaseTheme.h */,
@@ -4351,8 +4353,6 @@
 				E5B5994F214EBEE800726DE9 /* PhotoManager.m */,
 				E5E2797E215DF621007D27A8 /* UploadImagesManager.h */,
 				E5E2797F215DF621007D27A8 /* UploadImagesManager.m */,
-				E53FA82E21A845F6000C8661 /* VersionManager.h */,
-				E53FA82F21A845F6000C8661 /* VersionManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -5400,6 +5400,7 @@
 				E55340A12164620F003631E6 /* NSString+JKURLEncode.m in Sources */,
 				E55340472164620F003631E6 /* UIView+JKVisuals.m in Sources */,
 				E553401F2164620F003631E6 /* UIApplication+JKNetworkActivityIndicator.m in Sources */,
+				3C46B35721BE5B6D00DB03BA /* VersionManager.m in Sources */,
 				E553409D2164620F003631E6 /* NSString+JKHash.m in Sources */,
 				E5B59A2A214EBEE800726DE9 /* NSObject+Extension.m in Sources */,
 				E55340962164620F003631E6 /* NSString+JKHTML.m in Sources */,
@@ -5850,7 +5851,6 @@
 				3CD3C7FE215FC77F00DE6199 /* EaseMessageCell.m in Sources */,
 				E5E2799E215F520F007D27A8 /* ZRSWOrderListDetailController.m in Sources */,
 				E55340D52164620F003631E6 /* CAMediaTimingFunction+JKAdditionalEquations.m in Sources */,
-				E53FA83021A845F6000C8661 /* VersionManager.m in Sources */,
 				E5B59A58214EBEE800726DE9 /* TZGifPhotoPreviewController.m in Sources */,
 				E5B59A50214EBEE800726DE9 /* TZPhotoPreviewController.m in Sources */,
 				3CD3C80A215FC77F00DE6199 /* EaseBubbleView+File.m in Sources */,

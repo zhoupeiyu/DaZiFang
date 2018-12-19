@@ -259,10 +259,10 @@
 //            [self getLocationCity];
         }else{
             //定位服务开启
-            [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
+            [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"若不允许,你将无法使用显示当前位置以及当前位置签到签退等相关功能." preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
         }
     }else{
-        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"为了给您提供更多服务，我们需要访问您的地理位置" preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
+        [TipViewManager showAlertControllerWithTitle:@"请去设置中打开定位服务,允许获取您的位置" message:@"若不允许,你将无法使用显示当前位置以及当前位置签到签退等相关功能." preferredStyle:PSTAlertControllerStyleAlert actionTitle:@"知道了" handler:nil controller:self completion:nil];
     }
 }
 
