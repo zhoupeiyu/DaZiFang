@@ -95,7 +95,7 @@ SYNTHESIZE_SINGLETON_ARC(BaseTheme);
             [_tabBarItemsAttributes addObject:infoDic];
         }
         {
-            NSMutableDictionary *infoDic = [BaseTheme infoDicWithTitle:@"我要贷款" normalImage:@"currency_bottom_loan_default" selectedImage:@"currency_bottom_loan_select"];
+            NSMutableDictionary *infoDic = [BaseTheme infoDicWithTitle:@"贷款产品" normalImage:@"currency_bottom_loan_default" selectedImage:@"currency_bottom_loan_select"];
             [_tabBarItemsAttributes addObject:infoDic];
         }
         {
