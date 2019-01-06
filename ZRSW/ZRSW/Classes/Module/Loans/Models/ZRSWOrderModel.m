@@ -118,12 +118,22 @@
 - (CGFloat)attrsItemHeight {
     return 14;
 }
+
+- (CGFloat)titleHeight {
+    NSString *title = self.title;
+    CGFloat titleH = [title getSizeWithFont:[UIFont boldSystemFontOfSize:16] constrainedToSize:CGSizeMake(SCREEN_WIDTH - 2 * [self attrsLeft], CGFLOAT_MAX)].height;
+    return titleH;
+}
 - (CGFloat)attrsCellHeight {
+    
     NSInteger count = self.loanTypeAttrs.count;
     NSInteger height = [self attrsItemHeight];
     NSInteger space = [self attrsItemMargin];
     CGFloat max = (((count - 1) / [self warpCount]) + 1) * height +  ((count - 1) / [self warpCount]) * space;
     max = max + [self attrsTop] * 2;
+    if (self.isNeedTittle) {
+        max = max + [self titleHeight] + [self attrsItemMargin];
+    }
     return max;
 }
 

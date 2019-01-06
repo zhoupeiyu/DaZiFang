@@ -206,6 +206,7 @@
 
 @interface ZRSWLoansProductAttributeCell ()
 @property (nonatomic, strong) NSMutableArray <UILabel *> *lblArray;
+@property (nonatomic, strong) UILabel *titleLbl;
 
 @end
 @implementation ZRSWLoansProductAttributeCell
@@ -231,12 +232,19 @@
 }
 
 - (void)setupLayout {
+    
     NSInteger count = [self.infoDetailModel warpCount];
     CGFloat width = (SCREEN_WIDTH - count * 2 * [self.infoDetailModel attrsLeft]);
     CGFloat height = [self.infoDetailModel attrsItemHeight];
     CGFloat margin = [self.infoDetailModel attrsItemMargin];
     CGFloat top = [self.infoDetailModel attrsTop];
     CGFloat left = [self.infoDetailModel attrsLeft];
+    
+    if (self.infoDetailModel.isNeedTittle) {
+        [self.contentView addSubview:self.titleLbl];
+        self.titleLbl.text = self.infoDetailModel.title;
+        top = top + [self.infoDetailModel titleHeight] + [self.infoDetailModel attrsItemMargin];
+    }
     [self.lblArray mas_distributeSudokuViewsWithFixedItemWidth:width fixedItemHeight:height fixedLineSpacing:margin fixedInteritemSpacing:-50 warpCount:count topSpacing:top bottomSpacing:top leadSpacing:left tailSpacing:0];
 }
 - (void)setInfoDetailModel:(ZRSWOrderLoanInfoDetailModel *)infoDetailModel {
@@ -274,6 +282,15 @@
     return lbl;
 }
 
+- (UILabel *)titleLbl {
+    if (!_titleLbl) {
+        _titleLbl = [[UILabel alloc] init];
+        _titleLbl.textAlignment = NSTextAlignmentLeft;
+        _titleLbl.font = [UIFont boldSystemFontOfSize:16];
+        _titleLbl.textColor = [LoansCellStates getBlackColor];
+    }
+    return _titleLbl;
+}
 @end
 
 @interface ZRSWLoansConditionCell ()

@@ -92,12 +92,16 @@
 //贷款需要的材料列表
 @property (nonatomic, strong) NSArray <ZRSWOrderLoanInfoCondition *>*loanCondition;
 
+// ** 是否需要标题 **/
+@property (nonatomic, assign) BOOL isNeedTittle;
+
 - (NSInteger)warpCount;
 - (CGFloat)attrsTop;
 - (CGFloat)attrsLeft;
 - (CGFloat)attrsItemMargin;
 - (CGFloat)attrsItemHeight;
 - (CGFloat)attrsCellHeight;
+- (CGFloat)titleHeight;
 
 - (CGFloat)loanConditionsCellHeight;
 - (CGFloat)materialDetailsCellHeight;
