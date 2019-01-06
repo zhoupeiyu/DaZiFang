@@ -15,6 +15,9 @@
 #define KOrderLoanTypeListIDKey                 @"KOrderLoanTypeListIDKey"
 #define KOrderLoanTypeListMainIDKey             @"KOrderLoanTypeListMainIDKey"
 
+@implementation ZRSWOrderMainTypeListItemFrame
+
+@end
 
 @implementation ZRSWOrderMainTypeDetaolModel
 
@@ -27,14 +30,69 @@
              };
 }
 
+- (CGFloat)itemTopMargin {
+    return 28 / 2;
+}
+- (CGFloat)iconViewHeight {
+    return 140 / 2;
+}
+
+- (CGFloat)iconViewWidth {
+    return 90 / 2;
+}
+- (CGFloat)itemHorizontalMargin {
+    return 70 / 2;
+}
+
+- (CGFloat)itemVerticalMargin {
+    return 30 / 2;
+}
+
+- (CGFloat)itemLeft {
+    return (SCREEN_WIDTH - [self iconViewWidth] * [self itemCol] - ([self itemCol] - 1) * [self itemHorizontalMargin]) / 2;
+}
+- (NSInteger)itemCol {
+    return 4;
+}
+
+- (CGFloat)getListHeigt {
+    NSInteger row = self.data.count / [self itemCol];
+    // ** item 顶部底部的高度 **/
+    NSInteger listHeight = 2 * [self itemTopMargin];
+    // ** item 总高度 **/
+    listHeight = listHeight + row * [self iconViewHeight];
+    // ** item 中间总间距 **/
+    listHeight = listHeight + (row - 1) * [self itemVerticalMargin];
+    return listHeight;
+}
+
+- (NSMutableArray *)itemFrames {
+    if (!_itemFrames) {
+        _itemFrames = [[NSMutableArray alloc] init];
+    }
+    return _itemFrames;
+}
 - (void)setData:(NSArray *)data {
     _data = data;
     NSMutableArray *titles = [[NSMutableArray alloc] init];
     NSMutableArray *ids = [[NSMutableArray alloc] init];
+    [self.itemFrames removeAllObjects];
     for (ZRSWOrderMainTypeDetaolModel *cityModel in data) {
         if (cityModel.title.length > 0 && cityModel.mainTypeID.length > 0) {
             [titles addObject:cityModel.title];
             [ids addObject:cityModel.mainTypeID];
+            
+            ZRSWOrderMainTypeListItemFrame *frame = [[ZRSWOrderMainTypeListItemFrame alloc] init];
+            NSInteger index = [data indexOfObject:cityModel];
+            NSInteger row = index / [self itemCol];
+            NSInteger col = index % [self itemCol];
+            CGFloat item_x = [self itemLeft] + col * ([self iconViewWidth] + [self itemHorizontalMargin]);
+            CGFloat item_y = [self itemTopMargin] + row * ([self iconViewHeight] + [self itemVerticalMargin]);
+            frame.item_x = item_x;
+            frame.item_y = item_y;
+            frame.item_width = [self iconViewWidth];
+            frame.item_height = [self iconViewHeight];
+            [self.itemFrames addObject:frame];
         }
     }
     [[NSUserDefaults standardUserDefaults] setValue:titles forKey:KOrderMainTypeListNameKey];
@@ -96,6 +154,17 @@
 
 
 @end
+
+@implementation ZRSWOrderLoanHotProductModel
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"data" : [ZRSWOrderLoanInfoDetailModel class]
+             };
+}
+
+@end
+
 @implementation ZRSWOrderLoanInfoDetailModel
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{

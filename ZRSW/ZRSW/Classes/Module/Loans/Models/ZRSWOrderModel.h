@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ZRSWOrderMainTypeListItemFrame : NSObject
+@property (nonatomic, assign) CGFloat item_x;
+@property (nonatomic, assign) CGFloat item_y;
+@property (nonatomic, assign) CGFloat item_width;
+@property (nonatomic, assign) CGFloat item_height;
+@end
 @interface ZRSWOrderMainTypeDetaolModel : NSObject
 
 //贷款大类id
@@ -25,6 +31,13 @@
 @interface ZRSWOrderMainTypeListModel : BaseModel
 
 @property (nonatomic, strong) NSArray *data;
+
+
+// ** 每个item 的位置 **/
+@property (nonatomic, strong) NSMutableArray <ZRSWOrderMainTypeListItemFrame *> *itemFrames;
+
+// ** cell 高 **/
+- (CGFloat)getListHeigt;
 
 + (NSMutableArray *)getMainTypeTitles;
 + (NSMutableArray *)getMainTypeIDs;
@@ -113,6 +126,10 @@
 
 @end
 
+@interface ZRSWOrderLoanHotProductModel  : BaseModel
+
+@property (nonatomic, strong) NSArray *data;
+@end
 
 @interface ZRSWOrderListMainLoanTypeModel : NSObject
 //大类id；

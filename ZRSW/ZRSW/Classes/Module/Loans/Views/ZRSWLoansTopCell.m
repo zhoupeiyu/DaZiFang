@@ -7,6 +7,7 @@
 //
 
 #import "ZRSWLoansTopCell.h"
+#import <UIButton+WebCache.h>
 
 @implementation LoansCellStates
 
@@ -360,52 +361,6 @@
 
 @end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #pragma mark - headerView
 
 @interface ZRSWLoansTopHeaderView ()
@@ -483,7 +438,31 @@
 }
 @end
 
+@interface ZRSWLoansFasterEnterCell ()
 
+@end
+
+@implementation ZRSWLoansFasterEnterCell
+
+- (void)updateOrderMainTypeDetaolModel:(ZRSWOrderMainTypeListModel *)model {
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    for (NSInteger index = 0; index < model.itemFrames.count; index ++) {
+        ZRSWOrderMainTypeDetaolModel *detailModel = model.data[index];
+        ZRSWOrderMainTypeListItemFrame *frame = model.itemFrames[index];
+        CGRect btnFrame = CGRectMake(frame.item_x, frame.item_y, frame.item_width, frame.item_height);
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:detailModel.title forState:UIControlStateNormal];
+        [btn setTitle:detailModel.title forState:UIControlStateHighlighted];
+        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateHighlighted];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13.f];
+        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateNormal];
+        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateHighlighted];
+        btn.frame = btnFrame;
+        [self.contentView addSubview:btn];
+    }
+}
+@end
 
 
 

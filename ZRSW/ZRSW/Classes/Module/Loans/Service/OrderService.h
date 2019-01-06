@@ -36,6 +36,13 @@ typedef enum : NSUInteger {
 
 
 /**
+ 获得热门产品
+
+ @param cityID 城市
+ @param delegate 代理
+ */
+- (void)getHotProductList:(NSString *)cityID delegate:(id)delegate;
+/**
  贷款产品列表接口
 
  @param mainTypeId 贷款大类id
@@ -77,5 +84,6 @@ typedef enum : NSUInteger {
  @param condition 贷款所需材料：字段名为产品详情接口中返回的贷款材料id(conditionID)，值为用户上传的材料图片URL，多个URL使用英文逗号分隔；如果需要对多种材料进行上传，请分别使用对应的材料id(conditionID) ；ex: CON0001=身份证正面.jpg,身份证反面.jpg&CON002=房产证.jpg
  */
 - (void)createOrderLoanId:(NSString *)loanId loanUserName:(NSString *)loanUserName loanUserSex:(NSInteger)loanUserSex loanUserAddress:(NSString *)loanUserAddress loanUserPhone:(NSString *)loanUserPhone loanMoney:(NSString *)loanMoney remark:(NSString *)remark condition:(NSMutableArray *)condition delegate:(id)delegate;
+
 
 @end

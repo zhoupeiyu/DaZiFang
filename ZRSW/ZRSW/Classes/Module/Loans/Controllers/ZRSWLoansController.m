@@ -14,6 +14,7 @@
 #import "UserService.h"
 #import "ZRSWNewAndQuestionDetailsController.h"
 #import "ZRSWLoansTopCell.h"
+#import "OrderService.h"
 
 @interface ZRSWLoansController ()<SDCycleScrollViewDelegate,ZRSWHomeNewsHeaderViewDelegate>
 // ** 轮播图 **/
@@ -26,13 +27,17 @@
 @property (nonatomic, strong) NSMutableArray *hotInfoArray;
 // ** banner 图片数组 **/
 @property (nonatomic, strong) NSMutableArray *pictureArray;
+// ** 贷款大类 **/
+@property (nonatomic, strong) ZRSWOrderMainTypeListModel *mainTypeListModel;
+
 // ** banner 高度 **/
 @property (nonatomic, assign) CGFloat bannerHeight;
 // ** 快捷入口 高度 **/
 @property (nonatomic, assign) CGFloat fasterEntranceHeight;
 // ** header 高度 **/
 @property (nonatomic, assign) CGFloat sectionHeaderHeight;
-
+// ** 城市ID **/
+@property (nonatomic, strong) NSString *selectedCityID;
 @end
 
 @implementation ZRSWLoansController
@@ -92,7 +97,16 @@
     self.fasterEntranceHeight = kUI_HeightS(98);
     self.sectionHeaderHeight = kUI_HeightS(35);
     
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationKey];
+    if ([dic.allKeys containsObject:@"name"] && [dic.allKeys containsObject:@"id"]) {
+        NSString *name = dic[@"name"];
+        NSString *ID = dic[@"id"];
+        self.selectedCityID = ID;
+    }
+    
     [self requsetPopularInformationList];
+    [self requestMainType];
+    [self requsetHotProduct];
 }
 - (void)initilizeUI {
     
@@ -107,6 +121,19 @@
     [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:5 delegate:self];
 }
 
+- (void)requestMainType {
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [[[OrderService alloc] init] getOrderMainTypeList:self.selectedCityID delegate:self];
+    }
+}
+
+- (void)requsetHotProduct {
+    if ([TipViewManager showNetErrorToast]) {
+        [TipViewManager showLoading];
+        [[[OrderService alloc] init] getHotProductList:self.selectedCityID delegate:self];
+    }
+}
 #pragma mark - Private Method
 
 #pragma mark - System Method
@@ -190,27 +217,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
-        }
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"bannerHeaderView"];
         [cell.contentView addSubview:self.cycleScrollView];
         return cell;
     }
     else if (indexPath.section == 1) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
+        ZRSWLoansFasterEnterCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([ZRSWLoansFasterEnterCell class])];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
+            cell = [[ZRSWLoansFasterEnterCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([ZRSWLoansFasterEnterCell class])];
         }
-        cell.backgroundColor = [UIColor getRandomColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell updateOrderMainTypeDetaolModel:self.mainTypeListModel];
         return cell;
     }
     else if (indexPath.section == 2) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([UITableViewCell class])];
-        }
-        cell.backgroundColor = [UIColor getRandomColor];
+        ZRSWLoansProductAttributeCell *cell = [ZRSWLoansProductAttributeCell getCellWithTableView:tableView];
+        ZRSWOrderLoanInfoDetailModel *detailModel = self.hotInfoArray[indexPath.row];
+        [cell setInfoDetailModel:detailModel];
         return cell;
     }
     else if (indexPath.section == 3) {
@@ -252,7 +275,6 @@
 - (NSMutableArray *)loanProductArray {
     if (!_loanProductArray) {
         _loanProductArray = [[NSMutableArray alloc] init];
-        _loanProductArray = @[@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1"];
     }
     return _loanProductArray;
 }
@@ -287,6 +309,7 @@
 #pragma mark - Network CallBack
 
 - (void)requestFinishedWithStatus:(RequestFinishedStatus)status resObj:(id)resObj reqType:(NSString *)reqType {
+    [TipViewManager dismissLoading];
     if (status == RequestFinishedStatusSuccess) {
         if ([reqType isEqualToString:KGetNewsListPopInfoRequest]) {
             NewListModel *model = (NewListModel *)resObj;
@@ -298,6 +321,28 @@
                 [self.tableView reloadData];
             }else{
                 LLog(@"请求失败:%@",model.error_msg);
+            }
+        }
+        else if ([reqType isEqualToString:KGetOrderMainTypeListRequest]) {
+            ZRSWOrderMainTypeListModel *listModel = (ZRSWOrderMainTypeListModel *)resObj;
+            if (listModel.error_code.integerValue == 0) {
+                self.mainTypeListModel = listModel;
+                self.fasterEntranceHeight = listModel.getListHeigt;
+                [self.tableView reloadData];
+            }
+            else {
+                [TipViewManager showToastMessage:listModel.error_msg];
+            }
+        }
+        else if ([reqType isEqualToString:KGetOrderHotProductListRequest]) {
+            ZRSWOrderLoanHotProductModel *infoModel = (ZRSWOrderLoanHotProductModel *)resObj;
+            if (infoModel.error_code.integerValue == 0) {
+                [self.hotInfoArray removeAllObjects];
+                for (ZRSWOrderLoanInfoDetailModel *model in infoModel.data) {
+                    model.isNeedTittle = YES;
+                }
+                [self.hotInfoArray addObjectsFromArray:infoModel.data];
+                [self.tableView reloadData];
             }
         }
     }

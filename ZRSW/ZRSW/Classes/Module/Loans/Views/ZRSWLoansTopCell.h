@@ -58,3 +58,8 @@
 
 @end
 
+@interface ZRSWLoansFasterEnterCell : UITableViewCell
+
+- (void)updateOrderMainTypeDetaolModel:(ZRSWOrderMainTypeListModel *)model;
+
+@end
