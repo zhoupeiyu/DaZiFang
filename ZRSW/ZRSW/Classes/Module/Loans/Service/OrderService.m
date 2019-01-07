@@ -24,6 +24,13 @@
 
 }
 
+- (void)getHotProductList:(NSString *)cityID delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (cityID.length > 0) {
+        [params setObject:cityID forKey:@"cityId"];
+    }
+    [self POST:KGetOrderHotProductListInterface reqType:KGetOrderHotProductListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanHotProductModel class] NeedCache:NO];
+}
 - (void)getOrderLoanTypeList:(NSString *)mainTypeId delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (mainTypeId.length > 0) {

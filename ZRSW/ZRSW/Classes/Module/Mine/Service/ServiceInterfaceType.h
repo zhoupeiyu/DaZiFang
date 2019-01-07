@@ -90,6 +90,9 @@
 // 获得贷款大类
 #define KGetOrderMainTypeListRequest           @"KGetOrderMainTypeListRequest"
 
+// 获得热门产品
+#define KGetOrderHotProductListRequest          @"KGetOrderHotProductListRequest"
+
 //贷款产品列表接口
 #define KGetOrderLoanTypeListRequest            @"KGetOrderLoanTypeListRequest"
 

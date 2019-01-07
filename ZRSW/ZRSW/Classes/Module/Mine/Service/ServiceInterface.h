@@ -82,6 +82,10 @@
 // 贷款大类列表接口
 #define KGetOrderMainTypeListInterface                  @"api/order/mainTypeList"
 
+// 获得热门商品
+#define KGetOrderHotProductListInterface                  @"api/index/hotLoans"
+
+
 //贷款产品列表接口
 #define KGetOrderLoanTypeListInterface                  @"api/order/loanTypeList"
 

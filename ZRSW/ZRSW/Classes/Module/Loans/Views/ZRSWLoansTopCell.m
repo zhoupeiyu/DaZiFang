@@ -7,6 +7,7 @@
 //
 
 #import "ZRSWLoansTopCell.h"
+#import <UIButton+WebCache.h>
 
 @implementation LoansCellStates
 
@@ -206,6 +207,7 @@
 
 @interface ZRSWLoansProductAttributeCell ()
 @property (nonatomic, strong) NSMutableArray <UILabel *> *lblArray;
+@property (nonatomic, strong) UILabel *titleLbl;
 
 @end
 @implementation ZRSWLoansProductAttributeCell
@@ -231,12 +233,19 @@
 }
 
 - (void)setupLayout {
+    
     NSInteger count = [self.infoDetailModel warpCount];
     CGFloat width = (SCREEN_WIDTH - count * 2 * [self.infoDetailModel attrsLeft]);
     CGFloat height = [self.infoDetailModel attrsItemHeight];
     CGFloat margin = [self.infoDetailModel attrsItemMargin];
     CGFloat top = [self.infoDetailModel attrsTop];
     CGFloat left = [self.infoDetailModel attrsLeft];
+    
+    if (self.infoDetailModel.isNeedTittle) {
+        [self.contentView addSubview:self.titleLbl];
+        self.titleLbl.text = self.infoDetailModel.title;
+        top = top + [self.infoDetailModel titleHeight] + [self.infoDetailModel attrsItemMargin];
+    }
     [self.lblArray mas_distributeSudokuViewsWithFixedItemWidth:width fixedItemHeight:height fixedLineSpacing:margin fixedInteritemSpacing:-50 warpCount:count topSpacing:top bottomSpacing:top leadSpacing:left tailSpacing:0];
 }
 - (void)setInfoDetailModel:(ZRSWOrderLoanInfoDetailModel *)infoDetailModel {
@@ -274,6 +283,15 @@
     return lbl;
 }
 
+- (UILabel *)titleLbl {
+    if (!_titleLbl) {
+        _titleLbl = [[UILabel alloc] init];
+        _titleLbl.textAlignment = NSTextAlignmentLeft;
+        _titleLbl.font = [UIFont boldSystemFontOfSize:16];
+        _titleLbl.textColor = [LoansCellStates getBlackColor];
+    }
+    return _titleLbl;
+}
 @end
 
 @interface ZRSWLoansConditionCell ()
@@ -342,52 +360,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #pragma mark - headerView
 
@@ -466,7 +438,31 @@
 }
 @end
 
+@interface ZRSWLoansFasterEnterCell ()
 
+@end
+
+@implementation ZRSWLoansFasterEnterCell
+
+- (void)updateOrderMainTypeDetaolModel:(ZRSWOrderMainTypeListModel *)model {
+    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    for (NSInteger index = 0; index < model.itemFrames.count; index ++) {
+        ZRSWOrderMainTypeDetaolModel *detailModel = model.data[index];
+        ZRSWOrderMainTypeListItemFrame *frame = model.itemFrames[index];
+        CGRect btnFrame = CGRectMake(frame.item_x, frame.item_y, frame.item_width, frame.item_height);
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:detailModel.title forState:UIControlStateNormal];
+        [btn setTitle:detailModel.title forState:UIControlStateHighlighted];
+        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateHighlighted];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13.f];
+        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateNormal];
+        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateHighlighted];
+        btn.frame = btnFrame;
+        [self.contentView addSubview:btn];
+    }
+}
+@end
 
 
 

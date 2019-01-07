@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "BaseTableViewController.h"
 
-@interface ZRSWLoansController : BaseViewController
+@interface ZRSWLoansController : BaseTableViewController
 
 @end
