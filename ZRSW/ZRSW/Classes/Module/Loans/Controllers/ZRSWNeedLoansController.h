@@ -10,4 +10,5 @@
 
 @interface ZRSWNeedLoansController : BaseTableViewController
 
+@property (nonatomic, strong) NSString *loanId;
 @end

@@ -60,9 +60,9 @@
     // ** item 顶部底部的高度 **/
     NSInteger listHeight = 2 * [self itemTopMargin];
     // ** item 总高度 **/
-    listHeight = listHeight + row * [self iconViewHeight];
+    listHeight = listHeight + (row + 1) * [self iconViewHeight];
     // ** item 中间总间距 **/
-    listHeight = listHeight + (row - 1) * [self itemVerticalMargin];
+    listHeight = listHeight + row * [self itemVerticalMargin];
     return listHeight;
 }
 
@@ -185,7 +185,7 @@
     return 10;
 }
 - (CGFloat)attrsItemHeight {
-    return 14;
+    return 15;
 }
 
 - (CGFloat)titleHeight {

@@ -73,18 +73,18 @@
     [super setupConfig];
     self.title = @"我要贷款";
     [self setLeftBackBarButton];
-    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationKey];
-    NSMutableDictionary *dataDic = self.topDataSource[0];
-    if ([dic.allKeys containsObject:@"name"] && [dic.allKeys containsObject:@"id"]) {
-        NSString *name = dic[@"name"];
-        NSString *ID = dic[@"id"];
-        [dataDic setObject:name forKey:KContentKey];
-        [dataDic setObject:ID forKey:KIDKey];
-        self.selectedNewCity = YES;
-        self.selectedCityID = ID;
-    }
+//    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:CurrentLocationKey];
+//    NSMutableDictionary *dataDic = self.topDataSource[0];
+//    if ([dic.allKeys containsObject:@"name"] && [dic.allKeys containsObject:@"id"]) {
+//        NSString *name = dic[@"name"];
+//        NSString *ID = dic[@"id"];
+//        [dataDic setObject:name forKey:KContentKey];
+//        [dataDic setObject:ID forKey:KIDKey];
+//        self.selectedNewCity = YES;
+//        self.selectedCityID = ID;
+//    }
     
-    LLog(@"%@",dic);
+    [self requestLoanInfo];
     
 }
 - (void)setupLayOut {
@@ -96,11 +96,11 @@
     }];
 }
 - (void)goBack {
-    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
-    if (![UserModel hasLogin]) {
-        lastIndex = 0;
-    }
-    [self.tabBarController setSelectedIndex:lastIndex];
+//    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+//    if (![UserModel hasLogin]) {
+//        lastIndex = 0;
+//    }
+//    [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -158,12 +158,14 @@
 }
 
 - (void)requestMainType {
+    return;
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         [self.service getOrderMainTypeList:self.selectedCityID delegate:self];
     }
 }
 - (void)rquestLoanType {
+    return;
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
         [self.service getOrderLoanTypeList:self.selectedMainTypeID delegate:self];
@@ -176,6 +178,11 @@
     }
 }
 
+- (void)setLoanId:(NSString *)loanId {
+    _loanId = loanId;
+    self.selectedLoanID = loanId;
+    
+}
 - (void)setInfoModel:(ZRSWOrderLoanInfoModel *)infoModel {
     _infoModel = infoModel;
     [self.tableView reloadData];
@@ -184,7 +191,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.selectedLoanID.length > 0 && self.infoModel) {
-        return 5;
+        return 4;
     }
     else {
         return 1;
@@ -193,7 +200,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
+        return 0;
     }
     return 1;
 }
@@ -238,6 +245,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
+        return 0;
         return [ZRSWLoansTopCell cellHeigh];
     }
     else if (indexPath.section == 1) {
@@ -432,13 +440,13 @@
 - (UIButton *)footBtn {
     if (!_footBtn) {
         _footBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_footBtn setBackgroundImage:[UIImage imageNamed:@"currency_bottom_button"] forState:UIControlStateNormal];
+        [_footBtn setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x4771f3]] forState:UIControlStateNormal];
         [_footBtn setTitle:@"线上预审" forState:UIControlStateNormal];
         [_footBtn setTitleColor:[UIColor colorFromRGB:0xffffff] forState:UIControlStateNormal];
         [_footBtn setAdjustsImageWhenHighlighted:YES];
-        [_footBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 0)];
+//        [_footBtn setContentEdgeInsets:UIEdgeInsetsMake(10, 0, 0, 0)];
         _footBtn.titleLabel.font = [UIFont systemFontOfSize:18];
-        _footBtn.enabled = NO;
+        _footBtn.enabled = YES;
         [_footBtn addTarget:self action:@selector(nextAcrion) forControlEvents:UIControlEventTouchUpInside];
     }
     return _footBtn;

@@ -15,4 +15,6 @@
 - (void)setTitle:(NSString *)title;
 @property (nonatomic,weak) id<ZRSWHomeNewsHeaderViewDelegate>delegate;
 
+- (void)showLineView;
+
 @end

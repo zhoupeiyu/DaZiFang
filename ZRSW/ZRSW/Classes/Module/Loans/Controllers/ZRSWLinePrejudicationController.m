@@ -75,8 +75,8 @@
 #pragma mark - action
 
 - (void)back {
-    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
-    [self.tabBarController setSelectedIndex:lastIndex];
+//    NSUInteger lastIndex = [[NSUserDefaults standardUserDefaults] integerForKey:TabBarDidClickNotificationKey];
+//    [self.tabBarController setSelectedIndex:lastIndex];
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)footBtnAction {

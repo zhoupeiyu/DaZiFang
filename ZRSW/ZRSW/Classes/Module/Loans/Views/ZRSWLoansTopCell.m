@@ -208,6 +208,7 @@
 @interface ZRSWLoansProductAttributeCell ()
 @property (nonatomic, strong) NSMutableArray <UILabel *> *lblArray;
 @property (nonatomic, strong) UILabel *titleLbl;
+@property (nonatomic, strong) UIImageView *lineView;
 
 @end
 @implementation ZRSWLoansProductAttributeCell
@@ -223,15 +224,20 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self setupConfig];
+        [self setupUI];
     }
     return self;
 }
 - (void)setupConfig {
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.selectedBackgroundView = [ZRSWViewFactoryTool getCellSelectedView:self.contentView.bounds];
     _lblArray = [[NSMutableArray alloc] init];
 }
 
+- (void)setupUI {
+    [self.contentView addSubview:self.lineView];
+}
 - (void)setupLayout {
     
     NSInteger count = [self.infoDetailModel warpCount];
@@ -244,9 +250,23 @@
     if (self.infoDetailModel.isNeedTittle) {
         [self.contentView addSubview:self.titleLbl];
         self.titleLbl.text = self.infoDetailModel.title;
+        self.titleLbl.x = left;
+        self.titleLbl.y = [self.infoDetailModel attrsTop] - 1;
+        [self.titleLbl sizeToFit];
         top = top + [self.infoDetailModel titleHeight] + [self.infoDetailModel attrsItemMargin];
     }
-    [self.lblArray mas_distributeSudokuViewsWithFixedItemWidth:width fixedItemHeight:height fixedLineSpacing:margin fixedInteritemSpacing:-50 warpCount:count topSpacing:top bottomSpacing:top leadSpacing:left tailSpacing:0];
+    for (NSInteger index = 0; index < self.lblArray.count; index ++) {
+        UILabel *lbl = self.lblArray[index];
+        lbl.x = left;
+        lbl.y = top + index * (height + margin);
+        lbl.width = width;
+        lbl.height = height;
+    }
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.right.mas_equalTo(-15);
+        make.bottom.mas_equalTo(0);
+    }];
 }
 - (void)setInfoDetailModel:(ZRSWOrderLoanInfoDetailModel *)infoDetailModel {
     if (!infoDetailModel) return;
@@ -292,6 +312,13 @@
     }
     return _titleLbl;
 }
+- (UIImageView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"currency_line_720"]];
+    }
+    return _lineView;
+}
+
 @end
 
 @interface ZRSWLoansConditionCell ()

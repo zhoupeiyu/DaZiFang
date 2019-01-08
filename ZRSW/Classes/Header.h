@@ -70,6 +70,7 @@
 #import "ControllerUtilsManager.h"
 #import "UploadImagesManager.h"
 #import "VersionManager.h"
+#import "BaseImageButton.h"
 
 #pragma mark - 第三方
 

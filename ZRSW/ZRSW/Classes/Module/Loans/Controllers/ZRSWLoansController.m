@@ -15,6 +15,7 @@
 #import "ZRSWNewAndQuestionDetailsController.h"
 #import "ZRSWLoansTopCell.h"
 #import "OrderService.h"
+#import "ZRSWLinePrejudicationController.h"
 
 @interface ZRSWLoansController ()<SDCycleScrollViewDelegate,ZRSWHomeNewsHeaderViewDelegate>
 // ** 轮播图 **/
@@ -29,7 +30,10 @@
 @property (nonatomic, strong) NSMutableArray *pictureArray;
 // ** 贷款大类 **/
 @property (nonatomic, strong) ZRSWOrderMainTypeListModel *mainTypeListModel;
-
+// ** 热门产品 **/
+@property (nonatomic, strong) ZRSWHomeNewsHeaderView *hotProductHeader;
+// ** 热门资讯 **/
+@property (nonatomic, strong) ZRSWHomeNewsHeaderView *hotInfoHeader;
 // ** banner 高度 **/
 @property (nonatomic, assign) CGFloat bannerHeight;
 // ** 快捷入口 高度 **/
@@ -48,6 +52,7 @@
     
 }
 - (void)viewDidLoad {
+    self.tableViewStyle = UITableViewStyleGrouped;
     [super viewDidLoad];
     [self initialization];
 }
@@ -131,6 +136,7 @@
 - (void)requsetHotProduct {
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
+//
         [[[OrderService alloc] init] getHotProductList:self.selectedCityID delegate:self];
     }
 }
@@ -171,12 +177,12 @@
         ZRSWHomeNewsHeaderView *headerView = [[ZRSWHomeNewsHeaderView alloc] init];
         headerView.nextBtn.tag = section;
         if (section == 2) {
-            [headerView setTitle:@"热门贷款产品"];
-        }else if (section == 3) {
-            [headerView setTitle:@"热门资讯"];
+            return self.hotProductHeader;
         }
-        headerView.delegate = self;
-        return headerView;
+        else if (section == 3) {
+            return self.hotInfoHeader;
+        }
+        return nil;
     }
     return nil;
 }
@@ -207,7 +213,8 @@
         heightForRowAtIndexPath = self.fasterEntranceHeight;
     }
     else if (indexPath.section == 2) {
-        heightForRowAtIndexPath = 137;
+        ZRSWOrderLoanInfoDetailModel *detailModel = self.loanProductArray[indexPath.row];
+        heightForRowAtIndexPath = [detailModel attrsCellHeight];
     }
     else if (indexPath.section == 3) {
         heightForRowAtIndexPath = kUI_HeightS(120);
@@ -232,7 +239,8 @@
     }
     else if (indexPath.section == 2) {
         ZRSWLoansProductAttributeCell *cell = [ZRSWLoansProductAttributeCell getCellWithTableView:tableView];
-        ZRSWOrderLoanInfoDetailModel *detailModel = self.hotInfoArray[indexPath.row];
+        ZRSWOrderLoanInfoDetailModel *detailModel = self.loanProductArray[indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         [cell setInfoDetailModel:detailModel];
         return cell;
     }
@@ -252,7 +260,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == 3) {
+    if (indexPath.section == 2) {
+        ZRSWOrderLoanInfoDetailModel *detailModel = self.loanProductArray[indexPath.row];
+        ZRSWNeedLoansController *vc = [[ZRSWNeedLoansController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        vc.loanId = detailModel.loanID;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (indexPath.section == 3) {
         ZRSWNewAndQuestionDetailsController *detailsVC = [[ZRSWNewAndQuestionDetailsController alloc] init];
         detailsVC.type = DetailsTypePopularInformation;
         detailsVC.hidesBottomBarWhenPushed = YES;
@@ -304,7 +319,23 @@
     }
     return _cycleScrollView;
 }
-
+- (ZRSWHomeNewsHeaderView *)hotInfoHeader {
+    if (!_hotInfoHeader) {
+        _hotInfoHeader = [[ZRSWHomeNewsHeaderView alloc] init];
+        [_hotInfoHeader setTitle:@"热门资讯"];
+        _hotInfoHeader.delegate = self;
+    }
+    return _hotInfoHeader;
+}
+- (ZRSWHomeNewsHeaderView *)hotProductHeader {
+    if (!_hotProductHeader) {
+        _hotProductHeader = [[ZRSWHomeNewsHeaderView alloc] init];
+        [_hotProductHeader setTitle:@"热门贷款产品"];
+        _hotProductHeader.delegate = self;
+        [_hotProductHeader showLineView];
+    }
+    return _hotProductHeader;
+}
 
 #pragma mark - Network CallBack
 
@@ -337,11 +368,11 @@
         else if ([reqType isEqualToString:KGetOrderHotProductListRequest]) {
             ZRSWOrderLoanHotProductModel *infoModel = (ZRSWOrderLoanHotProductModel *)resObj;
             if (infoModel.error_code.integerValue == 0) {
-                [self.hotInfoArray removeAllObjects];
+                [self.loanProductArray removeAllObjects];
                 for (ZRSWOrderLoanInfoDetailModel *model in infoModel.data) {
                     model.isNeedTittle = YES;
                 }
-                [self.hotInfoArray addObjectsFromArray:infoModel.data];
+                [self.loanProductArray addObjectsFromArray:infoModel.data];
                 [self.tableView reloadData];
             }
         }

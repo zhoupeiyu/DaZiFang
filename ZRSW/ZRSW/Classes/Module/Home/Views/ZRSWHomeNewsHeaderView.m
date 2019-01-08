@@ -12,6 +12,8 @@
 @property (nonatomic, strong) UIImageView *leftImageView;
 @property (nonatomic, strong) UIButton *arrowButton;
 @property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIImageView *lineView;
+
 @end
 @implementation ZRSWHomeNewsHeaderView
 - (instancetype)init{
@@ -34,6 +36,15 @@
 
 }
 
+- (void)showLineView {
+    [self addSubview:self.lineView];
+    _lineView.hidden = NO;
+    [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.bottom.mas_equalTo(0);
+        make.right.mas_equalTo(-15);
+    }];
+}
 - (void)layoutSubviews{
     self.leftImageView.frame = CGRectMake(kUI_WidthS(15),kUI_HeightS(10), kUI_WidthS(3), kUI_HeightS(15));
     self.titleLabel.frame = CGRectMake(self.leftImageView.right + kUI_WidthS(10),kUI_HeightS(10), kUI_WidthS(128), kUI_HeightS(16));
@@ -76,7 +87,13 @@
     return _nextBtn;
 }
 
-
+- (UIImageView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"currency_line_720"]];
+        _lineView.hidden = YES;
+    }
+    return _lineView;
+}
 - (void)setTitle:(NSString *)title{
     self.titleLabel.text = title;
 }
