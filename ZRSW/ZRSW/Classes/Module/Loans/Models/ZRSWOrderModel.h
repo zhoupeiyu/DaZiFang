@@ -32,6 +32,7 @@
 
 @property (nonatomic, strong) NSArray *data;
 
+- (CGFloat)iconViewWidth;
 
 // ** 每个item 的位置 **/
 @property (nonatomic, strong) NSMutableArray <ZRSWOrderMainTypeListItemFrame *> *itemFrames;

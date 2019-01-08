@@ -476,17 +476,21 @@
     for (NSInteger index = 0; index < model.itemFrames.count; index ++) {
         ZRSWOrderMainTypeDetaolModel *detailModel = model.data[index];
         ZRSWOrderMainTypeListItemFrame *frame = model.itemFrames[index];
-        CGRect btnFrame = CGRectMake(frame.item_x, frame.item_y, frame.item_width, frame.item_height);
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [btn setTitle:detailModel.title forState:UIControlStateNormal];
-        [btn setTitle:detailModel.title forState:UIControlStateHighlighted];
-        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[LoansCellStates getBlackColor] forState:UIControlStateHighlighted];
-        btn.titleLabel.font = [UIFont systemFontOfSize:13.f];
-        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateNormal];
-        [btn sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl] forState:UIControlStateHighlighted];
-        btn.frame = btnFrame;
-        [self.contentView addSubview:btn];
+        
+        BaseImageButton *imageBtn = [[BaseImageButton alloc] initWithType:BaseImageButtonTypeTop AndMarginArr:@[@4]];
+        [self.contentView addSubview:imageBtn];
+        [imageBtn setText:detailModel.title];
+        [imageBtn setNormolTextColor:[LoansCellStates getBlackColor] AndhighLightTextColor:[LoansCellStates getBlackColor]];
+        imageBtn.contentLabel.font = [UIFont systemFontOfSize:13.f];
+        [imageBtn.imageView sd_setImageWithURL:[NSURL URLWithString:detailModel.thumbImgUrl]];
+        [imageBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(frame.item_x);
+            make.top.mas_equalTo(frame.item_y);
+            make.size.mas_equalTo(CGSizeMake(frame.item_width, frame.item_height));
+        }];
+        [imageBtn.imageView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake([model iconViewWidth], [model iconViewWidth]));
+        }];
     }
 }
 @end

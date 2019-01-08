@@ -56,7 +56,8 @@
 }
 
 - (CGFloat)getListHeigt {
-    NSInteger row = self.data.count / [self itemCol];
+    NSInteger count = self.data.count - 1;
+    NSInteger row = (count > 0 ? count : 0)  / [self itemCol];
     // ** item 顶部底部的高度 **/
     NSInteger listHeight = 2 * [self itemTopMargin];
     // ** item 总高度 **/
