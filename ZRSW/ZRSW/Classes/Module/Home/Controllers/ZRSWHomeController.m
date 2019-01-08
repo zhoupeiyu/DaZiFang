@@ -561,34 +561,67 @@
     return _cycleScrollView;
 }
 
+//- (UIView *)loanView{
+//    if (!_loanView) {
+//        CGFloat height = kUI_HeightS(135);
+//        _loanView = [[UIView alloc] initWithFrame:CGRectMake(0, self.cycleScrollView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
+//        _loanView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
+//        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(126))/2 , kUI_HeightS(15), kUI_WidthS(126), kUI_HeightS(15))];
+//        titleLabel.text = @"最高可贷款（元）";
+//        titleLabel.textColor = [UIColor colorFromRGB:0x666666];
+//        titleLabel.textAlignment = NSTextAlignmentCenter;
+//        titleLabel.font = [UIFont systemFontOfSize:15];
+//        [_loanView addSubview:titleLabel];
+//        _loanAmountLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(205))/2 , titleLabel.bottom + kUI_HeightS(16), kUI_WidthS(205), kUI_HeightS(36))];
+//        _loanAmountLabel.textColor = [UIColor colorWithGradientStyle:UIGradientStyleLeftToRight withFrame:_loanAmountLabel.bounds andColors:@[[UIColor colorFromRGB:0xFFFF5153],[UIColor colorFromRGB:0xFFFF806B]]];;
+//        _loanAmountLabel.textAlignment = NSTextAlignmentLeft;
+//        _loanAmountLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
+//        NSShadow *shadow = [[NSShadow alloc] init];
+//        shadow.shadowBlurRadius = 4;
+//        shadow.shadowColor = [UIColor colorWithRed:255/255.0 green:88/255.0 blue:87/255.0 alpha:0.3];
+//        shadow.shadowOffset = CGSizeMake(0,2);
+//        _loanAmountLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"10,000,000"attributes:@{NSShadowAttributeName: shadow}];
+//
+//        [_loanView addSubview:_loanAmountLabel];
+//        UIButton *loanButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(226))/2 , _loanAmountLabel.bottom + kUI_HeightS(12), kUI_WidthS(226), kUI_HeightS(29))];
+//        [loanButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x4771F2]] forState:UIControlStateNormal];
+//        [loanButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x2341BF]] forState:UIControlStateHighlighted];
+//        [loanButton.layer setCornerRadius:5.0];
+//        [loanButton.layer setMasksToBounds:YES];
+//        [loanButton setTitle:@"我要贷款" forState:UIControlStateNormal];
+//        [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
+//        [loanButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
+//        [loanButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
+//        [_loanView addSubview:loanButton];
+//    }
+//    return _loanView;
+//}
+
+
+
 - (UIView *)loanView{
     if (!_loanView) {
         CGFloat height = kUI_HeightS(135);
         _loanView = [[UIView alloc] initWithFrame:CGRectMake(0, self.cycleScrollView.bottom + kUI_HeightS(10), SCREEN_WIDTH, height)];
         _loanView.backgroundColor = [UIColor colorFromRGB:0xFFFFFF];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(126))/2 , kUI_HeightS(15), kUI_WidthS(126), kUI_HeightS(15))];
-        titleLabel.text = @"最高可贷款（元）";
-        titleLabel.textColor = [UIColor colorFromRGB:0x666666];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.font = [UIFont systemFontOfSize:15];
-        [_loanView addSubview:titleLabel];
-        _loanAmountLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(205))/2 , titleLabel.bottom + kUI_HeightS(16), kUI_WidthS(205), kUI_HeightS(36))];
-        _loanAmountLabel.textColor = [UIColor colorWithGradientStyle:UIGradientStyleLeftToRight withFrame:_loanAmountLabel.bounds andColors:@[[UIColor colorFromRGB:0xFFFF5153],[UIColor colorFromRGB:0xFFFF806B]]];;
-        _loanAmountLabel.textAlignment = NSTextAlignmentLeft;
-        _loanAmountLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:36];
-        NSShadow *shadow = [[NSShadow alloc] init];
-        shadow.shadowBlurRadius = 4;
-        shadow.shadowColor = [UIColor colorWithRed:255/255.0 green:88/255.0 blue:87/255.0 alpha:0.3];
-        shadow.shadowOffset = CGSizeMake(0,2);
-        _loanAmountLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"10,000,000"attributes:@{NSShadowAttributeName: shadow}];
-
-        [_loanView addSubview:_loanAmountLabel];
-        UIButton *loanButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(226))/2 , _loanAmountLabel.bottom + kUI_HeightS(12), kUI_WidthS(226), kUI_HeightS(29))];
+        UILabel *titleLabel1 = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(200))/2 , kUI_HeightS(20), kUI_WidthS(200), kUI_HeightS(18))];
+        titleLabel1.text = @"汇集业内热门贷款产品";
+        titleLabel1.textColor = [UIColor colorFromRGB:0x474455];
+        titleLabel1.textAlignment = NSTextAlignmentCenter;
+        titleLabel1.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+        [_loanView addSubview:titleLabel1];
+        UILabel *titleLabel2 = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(200))/2 , titleLabel1.bottom + kUI_HeightS(15), kUI_WidthS(200), kUI_HeightS(18))];
+        titleLabel2.text = @"懂您所需，贷您所想！";
+        titleLabel2.textColor = [UIColor colorFromRGB:0x474455];
+        titleLabel2.textAlignment = NSTextAlignmentCenter;
+        titleLabel2.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+        [_loanView addSubview:titleLabel2];
+        UIButton *loanButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(226))/2 , titleLabel2.bottom + kUI_HeightS(15), kUI_WidthS(226), kUI_HeightS(29))];
         [loanButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x4771F2]] forState:UIControlStateNormal];
         [loanButton setBackgroundImage:[UIImage imageWithColor:[UIColor colorFromRGB:0x2341BF]] forState:UIControlStateHighlighted];
         [loanButton.layer setCornerRadius:5.0];
         [loanButton.layer setMasksToBounds:YES];
-        [loanButton setTitle:@"我要贷款" forState:UIControlStateNormal];
+        [loanButton setTitle:@"查看贷款产品" forState:UIControlStateNormal];
         [loanButton setTitleColor:[UIColor colorFromRGB:0xFFFFFF] forState:UIControlStateNormal];
         [loanButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:15]];
         [loanButton addTarget:self action:@selector(loanButtonClck:) forControlEvents:UIControlEventTouchUpInside];
