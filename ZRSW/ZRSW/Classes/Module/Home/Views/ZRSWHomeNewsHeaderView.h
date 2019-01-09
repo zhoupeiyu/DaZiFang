@@ -12,6 +12,7 @@
 @end
 @interface ZRSWHomeNewsHeaderView : UIView
 @property (nonatomic, strong) UIButton *nextBtn;
+@property (nonatomic, strong) UIButton *arrowButton;
 - (void)setTitle:(NSString *)title;
 @property (nonatomic,weak) id<ZRSWHomeNewsHeaderViewDelegate>delegate;
 

@@ -10,7 +10,6 @@
 
 @interface ZRSWHomeNewsHeaderView ()
 @property (nonatomic, strong) UIImageView *leftImageView;
-@property (nonatomic, strong) UIButton *arrowButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *lineView;
 

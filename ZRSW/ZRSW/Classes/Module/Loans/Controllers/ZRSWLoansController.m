@@ -17,6 +17,7 @@
 #import "OrderService.h"
 #import "ZRSWLinePrejudicationController.h"
 #import "ZRSWProductListController.h"
+#import "ZRSWNewsListDetailsController.h"
 
 @interface ZRSWLoansController ()<SDCycleScrollViewDelegate,ZRSWHomeNewsHeaderViewDelegate>
 // ** 轮播图 **/
@@ -124,7 +125,7 @@
 #pragma mark - Public Method
 
 - (void)requsetPopularInformationList{
-    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:5 delegate:self];
+    [[[UserService alloc] init] getNewList:NewListTypePopularInformation lastId:nil pageSize:3 delegate:self];
 }
 
 - (void)requestMainType {
@@ -146,6 +147,17 @@
 #pragma mark - System Method
 
 #pragma mark - Delegate && DataSource
+
+-(void)getMoreClick:(NSInteger)type title:(NSString *)title{
+    if (type == 0) {
+        LLog(@"热门资讯");
+        ZRSWNewsListDetailsController *listDetailsVC = [[ZRSWNewsListDetailsController alloc] init];
+        listDetailsVC.type = NewListTypePopularInformation;
+        listDetailsVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:listDetailsVC animated:YES];
+    }else if (type == 1){
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger numberOfRowsInSection = 0;
@@ -342,6 +354,7 @@
         [_hotProductHeader setTitle:@"热门贷款产品"];
         _hotProductHeader.delegate = self;
         [_hotProductHeader showLineView];
+        _hotProductHeader.arrowButton.hidden = YES;
     }
     return _hotProductHeader;
 }
