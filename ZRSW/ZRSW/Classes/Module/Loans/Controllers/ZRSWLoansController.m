@@ -16,6 +16,7 @@
 #import "ZRSWLoansTopCell.h"
 #import "OrderService.h"
 #import "ZRSWLinePrejudicationController.h"
+#import "ZRSWProductListController.h"
 
 @interface ZRSWLoansController ()<SDCycleScrollViewDelegate,ZRSWHomeNewsHeaderViewDelegate>
 // ** 轮播图 **/
@@ -235,12 +236,20 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell updateOrderMainTypeDetaolModel:self.mainTypeListModel];
+        [cell setImageBtnClick:^(ZRSWOrderMainTypeDetaolModel *model) {
+            ZRSWProductListController *vc = [[ZRSWProductListController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.mainTypeID = model.mainTypeID;
+            vc.title = model.title;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
         return cell;
     }
     else if (indexPath.section == 2) {
         ZRSWLoansProductAttributeCell *cell = [ZRSWLoansProductAttributeCell getCellWithTableView:tableView];
         ZRSWOrderLoanInfoDetailModel *detailModel = self.loanProductArray[indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.changedColor = [UIColor colorFromRGB:0x4771f2];
         [cell setInfoDetailModel:detailModel];
         return cell;
     }

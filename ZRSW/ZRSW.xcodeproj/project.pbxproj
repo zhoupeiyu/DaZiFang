@@ -765,6 +765,7 @@
 		E5CA99522177933400C1906D /* btn_deleted_img_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA99502177933400C1906D /* btn_deleted_img_normal@3x.png */; };
 		E5CA995421781D9900C1906D /* pretrial_delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */; };
 		E5CD228521E4C83400CD8B5A /* BaseImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CD228421E4C83400CD8B5A /* BaseImageButton.m */; };
+		E5CD228821E4F42300CD8B5A /* ZRSWProductListController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CD228721E4F42300CD8B5A /* ZRSWProductListController.m */; };
 		E5D39185215CA95400E4F962 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D39184215CA95400E4F962 /* libc++.tbd */; };
 		E5E27963215CD629007D27A8 /* ZRSWForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */; };
 		E5E27980215DF621007D27A8 /* UploadImagesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E2797F215DF621007D27A8 /* UploadImagesManager.m */; };
@@ -2067,6 +2068,8 @@
 		E5CA995321781D9900C1906D /* pretrial_delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pretrial_delete_button@2x.png"; sourceTree = "<group>"; };
 		E5CD228321E4C83400CD8B5A /* BaseImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseImageButton.h; sourceTree = "<group>"; };
 		E5CD228421E4C83400CD8B5A /* BaseImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseImageButton.m; sourceTree = "<group>"; };
+		E5CD228621E4F42300CD8B5A /* ZRSWProductListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWProductListController.h; sourceTree = "<group>"; };
+		E5CD228721E4F42300CD8B5A /* ZRSWProductListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWProductListController.m; sourceTree = "<group>"; };
 		E5D39184215CA95400E4F962 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		E5E27961215CD629007D27A8 /* ZRSWForgetPwdViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZRSWForgetPwdViewController.h; sourceTree = "<group>"; };
 		E5E27962215CD629007D27A8 /* ZRSWForgetPwdViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZRSWForgetPwdViewController.m; sourceTree = "<group>"; };
@@ -4084,6 +4087,8 @@
 				E5533E1121646064003631E6 /* ZRSWNeedLoansController.m */,
 				E5533E0C2164601B003631E6 /* ZRSWLinePrejudicationController.h */,
 				E5533E0D2164601B003631E6 /* ZRSWLinePrejudicationController.m */,
+				E5CD228621E4F42300CD8B5A /* ZRSWProductListController.h */,
+				E5CD228721E4F42300CD8B5A /* ZRSWProductListController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -5582,6 +5587,7 @@
 				E55340182164620F003631E6 /* UILabel+JKAutomaticWriting.m in Sources */,
 				3CD3C80D215FC77F00DE6199 /* EaseBubbleView+Voice.m in Sources */,
 				E5533E1021646040003631E6 /* ZRSWLoginController.m in Sources */,
+				E5CD228821E4F42300CD8B5A /* ZRSWProductListController.m in Sources */,
 				E55340512164620F003631E6 /* UINavigationItem+JKLoading.m in Sources */,
 				3C158A562179845100CC2366 /* UIImage+compress.m in Sources */,
 				E553400D2164620F003631E6 /* UIImage+JKRemoteSize.m in Sources */,

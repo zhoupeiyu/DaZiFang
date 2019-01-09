@@ -110,6 +110,11 @@
 @end
 
 @implementation ZRSWOrderLoanTypDetailModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"loanTypeAttrs" : [ZRSWOrderLoanInfoAttrs class],
+             };
+}
 
 @end
 @implementation ZRSWOrderLoanTypeListModel
@@ -156,6 +161,14 @@
 
 @end
 
+@implementation ZRSWOrderLoanProductListModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"data" : [ZRSWOrderLoanInfoDetailModel class]
+             };
+}
+
+@end
 @implementation ZRSWOrderLoanHotProductModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {

@@ -36,7 +36,7 @@
     if (mainTypeId.length > 0) {
         [params setObject:mainTypeId forKey:@"mainTypeId"];
     }
-    [self POST:KGetOrderLoanTypeListInterface reqType:KGetOrderLoanTypeListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanTypeListModel class] NeedCache:NO];
+    [self POST:KGetOrderLoanTypeListInterface reqType:KGetOrderLoanTypeListRequest delegate:delegate parameters:params ObjcClass:[ZRSWOrderLoanProductListModel class] NeedCache:NO];
 
 }
 - (void)getLoanDetailInfo:(NSString *)loanId delegate:(id)delegate {

@@ -277,8 +277,12 @@
     }
     for (ZRSWOrderLoanInfoAttrs *model in infoDetailModel.loanTypeAttrs) {
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@：%@",model.attrName,model.attrVal]];
+        UIColor *color = [self dataColor];
+        if ([model.attrName isEqualToString:@"最低月息"] && self.changedColor) {
+            color = self.changedColor;
+        }
         [att addAttribute:NSForegroundColorAttributeName value:[self titleColor] range:NSMakeRange(0, model.attrName.length + 1)];
-        [att addAttribute:NSForegroundColorAttributeName value:[self dataColor] range:NSMakeRange(model.attrName.length + 1, model.attrVal.length)];
+        [att addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(model.attrName.length + 1, model.attrVal.length)];
         UILabel *lbl = [self getlbl];
         lbl.attributedText = att;
         [self.contentView addSubview:lbl];
@@ -286,7 +290,9 @@
     }
     [self setupLayout];
 }
-
+- (void)showOrHiddenLineView:(BOOL)isHidden {
+    self.lineView.hidden = isHidden;
+}
 #pragma mark - lazy
 
 - (UIColor *)titleColor {
@@ -466,12 +472,13 @@
 @end
 
 @interface ZRSWLoansFasterEnterCell ()
-
+@property (nonatomic, strong) ZRSWOrderMainTypeListModel *listModel;
 @end
 
 @implementation ZRSWLoansFasterEnterCell
 
 - (void)updateOrderMainTypeDetaolModel:(ZRSWOrderMainTypeListModel *)model {
+    self.listModel = model;
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for (NSInteger index = 0; index < model.itemFrames.count; index ++) {
         ZRSWOrderMainTypeDetaolModel *detailModel = model.data[index];
@@ -491,6 +498,16 @@
         [imageBtn.imageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake([model iconViewWidth], [model iconViewWidth]));
         }];
+        imageBtn.tag = index;
+        [imageBtn addTarget:self action:@selector(imageBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+}
+
+- (void)imageBtnClick:(BaseImageButton *)imageBtn {
+    if (self.imageBtnClick) {
+        ZRSWOrderMainTypeDetaolModel *model = self.listModel.data[imageBtn.tag];
+        self.imageBtnClick(model);
     }
 }
 @end

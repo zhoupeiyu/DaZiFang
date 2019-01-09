@@ -45,6 +45,7 @@
 
 @end
 
+@class ZRSWOrderLoanInfoAttrs;
 @interface ZRSWOrderLoanTypDetailModel : NSObject
 // 产品id
 @property (nonatomic, strong) NSString *loanID;
@@ -54,6 +55,8 @@
 @property (nonatomic, strong) NSString *title;
 // 产品副标题
 @property (nonatomic, strong) NSString *subTitle;
+// ** 属性 **/
+@property (nonatomic, strong) NSArray <ZRSWOrderLoanInfoAttrs *> *loanTypeAttrs;
 
 @end
 @interface ZRSWOrderLoanTypeListModel : BaseModel
@@ -124,6 +127,11 @@
 @interface ZRSWOrderLoanInfoModel :BaseModel
 
 @property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *data;
+
+@end
+
+@interface ZRSWOrderLoanProductListModel : BaseModel
+@property (nonatomic, strong) NSArray *data;
 
 @end
 

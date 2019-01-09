@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ZRSWOrderModel.h"
 
+typedef void (^LoansFasterEnterBtnClick)(ZRSWOrderMainTypeDetaolModel *model);
+
 @interface LoansCellStates : NSObject
 
 + (UIColor *)getBlackColor;
@@ -43,6 +45,9 @@
 @interface ZRSWLoansProductAttributeCell : UITableViewCell
 + (ZRSWLoansProductAttributeCell *)getCellWithTableView:(UITableView *)tableView;
 @property (nonatomic, strong) ZRSWOrderLoanInfoDetailModel *infoDetailModel;
+@property (nonatomic, strong) UIColor *changedColor;
+
+- (void)showOrHiddenLineView:(BOOL)isHidden;
 
 @end
 
@@ -61,5 +66,7 @@
 @interface ZRSWLoansFasterEnterCell : UITableViewCell
 
 - (void)updateOrderMainTypeDetaolModel:(ZRSWOrderMainTypeListModel *)model;
+
+@property (nonatomic, copy) LoansFasterEnterBtnClick imageBtnClick;
 
 @end

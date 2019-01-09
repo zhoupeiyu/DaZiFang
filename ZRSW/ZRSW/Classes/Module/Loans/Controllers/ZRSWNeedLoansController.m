@@ -191,7 +191,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.selectedLoanID.length > 0 && self.infoModel) {
-        return 4;
+        return 5;
     }
     else {
         return 1;
