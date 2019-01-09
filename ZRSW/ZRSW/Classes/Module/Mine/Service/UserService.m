@@ -165,7 +165,14 @@
     }
     [self POST:KBannerInterface reqType:KBannerRequest delegate:delegate parameters:params ObjcClass:[BannerListModel class] NeedCache:NO];
 }
-
+- (void)getProductBannerWithCityID:(NSString *)city delegate:(id)delegate {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (city.length > 0) {
+        [params setObject:city forKey:@"cityId"];
+    }
+    [params setObject:@"2" forKey:@"layoutId"];
+    [self POST:KBannerInterface reqType:KBannerRequest delegate:delegate parameters:params ObjcClass:[BannerListModel class] NeedCache:NO];
+}
 - (void)getNewList:(NewListType)listType lastId:(NSString *)lastId pageSize:(int)pageSize delegate:(id)delegate {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@((int)listType) forKey:@"type"];

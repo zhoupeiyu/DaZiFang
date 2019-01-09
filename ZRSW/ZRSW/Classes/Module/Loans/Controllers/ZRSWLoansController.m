@@ -114,6 +114,7 @@
     [self requsetPopularInformationList];
     [self requestMainType];
     [self requsetHotProduct];
+    [self requsetBannerList];
 }
 - (void)initilizeUI {
     
@@ -134,11 +135,15 @@
         [[[OrderService alloc] init] getOrderMainTypeList:self.selectedCityID delegate:self];
     }
 }
+- (void)requsetBannerList{
+    NSString *cityId = @"";
+    [[[UserService alloc] init] getProductBannerWithCityID:cityId delegate:self];
+}
 
 - (void)requsetHotProduct {
     if ([TipViewManager showNetErrorToast]) {
         [TipViewManager showLoading];
-//
+
         [[[OrderService alloc] init] getHotProductList:self.selectedCityID delegate:self];
     }
 }
@@ -318,7 +323,6 @@
 - (NSMutableArray *)pictureArray {
     if (!_pictureArray) {
         _pictureArray = [[NSMutableArray alloc] init];
-        [_pictureArray addObjectsFromArray:@[@"http://www.zhongrongsw.com/static-content/banner/2018/11/05/FILE000000000573023.png",@"http://www.zhongrongsw.com/static-content/banner/2018/11/05/FILE000000000574614.png",@"http://www.zhongrongsw.com/static-content/banner/2018/11/05/FILE000000000575579.png"]];
     }
     return _pictureArray;
 }
@@ -396,6 +400,25 @@
                 }
                 [self.loanProductArray addObjectsFromArray:infoModel.data];
                 [self.tableView reloadData];
+            }
+        }
+        else if ([reqType isEqualToString:KBannerRequest]) {
+            BannerListModel *bannerListModel = (BannerListModel *)resObj;
+            if (bannerListModel.error_code.integerValue == 0) {
+                if (self.pictureArray.count > 0) {
+                    [self.pictureArray removeAllObjects];
+                    [self.bannerArray removeAllObjects];
+                }
+                for (NSUInteger i = 0; i < bannerListModel.data.count; ++i){
+                    BannerModel *bannerModel = bannerListModel.data[i];
+                    LLog(@"%@",bannerModel.imgUrl);
+                    [self.pictureArray addObject:[NSString stringWithFormat:@"%@",bannerModel.imgUrl]];
+                    [self.bannerArray addObject:bannerModel];
+                    
+                }
+                self.cycleScrollView.imageURLStringsGroup = self.pictureArray;
+            }else{
+                LLog(@"请求失败:%@",bannerListModel.error_msg);
             }
         }
     }

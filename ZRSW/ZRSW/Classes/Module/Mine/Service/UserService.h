@@ -176,6 +176,14 @@
 
 
 /**
+ 获得贷款产品banner
+
+ @param city 城市ID 城市id：查询指定城市下的banner；默认为空，查询所有banner数据；
+ @param delegate  代理
+ */
+- (void)getProductBannerWithCityID:(NSString *)city delegate:(id)delegate;
+
+/**
  公告/资讯列表
  @param listType 类型 0=热门资讯；1=系统公告
  @param lastId 最后一次查询的最后一笔数据的id；
