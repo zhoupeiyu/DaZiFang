@@ -446,8 +446,9 @@
 - (void)loanButtonClck:(UIButton *)button{
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:TabBarDidClickNotificationKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    ZRSWNeedLoansController *vc = [[ZRSWNeedLoansController alloc] init];
+    ZRSWLoansController *vc = [[ZRSWLoansController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
+    [vc setLeftBackBarButton];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
