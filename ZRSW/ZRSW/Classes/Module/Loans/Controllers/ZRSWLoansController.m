@@ -300,6 +300,7 @@
         NewDetailModel *detailModel = self.hotInfoArray[indexPath.row];
         detailsVC.detailModel = detailModel;
         detailModel.readers = [NSString stringWithFormat:@"%ld",([detailModel.readers integerValue]+1)];
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
 }
