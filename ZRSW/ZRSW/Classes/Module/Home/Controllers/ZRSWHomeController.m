@@ -616,7 +616,7 @@
         titleLabel1.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
         [_loanView addSubview:titleLabel1];
         UILabel *titleLabel2 = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH -kUI_WidthS(200))/2 , titleLabel1.bottom + kUI_HeightS(15), kUI_WidthS(200), kUI_HeightS(18))];
-        titleLabel2.text = @"懂您所需，贷您所想！";
+        titleLabel2.text = @"懂您所需，贷你所想!";
         titleLabel2.textColor = [UIColor colorFromRGB:0x474455];
         titleLabel2.textAlignment = NSTextAlignmentCenter;
         titleLabel2.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
