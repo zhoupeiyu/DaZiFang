@@ -444,6 +444,10 @@
 
 #pragma mark - 我要贷款
 - (void)loanButtonClck:(UIButton *)button{
+    
+    UITabBarController *tabBarVC = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    tabBarVC.selectedIndex = 1;
+    return;
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:TabBarDidClickNotificationKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     ZRSWLoansController *vc = [[ZRSWLoansController alloc] init];
